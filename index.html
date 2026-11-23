@@ -272,7 +272,7 @@ const curE=()=>VIEWS[vi]||null;
 let spheres=null;
 function setupSpheres(entry){
   if(!window.THREE) return null;
-  const st={yaw:0,pitch:0,fov:75,rot:+((ADM.rot||{})[entry.id]||0),panes:[]};
+  const st={yaw:+(entry.yaw0||0),pitch:0,fov:75,rot:+((ADM.rot||{})[entry.id]||0),panes:[]};
   const local=LS('rot_'+entry.id); if(local!==null&&!(entry.id in (ADM.rot||{}))) st.rot=+local;
   for(const kind of ['real','model']){
     const el=document.querySelector(`.pane[data-k="${kind}"]`); if(!el) continue;
@@ -327,7 +327,7 @@ function pinList(eid){
 function startDraft(pos){ armed=false; document.querySelectorAll('.pane').forEach(p=>p.classList.remove('arming')); pending={eid:curE().id,...pos}; const d=$('draft'); d.querySelector('textarea').value=''; d.classList.add('on'); d.querySelector('textarea').focus({preventScroll:true}); paintPins(); }
 function paintPins(){
   const e=curE(); if(!e||!$('pinlist')) return; const list=pinList(e.id);
-  if(e.type!=='pano') for(const el of document.querySelectorAll('.pane.flat')){ const k=el.dataset.k;
+  if(e.type!=='pano'&&e.type!=='mpano') for(const el of document.querySelectorAll('.pane.flat')){ const k=el.dataset.k;
     el.querySelector('.pins').innerHTML=list.filter(q=>q.img===k).map(q=>`<div class="pin ${q.cls}" style="left:${+q.x}%;top:${+q.y}%">${q.n}</div>`).join(''); }
   else if(spheres) placeSpherePins();
   const L=list.filter(q=>q.n!=='+');
@@ -397,7 +397,9 @@ function viewHtml(e){
     <div><h3>Your photos</h3><span class="file"><button tabindex="-1" class="small">Attach photos</button><input type="file" accept="image/*" multiple id="pfile" aria-label="Attach photos"></span><div class="thumbs" id="thumbs"></div></div></div>`;
   if(!e) return '<p class="blurb">No views here yet. Use the box below to tell us what this place looked like, or attach photos.</p>';
   let h=`<h3 class="vt">${esc(e.label)}${(ADM.hidden||[]).includes(e.id)?' <span class="st">removed for reviewers</span>':''}</h3>`;
-  if(e.type==='pano') h+=`<div class="media"><div class="pane sphere" data-k="real"><span class="tag">Real 360°</span><div class="pins"></div></div><div class="pane sphere" data-k="model"><span class="tag">Model 360°</span><div class="pins"></div></div></div>
+  if(e.type==='mpano') h+=`<div class="media one"><div class="pane sphere" data-k="model"><span class="tag">Model 360°</span><div class="pins"></div></div></div>
+    <p class="hint">Drag to look around. Pinch or scroll to zoom. ${esc(e.cap||'')}</p><div class="ctrl"><button id="pinbtn">Add a pin</button></div>`;
+  else if(e.type==='pano') h+=`<div class="media"><div class="pane sphere" data-k="real"><span class="tag">Real 360°</span><div class="pins"></div></div><div class="pane sphere" data-k="model"><span class="tag">Model 360°</span><div class="pins"></div></div></div>
     <p class="hint">Drag either picture to look around; both turn together. Pinch or scroll to zoom. ${esc(e.cap||'')}</p>
     <div class="ctrl"><button id="pinbtn">Add a pin</button><span class="by">Model turned the wrong way?</span><button class="small" data-rot="-5" aria-label="Turn model left">⟲ 5°</button><button class="small" data-rot="5" aria-label="Turn model right">⟳ 5°</button></div>`;
   else h+=`<div class="media${e.real?'':' one'}">${e.real?`<div class="pane flat" data-k="real"><img src="${esc(e.real)}" alt="Real: ${esc(e.label)}"><span class="tag">Real</span><div class="pins"></div></div>`:''}<div class="pane flat" data-k="model"><img src="${esc(e.model)}" alt="Model: ${esc(e.label)}"><span class="tag">Model</span><div class="pins"></div></div></div>
@@ -414,7 +416,7 @@ function viewHtml(e){
 function tabsHtml(){
   const groups=[]; VIEWS.forEach((v,i)=>{ let g=groups.find(x=>x.kind===v.kind); if(!g) groups.push(g={kind:v.kind,items:[],soon:v.type==='soon'}); g.items.push(i); });
   const cur=groups.find(g=>g.items.includes(vi))||groups[0];
-  const short=v=>v.type==='pano'?'360°':(v.short||v.label);
+  const short=v=>v.short||(v.type==='pano'?'360°':v.label);
   let h='';
   if(groups.length>1) h+=`<div class="vtabs" role="tablist">${groups.map(g=>`<button role="tab" class="sb${g.soon?' soon':''}" data-view="${g.items[0]}" aria-selected="${g===cur}">${esc(g.kind)}${g.items.length===1&&VIEWS[g.items[0]].type==='pano'?' · 360°':''}</button>`).join('')}</div>`;
   if(cur&&cur.items.length>1) h+=`<div class="vtabs${groups.length>1?' sub':''}" role="tablist">${cur.items.map(i=>`<button role="tab" class="vb" data-view="${i}" aria-selected="${i===vi}">${esc(short(VIEWS[i]))}</button>`).join('')}</div>`;
@@ -424,7 +426,7 @@ function renderView(){
   disposeSpheres(); pending=null; armed=false; const e=curE();
   $('vtabs').innerHTML=VIEWS.length?tabsHtml():'';
   $('view').innerHTML=viewHtml(e);
-  if(e){ $('etext').value=E(e.id).text||''; if(e.type==='pano') spheres=setupSpheres(e); }
+  if(e){ $('etext').value=E(e.id).text||''; if(e.type==='pano'||e.type==='mpano') spheres=setupSpheres(e); }
   paintPins(); paintOthers(); paintPhotos();
   try{ history.replaceState(null,'',`#${area.key}${e?'--'+e.id:''}`); }catch(err){}
 }

@@ -11,3 +11,6 @@ sc = [(fr * np.roll(fm, j, axis=1)).sum() for j in range(720)]
 k = int(np.argmax(sc)) * W // 720 if FIX is None else int(round(FIX / 360 * W))
 R.save(pre + '_real.jpg', quality=78); Image.fromarray(np.roll(np.asarray(M), k, axis=1)).save(pre + '_model.jpg', quality=80)
 print(pre, 'shift deg', round(k * 360 / W, 1))
+import json, os
+sf = os.path.join(os.path.dirname(pre), 'shifts.json'); d = json.load(open(sf)) if os.path.exists(sf) else {}
+d[os.path.basename(pre)] = round(k * 360 / W, 1); json.dump(d, open(sf, 'w'), indent=0)

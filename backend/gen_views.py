@@ -17,7 +17,11 @@ def still(i, label, img, cap=MODEL_ONLY): return {"id": i, "type": "model", "lab
 
 PLACES = [
  # Sports Center building (hand-made views from earlier rounds)
- P('sc', 'Sports Center', xy=(1762, 1610), blurb='The big green-roofed Sports Center: the indoor court and canteen as one open hall, flags overhead, colour-war banners on the walls; the circus building is attached on its east end.', auto=False, gal='sports_center_circus', inside_name='Court & canteen', soon=['Canteen counter'], inside=[still("sc-in-w", "Looking west across the court", "img/sc_in_w_model.jpg", "Model only."), still("sc-in-e", "Looking east toward the circus", "img/sc_in_e_model.jpg", "Model only.")], extra=[
+ P('sc', 'Sports Center', xy=(1762, 1610), blurb='The big green-roofed Sports Center: the indoor court and canteen as one open hall, flags overhead, colour-war banners on the walls; the circus building is attached on its east end.', auto=False, gal='sports_center_circus', inside_name='Court & canteen', soon=[], inside=[
+   *[{"id": f"mp_sc_{k}", "type": "mpano", "label": l, "modelPano": f"pano/mp_sc_{k}.jpg", "short": sh, "cam": xy, "look": lk, "cap": "Model only: a 360° view rendered from the model. Drag to look around."} for k, l, sh, xy, lk in [
+     ('court', 'Middle of the court in 360°', 'Court 360°', (1741.1, 1608.6), (1720, 1608)), ('cantdoor', 'By the canteen entrance in 360°', 'Canteen entrance', (1754.1, 1600.1), (1754, 1594)),
+     ('benches', 'Among the canteen benches in 360°', 'Benches', (1737.1, 1594.6), (1750, 1594.6)), ('dj', 'By the DJ booth in 360°', 'DJ booth', (1745.1, 1597.6), (1740, 1597)),
+     ('window', 'At the canteen windows in 360°', 'Canteen windows', (1755.1, 1596.8), (1755, 1594))]],still("sc-in-w", "Looking west across the court", "img/sc_in_w_model.jpg", "Model only."), still("sc-in-e", "Looking east toward the circus", "img/sc_in_e_model.jpg", "Model only.")], extra=[
    {"id": "sc-top", "type": "pair", "label": "From above", "real": "img/sc_top_real.jpg", "model": "img/sc_top_model.jpg", "cap": TOP},
    still("sc-front", "The front, from the volleyball court", "img/sc_front_model.jpg"), still("sc-se", "From the southeast", "img/sc_se_model.jpg"),
    still("sc-sw", "From the southwest", "img/sc_sw_model.jpg"), still("circ-out", "Circus end, from the east", "img/circ_out_model.jpg")]),
@@ -43,7 +47,8 @@ PLACES = [
  P('lacrosse', 'Lacrosse (Upper Field)', 'Lacrosse on the Upper Field.', c=(1790, 1834), w=130),
  P('baseball', 'Baseball & softball', 'The baseball and softball field.', c=(1705, 1745), w=120, pano='s27', pano_label='Baseball field'),
  P('middle-field', 'The Middle Field', 'The big field south beyond the equestrian area.', auto=False, soon=['Overview']),
- P('gaga', 'Gaga & tetherball', 'The gaga pit by the volleyball court.', c=(1661, 1601), w=30),
+ P('gaga', 'Gaga', 'The gaga courts: the main one by the volleyball court, and another in front of the Upper Office. (The one in front of Cabin 1 is on the Cabin 1 page.)', c=(1661, 1601), w=30, soon=['By the Upper Office']),
+ P('tetherball', 'Tetherball', 'The three tetherball poles by the pool. (Tetherballs by the cabins are on each cabin\u2019s page.)', auto=False, soon=['By the pool'], xy=(1614, 1600)),
  # Athletics
  P('tennis', 'Tennis', 'The tennis courts.', c=(1618, 1679), w=90, pano='s23', pano_label='Tennis courts'),
  P('golf', 'Golf', 'The golf area.', c=(1512, 1404), w=80, pano='s05', pano_label='Golf'),
@@ -68,7 +73,8 @@ PLACES = [
  P('jetski', 'Jet ski dock', 'The floating jet ski dock.', c=(1185, 1145), w=40),
  P('pool', 'Pool', 'The swimming pool and pool house.', c=(1614, 1613), w=50, pano='s22', pano_label='Pool', soon=['Pool house']),
  # Camp buildings
- P('dh', 'Dining Hall', 'The Dining Hall, the tent on its stone floor to the south, and the Senior Dining Hall by the flagpoles.', c=(1355, 1543), w=75, gal=['dining_hall_out', 'dining_hall_in'], pano='s13', pano_label='Dining Hall', soon=['Kitchen'],
+ P('dh', 'Dining Hall', 'The Dining Hall, the tent on its stone floor to the south, and the Senior Dining Hall by the flagpoles.', c=(1355, 1543), w=75, gal=['dining_hall_out', 'dining_hall_in'], soon=['Inside', 'Kitchen'],
+   extra=[{"id": "s13-360", "type": "pano", "label": "Dining Hall from the air in 360°", "short": "Aerial 360°", "realPano": "pano/s13_real.jpg", "modelPano": "pano/s13_model.jpg", "cam": (1340, 1488), "look": (1355, 1549), "cap": "Real: drone 360° from the camp tour. The model was rendered from about the same spot in the air."}],
    sections={'Tent': [still('dh-tent', 'The tent from the southwest', 'img/dh_tent_model.jpg')]}, merge={'Senior Dining Hall': 'sr-dining'}),
  P('sr-dining', 'Senior Dining Hall', 'The Senior Dining Hall by the flagpoles.', c=(1393, 1548), w=40, soon=['Inside']),
  P('quad', 'Flagpole Quad', 'The Flagpole Quad.', c=(1395, 1528), w=70, pano='s31', pano_label='Flagpole Quad'),
@@ -99,6 +105,7 @@ for k, v in CABINS.items():
     nums = k.split('-') if k == '2-3' else [k]
     units = [n + l for n in nums for l in ('A', 'B')] if k != '5' else [k]
     if k.isdigit() and 16 <= int(k) <= 24: units += [f'{k}-{i} (senior staff)' for i in range(1, 5)]
+    units += {'1': ['Gaga court', 'Tetherballs'], '2-3': ['Tetherball (between 2 & 3)'], '4': ['Tetherball (between 3 & 4)']}.get(k, [])
     PLACES.append(P('cabin-' + k, 'Cabins 2 & 3' if k == '2-3' else 'Cabin ' + k, 'Cabin 24 burned around 2024; this shows it as it was.' if k == '24' else ('Cabin 5 was overflow and almost never used.' if k == '5' else ''),
                     c=v[:2] if v else None, w=max(30, v[2] * 2.2 + 10) if v else 40, auto=bool(v), soon=units))
 
@@ -106,14 +113,14 @@ def cab(*ks): return [{"ref": 'cabin-' + k} for k in ks if k in CABINS]
 MENU = [
  {"name": "Performing Arts", "items": [{"ref": "circus"}, {"ref": "dance"}, {"ref": "rec-hall", "view": "s18-360"}, {"ref": "rec-hall", "view": "rec-hall--blackbox-theater", "name": "Blackbox theater"}, {"ref": "rec-hall", "view": "s21-360", "name": "Music / Rock Band"}, {"ref": "amphitheater"}]},
  {"name": "Creative Arts", "items": [{"ref": "ac"}, {"ref": "pottery"}, {"ref": "woodshop"}, {"ref": "cooking"}]},
- {"name": "Field Sports", "items": [{"ref": "basketball"}, {"ref": "volleyball"}, {"ref": "soccer"}, {"ref": "lacrosse"}, {"ref": "baseball"}, {"ref": "middle-field"}, {"ref": "gaga"}]},
- {"name": "Athletics", "items": [{"ref": "tennis"}, {"ref": "gym"}, {"ref": "golf"}, {"ref": "archery"}, {"ref": "riflery"}, {"ref": "fencing"}, {"ref": "skate"}, {"ref": "mountainboard"}, {"ref": "bungee"}]},
+ {"name": "Field & Court Sports", "items": [{"ref": "basketball"}, {"ref": "volleyball"}, {"ref": "soccer"}, {"ref": "lacrosse"}, {"ref": "baseball"}, {"ref": "middle-field"}]},
+ {"name": "Athletics", "items": [{"ref": "tennis"}, {"ref": "gym"}, {"ref": "golf"}, {"ref": "archery"}, {"ref": "riflery"}, {"ref": "fencing"}, {"ref": "skate"}, {"ref": "mountainboard"}, {"ref": "bungee"}, {"ref": "gaga"}, {"ref": "tetherball"}]},
  {"name": "Adventure", "items": [{"ref": "ropes"}, {"ref": "paintball"}, {"ref": "lasertag"}, {"ref": "atv"}, {"ref": "dirtbikes"}, {"ref": "horses"}]},
  {"name": "Lake & Pool", "items": [{"name": "Lake", "items": [{"ref": "waterfront"}, {"ref": "waterslide"}, {"ref": "watertramp"}, {"ref": "ropeswing"}, {"ref": "jetski"}]}, {"name": "Pool", "items": [{"ref": "pool"}]}]},
  {"name": "Other Activities", "items": [{"ref": "media-arts"}]},
  {"name": "Cabins", "items": [{"name": "Junior Boys", "items": cab('1', '2-3')}, {"name": "Inter Boys", "items": cab('12', '13', '14', '15')}, {"name": "Senior Boys", "items": cab('16', '17', '18', '19')},
    {"name": "Junior Girls", "items": cab('6', '7', '8')}, {"name": "Inter Girls", "items": cab('9', '10', '11')}, {"name": "Senior Girls", "items": cab('20', '21', '22', '23', '24')},
-   {"name": "Overflow", "items": cab('4', '5')}, {"name": "Unsorted photos", "items": [{"ref": "cabins-photos"}]}]},
+   {"name": "Other Cabins", "items": cab('4', '5')}, {"name": "Unsorted photos", "items": [{"ref": "cabins-photos"}]}]},
  {"name": "Camp Buildings", "items": [{"ref": "sc"}, {"ref": "dh"}, {"ref": "rec-hall"}, {"ref": "quad"}, {"ref": "lower-office"}, {"ref": "infirmary"}]},
  {"name": "Outdoors", "items": [{"ref": "overview"}, {"ref": "roads"}, {"ref": "shortcut"}, {"ref": "skilift"}, {"ref": "entrance"}]},
  {"name": "Staff Areas", "items": [{"ref": "upper-office"}, {"ref": "condo"}, {"ref": "staff-lounge"}, {"ref": "cooler"}, {"ref": "laundry"}, {"ref": "maint"}, {"ref": "staff-parking"}]},
@@ -138,7 +145,19 @@ for p in PLACES:
     if p['pano']:
         pv = {"id": f"{p['pano']}-360", "type": "pano", "label": f"{p['pano_label']} in 360°", "realPano": f"pano/{p['pano']}_real.jpg", "modelPano": f"pano/{p['pano']}_model.jpg",
               "cap": "Real: 360° tour photo (2023–2025). The model was rendered from about the same spot; if it's turned, use the turn buttons."}
-        (ins if p['key'] in ('ac', 'dh', 'circus', 'dance', 'gym', 'rec-hall', 'rock-band', 'pottery', 'horses') else out).append(pv)
+        (ins if p['key'] in ('ac', 'circus', 'dance', 'gym', 'rec-hall', 'rock-band', 'pottery', 'horses') else out).append(pv)
+    SPOT = {'s07': (1791.6, 1609.9), 's12': (1393.9, 1584.9), 's14': (1684.2, 1566.2), 's19': (1786.1, 1627.1), 's34': (1744.1, 1625.5), 's17': (1459.0, 1491.8), 's18': (1491.0, 1645.0),
+            's21': (1474.1, 1650.7), 's22': (1612.1, 1615.6), 's30': (1418.6, 1582.6), 's31': (1395.0, 1528.7), 's23': (1617.1, 1681.6), 's29': (1643.1, 1565.7), 's37': (1455.2, 1581.7),
+            's25': (1494.7, 1723.0), 's27': (1702.1, 1765.6), 's24': (1314.7, 1528.7), 's36': (1422.4, 1461.5), 's05': (1511.9, 1403.7), 's40': (1250.0, 1183.3), 's39': (1177.1, 1230.6), 's11': (2022.1, 1935.6), 's08': (1761.0, 1705.5)}
+    SH = json.load(open(f'{SITE}/pano/shifts.json')) if os.path.exists(f'{SITE}/pano/shifts.json') else {}
+    for e in out + ins + [x for v in p['sections'].values() for x in v]:
+        if e.get('type') in ('pano', 'mpano'):
+            sid = e['id'].replace('-360', '')
+            cam = e.get('cam') or SPOT.get(sid); tgt = e.get('look') or p['c'] or p['xy']
+            if cam and tgt and (abs(tgt[0] - cam[0]) + abs(tgt[1] - cam[1]) > 2):
+                b = math.degrees(math.atan2(tgt[0] - cam[0], tgt[1] - cam[1])); sh = 0 if e['type'] == 'mpano' else SH.get(sid, 180)
+                e['yaw0'] = round((b + sh - 90) % 360, 1)
+            e.pop('cam', None); e.pop('look', None)
     exists = lambda e: all(os.path.exists(f"{SITE}/{e[k]}") for k in ('real', 'model', 'realPano', 'modelPano') if k in e)
     out = [e for e in out if exists(e)]; ins = [e for e in ins if exists(e)]
     parts = [x for x in [{"kind": "Outside", "entries": out}, {"kind": p['inside_name'], "entries": ins}] if x['entries']]

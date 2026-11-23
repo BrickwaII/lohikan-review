@@ -52,6 +52,51 @@
      "kind": "Court & canteen",
      "entries": [
       {
+       "id": "mp_sc_court",
+       "type": "mpano",
+       "label": "Middle of the court in 360\u00b0",
+       "modelPano": "pano/mp_sc_court.jpg",
+       "short": "Court 360\u00b0",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 178.4
+      },
+      {
+       "id": "mp_sc_cantdoor",
+       "type": "mpano",
+       "label": "By the canteen entrance in 360\u00b0",
+       "modelPano": "pano/mp_sc_cantdoor.jpg",
+       "short": "Canteen entrance",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 90.9
+      },
+      {
+       "id": "mp_sc_benches",
+       "type": "mpano",
+       "label": "Among the canteen benches in 360\u00b0",
+       "modelPano": "pano/mp_sc_benches.jpg",
+       "short": "Benches",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 0.0
+      },
+      {
+       "id": "mp_sc_dj",
+       "type": "mpano",
+       "label": "By the DJ booth in 360\u00b0",
+       "modelPano": "pano/mp_sc_dj.jpg",
+       "short": "DJ booth",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 173.3
+      },
+      {
+       "id": "mp_sc_window",
+       "type": "mpano",
+       "label": "At the canteen windows in 360\u00b0",
+       "modelPano": "pano/mp_sc_window.jpg",
+       "short": "Canteen windows",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 92.0
+      },
+      {
        "id": "sc-in-w",
        "type": "model",
        "label": "Looking west across the court",
@@ -64,17 +109,6 @@
        "label": "Looking east toward the circus",
        "model": "img/sc_in_e_model.jpg",
        "cap": "Model only."
-      }
-     ]
-    },
-    {
-     "kind": "Canteen counter",
-     "soon": true,
-     "entries": [
-      {
-       "id": "sc--canteen-counter",
-       "type": "soon",
-       "label": "Canteen counter"
       }
      ]
     }
@@ -294,7 +328,8 @@
        "label": "Basketball courts in 360\u00b0",
        "realPano": "pano/s14_real.jpg",
        "modelPano": "pano/s14_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 76.0
       }
      ]
     }
@@ -340,7 +375,8 @@
        "label": "Amphitheater & Lower Office in 360\u00b0",
        "realPano": "pano/s17_real.jpg",
        "modelPano": "pano/s17_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 111.9
       }
      ]
     }
@@ -391,7 +427,8 @@
        "label": "Rec Hall stage in 360\u00b0",
        "realPano": "pano/s18_real.jpg",
        "modelPano": "pano/s18_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 298.9
       }
      ]
     },
@@ -404,7 +441,8 @@
        "label": "Rock Band room in 360\u00b0",
        "realPano": "pano/s21_real.jpg",
        "modelPano": "pano/s21_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 204.7
       }
      ]
     },
@@ -526,7 +564,8 @@
        "label": "Inside Arts & Crafts in 360\u00b0",
        "realPano": "pano/s12_real.jpg",
        "modelPano": "pano/s12_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 331.9
       }
      ]
     }
@@ -618,7 +657,8 @@
        "label": "Pottery in 360\u00b0",
        "realPano": "pano/s30_real.jpg",
        "modelPano": "pano/s30_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 121.9
       }
      ]
     }
@@ -831,6 +871,15 @@
        "label": "From the southwest",
        "model": "img/baseball_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s27-360",
+       "type": "pano",
+       "label": "Baseball field in 360\u00b0",
+       "realPano": "pano/s27_real.jpg",
+       "modelPano": "pano/s27_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 91.0
       }
      ]
     }
@@ -860,8 +909,8 @@
    "candidates": []
   },
   "gaga": {
-   "name": "Gaga & tetherball",
-   "blurb": "The gaga pit by the volleyball court.",
+   "name": "Gaga",
+   "blurb": "The gaga courts: the main one by the volleyball court, and another in front of the Upper Office. (The one in front of Cabin 1 is on the Cabin 1 page.)",
    "parts": [
     {
      "kind": "Outside",
@@ -889,12 +938,45 @@
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
+    },
+    {
+     "kind": "By the Upper Office",
+     "soon": true,
+     "entries": [
+      {
+       "id": "gaga--by-the-upper-office",
+       "type": "soon",
+       "label": "By the Upper Office"
+      }
+     ]
     }
    ],
    "candidates": [],
    "xy": [
     1661,
     1601
+   ]
+  },
+  "tetherball": {
+   "name": "Tetherball",
+   "blurb": "The three tetherball poles by the pool. (Tetherballs by the cabins are on each cabin\u2019s page.)",
+   "parts": [
+    {
+     "kind": "By the pool",
+     "soon": true,
+     "entries": [
+      {
+       "id": "tetherball--by-the-pool",
+       "type": "soon",
+       "label": "By the pool"
+      }
+     ]
+    }
+   ],
+   "candidates": [],
+   "xy": [
+    1614,
+    1600
    ]
   },
   "tennis": {
@@ -925,6 +1007,15 @@
        "label": "From the southwest",
        "model": "img/tennis_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s23-360",
+       "type": "pano",
+       "label": "Tennis courts in 360\u00b0",
+       "realPano": "pano/s23_real.jpg",
+       "modelPano": "pano/s23_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 68.9
       }
      ]
     }
@@ -963,6 +1054,14 @@
        "label": "From the southwest",
        "model": "img/golf_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s05-360",
+       "type": "pano",
+       "label": "Golf in 360\u00b0",
+       "realPano": "pano/s05_real.jpg",
+       "modelPano": "pano/s05_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
       }
      ]
     }
@@ -1001,6 +1100,15 @@
        "label": "From the southwest",
        "model": "img/archery_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s25-360",
+       "type": "pano",
+       "label": "Archery range in 360\u00b0",
+       "realPano": "pano/s25_real.jpg",
+       "modelPano": "pano/s25_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 296.8
       }
      ]
     }
@@ -1095,6 +1203,15 @@
        "label": "From the southwest",
        "model": "img/skate_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s37-360",
+       "type": "pano",
+       "label": "Skate park in 360\u00b0",
+       "realPano": "pano/s37_real.jpg",
+       "modelPano": "pano/s37_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 35.3
       }
      ]
     }
@@ -1133,6 +1250,14 @@
        "label": "From the southwest",
        "model": "img/mountainboard_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s36-360",
+       "type": "pano",
+       "label": "Mountain boarding in 360\u00b0",
+       "realPano": "pano/s36_real.jpg",
+       "modelPano": "pano/s36_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
       }
      ]
     }
@@ -1171,6 +1296,15 @@
        "label": "From the southwest",
        "model": "img/bungee_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s29-360",
+       "type": "pano",
+       "label": "Bungee trampoline in 360\u00b0",
+       "realPano": "pano/s29_real.jpg",
+       "modelPano": "pano/s29_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 355.4
       }
      ]
     }
@@ -1285,6 +1419,14 @@
        "label": "From the southwest",
        "model": "img/lasertag_sw_model.jpg",
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s24-360",
+       "type": "pano",
+       "label": "Laser tag in 360\u00b0",
+       "realPano": "pano/s24_real.jpg",
+       "modelPano": "pano/s24_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
       }
      ]
     }
@@ -1300,13 +1442,37 @@
    "blurb": "The ATV and quad track.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "atv--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "atv-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/atv_top_real.jpg",
+       "model": "img/atv_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "atv-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/atv_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "atv-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/atv_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s08-360",
+       "type": "pano",
+       "label": "ATV track in 360\u00b0",
+       "realPano": "pano/s08_real.jpg",
+       "modelPano": "pano/s08_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
       }
      ]
     }
@@ -1322,13 +1488,43 @@
    "blurb": "The equestrian barn with its indoor ring, and the outdoor rings.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "horses--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "horses-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/horses_top_real.jpg",
+       "model": "img/horses_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "horses-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/horses_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "horses-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/horses_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
+     "kind": "Inside",
+     "entries": [
+      {
+       "id": "s11-360",
+       "type": "pano",
+       "label": "Barn & indoor ring in 360\u00b0",
+       "realPano": "pano/s11_real.jpg",
+       "modelPano": "pano/s11_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 330.1
       }
      ]
     }
@@ -1362,6 +1558,33 @@
    "blurb": "The waterfront: boathouse, beach and the U-shaped swim dock.",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "waterfront-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/waterfront_top_real.jpg",
+       "model": "img/waterfront_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "waterfront-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/waterfront_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "waterfront-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/waterfront_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "Boathouse inside",
      "soon": true,
      "entries": [
@@ -1384,13 +1607,38 @@
    "blurb": "The waterslide on the point.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "waterslide--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "waterslide-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/waterslide_top_real.jpg",
+       "model": "img/waterslide_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "waterslide-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/waterslide_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "waterslide-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/waterslide_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s40-360",
+       "type": "pano",
+       "label": "Waterslide in 360\u00b0",
+       "realPano": "pano/s40_real.jpg",
+       "modelPano": "pano/s40_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 240.7
       }
      ]
     }
@@ -1406,13 +1654,38 @@
    "blurb": "The water trampoline and iceberg in the swim area.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "watertramp--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "watertramp-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/watertramp_top_real.jpg",
+       "model": "img/watertramp_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "watertramp-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/watertramp_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "watertramp-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/watertramp_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "s39-360",
+       "type": "pano",
+       "label": "Water trampoline in 360\u00b0",
+       "realPano": "pano/s39_real.jpg",
+       "modelPano": "pano/s39_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 49.6
       }
      ]
     }
@@ -1428,13 +1701,29 @@
    "blurb": "The rope swing on the shore near the slide.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "ropeswing--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "ropeswing-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/ropeswing_top_real.jpg",
+       "model": "img/ropeswing_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "ropeswing-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/ropeswing_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "ropeswing-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/ropeswing_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
@@ -1450,13 +1739,29 @@
    "blurb": "The floating jet ski dock.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "jetski--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "jetski-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/jetski_top_real.jpg",
+       "model": "img/jetski_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "jetski-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/jetski_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "jetski-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/jetski_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
@@ -1475,12 +1780,35 @@
      "kind": "Outside",
      "entries": [
       {
+       "id": "pool-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/pool_top_real.jpg",
+       "model": "img/pool_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "pool-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/pool_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "pool-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/pool_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
        "id": "s22-360",
        "type": "pano",
        "label": "Pool in 360\u00b0",
        "realPano": "pano/s22_real.jpg",
        "modelPano": "pano/s22_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 50.3
       }
      ]
     },
@@ -1507,15 +1835,51 @@
    "blurb": "The Dining Hall, the tent on its stone floor to the south, and the Senior Dining Hall by the flagpoles.",
    "parts": [
     {
-     "kind": "Inside",
+     "kind": "Outside",
      "entries": [
+      {
+       "id": "dh-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/dh_top_real.jpg",
+       "model": "img/dh_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
       {
        "id": "s13-360",
        "type": "pano",
-       "label": "Dining Hall in 360\u00b0",
+       "label": "Dining Hall from the air in 360\u00b0",
+       "short": "Aerial 360\u00b0",
        "realPano": "pano/s13_real.jpg",
        "modelPano": "pano/s13_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+       "cap": "Real: drone 360\u00b0 from the camp tour. The model was rendered from about the same spot in the air.",
+       "yaw0": 269.7
+      },
+      {
+       "id": "dh-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/dh_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "dh-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/dh_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
+     "kind": "Tent",
+     "entries": [
+      {
+       "id": "dh-tent",
+       "type": "model",
+       "label": "The tent from the southwest",
+       "model": "img/dh_tent_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     },
@@ -1523,7 +1887,40 @@
      "kind": "Senior Dining Hall",
      "entries": [
       {
+       "id": "sr-dining-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/sr-dining_top_real.jpg",
+       "model": "img/sr-dining_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "sr-dining-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/sr-dining_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "sr-dining-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/sr-dining_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
        "id": "sr-dining--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    },
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "dh--inside",
        "type": "soon",
        "label": "Inside"
       }
@@ -1691,6 +2088,33 @@
    "blurb": "The Senior Dining Hall by the flagpoles.",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "sr-dining-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/sr-dining_top_real.jpg",
+       "model": "img/sr-dining_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "sr-dining-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/sr-dining_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "sr-dining-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/sr-dining_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "Inside",
      "soon": true,
      "entries": [
@@ -1716,6 +2140,28 @@
      "kind": "Outside",
      "entries": [
       {
+       "id": "quad-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/quad_top_real.jpg",
+       "model": "img/quad_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "quad-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/quad_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "quad-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/quad_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
        "id": "s31-360",
        "type": "pano",
        "label": "Flagpole Quad in 360\u00b0",
@@ -1736,6 +2182,33 @@
    "name": "Lower Office",
    "blurb": "The Lower Office.",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "lower-office-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/lower-office_top_real.jpg",
+       "model": "img/lower-office_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "lower-office-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/lower-office_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "lower-office-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/lower-office_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "Inside",
      "soon": true,
@@ -1796,6 +2269,33 @@
    "blurb": "The Infirmary.",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "infirmary-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/infirmary_top_real.jpg",
+       "model": "img/infirmary_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "infirmary-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/infirmary_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "infirmary-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/infirmary_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "Inside",
      "soon": true,
      "entries": [
@@ -1818,6 +2318,33 @@
    "blurb": "The Upper Office.",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "upper-office-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/upper-office_top_real.jpg",
+       "model": "img/upper-office_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "upper-office-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/upper-office_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "upper-office-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/upper-office_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "Inside",
      "soon": true,
      "entries": [
@@ -1839,6 +2366,33 @@
    "name": "The Condo",
    "blurb": "The Condo staff housing.",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "condo-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/condo_top_real.jpg",
+       "model": "img/condo_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "condo-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/condo_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "condo-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/condo_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "Inside",
      "soon": true,
@@ -1961,6 +2515,33 @@
    "blurb": "The laundry room; the evening-program closet is in its northwest corner.",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "laundry-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/laundry_top_real.jpg",
+       "model": "img/laundry_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "laundry-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/laundry_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "laundry-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/laundry_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "Laundry inside",
      "soon": true,
      "entries": [
@@ -1994,13 +2575,29 @@
    "blurb": "The two maintenance sheds west of Arts & Crafts.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "maint--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "maint-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/maint_top_real.jpg",
+       "model": "img/maint_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "maint-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/maint_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "maint-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/maint_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
@@ -2016,13 +2613,29 @@
    "blurb": "The whole camp from above.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "overview--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "overview-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/overview_top_real.jpg",
+       "model": "img/overview_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "overview-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/overview_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "overview-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/overview_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
@@ -2038,13 +2651,29 @@
    "blurb": "The old ski lift at the top of the Mount Tone slopes.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "skilift--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "skilift-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/skilift_top_real.jpg",
+       "model": "img/skilift_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "skilift-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/skilift_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "skilift-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/skilift_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
@@ -2197,6 +2826,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-1-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-1_top_real.jpg",
+       "model": "img/cabin-1_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-1-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-1_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-1-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-1_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "1A",
      "soon": true,
      "entries": [
@@ -2217,6 +2873,28 @@
        "label": "1B"
       }
      ]
+    },
+    {
+     "kind": "Gaga court",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-1--gaga-court",
+       "type": "soon",
+       "label": "Gaga court"
+      }
+     ]
+    },
+    {
+     "kind": "Tetherballs",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-1--tetherballs",
+       "type": "soon",
+       "label": "Tetherballs"
+      }
+     ]
     }
    ],
    "candidates": [],
@@ -2229,6 +2907,33 @@
    "name": "Cabins 2 & 3",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-2-3-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-2-3_top_real.jpg",
+       "model": "img/cabin-2-3_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-2-3-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-2-3_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-2-3-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-2-3_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "2A",
      "soon": true,
@@ -2272,6 +2977,17 @@
        "label": "3B"
       }
      ]
+    },
+    {
+     "kind": "Tetherball (between 2 & 3)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-2-3--tetherball--between-2---3",
+       "type": "soon",
+       "label": "Tetherball (between 2 & 3)"
+      }
+     ]
     }
    ],
    "candidates": [],
@@ -2284,6 +3000,33 @@
    "name": "Cabin 4",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-4-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-4_top_real.jpg",
+       "model": "img/cabin-4_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-4-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-4_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-4-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-4_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "4A",
      "soon": true,
@@ -2305,6 +3048,17 @@
        "label": "4B"
       }
      ]
+    },
+    {
+     "kind": "Tetherball (between 3 & 4)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-4--tetherball--between-3---4",
+       "type": "soon",
+       "label": "Tetherball (between 3 & 4)"
+      }
+     ]
     }
    ],
    "candidates": [],
@@ -2317,6 +3071,33 @@
    "name": "Cabin 6",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-6-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-6_top_real.jpg",
+       "model": "img/cabin-6_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-6-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-6_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-6-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-6_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "6A",
      "soon": true,
@@ -2350,6 +3131,33 @@
    "name": "Cabin 7",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-7-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-7_top_real.jpg",
+       "model": "img/cabin-7_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-7-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-7_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-7-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-7_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "7A",
      "soon": true,
@@ -2413,6 +3221,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-9-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-9_top_real.jpg",
+       "model": "img/cabin-9_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-9-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-9_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-9-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-9_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "9A",
      "soon": true,
      "entries": [
@@ -2445,6 +3280,33 @@
    "name": "Cabin 10",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-10-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-10_top_real.jpg",
+       "model": "img/cabin-10_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-10-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-10_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-10-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-10_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "10A",
      "soon": true,
@@ -2479,6 +3341,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-11-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-11_top_real.jpg",
+       "model": "img/cabin-11_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-11-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-11_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-11-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-11_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "11A",
      "soon": true,
      "entries": [
@@ -2511,6 +3400,33 @@
    "name": "Cabin 12",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-12-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-12_top_real.jpg",
+       "model": "img/cabin-12_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-12-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-12_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-12-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-12_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "12A",
      "soon": true,
@@ -2545,6 +3461,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-13-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-13_top_real.jpg",
+       "model": "img/cabin-13_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-13-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-13_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-13-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-13_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "13A",
      "soon": true,
      "entries": [
@@ -2577,6 +3520,33 @@
    "name": "Cabin 14",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-14-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-14_top_real.jpg",
+       "model": "img/cabin-14_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-14-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-14_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-14-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-14_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "14A",
      "soon": true,
@@ -2611,6 +3581,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-15-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-15_top_real.jpg",
+       "model": "img/cabin-15_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-15-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-15_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-15-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-15_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "15A",
      "soon": true,
      "entries": [
@@ -2643,6 +3640,33 @@
    "name": "Cabin 16",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-16-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-16_top_real.jpg",
+       "model": "img/cabin-16_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-16-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-16_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-16-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-16_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "16A",
      "soon": true,
@@ -2721,6 +3745,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-17-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-17_top_real.jpg",
+       "model": "img/cabin-17_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-17-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-17_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-17-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-17_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "17A",
      "soon": true,
      "entries": [
@@ -2797,6 +3848,33 @@
    "name": "Cabin 18",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-18-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-18_top_real.jpg",
+       "model": "img/cabin-18_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-18-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-18_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-18-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-18_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "18A",
      "soon": true,
@@ -2875,6 +3953,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-19-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-19_top_real.jpg",
+       "model": "img/cabin-19_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-19-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-19_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-19-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-19_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "19A",
      "soon": true,
      "entries": [
@@ -2951,6 +4056,33 @@
    "name": "Cabin 20",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-20-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-20_top_real.jpg",
+       "model": "img/cabin-20_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-20-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-20_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-20-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-20_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "20A",
      "soon": true,
@@ -3029,6 +4161,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-21-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-21_top_real.jpg",
+       "model": "img/cabin-21_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-21-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-21_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-21-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-21_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "21A",
      "soon": true,
      "entries": [
@@ -3105,6 +4264,33 @@
    "name": "Cabin 22",
    "blurb": "",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-22-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-22_top_real.jpg",
+       "model": "img/cabin-22_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-22-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-22_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-22-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-22_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "22A",
      "soon": true,
@@ -3183,6 +4369,33 @@
    "blurb": "",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-23-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-23_top_real.jpg",
+       "model": "img/cabin-23_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-23-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-23_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-23-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-23_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "23A",
      "soon": true,
      "entries": [
@@ -3259,6 +4472,33 @@
    "name": "Cabin 24",
    "blurb": "Cabin 24 burned around 2024; this shows it as it was.",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cabin-24-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cabin-24_top_real.jpg",
+       "model": "img/cabin-24_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cabin-24-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cabin-24_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cabin-24-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cabin-24_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "24A",
      "soon": true,
@@ -3398,7 +4638,7 @@
    ]
   },
   {
-   "name": "Field Sports",
+   "name": "Field & Court Sports",
    "items": [
     {
      "ref": "basketball"
@@ -3417,9 +4657,6 @@
     },
     {
      "ref": "middle-field"
-    },
-    {
-     "ref": "gaga"
     }
    ]
   },
@@ -3452,6 +4689,12 @@
     },
     {
      "ref": "bungee"
+    },
+    {
+     "ref": "gaga"
+    },
+    {
+     "ref": "tetherball"
     }
    ]
   },
@@ -3616,7 +4859,7 @@
      ]
     },
     {
-     "name": "Overflow",
+     "name": "Other Cabins",
      "items": [
       {
        "ref": "cabin-4"
