@@ -135,6 +135,17 @@ body{padding-bottom:24px}
 .vtabs.sub{margin-top:4px;padding-left:10px;border-left:3px solid var(--line)}
 .gsave{font-size:12px;color:var(--green)}
 .gal select{font:inherit;font-size:15px;min-height:38px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.item.dim{color:var(--mute);font-weight:500}.soonl{font-size:11px;font-weight:700;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:0 6px;margin-left:4px}
+.sb.soon{color:var(--mute);border-style:dashed}
+.soonbox{margin-top:10px;padding:14px;border:1px dashed var(--line);border-radius:10px;background:var(--bg);color:var(--mute)}
+.gal figure.is360{outline:3px solid #2a6fb0;outline-offset:-3px;position:relative}
+.b360{position:absolute;top:8px;left:8px;background:#2a6fb0;color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;pointer-events:none}
+.gal figure{position:relative}
+.picker{position:absolute;z-index:26;display:none;background:var(--sheet);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px #0004;max-height:60vh;overflow:hidden;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+.picker.on{display:grid}.pcol{overflow:auto;max-height:60vh;padding:6px}.pcol+.pcol{border-left:1px solid var(--line)}
+.picker .item{display:block;width:100%;text-align:left;border:0;background:none;padding:7px 10px;min-height:38px;font-weight:600;border-radius:6px}
+.picker .item:hover,.picker .item[aria-current=true]{background:var(--chip)}
+#sitefb{margin-top:6px}
 </style>
 </head>
 <body>
@@ -148,7 +159,7 @@ body{padding-bottom:24px}
   <div class="status" id="status">Loading…</div>
 </header>
 <nav class="topnav" aria-label="Places"><button class="arr" id="navl" aria-label="Scroll places left" hidden>‹</button><div class="navrow" id="navrow"></div><button class="arr" id="navr" aria-label="Scroll places right" hidden>›</button><button class="nt" id="chgbtn">What's changed</button><button id="menubtn" aria-haspopup="true">☰ Places</button></nav>
-<div class="dd" id="dd" role="menu"></div>
+<div class="dd" id="dd" role="menu"></div><div class="picker" id="picker" role="menu" aria-label="Pick a place"></div>
 <div class="menu" id="menu"><div class="panel" role="navigation" aria-label="Places"><div class="ctrl" style="margin:0 0 8px;justify-content:space-between"><h3 style="margin:0">Places</h3><button class="small" id="menuclose">Close</button></div><div id="tree"></div><button class="item" id="chgbtn2" style="margin-top:10px">What's changed</button></div></div>
 <main class="wrap"><section class="card" id="changes"></section>
   <section class="card">
@@ -168,10 +179,12 @@ body{padding-bottom:24px}
   <details class="drawer" id="udrawer"><summary id="usum">Help sort unverified photos</summary><p class="by">Photos that might show this place. Tell us if they're right, then Henry adds the good ones to the gallery.</p><div class="gal" id="ugal"></div></details>
   <section class="foot">
     <div class="ctrl"><button class="small" id="showall" aria-pressed="false">Show fixed &amp; not-valid notes</button><button class="small" id="copy">Copy my feedback</button></div>
+    <details><summary>Feedback about this website</summary><p class="by">Anything confusing, broken, or that you'd like the site to do.</p><textarea id="sitefb" maxlength="3000" placeholder="e.g. the 360 views are slow on my phone"></textarea><ul class="notes" id="sitefbo"></ul></details>
     <details><summary>Henry's tools</summary><div class="ctrl"><input class="in" id="akey" type="password" placeholder="Passcode" style="max-width:220px"><button class="small" id="alogin">Unlock</button><span id="astate"></span></div></details>
   </section>
 </main>
 <div class="big" id="big" role="dialog" aria-label="Photo"><img id="bigimg" alt=""></div>
+<div class="big" id="pano" role="dialog" aria-label="360 photo"><div id="panohost" style="width:min(1200px,96vw);height:min(720px,80vh);border-radius:10px;overflow:hidden;touch-action:none;cursor:grab"></div><button id="pclose" style="position:fixed;top:12px;right:12px">Close</button></div>
 <div class="toast" id="toast" role="status"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -229,7 +242,8 @@ const hasContent=a=>!!a&&(a.parts.some(p=>p.entries.length)||(a.candidates||[]).
 const AR=k=>(DATA.areas||{})[k];
 function flatAreas(items,path){ for(const it of items){ if(it.ref){ const a=AR(it.ref); if(hasContent(a)&&!AREAS.some(x=>x.key===it.ref)) AREAS.push({...a,key:it.ref,path}); } else flatAreas(it.items||[],[...path,it.name]); } }
 const groupHas=g=>(g.items||[]).some(it=>it.ref?hasContent(AR(it.ref)):groupHas(it));
-const itemBtn=it=>{ const a=AR(it.ref); return hasContent(a)?`<button class="item" data-area="${esc(it.ref)}"${it.view?` data-goto="${esc(it.view)}"`:''} aria-current="${area&&area.key===it.ref}">${esc(it.name||a.name)}</button>`:''; };
+const realViews=a=>a.parts.some(p=>p.entries.some(e=>e.type!=='soon'));
+const itemBtn=it=>{ const a=AR(it.ref); return hasContent(a)?`<button class="item${realViews(a)?'':' dim'}" data-area="${esc(it.ref)}"${it.view?` data-goto="${esc(it.view)}"`:''} aria-current="${area&&area.key===it.ref}">${esc(it.name||a.name)}${realViews(a)?'':' <span class="soonl">soon</span>'}</button>`:''; };
 function treeHtml(items,depth){
   return items.map(it=>{ if(it.ref) return itemBtn(it);
     const inner=treeHtml(it.items||[],depth+1); if(!inner) return '';
@@ -350,15 +364,15 @@ function paintGallery(){
     const fb=[...others.map(o=>({w:who(o),x:(o.gfb||{})[p.id]})),{w:'You',x:f}].filter(z=>z.x&&(z.x.v||z.x.t));
     const fbLine=x=>[lbl[x.v]+(x.v==='other'&&x.to?`: ${placeName(x.to)}`:''),x.t].filter(Boolean).join(' — ');
     const sugg=[...new Set(fb.filter(z=>z.x.v==='other'&&z.x.to&&AR(z.x.to)).map(z=>z.x.to))];
-    return `<figure><img src="${esc(p.src)}" alt="${esc(p.cap||'Camp photo')}" loading="lazy"><div class="gb">
+    return `<figure${p.pano?' class="is360"':''}><img src="${esc(p.src)}" alt="${esc(p.cap||'Camp photo')}" loading="lazy"${p.pano?' data-pano="1"':''}>${p.pano?'<span class="b360">360° · tap to look around</span>':''}<div class="gb">
       <span class="by">${esc(p.cap||'')}${gs.to?` · moved from ${esc(placeName(p.home))}`:''}</span>
       ${mode==='rej'?'':`<div class="opts">${Object.entries(mode==='ok'?{other:'Different place',meh:'Not useful'}:lbl).map(([v,l])=>`<button class="small" data-gfb="${esc(p.id)}" data-v="${v}" aria-pressed="${f.v===v}">${l}</button>`).join('')}</div>
-      ${f.v==='other'?`<select data-gto="${esc(p.id)}" aria-label="Which place does this photo show?">${placeOptions(f.to)}</select>`:''}
+      ${f.v==='other'?`<button class="small pick" data-pick="${esc(p.id)}" data-mode="fb">${f.to?'Place: '+esc(placeName(f.to))+' ▾':'Pick the right place ▾'}</button>`:''}
       <input class="in" data-gtx="${esc(p.id)}" maxlength="400" placeholder="What does this show? Year, building, anything wrong…" value="${esc(f.t||'')}">`}
       ${fb.length?`<ul class="notes">${fb.map(z=>`<li><span class="n txt">✎</span><span>${esc(fbLine(z.x))}<br><span class="by">${esc(z.w)}</span></span><span></span></li>`).join('')}</ul>`:''}
       ${isOwner?`<div class="opts">${mode==='ok'?`<button class="small" data-gal="${esc(p.id)}" data-v="">Take out of gallery</button>`:mode==='rej'?`<button class="small" data-gal="${esc(p.id)}" data-v="">Restore</button>`:`<button class="small" data-gal="${esc(p.id)}" data-v="ok">Add to gallery</button><button class="small" data-gal="${esc(p.id)}" data-v="no">Hide (not useful)</button>`}
         ${sugg.map(k=>`<button class="small" data-galmove="${esc(p.id)}" data-to="${esc(k)}">Move to ${esc(placeName(k))}</button>`).join('')}</div>
-        ${mode!=='rej'?`<select data-galmovesel="${esc(p.id)}" aria-label="Move this photo to another place">${placeOptions('').replace('Pick the right place…','Move to another place…')}</select>`:''}`:''}
+        ${mode!=='rej'?`<button class="small pick" data-pick="${esc(p.id)}" data-mode="move">Move to another place ▾</button>`:''}`:''}
     </div></figure>`; };
   $('gal').innerHTML=ok.map(p=>card(p,'ok')).join('');
   $('ugal').innerHTML=un.map(p=>card(p,'un')).join('')+(isOwner&&rej.length?`<details style="grid-column:1/-1"><summary class="by">Hidden photos (${rej.length})</summary><div class="gal">${rej.map(p=>card(p,'rej')).join('')}</div></details>`:'');
@@ -366,6 +380,9 @@ function paintGallery(){
 
 /* ---------- render ---------- */
 function viewHtml(e){
+  if(e&&e.type==='soon') return `<h3 class="vt">${esc(e.label)}</h3><div class="soonbox"><b>Model coming soon.</b> This part isn't modelled yet. If you remember it or have photos, add them below; they help build it.</div>
+    <div class="grid2"><div><h3>Notes</h3><textarea id="etext" placeholder="What was here? Layout, furniture, colours, what changed over the years…" maxlength="2000"></textarea><ul class="notes" id="otext"></ul></div>
+    <div><h3>Your photos</h3><span class="file"><button tabindex="-1" class="small">Attach photos</button><input type="file" accept="image/*" multiple id="pfile" aria-label="Attach photos"></span><div class="thumbs" id="thumbs"></div></div></div>`;
   if(!e) return '<p class="blurb">No views here yet. Use the box below to tell us what this place looked like, or attach photos.</p>';
   let h=`<h3 class="vt">${esc(e.label)}${(ADM.hidden||[]).includes(e.id)?' <span class="st">removed for reviewers</span>':''}</h3>`;
   if(e.type==='pano') h+=`<div class="media"><div class="pane sphere" data-k="real"><span class="tag">Real 360°</span><div class="pins"></div></div><div class="pane sphere" data-k="model"><span class="tag">Model 360°</span><div class="pins"></div></div></div>
@@ -383,11 +400,12 @@ function viewHtml(e){
   return h;
 }
 function tabsHtml(){
-  const groups=[]; VIEWS.forEach((v,i)=>{ let g=groups.find(x=>x.kind===v.kind); if(!g) groups.push(g={kind:v.kind,items:[]}); g.items.push(i); });
+  const groups=[]; VIEWS.forEach((v,i)=>{ let g=groups.find(x=>x.kind===v.kind); if(!g) groups.push(g={kind:v.kind,items:[],soon:v.type==='soon'}); g.items.push(i); });
   const cur=groups.find(g=>g.items.includes(vi))||groups[0];
   const short=v=>v.type==='pano'?'360°':(v.short||v.label);
-  let h=`<div class="vtabs" role="tablist">${groups.map(g=>`<button role="tab" class="sb" data-view="${g.items[0]}" aria-selected="${g===cur}">${esc(g.kind)}${g.items.length===1&&VIEWS[g.items[0]].type==='pano'?' · 360°':''}</button>`).join('')}</div>`;
-  if(cur&&cur.items.length>1) h+=`<div class="vtabs sub" role="tablist">${cur.items.map(i=>`<button role="tab" class="vb" data-view="${i}" aria-selected="${i===vi}">${esc(short(VIEWS[i]))}</button>`).join('')}</div>`;
+  let h='';
+  if(groups.length>1) h+=`<div class="vtabs" role="tablist">${groups.map(g=>`<button role="tab" class="sb${g.soon?' soon':''}" data-view="${g.items[0]}" aria-selected="${g===cur}">${esc(g.kind)}${g.items.length===1&&VIEWS[g.items[0]].type==='pano'?' · 360°':''}</button>`).join('')}</div>`;
+  if(cur&&cur.items.length>1) h+=`<div class="vtabs${groups.length>1?' sub':''}" role="tablist">${cur.items.map(i=>`<button role="tab" class="vb" data-view="${i}" aria-selected="${i===vi}">${esc(short(VIEWS[i]))}</button>`).join('')}</div>`;
   return h;
 }
 function renderView(){
@@ -398,7 +416,8 @@ function renderView(){
   paintPins(); paintOthers(); paintPhotos();
   try{ history.replaceState(null,'',`#${area.key}${e?'--'+e.id:''}`); }catch(err){}
 }
-function renderPlace(){
+function paintSiteFb(){ if(document.activeElement!==$('sitefb')) $('sitefb').value=mine.site||''; $('sitefbo').innerHTML=isOwner?others.filter(o=>o.site).map(o=>`<li><span class="n txt">✎</span><span>${esc(o.site)}<br><span class="by">${esc(who(o))}</span></span><span></span></li>`).join(''):''; }
+function renderPlace(){ paintSiteFb();
   $('crumb').textContent=curPath.join(' › '); $('pname').textContent=area.name; $('pblurb').textContent=area.blurb||'';
   $('wtitle').textContent=`Anything else about ${area.name}?`;
   $('stext').value=A(area.key).text||''; $('sang').value=A(area.key).angles||'';
@@ -423,6 +442,26 @@ function showChanges(){
   $('changes').innerHTML=`<h2>What's changed in the model</h2><p class="blurb">Each update to the model, with before and after pictures. Comment on any of them like a normal view.</p>`+(C.length?C.slice().reverse().map(v=>`<h3 style="margin-top:18px">${esc(v.version)} · ${esc(v.date||'')}</h3>${(v.items||[]).map(it=>`<div class="chg"><div class="by">${esc(it.place||'')}</div><b>${esc(it.title)}</b>${it.note?`<p class="hint">${esc(it.note)}</p>`:''}<div class="media"><div class="pane flat"><img src="${esc(it.before)}" alt="Before"><span class="tag">Before</span></div><div class="pane flat"><img src="${esc(it.after)}" alt="After"><span class="tag">After</span></div></div></div>`).join('')}`).join(''):'<p class="by">No model updates yet. They will show up here after the first round of fixes.</p>');
   try{ history.replaceState(null,'','#changes'); }catch(e){} window.scrollTo({top:0});
 }
+function openPicker(btn){ const P=$('picker'); P.dataset.id=btn.dataset.pick; P.dataset.mode=btn.dataset.mode;
+  const tops=DATA.groups.filter(groupHas); P.innerHTML=`<div class="pcol" id="pcol1">${tops.map((g,i)=>`<button class="item" data-pg="${i}">${esc(g.name)} ›</button>`).join('')}</div><div class="pcol" id="pcol2"><span class="by">Pick a group</span></div>`;
+  P.classList.add('on'); const r=btn.getBoundingClientRect(); const w=Math.min(560,innerWidth-16); P.style.width=w+'px'; P.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px'; P.style.top=(r.bottom+window.scrollY+4)+'px'; }
+function pickGroup(i){ const g=DATA.groups.filter(groupHas)[i]; document.querySelectorAll('#pcol1 .item').forEach((b,k)=>b.setAttribute('aria-current',String(k===i)));
+  const item=it=>it.ref?(hasContent(AR(it.ref))?`<button class="item" data-pk="${esc(it.ref)}">${esc(it.name||AR(it.ref).name)}</button>`:''):(()=>{ const inner=(it.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(it.name)}</div>${inner}</div>`:''; })();
+  $('pcol2').innerHTML=g.items.map(item).join(''); }
+function closePicker(){ $('picker').classList.remove('on'); }
+let pv=null;
+function openPano(src){ if(!window.THREE){ $('bigimg').src=src; $('big').classList.add('on'); return; }
+  closePano(); const box=$('pano'); box.classList.add('on'); const host=$('panohost');
+  const r=new THREE.WebGLRenderer({antialias:true}); r.setPixelRatio(Math.min(2,devicePixelRatio||1)); host.append(r.domElement);
+  const sc=new THREE.Scene(), cam=new THREE.PerspectiveCamera(75,1,0.1,1000); const g=new THREE.SphereGeometry(500,64,40); g.scale(-1,1,1);
+  const m=new THREE.MeshBasicMaterial({color:0x333333}); sc.add(new THREE.Mesh(g,m));
+  const st={yaw:0,pitch:0,fov:75}; const draw=()=>{ const w=host.clientWidth,h=host.clientHeight; r.setSize(w,h,false); cam.aspect=w/h; cam.fov=st.fov; cam.updateProjectionMatrix(); const y=st.yaw*Math.PI/180,x=st.pitch*Math.PI/180; cam.lookAt(Math.sin(y)*Math.cos(x),Math.sin(x),-Math.cos(y)*Math.cos(x)); r.render(sc,cam); };
+  new THREE.TextureLoader().load(src,t=>{m.map=t;m.color.set(0xffffff);m.needsUpdate=true;draw();});
+  let d=null; host.onpointerdown=e=>{host.setPointerCapture(e.pointerId); d={x:e.clientX,y:e.clientY,yaw:st.yaw,pitch:st.pitch};};
+  host.onpointermove=e=>{ if(!d) return; const k=st.fov/host.clientHeight; st.yaw=d.yaw-(e.clientX-d.x)*k; st.pitch=Math.max(-85,Math.min(85,d.pitch+(e.clientY-d.y)*k)); draw(); };
+  host.onpointerup=()=>{d=null;}; host.onwheel=e=>{e.preventDefault(); st.fov=Math.max(30,Math.min(100,st.fov+e.deltaY*0.04)); draw();};
+  const ro=new ResizeObserver(draw); ro.observe(host); pv={r,g,m,ro}; }
+function closePano(){ $('pano').classList.remove('on'); if(!pv) return; pv.ro.disconnect(); pv.g.dispose(); if(pv.m.map) pv.m.map.dispose(); pv.m.dispose(); pv.r.dispose(); $('panohost').innerHTML=''; pv=null; }
 function closeDD(){ $('dd').classList.remove('on'); }
 function refresh(){ if(!area) return; const id=curE()&&curE().id; buildViews(); const i=id?VIEWS.findIndex(v=>v.id===id):-1; vi=i>=0?i:Math.min(vi,Math.max(0,VIEWS.length-1));
   const typing=document.activeElement&&document.activeElement.matches('textarea,input');
@@ -435,6 +474,7 @@ document.addEventListener('input',e=>{
   else if(t.id==='etext'){ E(c.id).text=t.value; E(c.id).ver=VER(); queueSave(); }
   else if(t.id==='stext'){ A(area.key).text=t.value; A(area.key).ver=VER(); queueSave(); }
   else if(t.id==='sang'){ A(area.key).angles=t.value; A(area.key).ver=VER(); queueSave(); }
+  else if(t.id==='sitefb'){ mine.site=t.value; queueSave(); }
   else if(t.dataset.gtx){ const g=(mine.gfb??={})[t.dataset.gtx]??={}; g.t=t.value; queueSave(); }
 });
 document.addEventListener('change',e=>{ const t=e.target;
@@ -445,10 +485,11 @@ document.addEventListener('change',e=>{ const t=e.target;
 document.addEventListener('click',async e=>{
   const fl=e.target.closest('.pane.flat');
   if(fl&&armed){ const r=fl.getBoundingClientRect(); startDraft({img:fl.dataset.k,x:+((e.clientX-r.left)/r.width*100).toFixed(1),y:+((e.clientY-r.top)/r.height*100).toFixed(1)}); return; }
-  const im=e.target.closest('.thumbs img,.gal img'); if(im&&im.src){ $('bigimg').src=im.src; $('big').classList.add('on'); return; }
+  const im=e.target.closest('.thumbs img,.gal img'); if(im&&im.src){ if(im.dataset.pano) openPano(im.src); else { $('bigimg').src=im.src; $('big').classList.add('on'); } return; }
+  if(e.target.id==='pclose'||e.target.id==='pano'){ closePano(); return; }
   if(e.target.closest('#big')){ $('big').classList.remove('on'); return; }
   if(e.target===$('menu')){ $('menu').classList.remove('on'); return; }
-  if(!e.target.closest('#dd,.nt')) closeDD();
+  if(!e.target.closest('#dd,.nt')) closeDD(); if(!e.target.closest('#picker,.pick')) closePicker();
   const t=e.target.closest('button'); if(!t) return; const c=curE();
   if(t.id==='menubtn'){ $('menu').classList.add('on'); }
   else if(t.id==='menuclose'){ $('menu').classList.remove('on'); }
@@ -471,6 +512,12 @@ document.addEventListener('click',async e=>{
   else if(t.id==='hideview'){ const H=new Set(ADM.hidden||[]); H.has(c.id)?H.delete(c.id):H.add(c.id); await saveAdm({hidden:[...H]}); toast(H.has(c.id)?'Removed for reviewers':'Restored'); }
   else if(t.dataset.gfb){ const g=(mine.gfb??={})[t.dataset.gfb]??={}; g.v=g.v===t.dataset.v?'':t.dataset.v; queueSave(); paintGallery(); toast('Saved'); }
   else if(t.dataset.gal&&isOwner){ const gal={...(ADM.gal||{})}, cur=galState(t.dataset.gal); const nv={...cur,s:t.dataset.v}; if(!nv.s) delete nv.s; if(!nv.s&&!nv.to) delete gal[t.dataset.gal]; else gal[t.dataset.gal]=nv; saveAdm({gal}); toast(t.dataset.v==='ok'?'Added to gallery':t.dataset.v==='no'?'Hidden':'Restored'); }
+  else if(t.dataset.pick){ openPicker(t); }
+  else if(t.dataset.pk){ const P=$('picker'); const id=P.dataset.id;
+    if(P.dataset.mode==='fb'){ const g=(mine.gfb??={})[id]??={}; g.to=t.dataset.pk; queueSave(); toast('Saved: '+placeName(t.dataset.pk)); }
+    else if(isOwner){ const gal={...(ADM.gal||{})}; gal[id]={to:t.dataset.pk}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.pk)); }
+    closePicker(); paintGallery(); }
+  else if(t.dataset.pg!==undefined&&t.closest('#picker')){ pickGroup(+t.dataset.pg); }
   else if(t.dataset.galmove&&isOwner){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmove]={to:t.dataset.to}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.to)); }
   else if(t.id==='showall'){ showAll=!showAll; t.setAttribute('aria-pressed',String(showAll)); t.textContent=showAll?'Hide fixed & not-valid notes':'Show fixed & not-valid notes'; paintPins(); paintOthers(); }
   else if(t.id==='alogin'){ const k=$('akey').value.trim(); if(!k||!API()) return;
@@ -487,13 +534,14 @@ document.addEventListener('click',async e=>{
     try{ await navigator.clipboard.writeText(L.join('\n')); toast('Copied. Paste it into a message to Henry.'); }catch(err){ toast("Couldn't copy here"); }
   }
 });
-document.addEventListener('keydown',e=>{ if(e.target.matches('input,textarea,select')) return; if(e.key==='ArrowRight'&&vi<VIEWS.length-1){ vi++; renderView(); } if(e.key==='ArrowLeft'&&vi>0){ vi--; renderView(); } if(e.key==='Escape'){ $('big').classList.remove('on'); $('menu').classList.remove('on'); } });
+document.addEventListener('keydown',e=>{ if(e.target.matches('input,textarea,select')) return; if(e.key==='ArrowRight'&&vi<VIEWS.length-1){ vi++; renderView(); } if(e.key==='ArrowLeft'&&vi>0){ vi--; renderView(); } if(e.key==='Escape'){ closePano(); $('big').classList.remove('on'); $('menu').classList.remove('on'); } });
 document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') pull(); });
 
 fetch('views.json').then(r=>r.json()).then(async d=>{
   DATA=d; flatAreas(d.groups,[]); $('rname').value=mine.name||''; $('ryears').value=mine.years||'';
   const m=/^#([a-z0-9-]+?)(?:--([A-Za-z0-9-]+))?$/.exec(location.hash); if(location.hash==='#changes') showChanges(); else setArea(m?m[1]:AREAS[0].key,m?m[2]:null);
   $('navrow').addEventListener('scroll',navArrows,{passive:true}); addEventListener('resize',()=>{navArrows();closeDD();});
+  $('picker').addEventListener('mouseover',e=>{ const b=e.target.closest('[data-pg]'); if(b&&matchMedia('(hover:hover)').matches) pickGroup(+b.dataset.pg); });
   $('navrow').addEventListener('mouseover',e=>{ const b=e.target.closest('.nt'); if(b&&matchMedia('(hover:hover)').matches){ clearTimeout(ddT); openDD(b); } });
   $('navrow').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); }); $('dd').addEventListener('mouseenter',()=>clearTimeout(ddT)); $('dd').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); });
   if(!API()){ status("Saving isn't switched on yet. Your notes stay in this browser; use Copy my feedback at the bottom."); return; }

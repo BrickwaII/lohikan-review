@@ -3,9 +3,9 @@
  "title": "Camp Lohikan 3D review",
  "api": "https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec",
  "areas": {
-  "sc-out": {
-   "name": "Sports Center outside",
-   "blurb": "The big green-roofed Sports Center; the circus building is attached on its east end.",
+  "sc": {
+   "name": "Sports Center",
+   "blurb": "The big green-roofed Sports Center: the indoor court and canteen as one open hall, flags overhead, colour-war banners on the walls; the circus building is attached on its east end.",
    "parts": [
     {
      "kind": "Outside",
@@ -47,82 +47,9 @@
        "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
-    }
-   ],
-   "candidates": [
-    {
-     "id": "3283b3025f",
-     "src": "gallery/3283b3025f.jpg",
-     "cap": "Camp Instagram"
     },
     {
-     "id": "032af3fdaf",
-     "src": "gallery/032af3fdaf.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "0c0da076d9",
-     "src": "gallery/0c0da076d9.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "24ba924e26",
-     "src": "gallery/24ba924e26.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "0fae58ceae",
-     "src": "gallery/0fae58ceae.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "88abafd0fb",
-     "src": "gallery/88abafd0fb.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "d66835e6de",
-     "src": "gallery/d66835e6de.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "9769fa149c",
-     "src": "gallery/9769fa149c.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "9bc3aeff8f",
-     "src": "gallery/9bc3aeff8f.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "82e5546f70",
-     "src": "gallery/82e5546f70.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "a471905f3f",
-     "src": "gallery/a471905f3f.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "56856d3f7b",
-     "src": "gallery/56856d3f7b.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "9a34110016",
-     "src": "gallery/9a34110016.jpg",
-     "cap": "Camp Instagram"
-    }
-   ]
-  },
-  "sc-in": {
-   "name": "Sports Center inside & canteen",
-   "blurb": "The indoor court and canteen as one open hall, with flags overhead and colour-war banners on the walls.",
-   "parts": [
-    {
-     "kind": "Inside",
+     "kind": "Court & canteen",
      "entries": [
       {
        "id": "sc-in-w",
@@ -139,9 +66,99 @@
        "cap": "Model only."
       }
      ]
+    },
+    {
+     "kind": "Canteen counter",
+     "soon": true,
+     "entries": [
+      {
+       "id": "sc--canteen-counter",
+       "type": "soon",
+       "label": "Canteen counter"
+      }
+     ]
     }
    ],
-   "candidates": []
+   "candidates": [
+    {
+     "id": "3283b3025f",
+     "src": "gallery/3283b3025f.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "032af3fdaf",
+     "src": "gallery/032af3fdaf.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "0c0da076d9",
+     "src": "gallery/0c0da076d9.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "24ba924e26",
+     "src": "gallery/24ba924e26.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "0fae58ceae",
+     "src": "gallery/0fae58ceae.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "88abafd0fb",
+     "src": "gallery/88abafd0fb.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "d66835e6de",
+     "src": "gallery/d66835e6de.jpg",
+     "cap": "Camp Instagram",
+     "pano": false
+    },
+    {
+     "id": "9769fa149c",
+     "src": "gallery/9769fa149c.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "9bc3aeff8f",
+     "src": "gallery/9bc3aeff8f.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "82e5546f70",
+     "src": "gallery/82e5546f70.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "a471905f3f",
+     "src": "gallery/a471905f3f.jpg",
+     "cap": "Camp Instagram",
+     "pano": false
+    },
+    {
+     "id": "56856d3f7b",
+     "src": "gallery/56856d3f7b.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "9a34110016",
+     "src": "gallery/9a34110016.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    }
+   ]
   },
   "circus": {
    "name": "Circus",
@@ -223,7 +240,7 @@
    "candidates": []
   },
   "basketball": {
-   "name": "Basketball courts",
+   "name": "Basketball",
    "blurb": "The outdoor basketball courts west of the Sports Center.",
    "parts": [
     {
@@ -331,6 +348,33 @@
    "blurb": "The Rec Hall: stage, big open floor; the circus program ran here through 2007.",
    "parts": [
     {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "rec-hall-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/rec-hall_top_real.jpg",
+       "model": "img/rec-hall_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "rec-hall-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/rec-hall_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "rec-hall-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/rec-hall_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
      "kind": "Inside",
      "entries": [
       {
@@ -342,48 +386,67 @@
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
       }
      ]
+    },
+    {
+     "kind": "Backstage",
+     "soon": true,
+     "entries": [
+      {
+       "id": "rec-hall--backstage",
+       "type": "soon",
+       "label": "Backstage"
+      }
+     ]
     }
    ],
    "candidates": [
     {
      "id": "0fae58ceae",
      "src": "gallery/0fae58ceae.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "24ba924e26",
      "src": "gallery/24ba924e26.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "e8bbd208a5",
      "src": "gallery/e8bbd208a5.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "88abafd0fb",
      "src": "gallery/88abafd0fb.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "3283b3025f",
      "src": "gallery/3283b3025f.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "e49d410d53",
      "src": "gallery/e49d410d53.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "afcb727125",
      "src": "gallery/afcb727125.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "0c0da076d9",
      "src": "gallery/0c0da076d9.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     }
    ]
   },
@@ -436,14 +499,63 @@
     {
      "id": "e8bbd208a5",
      "src": "gallery/e8bbd208a5.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "88abafd0fb",
      "src": "gallery/88abafd0fb.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     }
    ]
+  },
+  "woodshop": {
+   "name": "Woodshop",
+   "blurb": "The woodshop, a strip about 10 ft deep along the east end of the Art Center.",
+   "parts": [
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "woodshop--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "media-arts": {
+   "name": "Media Arts",
+   "blurb": "The Media Arts room.",
+   "parts": [
+    {
+     "kind": "Outside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "media-arts--outside",
+       "type": "soon",
+       "label": "Outside"
+      }
+     ]
+    },
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "media-arts--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
+   "candidates": []
   },
   "pottery": {
    "name": "Pottery",
@@ -467,175 +579,624 @@
     {
      "id": "e8bbd208a5",
      "src": "gallery/e8bbd208a5.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "e44f0dedd5",
      "src": "gallery/e44f0dedd5.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "88abafd0fb",
      "src": "gallery/88abafd0fb.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "00173fc6c5",
      "src": "gallery/00173fc6c5.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "c2296eb874",
      "src": "gallery/c2296eb874.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "0de155d90c",
      "src": "gallery/0de155d90c.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "afcb727125",
      "src": "gallery/afcb727125.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "9308135305",
      "src": "gallery/9308135305.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     }
    ]
   },
   "cooking": {
    "name": "Cooking",
    "blurb": "The cooking building near the boys\u2019 side.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "cooking-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/cooking_top_real.jpg",
+       "model": "img/cooking_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "cooking-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/cooking_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "cooking-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/cooking_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
+    {
+     "kind": "Kitchen",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cooking--kitchen",
+       "type": "soon",
+       "label": "Kitchen"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "soccer": {
    "name": "Soccer (Lower Field)",
    "blurb": "Soccer on the Lower Field.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "soccer-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/soccer_top_real.jpg",
+       "model": "img/soccer_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "soccer-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/soccer_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "soccer-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/soccer_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "lacrosse": {
    "name": "Lacrosse (Upper Field)",
    "blurb": "Lacrosse on the Upper Field.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "lacrosse-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/lacrosse_top_real.jpg",
+       "model": "img/lacrosse_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "lacrosse-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/lacrosse_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "lacrosse-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/lacrosse_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "baseball": {
    "name": "Baseball & softball",
    "blurb": "The baseball and softball field.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "baseball-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/baseball_top_real.jpg",
+       "model": "img/baseball_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "baseball-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/baseball_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "baseball-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/baseball_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "middle-field": {
+   "name": "The Middle Field",
+   "blurb": "The big field south beyond the equestrian area.",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "middle-field--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "gaga": {
    "name": "Gaga & tetherball",
    "blurb": "The gaga pit by the volleyball court.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "gaga-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/gaga_top_real.jpg",
+       "model": "img/gaga_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "gaga-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/gaga_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "gaga-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/gaga_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "tennis": {
    "name": "Tennis",
    "blurb": "The tennis courts.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "tennis-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/tennis_top_real.jpg",
+       "model": "img/tennis_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "tennis-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/tennis_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "tennis-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/tennis_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "golf": {
    "name": "Golf",
    "blurb": "The golf area.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "golf-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/golf_top_real.jpg",
+       "model": "img/golf_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "golf-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/golf_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "golf-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/golf_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "archery": {
    "name": "Archery",
    "blurb": "The archery range.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "archery--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "fencing": {
+   "name": "Fencing",
+   "blurb": "Fencing.",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "fencing--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "riflery": {
    "name": "Riflery",
    "blurb": "The riflery range, reached by the shortcut behind Arts & Crafts.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "riflery--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "skate": {
    "name": "Skate park",
    "blurb": "The skate park on the old courts.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "skate--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "mountainboard": {
    "name": "Mountain boarding",
    "blurb": "The mountain boarding hill.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "mountainboard--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "bungee": {
    "name": "Bungee trampoline",
    "blurb": "The bungee trampolines and their pavilion.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "bungee--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "ropes": {
    "name": "Ropes & rock climbing",
    "blurb": "The ropes course and climbing tower.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "ropes--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "paintball": {
    "name": "Paintball",
    "blurb": "The paintball field.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "paintball--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "lasertag": {
    "name": "Laser tag",
    "blurb": "The laser tag area.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "lasertag--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "atv": {
    "name": "ATVs & quads",
    "blurb": "The ATV and quad track.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "atv--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "horses": {
    "name": "Horseback riding",
    "blurb": "The equestrian barn with its indoor ring, and the outdoor rings.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "horses--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "dirtbikes": {
+   "name": "Dirtbikes",
+   "blurb": "The dirtbike loop down the hill from the girls\u2019 cabins.",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "dirtbikes--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "waterfront": {
    "name": "Waterfront & swim dock",
    "blurb": "The waterfront: boathouse, beach and the U-shaped swim dock.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Boathouse inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "waterfront--boathouse-inside",
+       "type": "soon",
+       "label": "Boathouse inside"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "waterslide": {
    "name": "Waterslide",
    "blurb": "The waterslide on the point.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "waterslide--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "watertramp": {
    "name": "Water trampoline",
    "blurb": "The water trampoline and iceberg in the swim area.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "watertramp--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "ropeswing": {
    "name": "Rope swing",
    "blurb": "The rope swing on the shore near the slide.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "ropeswing--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "jetski": {
    "name": "Jet ski dock",
    "blurb": "The floating jet ski dock.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "jetski--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "pool": {
@@ -654,83 +1215,27 @@
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
       }
      ]
+    },
+    {
+     "kind": "Pool house",
+     "soon": true,
+     "entries": [
+      {
+       "id": "pool--pool-house",
+       "type": "soon",
+       "label": "Pool house"
+      }
+     ]
     }
    ],
    "candidates": []
   },
-  "dh-out": {
-   "name": "Dining Hall outside & tent",
-   "blurb": "The Dining Hall and the tent on its stone floor.",
-   "parts": [],
-   "candidates": [
-    {
-     "id": "c2296eb874",
-     "src": "gallery/c2296eb874.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "9308135305",
-     "src": "gallery/9308135305.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "0de155d90c",
-     "src": "gallery/0de155d90c.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "fea433ff6c",
-     "src": "gallery/fea433ff6c.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "88abafd0fb",
-     "src": "gallery/88abafd0fb.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "69c059d39d",
-     "src": "gallery/69c059d39d.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "dfd9de6f78",
-     "src": "gallery/dfd9de6f78.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "e8bbd208a5",
-     "src": "gallery/e8bbd208a5.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "df76e120b2",
-     "src": "gallery/df76e120b2.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "48d01afb97",
-     "src": "gallery/48d01afb97.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "4aa022c1d8",
-     "src": "gallery/4aa022c1d8.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "afcb727125",
-     "src": "gallery/afcb727125.jpg",
-     "cap": "Camp Instagram"
-    }
-   ]
-  },
-  "dh-in": {
-   "name": "Dining Hall inside",
-   "blurb": "Inside the Dining Hall.",
+  "dh": {
+   "name": "Dining Hall",
+   "blurb": "The Dining Hall, the tent on its stone floor to the south, and the Senior Dining Hall by the flagpoles.",
    "parts": [
     {
-     "kind": "Inside",
+     "kind": "Outside",
      "entries": [
       {
        "id": "s13-360",
@@ -741,70 +1246,186 @@
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
       }
      ]
+    },
+    {
+     "kind": "Senior Dining Hall",
+     "entries": [
+      {
+       "id": "sr-dining--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    },
+    {
+     "kind": "Kitchen",
+     "soon": true,
+     "entries": [
+      {
+       "id": "dh--kitchen",
+       "type": "soon",
+       "label": "Kitchen"
+      }
+     ]
     }
    ],
    "candidates": [
     {
-     "id": "88abafd0fb",
-     "src": "gallery/88abafd0fb.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "e8bbd208a5",
-     "src": "gallery/e8bbd208a5.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "df76e120b2",
-     "src": "gallery/df76e120b2.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "afcb727125",
-     "src": "gallery/afcb727125.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "e44f0dedd5",
-     "src": "gallery/e44f0dedd5.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "24ba924e26",
-     "src": "gallery/24ba924e26.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "d66835e6de",
-     "src": "gallery/d66835e6de.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "0c0da076d9",
-     "src": "gallery/0c0da076d9.jpg",
-     "cap": "Camp Instagram"
-    },
-    {
-     "id": "3283b3025f",
-     "src": "gallery/3283b3025f.jpg",
-     "cap": "Camp Instagram"
+     "id": "c2296eb874",
+     "src": "gallery/c2296eb874.jpg",
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "9308135305",
      "src": "gallery/9308135305.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
+    },
+    {
+     "id": "0de155d90c",
+     "src": "gallery/0de155d90c.jpg",
+     "cap": "Camp Instagram",
+     "pano": false
+    },
+    {
+     "id": "fea433ff6c",
+     "src": "gallery/fea433ff6c.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "88abafd0fb",
+     "src": "gallery/88abafd0fb.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "69c059d39d",
+     "src": "gallery/69c059d39d.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "dfd9de6f78",
+     "src": "gallery/dfd9de6f78.jpg",
+     "cap": "Camp Instagram",
+     "pano": false
+    },
+    {
+     "id": "e8bbd208a5",
+     "src": "gallery/e8bbd208a5.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "df76e120b2",
+     "src": "gallery/df76e120b2.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "48d01afb97",
+     "src": "gallery/48d01afb97.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "4aa022c1d8",
+     "src": "gallery/4aa022c1d8.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "afcb727125",
+     "src": "gallery/afcb727125.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "88abafd0fb",
+     "src": "gallery/88abafd0fb.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "e8bbd208a5",
+     "src": "gallery/e8bbd208a5.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "df76e120b2",
+     "src": "gallery/df76e120b2.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "afcb727125",
+     "src": "gallery/afcb727125.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "e44f0dedd5",
+     "src": "gallery/e44f0dedd5.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "24ba924e26",
+     "src": "gallery/24ba924e26.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "d66835e6de",
+     "src": "gallery/d66835e6de.jpg",
+     "cap": "Camp Instagram",
+     "pano": false
+    },
+    {
+     "id": "0c0da076d9",
+     "src": "gallery/0c0da076d9.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "3283b3025f",
+     "src": "gallery/3283b3025f.jpg",
+     "cap": "Camp Instagram",
+     "pano": true
+    },
+    {
+     "id": "9308135305",
+     "src": "gallery/9308135305.jpg",
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "0fae58ceae",
      "src": "gallery/0fae58ceae.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     }
    ]
   },
   "sr-dining": {
    "name": "Senior Dining Hall",
    "blurb": "The Senior Dining Hall by the flagpoles.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "sr-dining--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "quad": {
@@ -830,263 +1451,1458 @@
   "lower-office": {
    "name": "Lower Office",
    "blurb": "The Lower Office.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "lower-office--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
    "candidates": [
     {
      "id": "0de155d90c",
      "src": "gallery/0de155d90c.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "c2296eb874",
      "src": "gallery/c2296eb874.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "69c059d39d",
      "src": "gallery/69c059d39d.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "fea433ff6c",
      "src": "gallery/fea433ff6c.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "9ed5ac32e8",
      "src": "gallery/9ed5ac32e8.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "62463bfba7",
      "src": "gallery/62463bfba7.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     }
    ]
   },
   "infirmary": {
    "name": "Infirmary",
    "blurb": "The Infirmary.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "infirmary--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "upper-office": {
    "name": "Upper Office",
    "blurb": "The Upper Office.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "upper-office--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "condo": {
    "name": "The Condo",
    "blurb": "The Condo staff housing.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "condo--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    },
+    {
+     "kind": "Attic",
+     "soon": true,
+     "entries": [
+      {
+       "id": "condo--attic",
+       "type": "soon",
+       "label": "Attic"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "staff-lounge": {
+   "name": "Staff Lounge",
+   "blurb": "The Staff Lounge.",
+   "parts": [
+    {
+     "kind": "Outside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "staff-lounge--outside",
+       "type": "soon",
+       "label": "Outside"
+      }
+     ]
+    },
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "staff-lounge--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "staff-parking": {
+   "name": "Staff parking lot",
+   "blurb": "The staff parking lot.",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "staff-parking--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "laundry": {
    "name": "Laundry & EP closet",
    "blurb": "The laundry room; the evening-program closet is in its northwest corner.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Laundry inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "laundry--laundry-inside",
+       "type": "soon",
+       "label": "Laundry inside"
+      }
+     ]
+    },
+    {
+     "kind": "EP closet",
+     "soon": true,
+     "entries": [
+      {
+       "id": "laundry--ep-closet",
+       "type": "soon",
+       "label": "EP closet"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "maint": {
    "name": "Maintenance sheds",
    "blurb": "The two maintenance sheds west of Arts & Crafts.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "maint--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "overview": {
    "name": "Whole camp",
    "blurb": "The whole camp from above.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "overview--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "skilift": {
    "name": "Old ski lift",
    "blurb": "The old ski lift at the top of the Mount Tone slopes.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "skilift--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "shortcut": {
+   "name": "The Shortcut",
+   "blurb": "The path behind Arts & Crafts, around the Rec Hall hill to riflery.",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "shortcut--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "roads": {
+   "name": "Roads & paths",
+   "blurb": "The dirt roads and paths around camp.",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "roads--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "entrance": {
+   "name": "Camp entrance",
+   "blurb": "The way into camp.",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "entrance--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabins-photos": {
    "name": "All cabins (photos)",
    "blurb": "Cabin photos that still need sorting by cabin.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabins-photos--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
    "candidates": [
     {
      "id": "0de155d90c",
      "src": "gallery/0de155d90c.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "dfd9de6f78",
      "src": "gallery/dfd9de6f78.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "c2296eb874",
      "src": "gallery/c2296eb874.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "9308135305",
      "src": "gallery/9308135305.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": false
     },
     {
      "id": "fea433ff6c",
      "src": "gallery/fea433ff6c.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "48d01afb97",
      "src": "gallery/48d01afb97.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "9ed5ac32e8",
      "src": "gallery/9ed5ac32e8.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "df76e120b2",
      "src": "gallery/df76e120b2.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "4aa022c1d8",
      "src": "gallery/4aa022c1d8.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     },
     {
      "id": "69c059d39d",
      "src": "gallery/69c059d39d.jpg",
-     "cap": "Camp Instagram"
+     "cap": "Camp Instagram",
+     "pano": true
     }
    ]
   },
   "cabin-1": {
    "name": "Cabin 1",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "1A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-1--1a",
+       "type": "soon",
+       "label": "1A"
+      }
+     ]
+    },
+    {
+     "kind": "1B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-1--1b",
+       "type": "soon",
+       "label": "1B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-2-3": {
    "name": "Cabins 2 & 3",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "2A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-2-3--2a",
+       "type": "soon",
+       "label": "2A"
+      }
+     ]
+    },
+    {
+     "kind": "2B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-2-3--2b",
+       "type": "soon",
+       "label": "2B"
+      }
+     ]
+    },
+    {
+     "kind": "3A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-2-3--3a",
+       "type": "soon",
+       "label": "3A"
+      }
+     ]
+    },
+    {
+     "kind": "3B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-2-3--3b",
+       "type": "soon",
+       "label": "3B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-4": {
    "name": "Cabin 4",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "4A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-4--4a",
+       "type": "soon",
+       "label": "4A"
+      }
+     ]
+    },
+    {
+     "kind": "4B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-4--4b",
+       "type": "soon",
+       "label": "4B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-6": {
    "name": "Cabin 6",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "6A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-6--6a",
+       "type": "soon",
+       "label": "6A"
+      }
+     ]
+    },
+    {
+     "kind": "6B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-6--6b",
+       "type": "soon",
+       "label": "6B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-7": {
    "name": "Cabin 7",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "7A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-7--7a",
+       "type": "soon",
+       "label": "7A"
+      }
+     ]
+    },
+    {
+     "kind": "7B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-7--7b",
+       "type": "soon",
+       "label": "7B"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "cabin-8": {
+   "name": "Cabin 8",
+   "blurb": "",
+   "parts": [
+    {
+     "kind": "8A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-8--8a",
+       "type": "soon",
+       "label": "8A"
+      }
+     ]
+    },
+    {
+     "kind": "8B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-8--8b",
+       "type": "soon",
+       "label": "8B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-9": {
    "name": "Cabin 9",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "9A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-9--9a",
+       "type": "soon",
+       "label": "9A"
+      }
+     ]
+    },
+    {
+     "kind": "9B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-9--9b",
+       "type": "soon",
+       "label": "9B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-10": {
    "name": "Cabin 10",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "10A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-10--10a",
+       "type": "soon",
+       "label": "10A"
+      }
+     ]
+    },
+    {
+     "kind": "10B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-10--10b",
+       "type": "soon",
+       "label": "10B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-11": {
    "name": "Cabin 11",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "11A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-11--11a",
+       "type": "soon",
+       "label": "11A"
+      }
+     ]
+    },
+    {
+     "kind": "11B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-11--11b",
+       "type": "soon",
+       "label": "11B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-12": {
    "name": "Cabin 12",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "12A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-12--12a",
+       "type": "soon",
+       "label": "12A"
+      }
+     ]
+    },
+    {
+     "kind": "12B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-12--12b",
+       "type": "soon",
+       "label": "12B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-13": {
    "name": "Cabin 13",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "13A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-13--13a",
+       "type": "soon",
+       "label": "13A"
+      }
+     ]
+    },
+    {
+     "kind": "13B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-13--13b",
+       "type": "soon",
+       "label": "13B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-14": {
    "name": "Cabin 14",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "14A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-14--14a",
+       "type": "soon",
+       "label": "14A"
+      }
+     ]
+    },
+    {
+     "kind": "14B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-14--14b",
+       "type": "soon",
+       "label": "14B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-15": {
    "name": "Cabin 15",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "15A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-15--15a",
+       "type": "soon",
+       "label": "15A"
+      }
+     ]
+    },
+    {
+     "kind": "15B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-15--15b",
+       "type": "soon",
+       "label": "15B"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-16": {
    "name": "Cabin 16",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "16A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-16--16a",
+       "type": "soon",
+       "label": "16A"
+      }
+     ]
+    },
+    {
+     "kind": "16B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-16--16b",
+       "type": "soon",
+       "label": "16B"
+      }
+     ]
+    },
+    {
+     "kind": "16-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-16--16-1--senior-staff",
+       "type": "soon",
+       "label": "16-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "16-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-16--16-2--senior-staff",
+       "type": "soon",
+       "label": "16-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "16-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-16--16-3--senior-staff",
+       "type": "soon",
+       "label": "16-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "16-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-16--16-4--senior-staff",
+       "type": "soon",
+       "label": "16-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-17": {
    "name": "Cabin 17",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "17A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-17--17a",
+       "type": "soon",
+       "label": "17A"
+      }
+     ]
+    },
+    {
+     "kind": "17B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-17--17b",
+       "type": "soon",
+       "label": "17B"
+      }
+     ]
+    },
+    {
+     "kind": "17-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-17--17-1--senior-staff",
+       "type": "soon",
+       "label": "17-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "17-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-17--17-2--senior-staff",
+       "type": "soon",
+       "label": "17-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "17-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-17--17-3--senior-staff",
+       "type": "soon",
+       "label": "17-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "17-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-17--17-4--senior-staff",
+       "type": "soon",
+       "label": "17-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-18": {
    "name": "Cabin 18",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "18A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-18--18a",
+       "type": "soon",
+       "label": "18A"
+      }
+     ]
+    },
+    {
+     "kind": "18B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-18--18b",
+       "type": "soon",
+       "label": "18B"
+      }
+     ]
+    },
+    {
+     "kind": "18-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-18--18-1--senior-staff",
+       "type": "soon",
+       "label": "18-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "18-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-18--18-2--senior-staff",
+       "type": "soon",
+       "label": "18-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "18-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-18--18-3--senior-staff",
+       "type": "soon",
+       "label": "18-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "18-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-18--18-4--senior-staff",
+       "type": "soon",
+       "label": "18-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-19": {
    "name": "Cabin 19",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "19A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-19--19a",
+       "type": "soon",
+       "label": "19A"
+      }
+     ]
+    },
+    {
+     "kind": "19B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-19--19b",
+       "type": "soon",
+       "label": "19B"
+      }
+     ]
+    },
+    {
+     "kind": "19-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-19--19-1--senior-staff",
+       "type": "soon",
+       "label": "19-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "19-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-19--19-2--senior-staff",
+       "type": "soon",
+       "label": "19-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "19-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-19--19-3--senior-staff",
+       "type": "soon",
+       "label": "19-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "19-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-19--19-4--senior-staff",
+       "type": "soon",
+       "label": "19-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-20": {
    "name": "Cabin 20",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "20A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-20--20a",
+       "type": "soon",
+       "label": "20A"
+      }
+     ]
+    },
+    {
+     "kind": "20B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-20--20b",
+       "type": "soon",
+       "label": "20B"
+      }
+     ]
+    },
+    {
+     "kind": "20-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-20--20-1--senior-staff",
+       "type": "soon",
+       "label": "20-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "20-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-20--20-2--senior-staff",
+       "type": "soon",
+       "label": "20-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "20-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-20--20-3--senior-staff",
+       "type": "soon",
+       "label": "20-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "20-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-20--20-4--senior-staff",
+       "type": "soon",
+       "label": "20-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-21": {
    "name": "Cabin 21",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "21A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-21--21a",
+       "type": "soon",
+       "label": "21A"
+      }
+     ]
+    },
+    {
+     "kind": "21B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-21--21b",
+       "type": "soon",
+       "label": "21B"
+      }
+     ]
+    },
+    {
+     "kind": "21-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-21--21-1--senior-staff",
+       "type": "soon",
+       "label": "21-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "21-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-21--21-2--senior-staff",
+       "type": "soon",
+       "label": "21-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "21-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-21--21-3--senior-staff",
+       "type": "soon",
+       "label": "21-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "21-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-21--21-4--senior-staff",
+       "type": "soon",
+       "label": "21-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-22": {
    "name": "Cabin 22",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "22A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-22--22a",
+       "type": "soon",
+       "label": "22A"
+      }
+     ]
+    },
+    {
+     "kind": "22B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-22--22b",
+       "type": "soon",
+       "label": "22B"
+      }
+     ]
+    },
+    {
+     "kind": "22-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-22--22-1--senior-staff",
+       "type": "soon",
+       "label": "22-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "22-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-22--22-2--senior-staff",
+       "type": "soon",
+       "label": "22-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "22-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-22--22-3--senior-staff",
+       "type": "soon",
+       "label": "22-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "22-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-22--22-4--senior-staff",
+       "type": "soon",
+       "label": "22-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-23": {
    "name": "Cabin 23",
    "blurb": "",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "23A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-23--23a",
+       "type": "soon",
+       "label": "23A"
+      }
+     ]
+    },
+    {
+     "kind": "23B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-23--23b",
+       "type": "soon",
+       "label": "23B"
+      }
+     ]
+    },
+    {
+     "kind": "23-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-23--23-1--senior-staff",
+       "type": "soon",
+       "label": "23-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "23-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-23--23-2--senior-staff",
+       "type": "soon",
+       "label": "23-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "23-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-23--23-3--senior-staff",
+       "type": "soon",
+       "label": "23-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "23-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-23--23-4--senior-staff",
+       "type": "soon",
+       "label": "23-4 (senior staff)"
+      }
+     ]
+    }
+   ],
    "candidates": []
   },
   "cabin-24": {
    "name": "Cabin 24",
    "blurb": "Cabin 24 burned around 2024; this shows it as it was.",
-   "parts": [],
+   "parts": [
+    {
+     "kind": "24A",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-24--24a",
+       "type": "soon",
+       "label": "24A"
+      }
+     ]
+    },
+    {
+     "kind": "24B",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-24--24b",
+       "type": "soon",
+       "label": "24B"
+      }
+     ]
+    },
+    {
+     "kind": "24-1 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-24--24-1--senior-staff",
+       "type": "soon",
+       "label": "24-1 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "24-2 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-24--24-2--senior-staff",
+       "type": "soon",
+       "label": "24-2 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "24-3 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-24--24-3--senior-staff",
+       "type": "soon",
+       "label": "24-3 (senior staff)"
+      }
+     ]
+    },
+    {
+     "kind": "24-4 (senior staff)",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-24--24-4--senior-staff",
+       "type": "soon",
+       "label": "24-4 (senior staff)"
+      }
+     ]
+    }
+   ],
+   "candidates": []
+  },
+  "cabin-5": {
+   "name": "Cabin 5",
+   "blurb": "Cabin 5 was overflow and almost never used.",
+   "parts": [
+    {
+     "kind": "5",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cabin-5--5",
+       "type": "soon",
+       "label": "5"
+      }
+     ]
+    }
+   ],
    "candidates": []
   }
  },
@@ -1109,6 +2925,9 @@
     {
      "ref": "rec-hall",
      "view": "s18-360"
+    },
+    {
+     "ref": "media-arts"
     }
    ]
   },
@@ -1120,6 +2939,9 @@
     },
     {
      "ref": "pottery"
+    },
+    {
+     "ref": "woodshop"
     },
     {
      "ref": "cooking"
@@ -1145,6 +2967,9 @@
      "ref": "baseball"
     },
     {
+     "ref": "middle-field"
+    },
+    {
      "ref": "gaga"
     }
    ]
@@ -1166,6 +2991,9 @@
     },
     {
      "ref": "riflery"
+    },
+    {
+     "ref": "fencing"
     },
     {
      "ref": "skate"
@@ -1192,6 +3020,9 @@
     },
     {
      "ref": "atv"
+    },
+    {
+     "ref": "dirtbikes"
     },
     {
      "ref": "horses"
@@ -1287,6 +3118,9 @@
       },
       {
        "ref": "cabin-7"
+      },
+      {
+       "ref": "cabin-8"
       }
      ]
     },
@@ -1329,11 +3163,14 @@
      "items": [
       {
        "ref": "cabin-4"
+      },
+      {
+       "ref": "cabin-5"
       }
      ]
     },
     {
-     "name": "Unsorted",
+     "name": "Unsorted photos",
      "items": [
       {
        "ref": "cabins-photos"
@@ -1346,19 +3183,10 @@
    "name": "Camp Buildings",
    "items": [
     {
-     "ref": "sc-out"
+     "ref": "sc"
     },
     {
-     "ref": "sc-in"
-    },
-    {
-     "ref": "dh-out"
-    },
-    {
-     "ref": "dh-in"
-    },
-    {
-     "ref": "sr-dining"
+     "ref": "dh"
     },
     {
      "ref": "rec-hall"
@@ -1384,10 +3212,16 @@
      "ref": "condo"
     },
     {
+     "ref": "staff-lounge"
+    },
+    {
      "ref": "laundry"
     },
     {
      "ref": "maint"
+    },
+    {
+     "ref": "staff-parking"
     }
    ]
   },
@@ -1398,7 +3232,16 @@
      "ref": "overview"
     },
     {
+     "ref": "roads"
+    },
+    {
+     "ref": "shortcut"
+    },
+    {
      "ref": "skilift"
+    },
+    {
+     "ref": "entrance"
     }
    ]
   }
