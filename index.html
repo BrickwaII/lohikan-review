@@ -283,7 +283,7 @@ function pinList(eid){
   if(pending&&pending.eid===eid) out.push({...pending,cls:'new',n:'+'});
   return out;
 }
-function startDraft(pos){ armed=false; document.querySelectorAll('.pane').forEach(p=>p.classList.remove('arming')); pending={eid:curE().id,...pos}; const d=$('draft'); d.classList.add('on'); d.querySelector('textarea').focus({preventScroll:true}); paintPins(); }
+function startDraft(pos){ armed=false; document.querySelectorAll('.pane').forEach(p=>p.classList.remove('arming')); pending={eid:curE().id,...pos}; const d=$('draft'); d.querySelector('textarea').value=''; d.classList.add('on'); d.querySelector('textarea').focus({preventScroll:true}); paintPins(); }
 function paintPins(){
   const e=curE(); if(!e||!$('pinlist')) return; const list=pinList(e.id);
   if(e.type!=='pano') for(const el of document.querySelectorAll('.pane.flat')){ const k=el.dataset.k;
@@ -417,7 +417,7 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.view){ vi=+t.dataset.view; renderView(); }
   else if(t.id==='pinbtn'){ armed=true; pending=null; $('draft').classList.remove('on'); document.querySelectorAll('.pane').forEach(p=>p.classList.add('arming')); toast('Now tap the spot on either picture'); paintPins(); }
   else if(t.id==='savepin'){ const txt=$('draft').querySelector('textarea').value.trim(); if(!txt){toast('Write a short note first');return;}
-    const {eid,...pos}=pending; E(eid).pins.push({id:rid(),...pos,t:txt,ver:VER(),at:new Date().toISOString()}); pending=null; $('draft').classList.remove('on'); paintPins(); queueSave(); toast('Pin saved'); }
+    const {eid,...pos}=pending; E(eid).pins.push({id:rid(),...pos,t:txt,ver:VER(),at:new Date().toISOString()}); pending=null; $('draft').querySelector('textarea').value=''; $('draft').classList.remove('on'); paintPins(); queueSave(); toast('Pin saved'); }
   else if(t.id==='cancelpin'){ pending=null; armed=false; document.querySelectorAll('.pane').forEach(p=>p.classList.remove('arming')); $('draft').classList.remove('on'); paintPins(); }
   else if(t.dataset.delpin){ const en=E(c.id); en.pins=en.pins.filter(p=>p.id!==t.dataset.delpin); paintPins(); queueSave(); }
   else if(t.dataset.delphoto){ const tgt=t.dataset.scope==='area'?A(area.key):E(c.id); tgt.photos=(tgt.photos||[]).filter(r=>r.g!==t.dataset.delphoto); queueSave(); paintPhotos(); }
