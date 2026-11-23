@@ -128,6 +128,13 @@ select.tri{font:inherit;font-size:13px;min-height:30px;border-radius:6px;border:
 .vb[aria-selected=true]{background:var(--green);border-color:var(--green);color:var(--sheet)}
 h3.vt{font-size:22px;margin-top:10px}
 body{padding-bottom:24px}
+#changes{display:none}body.changes #changes{display:block}body.changes main>section:not(#changes),body.changes .drawer{display:none}
+.chg{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+@media(max-width:899px){#chgbtn{display:none}}
+.sb{min-height:46px;padding:8px 22px;font-size:17px}.sb[aria-selected=true]{background:var(--green);border-color:var(--green);color:var(--sheet)}
+.vtabs.sub{margin-top:4px;padding-left:10px;border-left:3px solid var(--line)}
+.gsave{font-size:12px;color:var(--green)}
+.gal select{font:inherit;font-size:15px;min-height:38px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
 </style>
 </head>
 <body>
@@ -140,10 +147,10 @@ body{padding-bottom:24px}
   </div>
   <div class="status" id="status">Loading…</div>
 </header>
-<nav class="topnav" aria-label="Places"><button class="arr" id="navl" aria-label="Scroll places left" hidden>‹</button><div class="navrow" id="navrow"></div><button class="arr" id="navr" aria-label="Scroll places right" hidden>›</button><button id="menubtn" aria-haspopup="true">☰ Places</button></nav>
+<nav class="topnav" aria-label="Places"><button class="arr" id="navl" aria-label="Scroll places left" hidden>‹</button><div class="navrow" id="navrow"></div><button class="arr" id="navr" aria-label="Scroll places right" hidden>›</button><button class="nt" id="chgbtn">What's changed</button><button id="menubtn" aria-haspopup="true">☰ Places</button></nav>
 <div class="dd" id="dd" role="menu"></div>
-<div class="menu" id="menu"><div class="panel" role="navigation" aria-label="Places"><div class="ctrl" style="margin:0 0 8px;justify-content:space-between"><h3 style="margin:0">Places</h3><button class="small" id="menuclose">Close</button></div><div id="tree"></div></div></div>
-<main class="wrap">
+<div class="menu" id="menu"><div class="panel" role="navigation" aria-label="Places"><div class="ctrl" style="margin:0 0 8px;justify-content:space-between"><h3 style="margin:0">Places</h3><button class="small" id="menuclose">Close</button></div><div id="tree"></div><button class="item" id="chgbtn2" style="margin-top:10px">What's changed</button></div></div>
+<main class="wrap"><section class="card" id="changes"></section>
   <section class="card">
     <div class="crumb" id="crumb"></div>
     <h2 id="pname"></h2><p class="blurb" id="pblurb"></p>
@@ -192,22 +199,24 @@ function chip(k,ver){ const t=triOf(k); let h=t.s?`<span class="st st-${t.s}">${
 
 /* ---------- storage: Google Apps Script backend (no login) ---------- */
 const API=()=>(DATA&&DATA.api)||'';
-async function api(body){ const r=await fetch(API(),{method:'POST',body:JSON.stringify(body)}); const j=await r.json(); if(!j.ok) throw new Error(j.error||'failed'); return j; }
+async function api(body){ const ac=new AbortController(), to=setTimeout(()=>ac.abort(),25000); let r; try{ r=await fetch(API(),{method:'POST',body:JSON.stringify(body),signal:ac.signal}); } finally { clearTimeout(to); } const j=await r.json(); if(!j.ok) throw new Error(j.error||'failed'); return j; }
 async function pull(){
   if(!API()) return;
   try{ const r=await fetch(API()+'?action=all&t='+Date.now()); const j=await r.json();
     others=(j.reviews||[]).filter(x=>x&&x.id!==me.id).map(x=>({...(x.data||{}),__u:x.id}));
     ADM={hidden:[],rot:{},tri:{},gal:{},...(j.admin||{})};
     const mineSrv=(j.reviews||[]).find(x=>x&&x.id===me.id);
+    const strip=o=>JSON.stringify({...o,at:''});
+    if(!pull.done){ pull.done=true; if(LS('lrv_data')&&(!mineSrv||strip(mineSrv.data||{})!==strip(mine))&&(Object.keys(mine.entries).length||Object.keys(mine.gfb||{}).length)) LS('lrv_dirty','1'); }
     if(mineSrv&&!dirty&&!Object.keys(mine.entries).length&&!Object.keys(mine.areas).length){ mine=Object.assign(mine,mineSrv.data||{}); $('rname').value=mine.name||''; $('ryears').value=mine.years||''; }
     status(online?'Your notes save automatically.':'Connected. Your notes save automatically.'); online=true; refresh();
   }catch(e){ status("Can't reach saved notes right now. Your notes stay in this browser."); }
 }
 let online=false, saveT=null, saving=false, dirty=false;
-function queueSave(){ LS('lrv_data',JSON.stringify(mine)); dirty=true; clearTimeout(saveT); saveT=setTimeout(flush,1200); }
+function queueSave(){ LS('lrv_data',JSON.stringify(mine)); LS('lrv_dirty','1'); dirty=true; status('Saving…'); clearTimeout(saveT); saveT=setTimeout(flush,1200); }
 async function flush(){
   if(!API()||saving||!dirty) return; saving=true; dirty=false; mine.at=new Date().toISOString();
-  try{ await api({action:'save',id:me.id,token:me.token,data:mine}); status('Saved. Everyone can see your notes.'); }
+  try{ await api({action:'save',id:me.id,token:me.token,data:mine}); status('Saved. Everyone can see your notes.'); if(!dirty) LS('lrv_dirty',''); }
   catch(e){ dirty=true; status('Not saved yet, retrying…'); setTimeout(flush,6000); }
   saving=false; if(dirty) flush();
 }
@@ -216,14 +225,20 @@ const okId=s=>typeof s==='string'&&/^[A-Za-z0-9_-]{10,80}$/.test(s);
 const photoUrl=r=>r&&okId(r.g)?`https://drive.google.com/thumbnail?id=${r.g}&sz=w1600`:'';
 
 /* ---------- places ---------- */
-const hasContent=a=>a.parts.some(p=>p.entries.length)||(a.candidates||[]).length;
-function flatAreas(items,path){ for(const it of items){ if(it.key){ if(hasContent(it)) AREAS.push({...it,path}); } else flatAreas(it.items||[],[...path,it.name]); } }
+const hasContent=a=>!!a&&(a.parts.some(p=>p.entries.length)||(a.candidates||[]).length>0);
+const AR=k=>(DATA.areas||{})[k];
+function flatAreas(items,path){ for(const it of items){ if(it.ref){ const a=AR(it.ref); if(hasContent(a)&&!AREAS.some(x=>x.key===it.ref)) AREAS.push({...a,key:it.ref,path}); } else flatAreas(it.items||[],[...path,it.name]); } }
+const groupHas=g=>(g.items||[]).some(it=>it.ref?hasContent(AR(it.ref)):groupHas(it));
+const itemBtn=it=>{ const a=AR(it.ref); return hasContent(a)?`<button class="item" data-area="${esc(it.ref)}"${it.view?` data-goto="${esc(it.view)}"`:''} aria-current="${area&&area.key===it.ref}">${esc(it.name||a.name)}</button>`:''; };
 function treeHtml(items,depth){
-  return items.map(it=>{ if(it.key){ return hasContent(it)?`<button class="item" data-area="${esc(it.key)}" aria-current="${area&&area.key===it.key}">${esc(it.name)}</button>`:''; }
-    const inner=treeHtml(it.items||[],depth+1), open=area&&area.path.includes(it.name);
-    return `<details${open?' open':''}><summary>${esc(it.name)}</summary><div class="sub">${inner||'<span class="soon">Coming soon</span>'}</div></details>`; }).join('');
+  return items.map(it=>{ if(it.ref) return itemBtn(it);
+    const inner=treeHtml(it.items||[],depth+1); if(!inner) return '';
+    const open=area&&curPath.includes(it.name);
+    return `<details${open?' open':''}><summary>${esc(it.name)}</summary><div class="sub">${inner}</div></details>`; }).join('');
 }
-function setArea(key,vid){ area=AREAS.find(a=>a.key===key)||AREAS[0]; buildViews(); vi=Math.max(0,VIEWS.findIndex(v=>v.id===vid)); renderPlace(); }
+function pathOf(key,items=DATA.groups,path=[]){ for(const it of items){ if(it.ref===key) return path; if(it.items){ const r=pathOf(key,it.items,[...path,it.name]); if(r) return r; } } return null; }
+let curPath=[];
+function setArea(key,vid,path){ document.body.classList.remove('changes'); area=AREAS.find(a=>a.key===key)||AREAS[0]; curPath=path||area.path; buildViews(); vi=Math.max(0,VIEWS.findIndex(v=>v.id===vid)); renderPlace(); }
 function buildViews(){ VIEWS=[]; for(const p of area.parts) for(const e of p.entries) if(isOwner||!(ADM.hidden||[]).includes(e.id)) VIEWS.push({...e,kind:p.kind}); }
 const curE=()=>VIEWS[vi]||null;
 
@@ -319,18 +334,34 @@ async function addPhotos(files,scope){
 }
 
 /* ---------- gallery ---------- */
+const galState=id=>{ const g=(ADM.gal||{})[id]; return typeof g==='string'?{s:g}:(g||{}); };
+function allPhotos(){ const L=[]; for(const [k,a] of Object.entries(DATA.areas||{})) for(const p of a.candidates||[]) L.push({...p,home:k}); return L; }
+const photoPlace=p=>galState(p.id).to||p.home;
+function placeOptions(sel){ const opt=[]; const walk=(items,pre)=>{ for(const it of items){ if(it.ref){ const a=AR(it.ref); if(a&&!opt.some(o=>o[0]===it.ref)) opt.push([it.ref,pre+(it.name||a.name)]); } else walk(it.items||[],pre+it.name+' › '); } }; walk(DATA.groups,'');
+  return `<option value="">Pick the right place…</option>`+opt.map(([k,l])=>`<option value="${esc(k)}"${k===sel?' selected':''}>${esc(l)}</option>`).join(''); }
+const placeName=k=>{ const a=AR(k); return a?a.name:k; };
 function paintGallery(){
-  const cands=(area.candidates||[]); const ok=cands.filter(p=>(ADM.gal||{})[p.id]==='ok'), un=cands.filter(p=>!(ADM.gal||{})[p.id]||(isOwner&&(ADM.gal||{})[p.id]==='no'));
-  $('gdrawer').style.display=ok.length?'':'none'; $('udrawer').style.display=un.length?'':'none';
+  const here=allPhotos().filter(p=>photoPlace(p)===area.key);
+  const ok=here.filter(p=>galState(p.id).s==='ok'), rej=here.filter(p=>galState(p.id).s==='no'), un=here.filter(p=>!galState(p.id).s);
+  $('gdrawer').style.display=ok.length?'':'none'; $('udrawer').style.display=(un.length||(isOwner&&rej.length))?'':'none';
   $('gsum').textContent=`Photo gallery (${ok.length})`; $('usum').textContent=`Help sort unverified photos (${un.length})`;
-  const card=(p,verified)=>{ const f=(mine.gfb||{})[p.id]||{}; const fb=others.map(o=>({o,x:(o.gfb||{})[p.id]})).filter(z=>z.x&&(z.x.v||z.x.t));
-    const lbl={yes:'Shows this place',no:'Wrong place',meh:'Not useful'};
-    return `<figure><img src="${esc(p.src)}" alt="${esc(p.cap||'Camp photo')}" loading="lazy" data-big="1"><div class="gb"><span class="by">${esc(p.cap||'')}${(ADM.gal||{})[p.id]==='no'?' · rejected':''}</span>
-      <div class="opts">${Object.entries(verified?{meh:'Not useful'}:lbl).map(([v,l])=>`<button class="small" data-gfb="${esc(p.id)}" data-v="${v}" aria-pressed="${f.v===v}">${l}</button>`).join('')}</div>
-      <input class="in" data-gtx="${esc(p.id)}" maxlength="400" placeholder="What does this show? Year, building, anything wrong…" value="${esc(f.t||'')}">
-      ${fb.length?`<ul class="notes">${fb.map(z=>`<li><span class="n txt">✎</span><span>${esc([lbl[z.x.v],z.x.t].filter(Boolean).join(': '))}<br><span class="by">${esc(who(z.o))}</span></span><span></span></li>`).join('')}</ul>`:''}
-      ${isOwner?`<div class="opts">${verified?`<button class="small" data-gal="${esc(p.id)}" data-v="">Remove from gallery</button>`:`<button class="small" data-gal="${esc(p.id)}" data-v="ok">Add to gallery</button><button class="small" data-gal="${esc(p.id)}" data-v="no">Reject</button>`}</div>`:''}</div></figure>`; };
-  $('gal').innerHTML=ok.map(p=>card(p,true)).join(''); $('ugal').innerHTML=un.map(p=>card(p,false)).join('');
+  const lbl={yes:'Shows this place',other:'Different place',meh:'Not useful'};
+  const card=(p,mode)=>{ const f=(mine.gfb||{})[p.id]||{}, gs=galState(p.id);
+    const fb=[...others.map(o=>({w:who(o),x:(o.gfb||{})[p.id]})),{w:'You',x:f}].filter(z=>z.x&&(z.x.v||z.x.t));
+    const fbLine=x=>[lbl[x.v]+(x.v==='other'&&x.to?`: ${placeName(x.to)}`:''),x.t].filter(Boolean).join(' — ');
+    const sugg=[...new Set(fb.filter(z=>z.x.v==='other'&&z.x.to&&AR(z.x.to)).map(z=>z.x.to))];
+    return `<figure><img src="${esc(p.src)}" alt="${esc(p.cap||'Camp photo')}" loading="lazy"><div class="gb">
+      <span class="by">${esc(p.cap||'')}${gs.to?` · moved from ${esc(placeName(p.home))}`:''}</span>
+      ${mode==='rej'?'':`<div class="opts">${Object.entries(mode==='ok'?{other:'Different place',meh:'Not useful'}:lbl).map(([v,l])=>`<button class="small" data-gfb="${esc(p.id)}" data-v="${v}" aria-pressed="${f.v===v}">${l}</button>`).join('')}</div>
+      ${f.v==='other'?`<select data-gto="${esc(p.id)}" aria-label="Which place does this photo show?">${placeOptions(f.to)}</select>`:''}
+      <input class="in" data-gtx="${esc(p.id)}" maxlength="400" placeholder="What does this show? Year, building, anything wrong…" value="${esc(f.t||'')}">`}
+      ${fb.length?`<ul class="notes">${fb.map(z=>`<li><span class="n txt">✎</span><span>${esc(fbLine(z.x))}<br><span class="by">${esc(z.w)}</span></span><span></span></li>`).join('')}</ul>`:''}
+      ${isOwner?`<div class="opts">${mode==='ok'?`<button class="small" data-gal="${esc(p.id)}" data-v="">Take out of gallery</button>`:mode==='rej'?`<button class="small" data-gal="${esc(p.id)}" data-v="">Restore</button>`:`<button class="small" data-gal="${esc(p.id)}" data-v="ok">Add to gallery</button><button class="small" data-gal="${esc(p.id)}" data-v="no">Hide (not useful)</button>`}
+        ${sugg.map(k=>`<button class="small" data-galmove="${esc(p.id)}" data-to="${esc(k)}">Move to ${esc(placeName(k))}</button>`).join('')}</div>
+        ${mode!=='rej'?`<select data-galmovesel="${esc(p.id)}" aria-label="Move this photo to another place">${placeOptions('').replace('Pick the right place…','Move to another place…')}</select>`:''}`:''}
+    </div></figure>`; };
+  $('gal').innerHTML=ok.map(p=>card(p,'ok')).join('');
+  $('ugal').innerHTML=un.map(p=>card(p,'un')).join('')+(isOwner&&rej.length?`<details style="grid-column:1/-1"><summary class="by">Hidden photos (${rej.length})</summary><div class="gal">${rej.map(p=>card(p,'rej')).join('')}</div></details>`:'');
 }
 
 /* ---------- render ---------- */
@@ -353,7 +384,11 @@ function viewHtml(e){
 }
 function tabsHtml(){
   const groups=[]; VIEWS.forEach((v,i)=>{ let g=groups.find(x=>x.kind===v.kind); if(!g) groups.push(g={kind:v.kind,items:[]}); g.items.push(i); });
-  return `<div class="vtabs" role="tablist">${groups.map(g=>`<span class="vg"><span class="vgl">${esc(g.kind)}</span>${g.items.map((i,k)=>`<button role="tab" class="vb" data-view="${i}" aria-selected="${i===vi}" title="${esc(VIEWS[i].label)}">${VIEWS[i].type==='pano'?'360°':g.items.filter(j=>VIEWS[j].type!=='pano').indexOf(i)+1}</button>`).join('')}</span>`).join('')}</div>`;
+  const cur=groups.find(g=>g.items.includes(vi))||groups[0];
+  const short=v=>v.type==='pano'?'360°':(v.short||v.label);
+  let h=`<div class="vtabs" role="tablist">${groups.map(g=>`<button role="tab" class="sb" data-view="${g.items[0]}" aria-selected="${g===cur}">${esc(g.kind)}${g.items.length===1&&VIEWS[g.items[0]].type==='pano'?' · 360°':''}</button>`).join('')}</div>`;
+  if(cur&&cur.items.length>1) h+=`<div class="vtabs sub" role="tablist">${cur.items.map(i=>`<button role="tab" class="vb" data-view="${i}" aria-selected="${i===vi}">${esc(short(VIEWS[i]))}</button>`).join('')}</div>`;
+  return h;
 }
 function renderView(){
   disposeSpheres(); pending=null; armed=false; const e=curE();
@@ -364,30 +399,34 @@ function renderView(){
   try{ history.replaceState(null,'',`#${area.key}${e?'--'+e.id:''}`); }catch(err){}
 }
 function renderPlace(){
-  $('crumb').textContent=area.path.join(' › '); $('pname').textContent=area.name; $('pblurb').textContent=area.blurb||'';
+  $('crumb').textContent=curPath.join(' › '); $('pname').textContent=area.name; $('pblurb').textContent=area.blurb||'';
   $('wtitle').textContent=`Anything else about ${area.name}?`;
   $('stext').value=A(area.key).text||''; $('sang').value=A(area.key).angles||'';
   renderView(); paintGallery(); paintNav();
 }
 function paintNav(){
   $('tree').innerHTML=treeHtml(DATA.groups,0);
-  const tops=DATA.groups.filter(g=>AREAS.some(a=>a.path[0]===g.name));
-  $('navrow').innerHTML=tops.map((g,i)=>`<button class="nt" data-top="${i}" aria-haspopup="true" aria-current="${area.path[0]===g.name}">${esc(g.name)} ▾</button>`).join('');
+  const tops=DATA.groups.filter(groupHas);
+  $('navrow').innerHTML=tops.map((g,i)=>`<button class="nt" data-top="${i}" aria-haspopup="true" aria-current="${curPath[0]===g.name}">${esc(g.name)} ▾</button>`).join('');
   navArrows();
 }
 function navArrows(){ const r=$('navrow'); $('navl').hidden=r.scrollLeft<=2; $('navr').hidden=r.scrollLeft+r.clientWidth>=r.scrollWidth-2; }
 let ddT=null;
 function openDD(btn){
-  const g=DATA.groups.filter(g=>AREAS.some(a=>a.path[0]===g.name))[+btn.dataset.top]; if(!g) return;
-  const item=it=>it.key?(hasContent(it)?`<button class="item" data-area="${esc(it.key)}" aria-current="${area.key===it.key}">${esc(it.name)}</button>`:''):(()=>{ const inner=(it.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(it.name)}</div>${inner}</div>`:''; })();
-  const dd=$('dd'); dd.innerHTML=g.items.map(item).join('')||'<span class="soon">Coming soon</span>';
-  const r=btn.getBoundingClientRect(); dd.style.left=Math.max(8,Math.min(r.left,innerWidth-dd.offsetWidth-8))+'px'; dd.style.top=(r.bottom+window.scrollY)+'px'; dd.classList.add('on'); dd.dataset.top=btn.dataset.top;
-  dd.style.left=Math.max(8,Math.min(r.left,innerWidth-dd.offsetWidth-8))+'px';
+  const g=DATA.groups.filter(groupHas)[+btn.dataset.top]; if(!g) return;
+  const item=it=>it.ref?itemBtn(it):(()=>{ const inner=(it.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(it.name)}</div>${inner}</div>`:''; })();
+  const dd=$('dd'); dd.innerHTML=g.items.map(item).join(''); dd.dataset.top=btn.dataset.top; dd.dataset.group=g.name; dd.classList.add('on');
+  const r=btn.getBoundingClientRect(); dd.style.top=(r.bottom+window.scrollY)+'px'; dd.style.left=Math.max(8,Math.min(r.left,innerWidth-dd.offsetWidth-8))+'px';
+}
+function showChanges(){
+  closeDD(); disposeSpheres(); document.body.classList.add('changes'); const C=DATA.changes||[];
+  $('changes').innerHTML=`<h2>What's changed in the model</h2><p class="blurb">Each update to the model, with before and after pictures. Comment on any of them like a normal view.</p>`+(C.length?C.slice().reverse().map(v=>`<h3 style="margin-top:18px">${esc(v.version)} · ${esc(v.date||'')}</h3>${(v.items||[]).map(it=>`<div class="chg"><div class="by">${esc(it.place||'')}</div><b>${esc(it.title)}</b>${it.note?`<p class="hint">${esc(it.note)}</p>`:''}<div class="media"><div class="pane flat"><img src="${esc(it.before)}" alt="Before"><span class="tag">Before</span></div><div class="pane flat"><img src="${esc(it.after)}" alt="After"><span class="tag">After</span></div></div></div>`).join('')}`).join(''):'<p class="by">No model updates yet. They will show up here after the first round of fixes.</p>');
+  try{ history.replaceState(null,'','#changes'); }catch(e){} window.scrollTo({top:0});
 }
 function closeDD(){ $('dd').classList.remove('on'); }
 function refresh(){ if(!area) return; const id=curE()&&curE().id; buildViews(); const i=id?VIEWS.findIndex(v=>v.id===id):-1; vi=i>=0?i:Math.min(vi,Math.max(0,VIEWS.length-1));
   const typing=document.activeElement&&document.activeElement.matches('textarea,input');
-  if((spheres&&curE()&&id===curE().id)||typing){ paintPins(); paintOthers(); paintPhotos(); paintGallery(); } else { renderView(); paintGallery(); } }
+  if((spheres&&curE()&&id===curE().id)||typing){ paintPins(); paintOthers(); paintPhotos(); if(!typing) paintGallery(); } else { renderView(); paintGallery(); } }
 
 /* ---------- events ---------- */
 document.addEventListener('input',e=>{
@@ -400,6 +439,8 @@ document.addEventListener('input',e=>{
 });
 document.addEventListener('change',e=>{ const t=e.target;
   if(t.id==='pfile'||t.id==='pfileA'){ addPhotos([...t.files],t.id==='pfileA'?'area':'view'); t.value=''; }
+  if(t.dataset.gto){ const g=(mine.gfb??={})[t.dataset.gto]??={}; g.to=t.value; queueSave(); paintGallery(); toast('Thanks! Saved.'); }
+  if(t.dataset.galmovesel&&isOwner&&t.value){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmovesel]={to:t.value}; saveAdm({gal}); toast('Moved to '+placeName(t.value)); }
   if(t.dataset.tri&&isOwner){ const tri={...(ADM.tri||{})}; if(t.value) tri[t.dataset.tri]={s:t.value,at:new Date().toISOString(),ver:VER()}; else delete tri[t.dataset.tri]; saveAdm({tri}); } });
 document.addEventListener('click',async e=>{
   const fl=e.target.closest('.pane.flat');
@@ -411,7 +452,11 @@ document.addEventListener('click',async e=>{
   const t=e.target.closest('button'); if(!t) return; const c=curE();
   if(t.id==='menubtn'){ $('menu').classList.add('on'); }
   else if(t.id==='menuclose'){ $('menu').classList.remove('on'); }
-  else if(t.dataset.area){ $('menu').classList.remove('on'); closeDD(); setArea(t.dataset.area); window.scrollTo({top:0}); }
+  else if(t.dataset.area){ const inDD=t.closest('#dd'); let path=inDD?null:null;
+    if(inDD){ const grp=DATA.groups.find(g=>g.name===$('dd').dataset.group); path=[grp.name,...((pathOf(t.dataset.area,grp.items)||[]))]; }
+    else { const trail=[]; let el=t.parentElement; while(el&&el.id!=='tree'){ if(el.tagName==='DETAILS') trail.unshift(el.querySelector(':scope>summary').textContent); el=el.parentElement; } path=trail; }
+    $('menu').classList.remove('on'); closeDD(); setArea(t.dataset.area,t.dataset.goto||null,path); window.scrollTo({top:0}); }
+  else if(t.id==='chgbtn'||t.id==='chgbtn2'){ $('menu').classList.remove('on'); showChanges(); }
   else if(t.dataset.top){ $('dd').classList.contains('on')&&$('dd').dataset.top===t.dataset.top?closeDD():openDD(t); }
   else if(t.id==='navl'||t.id==='navr'){ $('navrow').scrollBy({left:(t.id==='navl'?-1:1)*260,behavior:'smooth'}); }
   else if(t.dataset.view){ vi=+t.dataset.view; renderView(); }
@@ -424,8 +469,9 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.rot&&spheres){ spheres.rot=(spheres.rot+ +t.dataset.rot+360)%360; LS('rot_'+c.id,String(spheres.rot)); spheres.draw(); if(isOwner) saveAdm({rot:{...(ADM.rot||{}),[c.id]:spheres.rot}}); }
   else if(t.id==='useless'){ const en=E(c.id); en.flag=en.flag==='useless'?'':'useless'; queueSave(); renderView(); }
   else if(t.id==='hideview'){ const H=new Set(ADM.hidden||[]); H.has(c.id)?H.delete(c.id):H.add(c.id); await saveAdm({hidden:[...H]}); toast(H.has(c.id)?'Removed for reviewers':'Restored'); }
-  else if(t.dataset.gfb){ const g=(mine.gfb??={})[t.dataset.gfb]??={}; g.v=g.v===t.dataset.v?'':t.dataset.v; queueSave(); paintGallery(); }
-  else if(t.dataset.gal&&isOwner){ const gal={...(ADM.gal||{})}; if(t.dataset.v) gal[t.dataset.gal]=t.dataset.v; else delete gal[t.dataset.gal]; saveAdm({gal}); }
+  else if(t.dataset.gfb){ const g=(mine.gfb??={})[t.dataset.gfb]??={}; g.v=g.v===t.dataset.v?'':t.dataset.v; queueSave(); paintGallery(); toast('Saved'); }
+  else if(t.dataset.gal&&isOwner){ const gal={...(ADM.gal||{})}, cur=galState(t.dataset.gal); const nv={...cur,s:t.dataset.v}; if(!nv.s) delete nv.s; if(!nv.s&&!nv.to) delete gal[t.dataset.gal]; else gal[t.dataset.gal]=nv; saveAdm({gal}); toast(t.dataset.v==='ok'?'Added to gallery':t.dataset.v==='no'?'Hidden':'Restored'); }
+  else if(t.dataset.galmove&&isOwner){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmove]={to:t.dataset.to}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.to)); }
   else if(t.id==='showall'){ showAll=!showAll; t.setAttribute('aria-pressed',String(showAll)); t.textContent=showAll?'Hide fixed & not-valid notes':'Show fixed & not-valid notes'; paintPins(); paintOthers(); }
   else if(t.id==='alogin'){ const k=$('akey').value.trim(); if(!k||!API()) return;
     try{ await api({action:'checkkey',key:k}); adminKey=k; isOwner=true; LS('lrv_admin',k); $('astate').textContent='Unlocked'; refresh(); renderView(); }catch(err){ $('astate').textContent='Wrong passcode'; } }
@@ -436,7 +482,7 @@ document.addEventListener('click',async e=>{
         for(const q of x.pins||[]) out.push(`- ${en.label} [pin ${q.img?q.img+' '+q.x+'%,'+q.y+'%':'360 '+(q.dir||[]).join(',')}]: ${q.t}`);
         if(x.text) out.push(`- ${en.label}: ${x.text}`); if(x.flag) out.push(`- ${en.label}: not useful`); }
       const sx=mine.areas[a.key]; if(sx){ if(sx.text) out.push(`- Whole place: ${sx.text}`); if(sx.angles) out.push(`- New angles: ${sx.angles}`); }
-      for(const g of a.candidates||[]){ const f=(mine.gfb||{})[g.id]; if(f&&(f.v||f.t)) out.push(`- Photo ${g.id}: ${[f.v,f.t].filter(Boolean).join(' – ')}`); }
+      for(const g of a.candidates||[]){ const f=(mine.gfb||{})[g.id]; if(f&&(f.v||f.t)) out.push(`- Photo ${g.id}: ${[f.v,f.to?placeName(f.to):'',f.t].filter(Boolean).join(' – ')}`); }
       if(out.length) L.push('',a.name,...out); }
     try{ await navigator.clipboard.writeText(L.join('\n')); toast('Copied. Paste it into a message to Henry.'); }catch(err){ toast("Couldn't copy here"); }
   }
@@ -446,13 +492,13 @@ document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==
 
 fetch('views.json').then(r=>r.json()).then(async d=>{
   DATA=d; flatAreas(d.groups,[]); $('rname').value=mine.name||''; $('ryears').value=mine.years||'';
-  const m=/^#([a-z0-9-]+?)(?:--([A-Za-z0-9-]+))?$/.exec(location.hash); setArea(m?m[1]:AREAS[0].key,m?m[2]:null);
+  const m=/^#([a-z0-9-]+?)(?:--([A-Za-z0-9-]+))?$/.exec(location.hash); if(location.hash==='#changes') showChanges(); else setArea(m?m[1]:AREAS[0].key,m?m[2]:null);
   $('navrow').addEventListener('scroll',navArrows,{passive:true}); addEventListener('resize',()=>{navArrows();closeDD();});
   $('navrow').addEventListener('mouseover',e=>{ const b=e.target.closest('.nt'); if(b&&matchMedia('(hover:hover)').matches){ clearTimeout(ddT); openDD(b); } });
   $('navrow').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); }); $('dd').addEventListener('mouseenter',()=>clearTimeout(ddT)); $('dd').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); });
   if(!API()){ status("Saving isn't switched on yet. Your notes stay in this browser; use Copy my feedback at the bottom."); return; }
   const k=LS('lrv_admin'); if(k){ try{ await api({action:'checkkey',key:k}); adminKey=k; isOwner=true; $('astate').textContent='Unlocked'; }catch(e){} }
-  await pull(); renderPlace(); setInterval(()=>{ if(document.visibilityState==='visible') pull(); },90000);
+  await pull(); renderPlace(); if(LS('lrv_dirty')==='1'){ dirty=true; flush(); } setInterval(()=>{ if(document.visibilityState==='visible') pull(); },90000);
 }).catch(()=>status('Could not load the review.'));
 }
 </script>
