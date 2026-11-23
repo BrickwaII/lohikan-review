@@ -10,33 +10,33 @@ MODEL_ONLY = "Model only, trees hidden. No matching real photo yet; if you have 
 PANO = {'s07': 236, 's12': 105, 's14': 180, 's19': 180, 's34': 180}
 GAL = json.load(open('/home/claude/review/gal_list.json')) if os.path.exists('/home/claude/review/gal_list.json') else {}
 
-def P(key, name, blurb='', c=None, w=60, pano=None, pano_label=None, extra=None, gal=None, inside=None, auto=True, soon=None, inside_name='Inside', sections=None, merge=None):
-    return dict(sections=sections or {}, merge=merge or {}, key=key, name=name, blurb=blurb, c=c, w=w, pano=pano, pano_label=pano_label, extra=extra or [], gal=gal, inside=inside or [], auto=auto, soon=soon or [], inside_name=inside_name)
+def P(key, name, blurb='', c=None, w=60, pano=None, pano_label=None, extra=None, gal=None, inside=None, auto=True, soon=None, inside_name='Inside', sections=None, merge=None, xy=None):
+    return dict(xy=xy or c, sections=sections or {}, merge=merge or {}, key=key, name=name, blurb=blurb, c=c, w=w, pano=pano, pano_label=pano_label, extra=extra or [], gal=gal, inside=inside or [], auto=auto, soon=soon or [], inside_name=inside_name)
 
 def still(i, label, img, cap=MODEL_ONLY): return {"id": i, "type": "model", "label": label, "model": img, "cap": cap}
 
 PLACES = [
  # Sports Center building (hand-made views from earlier rounds)
- P('sc', 'Sports Center', 'The big green-roofed Sports Center: the indoor court and canteen as one open hall, flags overhead, colour-war banners on the walls; the circus building is attached on its east end.', auto=False, gal='sports_center_circus', inside_name='Court & canteen', soon=['Canteen counter'], inside=[still("sc-in-w", "Looking west across the court", "img/sc_in_w_model.jpg", "Model only."), still("sc-in-e", "Looking east toward the circus", "img/sc_in_e_model.jpg", "Model only.")], extra=[
+ P('sc', 'Sports Center', xy=(1762, 1610), blurb='The big green-roofed Sports Center: the indoor court and canteen as one open hall, flags overhead, colour-war banners on the walls; the circus building is attached on its east end.', auto=False, gal='sports_center_circus', inside_name='Court & canteen', soon=['Canteen counter'], inside=[still("sc-in-w", "Looking west across the court", "img/sc_in_w_model.jpg", "Model only."), still("sc-in-e", "Looking east toward the circus", "img/sc_in_e_model.jpg", "Model only.")], extra=[
    {"id": "sc-top", "type": "pair", "label": "From above", "real": "img/sc_top_real.jpg", "model": "img/sc_top_model.jpg", "cap": TOP},
    still("sc-front", "The front, from the volleyball court", "img/sc_front_model.jpg"), still("sc-se", "From the southeast", "img/sc_se_model.jpg"),
    still("sc-sw", "From the southwest", "img/sc_sw_model.jpg"), still("circ-out", "Circus end, from the east", "img/circ_out_model.jpg")]),
- P('circus', 'Circus', 'The 2008 circus building: trapeze rig, aerial rigging, mats, star-painted walls and the open south side.', auto=False, pano='s07', pano_label='Circus floor'),
- P('dance', 'Dance studio', 'The dance studio off the circus north aisle. Its exact position in the model is a guess.', auto=False, pano='s19', pano_label='Dance studio'),
- P('gym', 'Gymnastics', 'The walled-off gymnastics room along the north wall of the Sports Center.', auto=False, pano='s34', pano_label='Gymnastics room'),
- P('volleyball', 'Volleyball', 'The sand volleyball court in front of the Sports Center.', auto=False, extra=[still("vb-1", "Sand court from the southwest", "img/vb_model.jpg")]),
+ P('circus', 'Circus', 'The 2008 circus building: trapeze rig, aerial rigging, mats, star-painted walls and the open south side.', auto=False, xy=(1792, 1610), pano='s07', pano_label='Circus floor'),
+ P('dance', 'Dance studio', 'The dance studio off the circus north aisle. Its exact position in the model is a guess.', auto=False, xy=(1786, 1627), pano='s19', pano_label='Dance studio'),
+ P('gym', 'Gymnastics', 'The walled-off gymnastics room along the north wall of the Sports Center.', auto=False, xy=(1744, 1626), pano='s34', pano_label='Gymnastics room'),
+ P('volleyball', 'Volleyball', 'The sand volleyball court in front of the Sports Center.', auto=False, xy=(1689, 1601), extra=[still("vb-1", "Sand court from the southwest", "img/vb_model.jpg")]),
  P('basketball', 'Basketball', 'The outdoor basketball courts west of the Sports Center.', c=(1683, 1571), w=60, pano='s14', pano_label='Basketball courts'),
  # Performing arts
- P('rock-band', 'Rock Band / Music', 'The music and rock band room.', pano='s21', pano_label='Rock Band room', auto=False),
  P('amphitheater', 'Amphitheater', 'The outdoor amphitheater stage below the Lower Office.', c=(1475, 1480), w=70, pano='s17', pano_label='Amphitheater & Lower Office'),
- P('rec-hall', 'Rec Hall', 'The Rec Hall: stage, big open floor; the circus program ran here through 2007.', c=(1485, 1647), w=70, pano='s18', pano_label='Rec Hall stage', gal='rec_hall', soon=['Backstage']),
+ P('rec-hall', 'Rec Hall', 'The Rec Hall: stage, big open floor; the circus program ran here through 2007.', c=(1485, 1647), w=70, pano='s18', pano_label='Rec Hall stage', gal='rec_hall', inside_name='Stage', soon=['Blackbox theater', 'Backstage'],
+   sections={'Music / Rock Band': [{"id": "s21-360", "type": "pano", "label": "Rock Band room in 360°", "realPano": "pano/s21_real.jpg", "modelPano": "pano/s21_model.jpg", "cap": "Real: 360° tour photo (2023–2025). The model was rendered from about the same spot; if it's turned, use the turn buttons."}]}),
  # Creative arts
- P('ac', 'Arts & Crafts', 'The long Art Center: open south side, painted ceiling panels and banners, tables along the back and left walls, closets, and the mesh-covered patio out front.', auto=False, gal='art_center', extra=[
+ P('ac', 'Arts & Crafts', 'The long Art Center: open south side, painted ceiling panels and banners, tables along the back and left walls, closets, and the mesh-covered patio out front.', auto=False, xy=(1391, 1588), gal='art_center', extra=[
    {"id": "ac-top", "type": "pair", "label": "From above", "real": "img/ac_top_real.jpg", "model": "img/ac_top_model.jpg", "cap": TOP},
    still("ac-s", "From the south", "img/ac_s_model.jpg"), still("ac-se", "From the southeast", "img/ac_se_model.jpg")], pano='s12', pano_label='Inside Arts & Crafts'),
- P('woodshop', 'Woodshop', 'The woodshop, a strip about 10 ft deep along the east end of the Art Center.', auto=False, soon=['Inside']),
- P('media-arts', 'Media Arts', 'The Media Arts room.', auto=False, soon=['Outside', 'Inside']),
- P('pottery', 'Pottery', 'Pottery, at the end of the Art Center.', pano='s30', pano_label='Pottery', gal='pottery', auto=False),
+ P('woodshop', 'Woodshop', 'The woodshop, a strip about 10 ft deep along the east end of the Art Center.', auto=False, soon=['Inside'], xy=(1420, 1585)),
+ P('media-arts', 'Media Arts', 'The Media Arts room.', auto=False, soon=['Outside', 'Inside'], xy=(1615, 1754)),
+ P('pottery', 'Pottery', 'Pottery, at the end of the Art Center.', pano='s30', pano_label='Pottery', gal='pottery', auto=False, xy=(1365, 1590)),
  P('cooking', 'Cooking', 'The cooking building near the boys’ side.', c=(1512, 1706), w=40, soon=['Kitchen']),
  # Field sports
  P('soccer', 'Soccer (Lower Field)', 'Soccer on the Lower Field.', c=(1865, 1609), w=130),
@@ -77,14 +77,15 @@ PLACES = [
  # Staff areas
  P('upper-office', 'Upper Office', 'The Upper Office.', c=(1616, 1757), w=40, soon=['Inside']),
  P('condo', 'The Condo', 'The Condo staff housing.', c=(1634, 1758), w=45, soon=['Inside', 'Attic']),
- P('staff-lounge', 'Staff Lounge', 'The Staff Lounge.', auto=False, soon=['Outside', 'Inside']),
- P('staff-parking', 'Staff parking lot', 'The staff parking lot.', auto=False, soon=['Overview']),
+ P('staff-lounge', 'Staff Lounge', 'The Staff Lounge.', auto=False, soon=['Outside', 'Inside'], xy=(1621, 1753)),
+ P('cooler', 'The Cooler', 'The Cooler.', auto=False, soon=['Outside', 'Inside'], xy=(1641, 1747)),
+ P('staff-parking', 'Staff parking lot', 'The staff parking lot.', auto=False, soon=['Overview'], xy=(1286, 1610)),
  P('laundry', 'Laundry & EP closet', 'The laundry room; the evening-program closet is in its northwest corner.', c=(1301, 1584), w=35, soon=['Laundry inside', 'EP closet']),
  P('maint', 'Maintenance sheds', 'The two maintenance sheds west of Arts & Crafts.', c=(1334, 1610), w=35),
  # Outdoors
  P('overview', 'Whole camp', 'The whole camp from above.', c=(1600, 1600), w=700),
  P('skilift', 'Old ski lift', 'The old ski lift at the top of the Mount Tone slopes.', c=(1328, 1841), w=60),
- P('shortcut', 'The Shortcut', 'The path behind Arts & Crafts, around the Rec Hall hill to riflery.', auto=False, soon=['Overview']),
+ P('shortcut', 'The Shortcut', 'The path behind Arts & Crafts, around the Rec Hall hill to riflery.', auto=False, soon=['Overview'], xy=(1440, 1640)),
  P('roads', 'Roads & paths', 'The dirt roads and paths around camp.', auto=False, soon=['Overview']),
  P('entrance', 'Camp entrance', 'The way into camp.', auto=False, soon=['Overview']),
  P('cabins-photos', 'All cabins (photos)', 'Cabin photos that still need sorting by cabin.', gal='cabin_out', auto=False),
@@ -103,18 +104,19 @@ for k, v in CABINS.items():
 
 def cab(*ks): return [{"ref": 'cabin-' + k} for k in ks if k in CABINS]
 MENU = [
- {"name": "Performing Arts", "items": [{"ref": "circus"}, {"ref": "dance"}, {"ref": "rock-band"}, {"ref": "amphitheater"}, {"ref": "rec-hall", "view": "s18-360"}, {"ref": "media-arts"}]},
+ {"name": "Performing Arts", "items": [{"ref": "circus"}, {"ref": "dance"}, {"ref": "rec-hall", "view": "s18-360"}, {"ref": "rec-hall", "view": "rec-hall--blackbox-theater", "name": "Blackbox theater"}, {"ref": "rec-hall", "view": "s21-360", "name": "Music / Rock Band"}, {"ref": "amphitheater"}]},
  {"name": "Creative Arts", "items": [{"ref": "ac"}, {"ref": "pottery"}, {"ref": "woodshop"}, {"ref": "cooking"}]},
  {"name": "Field Sports", "items": [{"ref": "basketball"}, {"ref": "volleyball"}, {"ref": "soccer"}, {"ref": "lacrosse"}, {"ref": "baseball"}, {"ref": "middle-field"}, {"ref": "gaga"}]},
  {"name": "Athletics", "items": [{"ref": "tennis"}, {"ref": "gym"}, {"ref": "golf"}, {"ref": "archery"}, {"ref": "riflery"}, {"ref": "fencing"}, {"ref": "skate"}, {"ref": "mountainboard"}, {"ref": "bungee"}]},
  {"name": "Adventure", "items": [{"ref": "ropes"}, {"ref": "paintball"}, {"ref": "lasertag"}, {"ref": "atv"}, {"ref": "dirtbikes"}, {"ref": "horses"}]},
  {"name": "Lake & Pool", "items": [{"name": "Lake", "items": [{"ref": "waterfront"}, {"ref": "waterslide"}, {"ref": "watertramp"}, {"ref": "ropeswing"}, {"ref": "jetski"}]}, {"name": "Pool", "items": [{"ref": "pool"}]}]},
+ {"name": "Other Activities", "items": [{"ref": "media-arts"}]},
  {"name": "Cabins", "items": [{"name": "Junior Boys", "items": cab('1', '2-3')}, {"name": "Inter Boys", "items": cab('12', '13', '14', '15')}, {"name": "Senior Boys", "items": cab('16', '17', '18', '19')},
    {"name": "Junior Girls", "items": cab('6', '7', '8')}, {"name": "Inter Girls", "items": cab('9', '10', '11')}, {"name": "Senior Girls", "items": cab('20', '21', '22', '23', '24')},
    {"name": "Overflow", "items": cab('4', '5')}, {"name": "Unsorted photos", "items": [{"ref": "cabins-photos"}]}]},
  {"name": "Camp Buildings", "items": [{"ref": "sc"}, {"ref": "dh"}, {"ref": "rec-hall"}, {"ref": "quad"}, {"ref": "lower-office"}, {"ref": "infirmary"}]},
- {"name": "Staff Areas", "items": [{"ref": "upper-office"}, {"ref": "condo"}, {"ref": "staff-lounge"}, {"ref": "laundry"}, {"ref": "maint"}, {"ref": "staff-parking"}]},
  {"name": "Outdoors", "items": [{"ref": "overview"}, {"ref": "roads"}, {"ref": "shortcut"}, {"ref": "skilift"}, {"ref": "entrance"}]},
+ {"name": "Staff Areas", "items": [{"ref": "upper-office"}, {"ref": "condo"}, {"ref": "staff-lounge"}, {"ref": "cooler"}, {"ref": "laundry"}, {"ref": "maint"}, {"ref": "staff-parking"}]},
 ]
 
 def topdown(p):
@@ -136,7 +138,7 @@ for p in PLACES:
     if p['pano']:
         pv = {"id": f"{p['pano']}-360", "type": "pano", "label": f"{p['pano_label']} in 360°", "realPano": f"pano/{p['pano']}_real.jpg", "modelPano": f"pano/{p['pano']}_model.jpg",
               "cap": "Real: 360° tour photo (2023–2025). The model was rendered from about the same spot; if it's turned, use the turn buttons."}
-        (ins if p['key'] in ('ac', 'dh-in', 'circus', 'dance', 'gym', 'rec-hall', 'rock-band', 'pottery', 'horses') else out).append(pv)
+        (ins if p['key'] in ('ac', 'dh', 'circus', 'dance', 'gym', 'rec-hall', 'rock-band', 'pottery', 'horses') else out).append(pv)
     exists = lambda e: all(os.path.exists(f"{SITE}/{e[k]}") for k in ('real', 'model', 'realPano', 'modelPano') if k in e)
     out = [e for e in out if exists(e)]; ins = [e for e in ins if exists(e)]
     parts = [x for x in [{"kind": "Outside", "entries": out}, {"kind": p['inside_name'], "entries": ins}] if x['entries']]
@@ -158,10 +160,10 @@ for p in PLACES:
         try:
             from PIL import Image as _I; w_, h_ = _I.open(f"{SITE}/{c['src']}").size; c['pano'] = abs(w_ / h_ - 2) < 0.08
         except Exception: pass
-    areas[p['key']] = {"name": p['name'], "blurb": p['blurb'], "parts": parts, "candidates": cands}
+    areas[p['key']] = {"name": p['name'], "blurb": p['blurb'], "parts": parts, "candidates": cands, **({"xy": list(p['xy'])} if p['xy'] else {})}
 
 old = json.load(open(f'{SITE}/views.json'))
-D = {"version": "v4", "title": "Camp Lohikan 3D review", "api": "https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec", "areas": areas, "groups": MENU, "changes": old.get('changes', [])}
+D = {"version": "v4", "title": "Camp Lohikan 3D review", "api": "https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec", "areas": areas, "groups": MENU, "changes": old.get('changes', []), "minimap": {"src": "img/minimap.jpg", "x0": 1150, "x1": 2080, "y0": 1090, "y1": 1960}}
 json.dump(D, open(f'{SITE}/views.json', 'w'), indent=1)
 renders.append({"name": "dh_tent", "cam": [1330, 1505, 9], "look": [1354, 1528, 2], "fov": 60, "hideTrees": True})
 json.dump(renders, open('/home/claude/review/renders_todo.json', 'w'))

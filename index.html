@@ -146,11 +146,23 @@ body{padding-bottom:24px}
 .picker .item{display:block;width:100%;text-align:left;border:0;background:none;padding:7px 10px;min-height:38px;font-weight:600;border-radius:6px}
 .picker .item:hover,.picker .item[aria-current=true]{background:var(--chip)}
 #sitefb{margin-top:6px}
+textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
+.dd{overflow-x:hidden}
+.dd.two{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);padding:0;width:min(520px,94vw)}.dd.two.on{display:grid}
+.dd.two .pcol{max-height:70vh;overflow-y:auto;overflow-x:hidden;padding:6px}.dd.two .pcol+.pcol{border-left:1px solid var(--line)}
+.dd .item[aria-expanded=true]{background:var(--chip)}
+.mini{position:absolute;top:10px;right:max(4vw,14px);width:190px;border-radius:8px;overflow:hidden;border:2px solid #3c6a4f;box-shadow:0 2px 8px #0005}
+.mini img{display:block;width:100%;height:auto}
+.mini .dot{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#e2231a;border:2px solid #fff;box-shadow:0 0 0 3px #e2231a55}
+.mini .lbl{position:absolute;left:0;right:0;bottom:0;background:#000a;color:#fff;font-size:11px;padding:2px 6px;text-align:center}
+.top{position:relative}.top .who{max-width:calc(100% - 220px)}
+@media(max-width:899px){.mini{display:none}.top .who{max-width:none}}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="row1"><h1>Camp Lohikan 3D review</h1></div>
+  <div class="mini" id="mini" aria-hidden="true"><img id="miniimg" alt=""><span class="dot" id="minidot"></span><span class="lbl">You are here</span></div>
   <details class="how"><summary>How this works</summary><p>Henry is rebuilding camp as a 3D model. Pick a place from the menu. Each view shows the real photo on the left and the model on the right; switch views with the numbered buttons. Drag the 360° views and both turn together. Add a pin where something's wrong, write notes, attach your own photos if they help. Everyone who reviews sees each other's notes. No login needed.</p></details>
   <div class="who">
     <label>Your name (optional)<input id="rname" autocomplete="name" maxlength="60"></label>
@@ -417,7 +429,9 @@ function renderView(){
   try{ history.replaceState(null,'',`#${area.key}${e?'--'+e.id:''}`); }catch(err){}
 }
 function paintSiteFb(){ if(document.activeElement!==$('sitefb')) $('sitefb').value=mine.site||''; $('sitefbo').innerHTML=isOwner?others.filter(o=>o.site).map(o=>`<li><span class="n txt">✎</span><span>${esc(o.site)}<br><span class="by">${esc(who(o))}</span></span><span></span></li>`).join(''):''; }
-function renderPlace(){ paintSiteFb();
+function paintMini(){ const M=DATA.minimap, d=$('minidot'); if(!M){ $('mini').style.display='none'; return; } if(!$('miniimg').src) $('miniimg').src=M.src;
+  if(area&&area.xy){ d.style.display=''; d.style.left=((area.xy[0]-M.x0)/(M.x1-M.x0)*100)+'%'; d.style.top=((M.y1-area.xy[1])/(M.y1-M.y0)*100)+'%'; } else d.style.display='none'; }
+function renderPlace(){ paintSiteFb(); paintMini();
   $('crumb').textContent=curPath.join(' › '); $('pname').textContent=area.name; $('pblurb').textContent=area.blurb||'';
   $('wtitle').textContent=`Anything else about ${area.name}?`;
   $('stext').value=A(area.key).text||''; $('sang').value=A(area.key).angles||'';
@@ -433,10 +447,19 @@ function navArrows(){ const r=$('navrow'); $('navl').hidden=r.scrollLeft<=2; $('
 let ddT=null;
 function openDD(btn){
   const g=DATA.groups.filter(groupHas)[+btn.dataset.top]; if(!g) return;
-  const item=it=>it.ref?itemBtn(it):(()=>{ const inner=(it.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(it.name)}</div>${inner}</div>`:''; })();
-  const dd=$('dd'); dd.innerHTML=g.items.map(item).join(''); dd.dataset.top=btn.dataset.top; dd.dataset.group=g.name; dd.classList.add('on');
+  const dd=$('dd'); dd.dataset.top=btn.dataset.top; dd.dataset.group=g.name;
+  const subs=g.items.filter(it=>!it.ref&&groupHas(it));
+  if(subs.length){ dd.classList.add('two');
+    dd.innerHTML=`<div class="pcol">${g.items.map((it,k)=>it.ref?itemBtn(it):(groupHas(it)?`<button class="item" data-sub="${k}" aria-expanded="false">${esc(it.name)} ›</button>`:'')).join('')}</div><div class="pcol" id="ddsub"><span class="by" style="padding:8px;display:block">Pick a group</span></div>`;
+    const cur=g.items.findIndex(it=>!it.ref&&curPath.includes(it.name)); showSub(cur>=0?cur:g.items.indexOf(subs[0]));
+  } else { dd.classList.remove('two'); dd.innerHTML=g.items.map(it=>it.ref?itemBtn(it):'').join(''); }
+  dd.classList.add('on');
   const r=btn.getBoundingClientRect(); dd.style.top=(r.bottom+window.scrollY)+'px'; dd.style.left=Math.max(8,Math.min(r.left,innerWidth-dd.offsetWidth-8))+'px';
 }
+function showSub(k){ const dd=$('dd'), g=DATA.groups.find(x=>x.name===dd.dataset.group), it=g&&g.items[k]; if(!it||it.ref) return;
+  dd.querySelectorAll('[data-sub]').forEach(b=>b.setAttribute('aria-expanded',String(+b.dataset.sub===k)));
+  const item=x=>x.ref?itemBtn(x):(()=>{ const inner=(x.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(x.name)}</div>${inner}</div>`:''; })();
+  $('ddsub').innerHTML=(it.items||[]).map(item).join(''); $('ddsub').dataset.sub=k; }
 function showChanges(){
   closeDD(); disposeSpheres(); document.body.classList.add('changes'); const C=DATA.changes||[];
   $('changes').innerHTML=`<h2>What's changed in the model</h2><p class="blurb">Each update to the model, with before and after pictures. Comment on any of them like a normal view.</p>`+(C.length?C.slice().reverse().map(v=>`<h3 style="margin-top:18px">${esc(v.version)} · ${esc(v.date||'')}</h3>${(v.items||[]).map(it=>`<div class="chg"><div class="by">${esc(it.place||'')}</div><b>${esc(it.title)}</b>${it.note?`<p class="hint">${esc(it.note)}</p>`:''}<div class="media"><div class="pane flat"><img src="${esc(it.before)}" alt="Before"><span class="tag">Before</span></div><div class="pane flat"><img src="${esc(it.after)}" alt="After"><span class="tag">After</span></div></div></div>`).join('')}`).join(''):'<p class="by">No model updates yet. They will show up here after the first round of fixes.</p>');
@@ -498,6 +521,7 @@ document.addEventListener('click',async e=>{
     else { const trail=[]; let el=t.parentElement; while(el&&el.id!=='tree'){ if(el.tagName==='DETAILS') trail.unshift(el.querySelector(':scope>summary').textContent); el=el.parentElement; } path=trail; }
     $('menu').classList.remove('on'); closeDD(); setArea(t.dataset.area,t.dataset.goto||null,path); window.scrollTo({top:0}); }
   else if(t.id==='chgbtn'||t.id==='chgbtn2'){ $('menu').classList.remove('on'); showChanges(); }
+  else if(t.dataset.sub!==undefined&&t.closest('#dd')){ showSub(+t.dataset.sub); }
   else if(t.dataset.top){ $('dd').classList.contains('on')&&$('dd').dataset.top===t.dataset.top?closeDD():openDD(t); }
   else if(t.id==='navl'||t.id==='navr'){ $('navrow').scrollBy({left:(t.id==='navl'?-1:1)*260,behavior:'smooth'}); }
   else if(t.dataset.view){ vi=+t.dataset.view; renderView(); }
@@ -543,7 +567,7 @@ fetch('views.json').then(r=>r.json()).then(async d=>{
   $('navrow').addEventListener('scroll',navArrows,{passive:true}); addEventListener('resize',()=>{navArrows();closeDD();});
   $('picker').addEventListener('mouseover',e=>{ const b=e.target.closest('[data-pg]'); if(b&&matchMedia('(hover:hover)').matches) pickGroup(+b.dataset.pg); });
   $('navrow').addEventListener('mouseover',e=>{ const b=e.target.closest('.nt'); if(b&&matchMedia('(hover:hover)').matches){ clearTimeout(ddT); openDD(b); } });
-  $('navrow').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); }); $('dd').addEventListener('mouseenter',()=>clearTimeout(ddT)); $('dd').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); });
+  $('navrow').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); }); $('dd').addEventListener('mouseenter',()=>clearTimeout(ddT)); $('dd').addEventListener('mouseover',e=>{ const b=e.target.closest('[data-sub]'); if(b&&matchMedia('(hover:hover)').matches) showSub(+b.dataset.sub); }); $('dd').addEventListener('mouseleave',()=>{ ddT=setTimeout(closeDD,300); });
   if(!API()){ status("Saving isn't switched on yet. Your notes stay in this browser; use Copy my feedback at the bottom."); return; }
   const k=LS('lrv_admin'); if(k){ try{ await api({action:'checkkey',key:k}); adminKey=k; isOwner=true; $('astate').textContent='Unlocked'; }catch(e){} }
   await pull(); renderPlace(); if(LS('lrv_dirty')==='1'){ dirty=true; flush(); } setInterval(()=>{ if(document.visibilityState==='visible') pull(); },90000);

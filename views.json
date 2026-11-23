@@ -158,6 +158,10 @@
      "cap": "Camp Instagram",
      "pano": true
     }
+   ],
+   "xy": [
+    1762,
+    1610
    ]
   },
   "circus": {
@@ -178,7 +182,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1792,
+    1610
+   ]
   },
   "dance": {
    "name": "Dance studio",
@@ -198,7 +206,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1786,
+    1627
+   ]
   },
   "gym": {
    "name": "Gymnastics",
@@ -218,7 +230,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1744,
+    1626
+   ]
   },
   "volleyball": {
    "name": "Volleyball",
@@ -237,7 +253,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1689,
+    1601
+   ]
   },
   "basketball": {
    "name": "Basketball",
@@ -279,27 +299,11 @@
      ]
     }
    ],
-   "candidates": []
-  },
-  "rock-band": {
-   "name": "Rock Band / Music",
-   "blurb": "The music and rock band room.",
-   "parts": [
-    {
-     "kind": "Inside",
-     "entries": [
-      {
-       "id": "s21-360",
-       "type": "pano",
-       "label": "Rock Band room in 360\u00b0",
-       "realPano": "pano/s21_real.jpg",
-       "modelPano": "pano/s21_model.jpg",
-       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
-      }
-     ]
-    }
-   ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1683,
+    1571
+   ]
   },
   "amphitheater": {
    "name": "Amphitheater",
@@ -341,7 +345,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1475,
+    1480
+   ]
   },
   "rec-hall": {
    "name": "Rec Hall",
@@ -375,7 +383,7 @@
      ]
     },
     {
-     "kind": "Inside",
+     "kind": "Stage",
      "entries": [
       {
        "id": "s18-360",
@@ -384,6 +392,30 @@
        "realPano": "pano/s18_real.jpg",
        "modelPano": "pano/s18_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+      }
+     ]
+    },
+    {
+     "kind": "Music / Rock Band",
+     "entries": [
+      {
+       "id": "s21-360",
+       "type": "pano",
+       "label": "Rock Band room in 360\u00b0",
+       "realPano": "pano/s21_real.jpg",
+       "modelPano": "pano/s21_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+      }
+     ]
+    },
+    {
+     "kind": "Blackbox theater",
+     "soon": true,
+     "entries": [
+      {
+       "id": "rec-hall--blackbox-theater",
+       "type": "soon",
+       "label": "Blackbox theater"
       }
      ]
     },
@@ -448,6 +480,10 @@
      "cap": "Camp Instagram",
      "pano": true
     }
+   ],
+   "xy": [
+    1485,
+    1647
    ]
   },
   "ac": {
@@ -508,6 +544,10 @@
      "cap": "Camp Instagram",
      "pano": true
     }
+   ],
+   "xy": [
+    1391,
+    1588
    ]
   },
   "woodshop": {
@@ -526,7 +566,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1420,
+    1585
+   ]
   },
   "media-arts": {
    "name": "Media Arts",
@@ -555,7 +599,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1615,
+    1754
+   ]
   },
   "pottery": {
    "name": "Pottery",
@@ -624,6 +672,10 @@
      "cap": "Camp Instagram",
      "pano": false
     }
+   ],
+   "xy": [
+    1365,
+    1590
    ]
   },
   "cooking": {
@@ -669,7 +721,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1512,
+    1706
+   ]
   },
   "soccer": {
    "name": "Soccer (Lower Field)",
@@ -703,7 +759,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1865,
+    1609
+   ]
   },
   "lacrosse": {
    "name": "Lacrosse (Upper Field)",
@@ -737,7 +797,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1790,
+    1834
+   ]
   },
   "baseball": {
    "name": "Baseball & softball",
@@ -771,7 +835,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1705,
+    1745
+   ]
   },
   "middle-field": {
    "name": "The Middle Field",
@@ -823,7 +891,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1661,
+    1601
+   ]
   },
   "tennis": {
    "name": "Tennis",
@@ -857,7 +929,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1618,
+    1679
+   ]
   },
   "golf": {
    "name": "Golf",
@@ -891,25 +967,49 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1512,
+    1404
+   ]
   },
   "archery": {
    "name": "Archery",
    "blurb": "The archery range.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "archery--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "archery-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/archery_top_real.jpg",
+       "model": "img/archery_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "archery-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/archery_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "archery-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/archery_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1486,
+    1728
+   ]
   },
   "fencing": {
    "name": "Fencing",
@@ -934,126 +1034,266 @@
    "blurb": "The riflery range, reached by the shortcut behind Arts & Crafts.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "riflery--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "riflery-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/riflery_top_real.jpg",
+       "model": "img/riflery_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "riflery-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/riflery_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "riflery-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/riflery_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1456,
+    1697
+   ]
   },
   "skate": {
    "name": "Skate park",
    "blurb": "The skate park on the old courts.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "skate--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "skate-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/skate_top_real.jpg",
+       "model": "img/skate_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "skate-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/skate_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "skate-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/skate_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1458,
+    1585
+   ]
   },
   "mountainboard": {
    "name": "Mountain boarding",
    "blurb": "The mountain boarding hill.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "mountainboard--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "mountainboard-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/mountainboard_top_real.jpg",
+       "model": "img/mountainboard_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "mountainboard-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/mountainboard_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "mountainboard-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/mountainboard_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1422,
+    1462
+   ]
   },
   "bungee": {
    "name": "Bungee trampoline",
    "blurb": "The bungee trampolines and their pavilion.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "bungee--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "bungee-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/bungee_top_real.jpg",
+       "model": "img/bungee_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "bungee-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/bungee_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "bungee-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/bungee_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1645,
+    1563
+   ]
   },
   "ropes": {
    "name": "Ropes & rock climbing",
    "blurb": "The ropes course and climbing tower.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "ropes--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "ropes-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/ropes_top_real.jpg",
+       "model": "img/ropes_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "ropes-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/ropes_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "ropes-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/ropes_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1458,
+    1872
+   ]
   },
   "paintball": {
    "name": "Paintball",
    "blurb": "The paintball field.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "paintball--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "paintball-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/paintball_top_real.jpg",
+       "model": "img/paintball_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "paintball-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/paintball_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "paintball-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/paintball_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1337,
+    1116
+   ]
   },
   "lasertag": {
    "name": "Laser tag",
    "blurb": "The laser tag area.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "lasertag--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "lasertag-top",
+       "type": "pair",
+       "label": "From above",
+       "real": "img/lasertag_top_real.jpg",
+       "model": "img/lasertag_top_model.jpg",
+       "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+      },
+      {
+       "id": "lasertag-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/lasertag_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "lasertag-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/lasertag_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1315,
+    1529
+   ]
   },
   "atv": {
    "name": "ATVs & quads",
@@ -1071,7 +1311,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1761,
+    1705
+   ]
   },
   "horses": {
    "name": "Horseback riding",
@@ -1089,7 +1333,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    2010,
+    1905
+   ]
   },
   "dirtbikes": {
    "name": "Dirtbikes",
@@ -1125,7 +1373,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1220,
+    1255
+   ]
   },
   "waterslide": {
    "name": "Waterslide",
@@ -1143,7 +1395,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1243,
+    1190
+   ]
   },
   "watertramp": {
    "name": "Water trampoline",
@@ -1161,7 +1417,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1182,
+    1226
+   ]
   },
   "ropeswing": {
    "name": "Rope swing",
@@ -1179,7 +1439,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1228,
+    1191
+   ]
   },
   "jetski": {
    "name": "Jet ski dock",
@@ -1197,7 +1461,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1185,
+    1145
+   ]
   },
   "pool": {
    "name": "Pool",
@@ -1228,14 +1496,18 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1614,
+    1613
+   ]
   },
   "dh": {
    "name": "Dining Hall",
    "blurb": "The Dining Hall, the tent on its stone floor to the south, and the Senior Dining Hall by the flagpoles.",
    "parts": [
     {
-     "kind": "Outside",
+     "kind": "Inside",
      "entries": [
       {
        "id": "s13-360",
@@ -1408,6 +1680,10 @@
      "cap": "Camp Instagram",
      "pano": true
     }
+   ],
+   "xy": [
+    1355,
+    1543
    ]
   },
   "sr-dining": {
@@ -1426,7 +1702,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1393,
+    1548
+   ]
   },
   "quad": {
    "name": "Flagpole Quad",
@@ -1446,7 +1726,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1395,
+    1528
+   ]
   },
   "lower-office": {
    "name": "Lower Office",
@@ -1501,6 +1785,10 @@
      "cap": "Camp Instagram",
      "pano": true
     }
+   ],
+   "xy": [
+    1438,
+    1498
    ]
   },
   "infirmary": {
@@ -1519,7 +1807,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1453,
+    1536
+   ]
   },
   "upper-office": {
    "name": "Upper Office",
@@ -1537,7 +1829,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1616,
+    1757
+   ]
   },
   "condo": {
    "name": "The Condo",
@@ -1566,7 +1862,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1634,
+    1758
+   ]
   },
   "staff-lounge": {
    "name": "Staff Lounge",
@@ -1595,7 +1895,44 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1621,
+    1753
+   ]
+  },
+  "cooler": {
+   "name": "The Cooler",
+   "blurb": "The Cooler.",
+   "parts": [
+    {
+     "kind": "Outside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cooler--outside",
+       "type": "soon",
+       "label": "Outside"
+      }
+     ]
+    },
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "cooler--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
+   "candidates": [],
+   "xy": [
+    1641,
+    1747
+   ]
   },
   "staff-parking": {
    "name": "Staff parking lot",
@@ -1613,7 +1950,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1286,
+    1610
+   ]
   },
   "laundry": {
    "name": "Laundry & EP closet",
@@ -1642,7 +1983,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1301,
+    1584
+   ]
   },
   "maint": {
    "name": "Maintenance sheds",
@@ -1660,7 +2005,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1334,
+    1610
+   ]
   },
   "overview": {
    "name": "Whole camp",
@@ -1678,7 +2027,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1600,
+    1600
+   ]
   },
   "skilift": {
    "name": "Old ski lift",
@@ -1696,7 +2049,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1328,
+    1841
+   ]
   },
   "shortcut": {
    "name": "The Shortcut",
@@ -1714,7 +2071,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1440,
+    1640
+   ]
   },
   "roads": {
    "name": "Roads & paths",
@@ -1858,7 +2219,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1307,
+    1567
+   ]
   },
   "cabin-2-3": {
    "name": "Cabins 2 & 3",
@@ -1909,7 +2274,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1393,
+    1497
+   ]
   },
   "cabin-4": {
    "name": "Cabin 4",
@@ -1938,7 +2307,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1423,
+    1543
+   ]
   },
   "cabin-6": {
    "name": "Cabin 6",
@@ -1967,7 +2340,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1528,
+    1496
+   ]
   },
   "cabin-7": {
    "name": "Cabin 7",
@@ -1996,7 +2373,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1520,
+    1526
+   ]
   },
   "cabin-8": {
    "name": "Cabin 8",
@@ -2054,7 +2435,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1582,
+    1506
+   ]
   },
   "cabin-10": {
    "name": "Cabin 10",
@@ -2083,7 +2468,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1563,
+    1554
+   ]
   },
   "cabin-11": {
    "name": "Cabin 11",
@@ -2112,7 +2501,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1587,
+    1554
+   ]
   },
   "cabin-12": {
    "name": "Cabin 12",
@@ -2141,7 +2534,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1538,
+    1724
+   ]
   },
   "cabin-13": {
    "name": "Cabin 13",
@@ -2170,7 +2567,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1554,
+    1737
+   ]
   },
   "cabin-14": {
    "name": "Cabin 14",
@@ -2199,7 +2600,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1576,
+    1748
+   ]
   },
   "cabin-15": {
    "name": "Cabin 15",
@@ -2228,7 +2633,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1595,
+    1754
+   ]
   },
   "cabin-16": {
    "name": "Cabin 16",
@@ -2301,7 +2710,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1505,
+    1760
+   ]
   },
   "cabin-17": {
    "name": "Cabin 17",
@@ -2374,7 +2787,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1526,
+    1774
+   ]
   },
   "cabin-18": {
    "name": "Cabin 18",
@@ -2447,7 +2864,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1549,
+    1786
+   ]
   },
   "cabin-19": {
    "name": "Cabin 19",
@@ -2520,7 +2941,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1522,
+    1809
+   ]
   },
   "cabin-20": {
    "name": "Cabin 20",
@@ -2593,7 +3018,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1699,
+    1642
+   ]
   },
   "cabin-21": {
    "name": "Cabin 21",
@@ -2666,7 +3095,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1701,
+    1663
+   ]
   },
   "cabin-22": {
    "name": "Cabin 22",
@@ -2739,7 +3172,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1810,
+    1675
+   ]
   },
   "cabin-23": {
    "name": "Cabin 23",
@@ -2812,7 +3249,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1855,
+    1677
+   ]
   },
   "cabin-24": {
    "name": "Cabin 24",
@@ -2885,7 +3326,11 @@
      ]
     }
    ],
-   "candidates": []
+   "candidates": [],
+   "xy": [
+    1886,
+    1671
+   ]
   },
   "cabin-5": {
    "name": "Cabin 5",
@@ -2917,17 +3362,21 @@
      "ref": "dance"
     },
     {
-     "ref": "rock-band"
-    },
-    {
-     "ref": "amphitheater"
-    },
-    {
      "ref": "rec-hall",
      "view": "s18-360"
     },
     {
-     "ref": "media-arts"
+     "ref": "rec-hall",
+     "view": "rec-hall--blackbox-theater",
+     "name": "Blackbox theater"
+    },
+    {
+     "ref": "rec-hall",
+     "view": "s21-360",
+     "name": "Music / Rock Band"
+    },
+    {
+     "ref": "amphitheater"
     }
    ]
   },
@@ -3059,6 +3508,14 @@
        "ref": "pool"
       }
      ]
+    }
+   ]
+  },
+  {
+   "name": "Other Activities",
+   "items": [
+    {
+     "ref": "media-arts"
     }
    ]
   },
@@ -3203,29 +3660,6 @@
    ]
   },
   {
-   "name": "Staff Areas",
-   "items": [
-    {
-     "ref": "upper-office"
-    },
-    {
-     "ref": "condo"
-    },
-    {
-     "ref": "staff-lounge"
-    },
-    {
-     "ref": "laundry"
-    },
-    {
-     "ref": "maint"
-    },
-    {
-     "ref": "staff-parking"
-    }
-   ]
-  },
-  {
    "name": "Outdoors",
    "items": [
     {
@@ -3244,7 +3678,40 @@
      "ref": "entrance"
     }
    ]
+  },
+  {
+   "name": "Staff Areas",
+   "items": [
+    {
+     "ref": "upper-office"
+    },
+    {
+     "ref": "condo"
+    },
+    {
+     "ref": "staff-lounge"
+    },
+    {
+     "ref": "cooler"
+    },
+    {
+     "ref": "laundry"
+    },
+    {
+     "ref": "maint"
+    },
+    {
+     "ref": "staff-parking"
+    }
+   ]
   }
  ],
- "changes": []
+ "changes": [],
+ "minimap": {
+  "src": "img/minimap.jpg",
+  "x0": 1150,
+  "x1": 2080,
+  "y0": 1090,
+  "y1": 1960
+ }
 }
