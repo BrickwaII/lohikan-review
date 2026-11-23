@@ -1,0 +1,452 @@
+{
+ "version": "v3",
+ "title": "Camp Lohikan 3D review",
+ "api": "https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec",
+ "groups": [
+  {
+   "name": "Sports Center & Circus",
+   "items": [
+    {
+     "key": "sc-out",
+     "name": "Sports Center outside",
+     "blurb": "The big green-roofed Sports Center; the circus building is attached on its east end.",
+     "parts": [
+      {
+       "kind": "Outside",
+       "entries": [
+        {
+         "id": "sc-top",
+         "type": "pair",
+         "label": "From above",
+         "real": "img/sc_top_real.jpg",
+         "model": "img/sc_top_model.jpg",
+         "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+        },
+        {
+         "id": "sc-front",
+         "type": "model",
+         "label": "The front, from the volleyball court",
+         "model": "img/sc_front_model.jpg",
+         "cap": "Model only, trees hidden."
+        },
+        {
+         "id": "sc-se",
+         "type": "model",
+         "label": "From the southeast",
+         "model": "img/sc_se_model.jpg",
+         "cap": "Model only, trees hidden."
+        },
+        {
+         "id": "sc-sw",
+         "type": "model",
+         "label": "From the southwest",
+         "model": "img/sc_sw_model.jpg",
+         "cap": "Model only, trees hidden."
+        },
+        {
+         "id": "circ-out",
+         "type": "model",
+         "label": "Circus end, from the east",
+         "model": "img/circ_out_model.jpg",
+         "cap": "Model only, trees hidden."
+        }
+       ]
+      }
+     ],
+     "candidates": [
+      {
+       "id": "3283b3025f",
+       "src": "gallery/3283b3025f.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "032af3fdaf",
+       "src": "gallery/032af3fdaf.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "0c0da076d9",
+       "src": "gallery/0c0da076d9.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "24ba924e26",
+       "src": "gallery/24ba924e26.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "0fae58ceae",
+       "src": "gallery/0fae58ceae.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "88abafd0fb",
+       "src": "gallery/88abafd0fb.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "d66835e6de",
+       "src": "gallery/d66835e6de.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "9769fa149c",
+       "src": "gallery/9769fa149c.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "9bc3aeff8f",
+       "src": "gallery/9bc3aeff8f.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "82e5546f70",
+       "src": "gallery/82e5546f70.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "a471905f3f",
+       "src": "gallery/a471905f3f.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "56856d3f7b",
+       "src": "gallery/56856d3f7b.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "9a34110016",
+       "src": "gallery/9a34110016.jpg",
+       "cap": "Camp Instagram"
+      }
+     ]
+    },
+    {
+     "key": "sc-in",
+     "name": "Sports Center inside",
+     "blurb": "The indoor court and canteen as one open hall, with flags overhead and colour-war banners on the walls.",
+     "parts": [
+      {
+       "kind": "Inside",
+       "entries": [
+        {
+         "id": "sc-in-w",
+         "type": "model",
+         "label": "Looking west across the court",
+         "model": "img/sc_in_w_model.jpg",
+         "cap": "Model only. No matching real photo yet; if you have one, attach it."
+        },
+        {
+         "id": "sc-in-e",
+         "type": "model",
+         "label": "Looking east toward the circus",
+         "model": "img/sc_in_e_model.jpg",
+         "cap": "Model only. No matching real photo yet; if you have one, attach it."
+        }
+       ]
+      }
+     ],
+     "candidates": []
+    },
+    {
+     "key": "circus",
+     "name": "Circus",
+     "blurb": "The 2008 circus building: trapeze rig, aerial rigging, mats, star-painted walls and the open south side.",
+     "parts": [
+      {
+       "kind": "Inside",
+       "entries": [
+        {
+         "id": "s07-360",
+         "type": "pano",
+         "label": "Circus floor in 360\u00b0",
+         "realPano": "pano/s07_real.jpg",
+         "modelPano": "pano/s07_model.jpg",
+         "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot."
+        }
+       ]
+      }
+     ],
+     "candidates": []
+    },
+    {
+     "key": "dance",
+     "name": "Dance studio",
+     "blurb": "The dance studio off the circus north aisle. Its exact position in the model is a guess.",
+     "parts": [
+      {
+       "kind": "Inside",
+       "entries": [
+        {
+         "id": "s19-360",
+         "type": "pano",
+         "label": "Dance studio in 360\u00b0",
+         "realPano": "pano/s19_real.jpg",
+         "modelPano": "pano/s19_model.jpg",
+         "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot."
+        }
+       ]
+      }
+     ],
+     "candidates": []
+    },
+    {
+     "key": "gym",
+     "name": "Gymnastics",
+     "blurb": "The walled-off gymnastics room along the north wall of the Sports Center.",
+     "parts": [
+      {
+       "kind": "Inside",
+       "entries": [
+        {
+         "id": "s34-360",
+         "type": "pano",
+         "label": "Gymnastics room in 360\u00b0",
+         "realPano": "pano/s34_real.jpg",
+         "modelPano": "pano/s34_model.jpg",
+         "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot."
+        }
+       ]
+      }
+     ],
+     "candidates": []
+    },
+    {
+     "key": "volleyball",
+     "name": "Volleyball",
+     "blurb": "The sand volleyball court in front of the Sports Center.",
+     "parts": [
+      {
+       "kind": "Outside",
+       "entries": [
+        {
+         "id": "vb-1",
+         "type": "model",
+         "label": "Sand court from the southwest",
+         "model": "img/vb_model.jpg",
+         "cap": "Model only, trees hidden."
+        }
+       ]
+      }
+     ],
+     "candidates": []
+    },
+    {
+     "key": "basketball",
+     "name": "Basketball",
+     "blurb": "The outdoor basketball courts west of the Sports Center.",
+     "parts": [
+      {
+       "kind": "Outside",
+       "entries": [
+        {
+         "id": "s14-360",
+         "type": "pano",
+         "label": "Basketball courts in 360\u00b0",
+         "realPano": "pano/s14_real.jpg",
+         "modelPano": "pano/s14_model.jpg",
+         "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot."
+        }
+       ]
+      }
+     ],
+     "candidates": []
+    }
+   ]
+  },
+  {
+   "name": "Cabins",
+   "items": [
+    {
+     "name": "Junior Boys",
+     "items": []
+    },
+    {
+     "name": "Inter Boys (12\u201315)",
+     "items": []
+    },
+    {
+     "name": "Senior Boys (16\u201319)",
+     "items": []
+    },
+    {
+     "name": "Junior Girls (6\u20138)",
+     "items": []
+    },
+    {
+     "name": "Inter Girls (9\u201311)",
+     "items": []
+    },
+    {
+     "name": "Senior Girls (20\u201324)",
+     "items": []
+    },
+    {
+     "name": "Other (4 & 5)",
+     "items": []
+    }
+   ]
+  },
+  {
+   "name": "Arts & Crafts & Dining Hall",
+   "items": [
+    {
+     "key": "ac",
+     "name": "Arts & Crafts",
+     "blurb": "The long Art Center: open south side, painted ceiling panels and banners, tables along the back and left walls, closets, and the mesh-covered patio out front.",
+     "parts": [
+      {
+       "kind": "Outside",
+       "entries": [
+        {
+         "id": "ac-top",
+         "type": "pair",
+         "label": "From above",
+         "real": "img/ac_top_real.jpg",
+         "model": "img/ac_top_model.jpg",
+         "cap": "Real: 2015 aerial photo, north up. Model: same area from straight above."
+        },
+        {
+         "id": "ac-s",
+         "type": "model",
+         "label": "From the south",
+         "model": "img/ac_s_model.jpg",
+         "cap": "Model only, trees hidden."
+        },
+        {
+         "id": "ac-se",
+         "type": "model",
+         "label": "From the southeast",
+         "model": "img/ac_se_model.jpg",
+         "cap": "Model only, trees hidden."
+        }
+       ]
+      },
+      {
+       "kind": "Inside",
+       "entries": [
+        {
+         "id": "s12-360",
+         "type": "pano",
+         "label": "Inside Arts & Crafts in 360\u00b0",
+         "realPano": "pano/s12_real.jpg",
+         "modelPano": "pano/s12_model.jpg",
+         "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot."
+        }
+       ]
+      }
+     ],
+     "candidates": [
+      {
+       "id": "e8bbd208a5",
+       "src": "gallery/e8bbd208a5.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "88abafd0fb",
+       "src": "gallery/88abafd0fb.jpg",
+       "cap": "Camp Instagram"
+      }
+     ]
+    },
+    {
+     "key": "woodshop",
+     "name": "Woodshop",
+     "blurb": "",
+     "parts": [],
+     "candidates": []
+    },
+    {
+     "key": "pottery",
+     "name": "Pottery",
+     "blurb": "Pottery at the west end of the Art Center.",
+     "parts": [],
+     "candidates": [
+      {
+       "id": "e8bbd208a5",
+       "src": "gallery/e8bbd208a5.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "e44f0dedd5",
+       "src": "gallery/e44f0dedd5.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "88abafd0fb",
+       "src": "gallery/88abafd0fb.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "00173fc6c5",
+       "src": "gallery/00173fc6c5.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "c2296eb874",
+       "src": "gallery/c2296eb874.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "0de155d90c",
+       "src": "gallery/0de155d90c.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "afcb727125",
+       "src": "gallery/afcb727125.jpg",
+       "cap": "Camp Instagram"
+      },
+      {
+       "id": "9308135305",
+       "src": "gallery/9308135305.jpg",
+       "cap": "Camp Instagram"
+      }
+     ]
+    },
+    {
+     "key": "dh-out",
+     "name": "Dining Hall outside & tent",
+     "blurb": "",
+     "parts": [],
+     "candidates": []
+    },
+    {
+     "key": "dh-in",
+     "name": "Dining Hall inside",
+     "blurb": "",
+     "parts": [],
+     "candidates": []
+    },
+    {
+     "key": "sr-dining",
+     "name": "Senior Dining Hall",
+     "blurb": "",
+     "parts": [],
+     "candidates": []
+    },
+    {
+     "key": "flagpole",
+     "name": "Flagpole Quad",
+     "blurb": "",
+     "parts": [],
+     "candidates": []
+    },
+    {
+     "key": "lower-office",
+     "name": "Lower Office",
+     "blurb": "",
+     "parts": [],
+     "candidates": []
+    },
+    {
+     "key": "maint",
+     "name": "Maintenance & Laundry",
+     "blurb": "",
+     "parts": [],
+     "candidates": []
+    }
+   ]
+  }
+ ]
+}
