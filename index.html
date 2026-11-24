@@ -632,7 +632,7 @@ document.addEventListener('click',async e=>{
 document.addEventListener('keydown',e=>{ if(e.target.id==='plabel'&&e.key==='Enter'){ $('psave').click(); return; } if(e.target.matches('input,textarea,select')) return; if(e.key==='ArrowRight'&&vi<VIEWS.length-1){ vi++; renderView(); } if(e.key==='ArrowLeft'&&vi>0){ vi--; renderView(); } if(e.key==='Escape'){ closePano(); $('big').classList.remove('on'); $('menu').classList.remove('on'); } });
 document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') pull(); });
 
-fetch('views.json').then(r=>r.json()).then(async d=>{
+fetch('views.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(async d=>{
   DATA=d; flatAreas(d.groups,[]); $('rname').value=mine.name||''; $('ryears').value=mine.years||'';
   const m=/^#([a-z0-9-]+?)(?:--([A-Za-z0-9-]+))?$/.exec(location.hash); if(location.hash==='#changes') showChanges(); else setArea(m?m[1]:AREAS[0].key,m?m[2]:null);
   $('navrow').addEventListener('scroll',navArrows,{passive:true}); addEventListener('resize',()=>{navArrows();closeDD();});
