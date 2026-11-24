@@ -383,6 +383,7 @@ export function buildSportsCenter(renderer, opts = {}) {
     }
     // east end (faces the soccer field): big door in the middle
     {
+      /* Henry: the east wall doesn't reach the floor: open along the bottom across the nave and the north-east corner */
       /* v8 (Henry): open along the bottom ~2.8 m, a raised section in the middle, two rows of windows cut right through the wall */
       const sh = endProfile(); const hole = new THREE.Path(); const hx0 = -(NH - 0.3), hx1 = H - 0.3, hh = 2.8, hm = 3.6, mz = 4.0;
       hole.moveTo(hx0, 0.01); hole.lineTo(hx1, 0.01); hole.lineTo(hx1, hh); hole.lineTo(mz, hh); hole.lineTo(mz, hm); hole.lineTo(-mz, hm); hole.lineTo(-mz, hh); hole.lineTo(hx0, hh); hole.lineTo(hx0, 0.01); sh.holes.push(hole);
@@ -393,6 +394,7 @@ export function buildSportsCenter(renderer, opts = {}) {
       const lintel = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, hx1 - hx0), mat({ color: 0x2e241a })); lintel.position.set(cx1, hh, -(hx0 + hx1) / 2); ext.add(lintel);
       for (const zz of [-H + 0.3, -15.6, -NH + 0.2, -8.6, -4.0, 0, 4.0, 8.6, NH - 0.5]) { const ph = Math.abs(zz) < 4.1 ? hm : hh; const p = new THREE.Mesh(new THREE.BoxGeometry(0.35, ph, 0.35), mat({ color: Math.round(Math.abs(zz)) % 2 ? 0xd8262b : 0xf2d21f })); p.position.set(cx1 - 0.2, ph / 2, zz); inn.add(p); }
     }
+    /* Henry: both end walls have the two rows of clerestory windows and a plain band below the rafters; the star pattern does not continue into the gable */
     /* Henry: both end walls have the two rows of windows (real openings, glass you can see through) and a plain band below the rafters */
     for (const [xw, dir, rows] of [[cx1 - 0.06, -1, WIN_ROWS], [cx0 + 0.12, 1, WIN_ROWS.slice(1)]]) for (const [y0, y1] of rows) {
       const wb = new THREE.Mesh(new THREE.PlaneGeometry(2 * NH - 0.8, y1 - y0), mat({ map: tex(clere, 7, 1), transparent: true, depthWrite: false, side: THREE.DoubleSide })); wb.rotation.y = dir * Math.PI / 2; wb.position.set(xw, (y0 + y1) / 2, 0); inn.add(wb); }
