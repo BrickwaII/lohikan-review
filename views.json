@@ -2759,16 +2759,127 @@
   },
   "roads": {
    "name": "Roads & paths",
-   "blurb": "The dirt roads and paths around camp.",
+   "blurb": "The roads around camp, mostly smooth dirt curves; concrete only from the lake up to the Lower Office and briefly behind the Infirmary. 360\u00b0 spots picked by Henry.",
    "parts": [
     {
-     "kind": "Overview",
-     "soon": true,
+     "kind": "Outside",
      "entries": [
       {
-       "id": "roads--overview",
-       "type": "soon",
-       "label": "Overview"
+       "id": "road01",
+       "type": "mpano",
+       "label": "1. Lake Road in 360\u00b0",
+       "short": "1. Lake Road",
+       "modelPano": "pano/road01.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 0.9
+      },
+      {
+       "id": "road02",
+       "type": "mpano",
+       "label": "2. Camp Entrance in 360\u00b0",
+       "short": "2. Camp Entrance",
+       "modelPano": "pano/road02.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 299.6
+      },
+      {
+       "id": "road03",
+       "type": "mpano",
+       "label": "3. Lower Office roadside in 360\u00b0",
+       "short": "3. Lower Office roadside",
+       "modelPano": "pano/road03.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 271.9
+      },
+      {
+       "id": "road04",
+       "type": "mpano",
+       "label": "4. Infirmary parking lot in 360\u00b0",
+       "short": "4. Infirmary parking lot",
+       "modelPano": "pano/road04.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 186.6
+      },
+      {
+       "id": "road05",
+       "type": "mpano",
+       "label": "5. Arts & Crafts to the Dining Hall in 360\u00b0",
+       "short": "5. Arts & Crafts to the Dining Hall",
+       "modelPano": "pano/road05.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 337.7
+      },
+      {
+       "id": "road06",
+       "type": "mpano",
+       "label": "6. Base of the Hill in 360\u00b0",
+       "short": "6. Base of the Hill",
+       "modelPano": "pano/road06.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 12.4
+      },
+      {
+       "id": "road07",
+       "type": "mpano",
+       "label": "7. Entrance to the Sports Center area in 360\u00b0",
+       "short": "7. Entrance to the Sports Center area",
+       "modelPano": "pano/road07.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 343.8
+      },
+      {
+       "id": "road08",
+       "type": "mpano",
+       "label": "8. Senior Girls Hill in 360\u00b0",
+       "short": "8. Senior Girls Hill",
+       "modelPano": "pano/road08.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 207.8
+      },
+      {
+       "id": "road09",
+       "type": "mpano",
+       "label": "9. To the Upper Field in 360\u00b0",
+       "short": "9. To the Upper Field",
+       "modelPano": "pano/road09.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 311.1
+      },
+      {
+       "id": "road10",
+       "type": "mpano",
+       "label": "10. To the Barn in 360\u00b0",
+       "short": "10. To the Barn",
+       "modelPano": "pano/road10.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 158.7
+      },
+      {
+       "id": "road11",
+       "type": "mpano",
+       "label": "11. Cooler parking lot in 360\u00b0",
+       "short": "11. Cooler parking lot",
+       "modelPano": "pano/road11.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 150.7
+      },
+      {
+       "id": "road12",
+       "type": "mpano",
+       "label": "12. Boys Hill in 360\u00b0",
+       "short": "12. Boys Hill",
+       "modelPano": "pano/road12.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 302.6
+      },
+      {
+       "id": "road13",
+       "type": "mpano",
+       "label": "13. Road to Senior Boys Hill in 360\u00b0",
+       "short": "13. Road to Senior Boys Hill",
+       "modelPano": "pano/road13.jpg",
+       "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
+       "yaw0": 122.6
       }
      ]
     }
