@@ -167,6 +167,7 @@ textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
 .plist{width:300px;overflow:auto;border-left:1px solid var(--line);padding:10px;background:var(--sheet)}
 .pform{display:none;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--sheet)}.pform.on{display:flex}.pform .in{flex:1}
 @media(max-width:700px){.pbody{flex-direction:column}.plist{width:auto;max-height:30vh;border-left:0;border-top:1px solid var(--line)}}
+.chgfb{margin-top:8px}.why{margin:8px 0}.why summary{cursor:pointer;font-weight:600}.why li{margin:6px 0}.chgfb textarea{width:100%;box-sizing:border-box}
 </style>
 </head>
 <body>
@@ -252,7 +253,7 @@ async function pull(){
     const strip=o=>JSON.stringify({...o,at:''});
     if(!pull.done){ pull.done=true; if(LS('lrv_data')&&(!mineSrv||strip(mineSrv.data||{})!==strip(mine))&&(Object.keys(mine.entries).length||Object.keys(mine.gfb||{}).length)) LS('lrv_dirty','1'); }
     if(mineSrv&&!dirty&&!Object.keys(mine.entries).length&&!Object.keys(mine.areas).length){ mine=Object.assign(mine,mineSrv.data||{}); $('rname').value=mine.name||''; $('ryears').value=mine.years||''; }
-    status(online?'Your notes save automatically.':'Connected. Your notes save automatically.'); online=true; refresh();
+    status(online?'Your notes save automatically.':'Connected. Your notes save automatically.'); online=true; refresh(); if(document.body.classList.contains('changes')&&!(document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.chg)) showChanges();
   }catch(e){ status("Can't reach saved notes right now. Your notes stay in this browser."); }
 }
 let online=false, saveT=null, saving=false, dirty=false;
@@ -482,9 +483,12 @@ function showSub(k){ const dd=$('dd'), g=DATA.groups.find(x=>x.name===dd.dataset
   dd.querySelectorAll('[data-sub]').forEach(b=>b.setAttribute('aria-expanded',String(+b.dataset.sub===k)));
   const item=x=>x.ref?itemBtn(x):(()=>{ const inner=(x.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(x.name)}</div>${inner}</div>`:''; })();
   $('ddsub').innerHTML=(it.items||[]).map(item).join(''); $('ddsub').dataset.cur=k; }
+function chgFb(ver,i){ const k=`chg-${ver}-${i}`, mineT=((mine.entries||{})[k]||{}).text||'';
+  const oth=others.map(o=>({w:who(o),t:((o.entries||{})[k]||{}).text})).filter(x=>x.t);
+  return `<div class="chgfb">${oth.map(x=>`<p class="hint"><b>${esc(x.w)}:</b> ${esc(x.t)}</p>`).join('')}<textarea class="in" rows="2" data-chg="${k}" placeholder="Was this change done right? Tell us what's off.">${esc(mineT)}</textarea></div>`; }
 function showChanges(){
   closeDD(); disposeSpheres(); document.body.classList.add('changes'); const C=DATA.changes||[];
-  $('changes').innerHTML=`<h2>What's changed in the model</h2><p class="blurb">Each update to the model, with before and after pictures. Comment on any of them like a normal view.</p>`+(C.length?C.slice().reverse().map(v=>`<h3 style="margin-top:18px">${esc(v.version)} · ${esc(v.date||'')}</h3>${(v.items||[]).map(it=>`<div class="chg"><div class="by">${esc(it.place||'')}</div><b>${esc(it.title)}</b>${it.note?`<p class="hint">${esc(it.note)}</p>`:''}<div class="media"><div class="pane flat"><img src="${esc(it.before)}" alt="Before"><span class="tag">Before</span></div><div class="pane flat"><img src="${esc(it.after)}" alt="After"><span class="tag">After</span></div></div></div>`).join('')}`).join(''):'<p class="by">No model updates yet. They will show up here after the first round of fixes.</p>');
+  $('changes').innerHTML=`<h2>What's changed in the model</h2><p class="blurb">Each update to the model, with before and after pictures. Comment on any of them like a normal view.</p>`+(C.length?C.slice().reverse().map(v=>`<h3 style="margin-top:18px">${esc(v.version)} · ${esc(v.date||'')}</h3>${(v.items||[]).map((it,ii)=>`<div class="chg"><div class="by">${esc(it.place||'')}</div><b>${esc(it.title)}</b>${it.note?`<p class="hint">${esc(it.note)}</p>`:''}${(it.notes||[]).length?`<details class="why"><summary>Why: ${it.notes.length} note${it.notes.length>1?'s':''} this change answers</summary><ul>${it.notes.map(n=>`<li><b>${esc(n.who)}:</b> ${esc(n.t)}${n.area?` <button class="small" data-goarea="${esc(n.area)}" data-govid="${esc(n.view||'')}">See it${n.label?` (${esc(n.label)})`:''}</button>`:''}</li>`).join('')}</ul></details>`:''}<div class="media"><div class="pane flat"><img src="${esc(it.before)}" alt="Before"><span class="tag">Before</span></div><div class="pane flat"><img src="${esc(it.after)}" alt="After"><span class="tag">After</span></div></div>${chgFb(v.version,ii)}</div>`).join('')}`).join(''):'<p class="by">No model updates yet. They will show up here after the first round of fixes.</p>');
   try{ history.replaceState(null,'','#changes'); }catch(e){} window.scrollTo({top:0});
 }
 function openPicker(btn){ const P=$('picker'); P.dataset.id=btn.dataset.pick; P.dataset.mode=btn.dataset.mode;
@@ -535,7 +539,7 @@ function refresh(){ if(!area) return; const id=curE()&&curE().id; buildViews(); 
   if((spheres&&curE()&&id===curE().id)||typing){ paintPins(); paintOthers(); paintPhotos(); if(!typing) paintGallery(); } else { renderView(); paintGallery(); } }
 
 /* ---------- events ---------- */
-document.addEventListener('input',e=>{
+document.addEventListener('input',e=>{ if(e.target.dataset&&e.target.dataset.chg){ const k=e.target.dataset.chg; (mine.entries??={})[k]={...(mine.entries[k]||{pins:[],photos:[]}),text:e.target.value,ver:DATA.version}; queueSave(); return; }
   const t=e.target, c=curE();
   if(t.id==='rname'||t.id==='ryears'){ mine[t.id==='rname'?'name':'years']=t.value.trim(); queueSave(); }
   else if(t.id==='etext'){ E(c.id).text=t.value; E(c.id).ver=VER(); queueSave(); }
@@ -587,6 +591,7 @@ document.addEventListener('click',async e=>{
     closePicker(); paintGallery(); }
   else if(t.dataset.pg!==undefined&&t.closest('#picker')){ pickGroup(+t.dataset.pg); }
   else if(t.dataset.galmove&&isOwner){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmove]={to:t.dataset.to,at:Date.now()}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.to)); }
+  else if(t.dataset.goarea){ setArea(t.dataset.goarea, t.dataset.govid||null); window.scrollTo({top:0}); }
   else if(t.id==='planbtn'){ openPlanner(); }
   else if(t.id==='planclose'){ $('planner').classList.remove('on'); pPending=null; $('pform').classList.remove('on'); }
   else if(t.id==='psave'){ const l=$('plabel').value.trim(); if(!l){ toast('Give the spot a name'); return; } (mine.req360??=[]).push({id:rid(),x:+(PM.x0+pPending.px/PM.S).toFixed(1),y:+(PM.y1-pPending.py/PM.S).toFixed(1),label:l,at:new Date().toISOString()}); pPending=null; $('pform').classList.remove('on'); queueSave(); paintPlan(); toast('Pin saved'); }
