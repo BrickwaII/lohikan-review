@@ -157,6 +157,15 @@ textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
 .mini .lbl{position:absolute;left:0;right:0;bottom:0;background:#000a;color:#fff;font-size:11px;padding:2px 6px;text-align:center}
 .top{position:relative}.top .who{max-width:calc(100% - 220px)}
 @media(max-width:899px){.mini{display:none}.top .who{max-width:none}}
+.planner{position:fixed;inset:0;z-index:35;background:var(--bg);display:none;flex-direction:column}.planner.on{display:flex}
+.phead{display:flex;gap:12px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}.phead .by{flex:1}
+.pbody{flex:1;display:flex;min-height:0}.pview{flex:1;position:relative;overflow:hidden;background:#1b2a20;touch-action:none;cursor:grab}
+.pinner{position:absolute;left:0;top:0;transform-origin:0 0}.pinner img{display:block;user-select:none;-webkit-user-drag:none}
+.ppin{position:absolute;width:0;height:0}.ppin span{position:absolute;left:0;top:0;transform:translate(-50%,-100%) scale(var(--is,1));transform-origin:50% 100%;background:var(--red);color:#fff;font:700 12px/1.2 sans-serif;padding:3px 7px;border-radius:8px 8px 8px 0;white-space:nowrap;box-shadow:0 1px 4px #0008}
+.ppin.other span{background:var(--blue)}.ppin.new span{background:#e8a43a}
+.plist{width:300px;overflow:auto;border-left:1px solid var(--line);padding:10px;background:var(--sheet)}
+.pform{display:none;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--sheet)}.pform.on{display:flex}.pform .in{flex:1}
+@media(max-width:700px){.pbody{flex-direction:column}.plist{width:auto;max-height:30vh;border-left:0;border-top:1px solid var(--line)}}
 </style>
 </head>
 <body>
@@ -190,13 +199,19 @@ textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
   <details class="drawer" id="gdrawer"><summary id="gsum">Photo gallery</summary><div class="gal" id="gal"></div></details>
   <details class="drawer" id="udrawer"><summary id="usum">Help sort unverified photos</summary><p class="by">Photos that might show this place. Tell us if they're right, then Henry adds the good ones to the gallery.</p><div class="gal" id="ugal"></div></details>
   <section class="foot">
-    <div class="ctrl"><button class="small" id="showall" aria-pressed="false">Show fixed &amp; not-valid notes</button><button class="small" id="copy">Copy my feedback</button></div>
+    <div class="ctrl"><button class="small" id="planbtn">Suggest new 360° spots on the map</button><button class="small" id="showall" aria-pressed="false">Show fixed &amp; not-valid notes</button><button class="small" id="copy">Copy my feedback</button></div>
     <details><summary>Feedback about this website</summary><p class="by">Anything confusing, broken, or that you'd like the site to do.</p><textarea id="sitefb" maxlength="3000" placeholder="e.g. the 360 views are slow on my phone"></textarea><ul class="notes" id="sitefbo"></ul></details>
     <details><summary>Henry's tools</summary><div class="ctrl"><input class="in" id="akey" type="password" placeholder="Passcode" style="max-width:220px"><button class="small" id="alogin">Unlock</button><span id="astate"></span></div></details>
   </section>
 </main>
 <div class="big" id="big" role="dialog" aria-label="Photo"><img id="bigimg" alt=""></div>
 <div class="big" id="pano" role="dialog" aria-label="360 photo"><div id="panohost" style="width:min(1200px,96vw);height:min(720px,80vh);border-radius:10px;overflow:hidden;touch-action:none;cursor:grab"></div><button id="pclose" style="position:fixed;top:12px;right:12px">Close</button></div>
+<div class="planner" id="planner" role="dialog" aria-label="Suggest 360 spots">
+  <div class="phead"><b>Suggest 360° spots</b><span class="by">Drag to move · scroll or pinch to zoom · tap a spot to drop a pin and name it</span><button class="small" id="planclose">Close</button></div>
+  <div class="pbody"><div class="pview" id="pview"><div class="pinner" id="pinner"><img id="planimg" alt="Camp map" draggable="false"><div id="ppins"></div></div></div>
+    <aside class="plist"><h3>Pins</h3><ul class="notes" id="plist"></ul></aside></div>
+  <div class="pform" id="pform"><input class="in" id="plabel" maxlength="120" placeholder="Name this spot, e.g. road between Cabin 12 and tennis"><button class="primary small" id="psave">Save pin</button><button class="small" id="pcancel">Cancel</button></div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -363,23 +378,24 @@ async function addPhotos(files,scope){
 
 /* ---------- gallery ---------- */
 const galState=id=>{ const g=(ADM.gal||{})[id]; return typeof g==='string'?{s:g}:(g||{}); };
-function allPhotos(){ const L=[]; for(const [k,a] of Object.entries(DATA.areas||{})) for(const p of a.candidates||[]) L.push({...p,home:k}); return L; }
-const photoPlace=p=>galState(p.id).to||p.home;
+function allPhotos(){ const M=new Map(); for(const [k,a] of Object.entries(DATA.areas||{})) for(const p of a.candidates||[]){ const q=M.get(p.id); if(q){ if(!q.homes.includes(k)) q.homes.push(k); } else M.set(p.id,{...p,home:k,homes:[k]}); } return [...M.values()]; }
+const photoPlaces=p=>{ const t=galState(p.id).to; return t?[t]:p.homes; };
 function placeOptions(sel){ const opt=[]; const walk=(items,pre)=>{ for(const it of items){ if(it.ref){ const a=AR(it.ref); if(a&&!opt.some(o=>o[0]===it.ref)) opt.push([it.ref,pre+(it.name||a.name)]); } else walk(it.items||[],pre+it.name+' › '); } }; walk(DATA.groups,'');
   return `<option value="">Pick the right place…</option>`+opt.map(([k,l])=>`<option value="${esc(k)}"${k===sel?' selected':''}>${esc(l)}</option>`).join(''); }
 const placeName=k=>{ const a=AR(k); return a?a.name:k; };
 function paintGallery(){
-  const here=allPhotos().filter(p=>photoPlace(p)===area.key);
+  const here=allPhotos().filter(p=>photoPlaces(p).includes(area.key));
   const ok=here.filter(p=>galState(p.id).s==='ok'), rej=here.filter(p=>galState(p.id).s==='no'), un=here.filter(p=>!galState(p.id).s);
   $('gdrawer').style.display=ok.length?'':'none'; $('udrawer').style.display=(un.length||(isOwner&&rej.length))?'':'none';
   $('gsum').textContent=`Photo gallery (${ok.length})`; $('usum').textContent=`Help sort unverified photos (${un.length})`;
   const lbl={yes:'Shows this place',other:'Different place',meh:'Not useful'};
-  const card=(p,mode)=>{ const f=(mine.gfb||{})[p.id]||{}, gs=galState(p.id);
-    const fb=[...others.map(o=>({w:who(o),x:(o.gfb||{})[p.id]})),{w:'You',x:f}].filter(z=>z.x&&(z.x.v||z.x.t));
-    const fbLine=x=>[lbl[x.v]+(x.v==='other'&&x.to?`: ${placeName(x.to)}`:''),x.t].filter(Boolean).join(' — ');
+  const card=(p,mode)=>{ const gs=galState(p.id), moved=!!gs.to, f0=(mine.gfb||{})[p.id]||{}, f=(moved&&f0.v==='other'&&!((f0.vt||0)>(gs.at||0)))?{...f0,v:''}:f0;
+    const stale=x=>x&&moved&&x.v==='other'&&!((x.vt||0)>(gs.at||0)), clean=x=>stale(x)?{...x,v:''}:x;
+    const fb=[...others.map(o=>({w:who(o),x:clean((o.gfb||{})[p.id])})),{w:'You',x:f}].filter(z=>z.x&&(z.x.v||z.x.t));
+    const fbLine=x=>[x.v?lbl[x.v]+(x.v==='other'&&x.to?`: ${placeName(x.to)}`:''):'',x.t].filter(Boolean).join(' — ');
     const sugg=[...new Set(fb.filter(z=>z.x.v==='other'&&z.x.to&&AR(z.x.to)).map(z=>z.x.to))];
     return `<figure${p.pano?' class="is360"':''}><img src="${esc(p.src)}" alt="${esc(p.cap||'Camp photo')}" loading="lazy"${p.pano?' data-pano="1"':''}>${p.pano?'<span class="b360">360° · tap to look around</span>':''}<div class="gb">
-      <span class="by">${esc(p.cap||'')}${gs.to?` · moved from ${esc(placeName(p.home))}`:''}</span>
+      <span class="by">${esc(p.cap||'')}${moved?` · moved from ${esc(p.homes.map(placeName).join(', '))}`:''}</span>
       ${mode==='rej'?'':`<div class="opts">${Object.entries(mode==='ok'?{other:'Different place',meh:'Not useful'}:lbl).map(([v,l])=>`<button class="small" data-gfb="${esc(p.id)}" data-v="${v}" aria-pressed="${f.v===v}">${l}</button>`).join('')}</div>
       ${f.v==='other'?`<button class="small pick" data-pick="${esc(p.id)}" data-mode="fb">${f.to?'Place: '+esc(placeName(f.to))+' ▾':'Pick the right place ▾'}</button>`:''}
       <input class="in" data-gtx="${esc(p.id)}" maxlength="400" placeholder="What does this show? Year, building, anything wrong…" value="${esc(f.t||'')}">`}
@@ -477,6 +493,28 @@ function pickGroup(i){ const g=DATA.groups.filter(groupHas)[i]; document.querySe
   const item=it=>it.ref?(hasContent(AR(it.ref))?`<button class="item" data-pk="${esc(it.ref)}">${esc(it.name||AR(it.ref).name)}</button>`:''):(()=>{ const inner=(it.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(it.name)}</div>${inner}</div>`:''; })();
   $('pcol2').innerHTML=g.items.map(item).join(''); }
 function closePicker(){ $('picker').classList.remove('on'); }
+const PM={x0:1150,y1:1960,S:2.2}; let pz={s:0.5,tx:0,ty:0}, pPending=null, pInit=false;
+function openPlanner(){ $('planner').classList.add('on'); const img=$('planimg'); if(!img.src) img.src='img/plan_map.jpg';
+  const fit=()=>{ const v=$('pview'); pz.s=Math.min(v.clientWidth/2046,v.clientHeight/1914); pz.tx=(v.clientWidth-2046*pz.s)/2; pz.ty=(v.clientHeight-1914*pz.s)/2; applyPz(); };
+  if(!pInit){ pInit=true; setupPlanner(); if(img.complete) fit(); else img.onload=fit; } else applyPz(); paintPlan(); }
+function applyPz(){ $('pinner').style.transform=`translate(${pz.tx}px,${pz.ty}px) scale(${pz.s})`; $('pinner').style.setProperty('--is',String(1/pz.s)); }
+function setupPlanner(){ const v=$('pview'); const P=new Map(); let st=null;
+  v.addEventListener('pointerdown',e=>{ v.setPointerCapture(e.pointerId); P.set(e.pointerId,[e.clientX,e.clientY]); st={x:e.clientX,y:e.clientY,tx:pz.tx,ty:pz.ty,moved:false,pinch:P.size===2?{d:dist(),s:pz.s,cx:mid()[0],cy:mid()[1]}:null}; });
+  const dist=()=>{ const [a,b]=[...P.values()]; return Math.hypot(a[0]-b[0],a[1]-b[1]); }, mid=()=>{ const [a,b]=[...P.values()]; return [(a[0]+b[0])/2,(a[1]+b[1])/2]; };
+  v.addEventListener('pointermove',e=>{ if(!P.has(e.pointerId)||!st) return; P.set(e.pointerId,[e.clientX,e.clientY]);
+    if(P.size===2&&st.pinch){ const r=v.getBoundingClientRect(), ns=Math.max(0.2,Math.min(4,st.pinch.s*dist()/st.pinch.d)); zoomAt(st.pinch.cx-r.left,st.pinch.cy-r.top,ns); st.moved=true; return; }
+    const dx=e.clientX-st.x, dy=e.clientY-st.y; if(Math.abs(dx)+Math.abs(dy)>4) st.moved=true; if(st.moved&&P.size===1){ pz.tx=st.tx+dx; pz.ty=st.ty+dy; applyPz(); } });
+  v.addEventListener('pointerup',e=>{ const click=st&&!st.moved&&P.size===1; P.delete(e.pointerId);
+    if(click){ const r=v.getBoundingClientRect(), px=(e.clientX-r.left-pz.tx)/pz.s, py=(e.clientY-r.top-pz.ty)/pz.s; if(px>=0&&py>=0&&px<=2046&&py<=1914){ pPending={px,py}; $('pform').classList.add('on'); $('plabel').value=''; $('plabel').focus(); paintPlan(); } }
+    if(P.size===0) st=null; });
+  v.addEventListener('pointercancel',e=>{P.delete(e.pointerId); st=null;});
+  v.addEventListener('wheel',e=>{ e.preventDefault(); const r=v.getBoundingClientRect(); zoomAt(e.clientX-r.left,e.clientY-r.top,Math.max(0.2,Math.min(4,pz.s*Math.exp(-e.deltaY*0.0015)))); },{passive:false}); }
+function zoomAt(cx,cy,ns){ pz.tx=cx-(cx-pz.tx)*ns/pz.s; pz.ty=cy-(cy-pz.ty)*ns/pz.s; pz.s=ns; applyPz(); }
+const toPx=q=>[(q.x-PM.x0)*PM.S,(PM.y1-q.y)*PM.S];
+function paintPlan(){ const mineP=(mine.req360||[]).map(q=>({...q,me:true,w:'You'})), oth=others.flatMap(o=>(o.req360||[]).filter(q=>q&&typeof q.label==='string').map(q=>({...q,me:false,w:who(o)})));
+  const all=[...mineP,...oth];
+  $('ppins').innerHTML=all.map(q=>{ const [x,y]=toPx(q); return `<div class="ppin${q.me?'':' other'}" style="left:${x}px;top:${y}px"><span>${esc(q.label)}</span></div>`; }).join('')+(pPending?`<div class="ppin new" style="left:${pPending.px}px;top:${pPending.py}px"><span>new pin</span></div>`:'');
+  $('plist').innerHTML=all.length?all.map(q=>`<li><span class="n ${q.me?'':'other'}">•</span><span>${esc(q.label)}<br><span class="by">${esc(q.w)}</span></span>${q.me?`<button data-pdel="${esc(q.id)}">Delete</button>`:'<span></span>'}</li>`).join(''):'<li class="empty">No pins yet. Tap the map to add one.</li>'; }
 let pv=null;
 function openPano(src){ if(!window.THREE){ $('bigimg').src=src; $('big').classList.add('on'); return; }
   closePano(); const box=$('pano'); box.classList.add('on'); const host=$('panohost');
@@ -508,7 +546,7 @@ document.addEventListener('input',e=>{
 document.addEventListener('change',e=>{ const t=e.target;
   if(t.id==='pfile'||t.id==='pfileA'){ addPhotos([...t.files],t.id==='pfileA'?'area':'view'); t.value=''; }
   if(t.dataset.gto){ const g=(mine.gfb??={})[t.dataset.gto]??={}; g.to=t.value; queueSave(); paintGallery(); toast('Thanks! Saved.'); }
-  if(t.dataset.galmovesel&&isOwner&&t.value){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmovesel]={to:t.value}; saveAdm({gal}); toast('Moved to '+placeName(t.value)); }
+  if(t.dataset.galmovesel&&isOwner&&t.value){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmovesel]={to:t.value,at:Date.now()}; saveAdm({gal}); toast('Moved to '+placeName(t.value)); }
   if(t.dataset.tri&&isOwner){ const tri={...(ADM.tri||{})}; if(t.value) tri[t.dataset.tri]={s:t.value,at:new Date().toISOString(),ver:VER()}; else delete tri[t.dataset.tri]; saveAdm({tri}); } });
 document.addEventListener('click',async e=>{
   const fl=e.target.closest('.pane.flat');
@@ -539,15 +577,20 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.rot&&spheres){ spheres.rot=(spheres.rot+ +t.dataset.rot+360)%360; LS('rot_'+c.id,String(spheres.rot)); spheres.draw(); if(isOwner) saveAdm({rot:{...(ADM.rot||{}),[c.id]:spheres.rot}}); }
   else if(t.id==='useless'){ const en=E(c.id); en.flag=en.flag==='useless'?'':'useless'; queueSave(); renderView(); }
   else if(t.id==='hideview'){ const H=new Set(ADM.hidden||[]); H.has(c.id)?H.delete(c.id):H.add(c.id); await saveAdm({hidden:[...H]}); toast(H.has(c.id)?'Removed for reviewers':'Restored'); }
-  else if(t.dataset.gfb){ const g=(mine.gfb??={})[t.dataset.gfb]??={}; g.v=g.v===t.dataset.v?'':t.dataset.v; queueSave(); paintGallery(); toast('Saved'); }
+  else if(t.dataset.gfb){ const g=(mine.gfb??={})[t.dataset.gfb]??={}; g.v=g.v===t.dataset.v?'':t.dataset.v; g.vt=Date.now(); queueSave(); paintGallery(); toast('Saved'); }
   else if(t.dataset.gal&&isOwner){ const gal={...(ADM.gal||{})}, cur=galState(t.dataset.gal); const nv={...cur,s:t.dataset.v}; if(!nv.s) delete nv.s; if(!nv.s&&!nv.to) delete gal[t.dataset.gal]; else gal[t.dataset.gal]=nv; saveAdm({gal}); toast(t.dataset.v==='ok'?'Added to gallery':t.dataset.v==='no'?'Hidden':'Restored'); }
   else if(t.dataset.pick){ openPicker(t); }
   else if(t.dataset.pk){ const P=$('picker'); const id=P.dataset.id;
     if(P.dataset.mode==='fb'){ const g=(mine.gfb??={})[id]??={}; g.to=t.dataset.pk; queueSave(); toast('Saved: '+placeName(t.dataset.pk)); }
-    else if(isOwner){ const gal={...(ADM.gal||{})}; gal[id]={to:t.dataset.pk}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.pk)); }
+    else if(isOwner){ const gal={...(ADM.gal||{})}; gal[id]={to:t.dataset.pk,at:Date.now()}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.pk)); }
     closePicker(); paintGallery(); }
   else if(t.dataset.pg!==undefined&&t.closest('#picker')){ pickGroup(+t.dataset.pg); }
-  else if(t.dataset.galmove&&isOwner){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmove]={to:t.dataset.to}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.to)); }
+  else if(t.dataset.galmove&&isOwner){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmove]={to:t.dataset.to,at:Date.now()}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.to)); }
+  else if(t.id==='planbtn'){ openPlanner(); }
+  else if(t.id==='planclose'){ $('planner').classList.remove('on'); pPending=null; $('pform').classList.remove('on'); }
+  else if(t.id==='psave'){ const l=$('plabel').value.trim(); if(!l){ toast('Give the spot a name'); return; } (mine.req360??=[]).push({id:rid(),x:+(PM.x0+pPending.px/PM.S).toFixed(1),y:+(PM.y1-pPending.py/PM.S).toFixed(1),label:l,at:new Date().toISOString()}); pPending=null; $('pform').classList.remove('on'); queueSave(); paintPlan(); toast('Pin saved'); }
+  else if(t.id==='pcancel'){ pPending=null; $('pform').classList.remove('on'); paintPlan(); }
+  else if(t.dataset.pdel){ mine.req360=(mine.req360||[]).filter(q=>q.id!==t.dataset.pdel); queueSave(); paintPlan(); }
   else if(t.id==='photobtn'){ photoOn=!photoOn; LS('lrv_photo',photoOn?'1':'0'); paintPhotoBtn(); renderView(); }
   else if(t.id==='showall'){ showAll=!showAll; t.setAttribute('aria-pressed',String(showAll)); t.textContent=showAll?'Hide fixed & not-valid notes':'Show fixed & not-valid notes'; paintPins(); paintOthers(); }
   else if(t.id==='alogin'){ const k=$('akey').value.trim(); if(!k||!API()) return;
@@ -564,7 +607,7 @@ document.addEventListener('click',async e=>{
     try{ await navigator.clipboard.writeText(L.join('\n')); toast('Copied. Paste it into a message to Henry.'); }catch(err){ toast("Couldn't copy here"); }
   }
 });
-document.addEventListener('keydown',e=>{ if(e.target.matches('input,textarea,select')) return; if(e.key==='ArrowRight'&&vi<VIEWS.length-1){ vi++; renderView(); } if(e.key==='ArrowLeft'&&vi>0){ vi--; renderView(); } if(e.key==='Escape'){ closePano(); $('big').classList.remove('on'); $('menu').classList.remove('on'); } });
+document.addEventListener('keydown',e=>{ if(e.target.id==='plabel'&&e.key==='Enter'){ $('psave').click(); return; } if(e.target.matches('input,textarea,select')) return; if(e.key==='ArrowRight'&&vi<VIEWS.length-1){ vi++; renderView(); } if(e.key==='ArrowLeft'&&vi>0){ vi--; renderView(); } if(e.key==='Escape'){ closePano(); $('big').classList.remove('on'); $('menu').classList.remove('on'); } });
 document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') pull(); });
 
 fetch('views.json').then(r=>r.json()).then(async d=>{

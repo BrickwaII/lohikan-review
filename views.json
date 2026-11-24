@@ -1821,7 +1821,7 @@
        "realPano": "pano/s22_real.jpg",
        "modelPano": "pano/s22_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
-       "yaw0": 84.3
+       "yaw0": 273.8
       }
      ]
     },
@@ -1866,7 +1866,8 @@
        "realPano": "pano/s13_real.jpg",
        "modelPano": "pano/s13_model.jpg",
        "cap": "Real: drone 360\u00b0 from the camp tour. The model was rendered from about the same spot in the air.",
-       "yaw0": 269.7
+       "yaw0": 269.7,
+       "modelPanoPhoto": "pano/s13_photo.jpg"
       },
       {
        "id": "dh-se",
@@ -1881,8 +1882,7 @@
        "type": "model",
        "label": "From the southwest",
        "model": "img/dh_sw_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
-       "modelPhoto": "img/dh_sw_photo.jpg"
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     },
@@ -1894,8 +1894,7 @@
        "type": "model",
        "label": "The tent from the southwest",
        "model": "img/dh_tent_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
-       "modelPhoto": "img/dh_tent_photo.jpg"
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
       }
      ]
     },
@@ -2475,6 +2474,25 @@
    "name": "The A-Frame",
    "blurb": "The A-Frame staff building.",
    "parts": [
+    {
+     "kind": "Outside",
+     "entries": [
+      {
+       "id": "a-frame-se",
+       "type": "model",
+       "label": "From the southeast",
+       "model": "img/a-frame_se_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      },
+      {
+       "id": "a-frame-sw",
+       "type": "model",
+       "label": "From the southwest",
+       "model": "img/a-frame_sw_model.jpg",
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+      }
+     ]
+    },
     {
      "kind": "Inside",
      "soon": true,
