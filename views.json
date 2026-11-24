@@ -1,5 +1,5 @@
 {
- "version": "v6",
+ "version": "v7",
  "title": "Camp Lohikan 3D review",
  "api": "https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec",
  "areas": {
@@ -398,15 +398,15 @@
        "realPano": "pano/s17_real.jpg",
        "modelPano": "pano/s17_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
-       "yaw0": 133.3
+       "yaw0": 111.9
       }
      ]
     }
    ],
    "candidates": [],
    "xy": [
-    1474,
-    1468
+    1475,
+    1480
    ]
   },
   "rec-hall": {
@@ -5916,6 +5916,917 @@
        "area": "rec-hall",
        "view": "s21-360",
        "label": "Rock Band 360"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "version": "v7",
+   "date": "Nov 24, 2026",
+   "items": [
+    {
+     "place": "Circus",
+     "title": "Rework: 10 bays counted from the 360, red/yellow posts; west bay on the south side open with a low opening; north wall open from the middle to the NE corner; backstage and shed doors star-painted (outlines only); plain blue band, two rows of see-through windows, star band above; east end open ~5.2 m high",
+     "before": "img/changes/v7_circus_before.jpg",
+     "after": "img/changes/v7_circus_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the two rows of windows this wall are missing, and the walls do not go all the way down to the floor.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwttvk7rd3sdd3u",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwttvk7rd3sdd3u_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwttvk7rd3sdd3u_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwttvk7rd3sdd3u_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the silks floatin in the air here right now are distracting, the circus building as many arrangements of different circus equipment being raised and lowered, lets just begin with no equipment dangling.  Only the flying trapeze because it is always there (except for circus shows), and is always in the same place.  Later on we can adapt the buiding to have options for lowering and raising different circus equipment.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtty0ncanp4ph7",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtty0ncanp4ph7_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtty0ncanp4ph7_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtty0ncanp4ph7_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "This area should be open, and the area to the left should be closed",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvra45p8qt8ik",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvra45p8qt8ik_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvra45p8qt8ik_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvra45p8qt8ik_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "this is a door to backstage, there should be a door here (two doors folding inward), and the room behind it is circus backstage which should have its own section on this page.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvsbpww1og9ju",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvsbpww1og9ju_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvsbpww1og9ju_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvsbpww1og9ju_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "look at the pin on the real image and not the model for this one, it looks like there is a bit out of sync here.  this is another set of double doors which opens up to the circus shed, its own sub area here.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvth6zp3susjw",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvth6zp3susjw_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvth6zp3susjw_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvth6zp3susjw_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "this panel should be open, and from here you should see a door to gymnastics and the door to get into dance. on around the corner on the right",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvucqhbjm7jpw",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvucqhbjm7jpw_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvucqhbjm7jpw_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvucqhbjm7jpw_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "this area of the wall should have the same star patters",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvuofitufcywi",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvuofitufcywi_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvuofitufcywi_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvuofitufcywi_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "this area, where the panels are open on the corner of the building should be represented right.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvvch7gi509yv",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvvch7gi509yv_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvvch7gi509yv_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvvch7gi509yv_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "there should be windows along this wall, and all around the buildings the windows do not go all the way to the top before the rafters, there should be another chunk of all before the rafters, and the blue start patter does not continue into the rafters.  the poles on this wall are also not painted right, the red paint isn't there.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvwv0cdr8gfcu",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "The density of the rafters isn't correct.  there are more of them, but they are thin than the ones in the model.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvxktkyjel4ix",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvxktkyjel4ix_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvxktkyjel4ix_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtvxktkyjel4ix_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "i marked many of the changes as good but not all of them, the area still needs a rework.",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "1 row of windows was adding to this wall, but there should be two",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "its open now which is good, but the height of the openning is too big.",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "the door i believe is in the slightly wrong place, but also it should still have the blue stars pattern (it perfectly plens into the wall), so all this brown we see on the wall (and red) is wrong.\n\nWe need to fix the number of pillars and diagonal cross beams to match the real building exactly so we can pin point where the doors should be (and just to make it more accurate)",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "more of this space should be open, once we fix the number of columns and crossbeams as i discussed in another comment, we can lock down exactly how big it should be.",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "the windows are good, but we will need to add transparency to them.  Look how in the real image you can see the sports center and sky from behind it.",
+       "area": "",
+       "view": "",
+       "label": ""
+      }
+     ],
+     "replaces": [
+      "v5-6"
+     ]
+    },
+    {
+     "place": "Pottery",
+     "title": "Rework: two small rooms in the back (north) corners with the space between them running to the end wall; duplicate south windows removed; level flat ceiling; windows see-through from inside",
+     "before": "img/changes/v7_pottery_before.jpg",
+     "after": "img/changes/v7_pottery_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the back room with the kiln is missing",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxvswuzo1aetw",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxvswuzo1aetw_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxvswuzo1aetw_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxvswuzo1aetw_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "i don't know what this room is but it is also missing, probably a closet.",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxw4dm1gyh1ci",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxw4dm1gyh1ci_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxw4dm1gyh1ci_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxw4dm1gyh1ci_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "window is missing",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxw9s0jwelria",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxw9s0jwelria_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxw9s0jwelria_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxw9s0jwelria_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "window is missing",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxwhu4eeom2wu",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxwhu4eeom2wu_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxwhu4eeom2wu_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxwhu4eeom2wu_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "there should be two windows on either side of the door",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxwtawomugs0n",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxwtawomugs0n_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxwtawomugs0n_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxwtawomugs0n_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the ceiling in this room is flat.  You cannot see into the arts and crafts building at all/",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxxk2sr3yxu5v",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "this wall and door was added on the wrong side, it should be on the north side, there should be two small rooms in the back north west and north east corners, with a space between them that reaches all the way back to the end of the building",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "the new windows were added to on top of the existing one and it looks bad.",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "this is closer, but there still seems to be some weird artifacts, the flat ceiling should be level and flush with all the walls",
+       "area": "",
+       "view": "",
+       "label": ""
+      }
+     ],
+     "replaces": [
+      "v5-7"
+     ]
+    },
+    {
+     "place": "Barn indoor ring",
+     "title": "Rework: triangular (gable) roof; trusses like the circus: flat bottom chord, triangular top, every ~4 ft",
+     "before": "img/changes/v7_barn_before.jpg",
+     "after": "img/changes/v7_barn_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the celing should be flat, with rafters going from the ceiling to the actual roof.",
+       "area": "horses",
+       "view": "s11-360",
+       "label": "Barn & indoor ring in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu0fq4blqnep96",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu0fq4blqnep96_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu0fq4blqnep96_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu0fq4blqnep96_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the door is missing, and the wall should go all the way to the ground",
+       "area": "horses",
+       "view": "s11-360",
+       "label": "Barn & indoor ring in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu0g5vr8gove3u",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu0g5vr8gove3u_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu0g5vr8gove3u_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu0g5vr8gove3u_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "This is better but the building roof should be triangular, no arches.  the rafters should be like the circus building, flat on the bottom, triangular structure, more frewuent beams.",
+       "area": "",
+       "view": "",
+       "label": ""
+      }
+     ],
+     "replaces": [
+      "v5-8"
+     ]
+    },
+    {
+     "place": "Gymnastics",
+     "title": "Windows lowered; tumble track against the tall wall and shortened at the east end; doors at both ends of the room",
+     "before": "img/changes/v7_gym_before.jpg",
+     "after": "img/changes/v7_gym_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "This window and all the other windows are missing on this wall of the building",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtteebejwywjrt",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtteebejwywjrt_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtteebejwywjrt_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwtteebejwywjrt_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the tumble track should be all the way against the tall wall, and it shouldn't go as far to toward the east end.",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv39sa29jnkbsy",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv39sa29jnkbsy_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv39sa29jnkbsy_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv39sa29jnkbsy_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the door is missing",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv39xsm8diyt8w",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv39xsm8diyt8w_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv39xsm8diyt8w_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv39xsm8diyt8w_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the door is missing",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv3a6roz2o97vq",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3a6roz2o97vq_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3a6roz2o97vq_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3a6roz2o97vq_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "the windows are roughly in the right spots now, but they are too high.",
+       "area": "",
+       "view": "",
+       "label": ""
+      }
+     ],
+     "replaces": [
+      "v5-9"
+     ]
+    },
+    {
+     "place": "Pool",
+     "title": "Benches turned to face the pool",
+     "before": "img/changes/v7_pool_before.jpg",
+     "after": "img/changes/v7_pool_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the benches on the south end of the pool model are facing the wrong way and there should be 4 of them",
+       "area": "pool",
+       "view": "s22-360",
+       "label": "Pool in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu13jgr0hstto2",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu13jgr0hstto2_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu13jgr0hstto2_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwu13jgr0hstto2_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "it looks the same to me, the benches still face away from the pool",
+       "area": "",
+       "view": "",
+       "label": ""
+      }
+     ],
+     "replaces": [
+      "v5-11"
+     ]
+    },
+    {
+     "place": "Amphitheater",
+     "title": "Stage back in its original spot; Lower Office steps turned to run down to the road, smaller, with flagstones and stone walls at the bottom; red benches moved out along the hill facing the stage",
+     "before": "img/changes/v7_amph_before.jpg",
+     "after": "img/changes/v7_amph_after.jpg",
+     "notes": [
+      {
+       "who": "Henry (phone)",
+       "t": "You can\u2019t see the L from the back",
+       "area": "amphitheater",
+       "view": "amphitheater-se",
+       "label": "From the southeast",
+       "key": "rmwtx81orci1cerp|mwtym9uyxbatpxt",
+       "shots": [
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtym9uyxbatpxt_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtym9uyxbatpxt_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (phone)",
+       "t": "The stairway here is missing",
+       "area": "amphitheater",
+       "view": "s17-360",
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtymovmwr59gsh",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtymovmwr59gsh_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtymovmwr59gsh_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtymovmwr59gsh_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (phone)",
+       "t": "The wooden fence on the other side of the wall is missing",
+       "area": "amphitheater",
+       "view": "s17-360",
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtyn0yknehllsc_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtyn0yknehllsc_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtyn0yknehllsc_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (phone)",
+       "t": "It\u2019s a bit hard to see from this angle but there are red benches on top of the hill circling the amphitheater, and they are missing",
+       "area": "amphitheater",
+       "view": "s17-360",
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtynwlzuvzgpgo_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtynwlzuvzgpgo_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwtx81orci1cerp_mwtynwlzuvzgpgo_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "I believe the amphitheater was already in the correct place and didn't need to be moved.  This change log incorporated changes i wanted to the amphitheater and lower office together and its a bit hard to say which changes were correct and which ones weren't.",
+       "area": "",
+       "view": "",
+       "label": ""
+      },
+      {
+       "who": "Henry (change review)",
+       "t": "the stair way is now there, but its facing the wrong way and the stone work around it isn't present.\n\nthe benches here are in the wrong place, the wooden fence i can't tell",
+       "area": "",
+       "view": "",
+       "label": ""
+      }
+     ],
+     "replaces": [
+      "v5-4",
+      "v5-12"
+     ]
+    },
+    {
+     "place": "Horseback riding",
+     "title": "Removed the brown circle tracks drawn over the outdoor rings",
+     "before": "img/changes/v7_horses_before.jpg",
+     "after": "img/changes/v7_horses_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the circle tracks added on top of the image are not aligned with the real world ones, but since we have the realistic textures here, we can just delete them",
+       "area": "horses",
+       "view": "horses-sw",
+       "label": "From the southwest",
+       "key": "rmwttdq5k66osel0|mwv3f4gfeidc0ax",
+       "shots": [
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3f4gfeidc0ax_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3f4gfeidc0ax_2.jpg"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "place": "Bungee trampoline",
+     "title": "Gazebo turned so a corner faces the bungee; the bench side toward the trampolines is open; storage closet added by the fence",
+     "before": "img/changes/v7_bungee_before.jpg",
+     "after": "img/changes/v7_bungee_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the storage closet here is missing",
+       "area": "bungee",
+       "view": "s29-360",
+       "label": "Bungee trampoline in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv3c8tjaqoghb6",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3c8tjaqoghb6_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3c8tjaqoghb6_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3c8tjaqoghb6_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "i think the gazeebo here is a little off rotation wise, and one corner of the benches facing the bungie trampolines should be open",
+       "area": "bungee",
+       "view": "s29-360",
+       "label": "Bungee trampoline in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv3d2k3jnzmyhm",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3d2k3jnzmyhm_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3d2k3jnzmyhm_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3d2k3jnzmyhm_2.jpg"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "place": "Gaga",
+     "title": "Sand inside the gaga pits (a touch darker than volleyball)",
+     "before": "img/changes/v7_gaga_before.jpg",
+     "after": "img/changes/v7_gaga_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the inside of the gaga kit should be sand, like the volleyball court, maybe a tiny bit darker.",
+       "area": "gaga",
+       "view": "gaga-top",
+       "label": "From above",
+       "key": "rmwttdq5k66osel0|mwv3e1nqja9u48l",
+       "shots": [
+        {
+         "label": "Real photo",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3e1nqja9u48l_0.jpg"
+        },
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3e1nqja9u48l_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3e1nqja9u48l_2.jpg"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "place": "Roads: Camp Entrance",
+     "title": "CAMP LOHIKAN entrance sign, guard booth and gate arm (look is a placeholder until a photo is matched)",
+     "before": "img/changes/v7_entrance_before.jpg",
+     "after": "img/changes/v7_entrance_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the camp entrane sign and security gate are missing.",
+       "area": "roads",
+       "view": "road02",
+       "label": "2. Camp Entrance in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv3gx23uyv3u09",
+       "shots": [
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3gx23uyv3u09_0.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v7_rmwttdq5k66osel0_mwv3gx23uyv3u09_1.jpg"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "place": "Skate park",
+     "title": "Ramps rebuilt at real size from the skate park 360: half pipe on the west end, two tall wooden quarter pipes at the east end, funbox with a rail, launch ramps, box and rail",
+     "before": "img/changes/v7_skate_before.jpg",
+     "after": "img/changes/v7_skate_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "basically all the ramps and stuff are missing, especially the half pipe on the west side.",
+       "area": "skate",
+       "view": "",
+       "label": "Anything else",
+       "key": "rmwttdq5k66osel0|a|skate"
       }
      ]
     }

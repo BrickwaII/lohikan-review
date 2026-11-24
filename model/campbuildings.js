@@ -8,9 +8,9 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 // Henry: two flagpoles stand between the two Senior Dining porches (not in the middle of the quad)
 export const EXTRAS = [ { type: 'flagpole', name: 'Flagpole (left)', map: [1390.6, 1541.3], height: 8 }, { type: 'flagpole', name: 'Flagpole (right)', map: [1393.8, 1540.7], height: 8 },
   // Amphitheater stage shell (LiDAR b046 crown ~5.3 m above the ground; Ghost photos IMG_8253/IMG_8328 looking SE → it opens to the NW). Sizes estimated from the photos.
-  { type: 'bandshell', name: 'Amphitheater stage', map: [1482.5, 1451.5], angleDeg: -35, r: 3.0, depth: 5, spring: 2.2, floorH: 0.45, apronR: 3.3, wingL: 4.5, wingR: 2.2, wingH: 2.7, backDepth: 2.2, doorW: 1.0 },
-  { type: 'steps', name: 'Lower Office lawn steps', map: [1462.6, 1490.1], angleDeg: -60, len: 3.6, drop: 1.2, w: 2.6 },   /* Henry (17 Amphitheater 360): stone steps from the Lower Office lawn down to the road; bearing ~115 deg, ~4 m from the 360 camera */
-  { type: 'benches', name: 'Amphitheater hill benches', map: [1459.0, 1491.8], angleDeg: 0, list: [[-0.2, -4.2, 138], [-1.1, -5.4, 138], [-2.4, -6.6, 138], [-4.1, -7.7, 138]] },   /* Henry: red benches on top of the hill looking down at the amphitheater (seen right of the steps in the 360) */
+  { type: 'bandshell', name: 'Amphitheater stage', map: [1490.4, 1469.3],   /* Henry: it was already in the right place */ angleDeg: -35, r: 3.0, depth: 5, spring: 2.2, floorH: 0.45, apronR: 3.3, wingL: 4.5, wingR: 2.2, wingH: 2.7, backDepth: 2.2, doorW: 1.0 },
+  { type: 'steps', name: 'Lower Office lawn steps', map: [1463.7, 1489.0], angleDeg: -31, len: 3.2, drop: 0.7, w: 2.8, stone: true },   /* Henry (17 Amphitheater 360): stone steps from the Lower Office lawn down to the road; bearing ~115 deg, ~4 m from the 360 camera */
+  { type: 'benches', name: 'Amphitheater hill benches', map: [1459.0, 1491.8], angleDeg: 0, list: [[-2.3, -8.7, 115], [-3.7, -9.3, 115], [-5.3, -9.6, 115], [-7.3, -10.1, 115]] },   /* Henry: red benches on top of the hill looking down at the amphitheater (seen right of the steps in the 360) */
   { type: 'fence', name: 'Amphitheater split-rail fence', map: [1459.0, 1491.8], angleDeg: 0, color: '#8a6a48', rails: 2, h: 1.1, lines: [[[9.0, -3.3], [5.7, -5.7], [2.7, -7.5], [0, -8.8], [-2.4, -9.6]]] },   /* Henry: wooden split-rail fence along the far side of the road in front of the amphitheater */
   { type: 'tetherball', name: 'Tetherball (cabins 2 & 3)', map: [1393.5, 1496.75] },
   // ---- Sports Center zone (NAIP 2019 outlines; Ghost photos IMG p00653/p00428/p00301) ----
@@ -18,8 +18,10 @@ export const EXTRAS = [ { type: 'flagpole', name: 'Flagpole (left)', map: [1390.
   { type: 'sandcourt', name: 'Volleyball (sand)', map: [1688.5, 1599.5], angleDeg: 0, w: 41, d: 14, nets: [0], pad: 0.4 },   /* sand extent from the 2019 aerial: x 1668-1709, y 1592.5-1606.5 (Henry: v5 made it run too long) */   // pad above the 0.25 m slope so the sand reads as one surface (Henry)   // Henry: one net
   { type: 'gaga', name: 'Gaga court', map: [1660.5, 1600.5], angleDeg: 0, r: 3.6, h: 0.8 },   // Henry: octagonal gaga court at the end of the volleyball area (round feature in NAIP)
   { type: 'bungee', name: 'Bungee Trampoline', map: [1641.0, 1569.0], angleDeg: 0, h: 8, r: 4.2 },
-  { type: 'pavilion', name: 'Bungee pavilion', map: [1649.6, 1555.6], angleDeg: 0, w: 8.1, d: 9.3, eave: 2.6, top: 4.8, octagon: true, r: 4.4 },
+  { type: 'pavilion', name: 'Bungee pavilion', map: [1649.6, 1555.6], angleDeg: 22.5, w: 8.1, d: 9.3, eave: 2.6, top: 4.8, octagon: true, r: 4.4, openSides: [2, 5] },   /* Henry (v6): turned so a corner faces the bungee 360; the bench side toward the trampolines is open */
+  { type: 'closet', name: 'Bungee storage closet', map: [1646.0, 1562.8], angleDeg: 45, w: 1.1, d: 0.9, h: 2.2 },   /* Henry (29 Bungee 360): the brown storage closet by the fence */
   // Lower field (Henry: pretty much just the soccer goals). Field extent from NAIP; goal positions are estimates.
+  { type: 'entrance', name: 'Camp entrance sign + security gate', map: [1355.0, 1283.5], angleDeg: 0, roadW: 6 },   /* Henry (road 2 360): the CAMP LOHIKAN entrance sign and the security gate, ~11 m ENE of the 360 spot; look is a placeholder until photos are matched */
   { type: 'gateway', name: 'Sr Girls Hill sign', map: [1812.5, 1636.0], angleDeg: -18, text: 'SR GIRLS HILL', fence: [9, 7] },   /* Ghost IMG_8267 (heading 18 deg from 1805,1613): timber gateway sign + split-rail fence at the top of the bank; position estimated ~25 m along the heading */
   { type: 'arena', name: 'Equestrian indoor ring (open sides)', map: [2025.55, 1930.72], angleDeg: -115.7, x0: -38.0, x1: 20.5, hw: 12.25, eave: 6.0, rise: 2.6, w: 77, d: 25, endDoor: { w: 3.6, h: 3.8, z: 0 } },   /* 11 Equestrian Barn 360: open-sided ring; stall barn (b002 body) at the SW end */
   { type: 'lamellaroof', name: 'Art Center open pavilion', map: [1383.09, 1578.99], angleDeg: -8.5, len: 36, dep: 7.0, w: 36, d: 7.0, h: 3.5, rise: 0.8, open: ['+z', '-x', '+x'], murals: 0, flat: true, mesh: true },   /* 12 Art Center 360 + LiDAR b029: flat ~3.4 m roof south of the main gable (local x -24..12, z 5.7..14), open to the south, curved wooden lamella underside with painted ceiling panels, concrete floor */
@@ -27,7 +29,7 @@ export const EXTRAS = [ { type: 'flagpole', name: 'Flagpole (left)', map: [1390.
   { type: 'fence', name: 'Equestrian outdoor rings fence', map: [1992.5, 1860.0], angleDeg: 0, lines: [[[-23.0, 45.5], [13.75, 27.5], [-11.25, -27.0], [-50.0, -9.5], [-23.0, 45.5]], [[13.75, 27.5], [50.0, 12.0], [25.0, -43.75], [-11.25, -27.0]]], color: '#f4f4f0', rails: 3 },   /* two white 3-rail fenced paddocks SW of the barn, traced from NAIP 2019 and seen in the 04 Equestrian Aerial 360 */
   { type: 'tenniscourts', name: 'Tennis courts', map: [1617.6, 1679.1], angleDeg: -1.5, w: 111.3, d: 56.3, divider: -8.15, courts: [[-35.6, -16.7, 0], [1.2, -16.7, 0], [37.7, -16.7, 0], [-46.85, 10.6, 90], [-33.53, 10.6, 90], [-20.21, 10.6, 90], [-6.89, 10.6, 90], [6.43, 10.6, 90], [19.75, 10.6, 90], [33.07, 10.6, 90], [46.39, 10.6, 90]] },   /* 23 Tennis 360 + NAIP 2019: 3 courts (E-W) in the north row, 8 courts (N-S) in the south row, blue on green, chain-link fences, light poles */
   { type: 'pool', name: 'Swimming pool', map: [1614.0, 1613.3], angleDeg: -4, w: 37, d: 20.5, water: [25.8, 13.5], waterX: -1.9, lift: 0.7 },   /* 22 Pool Program 360 + NAIP 2019: concrete deck, red brick coping, lane rope, slide, lifeguard chair, red benches, chain-link fence */
-  { type: 'courts', name: 'Skate park (old courts)', map: [1457.8, 1584.75], angleDeg: 0, w: 50.6, d: 27.5, n: 2, pad: 0.25, hoops: false, surround: 0x6f8f6c, lanes: true, ramps: [[-12, -8, 90, 'quarter'], [14, -9, 180, 'quarter'], [19, -9, 180, 'quarter'], [-4, 3, 20, 'box'], [5, 4, 0, 'rail'], [10, -2, 200, 'launch'], [-8, 9, 0, 'launch'], [16, 6, 270, 'quarter']] },   /* 37 Skate Park 360 + NAIP 2019: old basketball courts (green with red keys) used as a skate park with portable ramps, boxes and rails; ramp spots are approximate */
+  { type: 'courts', name: 'Skate park (old courts)', map: [1457.8, 1584.75], angleDeg: 0, w: 50.6, d: 27.5, n: 2, pad: 0.25, hoops: false, surround: 0x6f8f6c, lanes: true, ramps: [[-20.8, -3.25, 90, 'half', { r: 1.6, w: 5, flat: 3.5 }], [23.2, -12.25, 0, 'qtall', { r: 2.2, w: 2.8 }], [23.2, -5.25, 0, 'qtall', { r: 2.2, w: 2.8 }], [-5.2, 0, 40, 'funbox', { l: 4, w: 2.2, h: 0.6 }], [-1.1, 10.9, 90, 'launch'], [-8.5, 11.0, 0, 'box'], [1.6, 12.1, 0, 'rail'], [-19.5, 9.2, 180, 'launch'], [-17.6, 7.6, 180, 'launch'], [-20.3, 5.8, 90, 'box']] },   /* Henry (v6): ramps re-placed and re-sized from the 37 Skate Park 360: half pipe on the west end, two tall wooden quarter pipes at the east end, funbox with a rail near the middle, launch, box, rail and kickers */   /* 37 Skate Park 360 + NAIP 2019: old basketball courts (green with red keys) used as a skate park with portable ramps, boxes and rails; ramp spots are approximate */
   { type: 'archery', name: 'Archery range', map: [1486.2, 1728.2], angleDeg: 149, len: 20, shed: [-11.6, -7.9], w: 22, d: 10 },   /* 25 Archery 360: shooting line with a rope on posts, white target backboard with 4 targets ~20 m away, small brown shed with a white door, split-rail fence; orientation inferred from Cooking appearing in the photo, so position is approximate */
   { type: 'ballfield', name: 'Baseball & softball field', map: [1704.5, 1737.5], angleDeg: 90, r: 44, base: 20, w: 80, d: 80, lift: 0.3 },   /* 27 Baseball & Softball 360 + NAIP 2019: big skinned dirt infield fanning north from home plate, backstop behind home; base distance is an estimate */
   /* ATV track moved to paths.json (draped dirt surfaces traced on the NAIP 2015 aerial, Nov 17) */
@@ -177,18 +179,17 @@ export const BUILDINGS = [
     ],
     interior: { floor: '#9a8a74', wallLower: '#c9dca0', wallUpper: '#c9dca0', split: 1.0, ceiling: '#c0935a',   /* 30 Pottery 360: pale green walls, plywood ceiling, concrete floor */
       walls: [ { x0: 22.2, z0: -7.8, x1: 22.2, z1: 6.8 }, { x0: 19.2, z0: -7.8, x1: 19.2, z1: 6.8 },
-               /* Henry (30 Pottery 360): kiln room behind a door at the west end of pottery, and a closet in the back (north-west) corner */
-               { x0: 25.0, z0: -7.8, x1: 25.0, z1: 4.0 }, { x0: 22.2, z0: 4.0, x1: 25.0, z1: 4.0 }, { x0: 22.2, z0: -4.6, x1: 25.0, z1: -4.6 } ],   /* Henry: the woodshop is a ~10 ft deep shop across the whole east end of Arts & Crafts (x 19.2..22.2), entered by a door near the south end of the pale green wall */
+               /* Henry (v5 rework): two small rooms in the back (north) corners of pottery, kiln room + closet, with the space between them running back to the end wall */
+               { x0: 25.4, z0: -7.8, x1: 25.4, z1: -4.2, h: 2.75 }, { x0: 22.2, z0: -4.2, x1: 25.4, z1: -4.2, h: 2.75 },
+               { x0: 30.0, z0: -7.8, x1: 30.0, z1: -4.2, h: 2.75 }, { x0: 30.0, z0: -4.2, x1: 33.2, z1: -4.2, h: 2.75 } ],   /* Henry: the woodshop is a ~10 ft deep shop across the whole east end of Arts & Crafts (x 19.2..22.2), entered by a door near the south end of the pale green wall */
       blocks: [ { x0: 26.2, x1: 26.8, y0: 0, y1: 0.55, z0: -2.0, z1: -1.4, color: '#5a3a2a' }, { x0: 28.0, x1: 28.6, y0: 0, y1: 0.55, z0: -2.0, z1: -1.4, color: '#5a3a2a' }, { x0: 29.8, x1: 30.4, y0: 0, y1: 0.55, z0: -1.6, z1: -1.0, color: '#5a3a2a' },
                 { x0: 24.2, x1: 26.0, y0: 0, y1: 0.85, z0: 1.6, z1: 2.6, color: '#6b6560' }, { x0: 30.8, x1: 32.6, y0: 0, y1: 0.85, z0: 1.4, z1: 2.4, color: '#b08860' }, { x0: 22.4, x1: 23.0, y0: 0, y1: 1.4, z0: -4.8, z1: -2.4, color: '#8a4a2a' } ,
                 /* east wall (Henry photo): six glass trophy cases, a WOODSHOP sign and the woodshop door near the south end */ { x0: 18.75, x1: 19.15, y0: 0.15, y1: 2.15, z0: -6.8, z1: -5.4, color: '#cfe0e6' }, { x0: 18.75, x1: 19.15, y0: 0.15, y1: 2.15, z0: -4.9, z1: -3.5, color: '#cfe0e6' }, { x0: 18.75, x1: 19.15, y0: 0.15, y1: 2.15, z0: -3.0, z1: -1.6, color: '#cfe0e6' }, { x0: 18.75, x1: 19.15, y0: 0.15, y1: 2.15, z0: -1.1, z1: 0.3, color: '#cfe0e6' }, { x0: 18.75, x1: 19.15, y0: 0.15, y1: 2.15, z0: 0.8, z1: 2.2, color: '#cfe0e6' }, { x0: 18.75, x1: 19.15, y0: 0.15, y1: 2.15, z0: 2.7, z1: 4.1, color: '#cfe0e6' }, { x0: 19.1, x1: 19.18, y0: 0, y1: 2.05, z0: 4.6, z1: 5.5, color: '#efe9da' }, { x0: 18.5, x1: 19.15, y0: 0.82, y1: 0.9, z0: -6.8, z1: 4.0, color: '#8a6a44' },
                 /* Henry (30 Pottery 360): flat plywood ceiling closing pottery off from Arts & Crafts; kiln-room door; windows on the back wall, east end and two on the south wall */
-                { x0: 22.2, x1: 33.2, y0: 2.85, y1: 2.92, z0: -7.8, z1: 6.8, color: '#b8874e' },
-                { x0: 25.03, x1: 25.1, y0: 0, y1: 2.1, z0: -0.3, z1: 0.7, color: '#8a5a34' },
+                { x0: 22.15, x1: 33.25, y0: 2.75, y1: 2.8, z0: -7.85, z1: 6.85, color: '#b8874e' },   // flat ceiling, level, overlapping the walls (Henry: flush)
+                { x0: 23.3, x1: 24.3, y0: 0, y1: 2.1, z0: -4.17, z1: -4.12, color: '#8a5a34' }, { x0: 31.1, x1: 32.1, y0: 0, y1: 2.1, z0: -4.17, z1: -4.12, color: '#8a5a34' },   // corner-room doors
                 { x0: 28.0, x1: 29.4, y0: 0.95, y1: 2.25, z0: -7.79, z1: -7.71, color: '#8a5a34' }, { x0: 28.12, x1: 29.28, y0: 1.07, y1: 2.13, z0: -7.72, z1: -7.66, color: '#d9ecf5' },
                 { x0: 33.11, x1: 33.19, y0: 0.95, y1: 2.25, z0: 0.2, z1: 1.6, color: '#8a5a34' }, { x0: 33.06, x1: 33.12, y0: 1.07, y1: 2.13, z0: 0.32, z1: 1.48, color: '#d9ecf5' },
-                { x0: 28.9, x1: 30.3, y0: 0.95, y1: 2.25, z0: 6.71, z1: 6.79, color: '#8a5a34' }, { x0: 29.02, x1: 30.18, y0: 1.07, y1: 2.13, z0: 6.66, z1: 6.72, color: '#d9ecf5' },
-                { x0: 31.7, x1: 33.1, y0: 0.95, y1: 2.25, z0: 6.71, z1: 6.79, color: '#8a5a34' }, { x0: 31.82, x1: 32.98, y0: 1.07, y1: 2.13, z0: 6.66, z1: 6.72, color: '#d9ecf5' },
                 /* Henry: one row of picnic tables with benches along the walls (back + left), tie-dye sinks in the back-left corner; the rest is open floor */
                 { x0: -32.8, x1: -30.6, y0: 0, y1: 0.9, z0: -7.6, z1: -6.6, color: '#9aa0a6' }, { x0: -30.4, x1: -28.2, y0: 0, y1: 0.9, z0: -7.6, z1: -6.6, color: '#9aa0a6' }, { x0: -26.5, x1: -22.0, y0: 0.7, y1: 0.78, z0: -6.50, z1: -5.70, color: '#7a5a3c' }, { x0: -26.5, x1: -22.0, y0: 0.4, y1: 0.46, z0: -6.95, z1: -6.65, color: '#9b7b52' }, { x0: -26.5, x1: -22.0, y0: 0.4, y1: 0.46, z0: -5.55, z1: -5.25, color: '#9b7b52' }, { x0: -26.25, x1: -26.15, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -22.35, x1: -22.25, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -20.5, x1: -16.0, y0: 0.7, y1: 0.78, z0: -6.50, z1: -5.70, color: '#7a5a3c' }, { x0: -20.5, x1: -16.0, y0: 0.4, y1: 0.46, z0: -6.95, z1: -6.65, color: '#9b7b52' }, { x0: -20.5, x1: -16.0, y0: 0.4, y1: 0.46, z0: -5.55, z1: -5.25, color: '#9b7b52' }, { x0: -20.25, x1: -20.15, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -16.35, x1: -16.25, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -14.5, x1: -10.0, y0: 0.7, y1: 0.78, z0: -6.50, z1: -5.70, color: '#7a5a3c' }, { x0: -14.5, x1: -10.0, y0: 0.4, y1: 0.46, z0: -6.95, z1: -6.65, color: '#9b7b52' }, { x0: -14.5, x1: -10.0, y0: 0.4, y1: 0.46, z0: -5.55, z1: -5.25, color: '#9b7b52' }, { x0: -14.25, x1: -14.15, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -10.35, x1: -10.25, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -8.5, x1: -4.0, y0: 0.7, y1: 0.78, z0: -6.50, z1: -5.70, color: '#7a5a3c' }, { x0: -8.5, x1: -4.0, y0: 0.4, y1: 0.46, z0: -6.95, z1: -6.65, color: '#9b7b52' }, { x0: -8.5, x1: -4.0, y0: 0.4, y1: 0.46, z0: -5.55, z1: -5.25, color: '#9b7b52' }, { x0: -8.25, x1: -8.15, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -4.35, x1: -4.25, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -2.5, x1: 2.0, y0: 0.7, y1: 0.78, z0: -6.50, z1: -5.70, color: '#7a5a3c' }, { x0: -2.5, x1: 2.0, y0: 0.4, y1: 0.46, z0: -6.95, z1: -6.65, color: '#9b7b52' }, { x0: -2.5, x1: 2.0, y0: 0.4, y1: 0.46, z0: -5.55, z1: -5.25, color: '#9b7b52' }, { x0: -2.25, x1: -2.15, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: 1.65, x1: 1.75, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: 3.5, x1: 8.0, y0: 0.7, y1: 0.78, z0: -6.50, z1: -5.70, color: '#7a5a3c' }, { x0: 3.5, x1: 8.0, y0: 0.4, y1: 0.46, z0: -6.95, z1: -6.65, color: '#9b7b52' }, { x0: 3.5, x1: 8.0, y0: 0.4, y1: 0.46, z0: -5.55, z1: -5.25, color: '#9b7b52' }, { x0: 3.75, x1: 3.85, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: 7.65, x1: 7.75, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: 9.5, x1: 14.0, y0: 0.7, y1: 0.78, z0: -6.50, z1: -5.70, color: '#7a5a3c' }, { x0: 9.5, x1: 14.0, y0: 0.4, y1: 0.46, z0: -6.95, z1: -6.65, color: '#9b7b52' }, { x0: 9.5, x1: 14.0, y0: 0.4, y1: 0.46, z0: -5.55, z1: -5.25, color: '#9b7b52' }, { x0: 9.75, x1: 9.85, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: 13.65, x1: 13.75, y0: 0, y1: 0.7, z0: -6.90, z1: -5.30, color: '#6a4a2c' }, { x0: -31.60, x1: -30.80, y0: 0.7, y1: 0.78, z0: -4.0, z1: 0.0, color: '#7a5a3c' }, { x0: -32.05, x1: -31.75, y0: 0.4, y1: 0.46, z0: -4.0, z1: 0.0, color: '#9b7b52' }, { x0: -30.65, x1: -30.35, y0: 0.4, y1: 0.46, z0: -4.0, z1: 0.0, color: '#9b7b52' }, { x0: -32.00, x1: -30.40, y0: 0, y1: 0.7, z0: -3.75, z1: -3.65, color: '#6a4a2c' }, { x0: -32.00, x1: -30.40, y0: 0, y1: 0.7, z0: -0.35, z1: -0.25, color: '#6a4a2c' }, { x0: -31.60, x1: -30.80, y0: 0.7, y1: 0.78, z0: 1.0, z1: 5.0, color: '#7a5a3c' }, { x0: -32.05, x1: -31.75, y0: 0.4, y1: 0.46, z0: 1.0, z1: 5.0, color: '#9b7b52' }, { x0: -30.65, x1: -30.35, y0: 0.4, y1: 0.46, z0: 1.0, z1: 5.0, color: '#9b7b52' }, { x0: -32.00, x1: -30.40, y0: 0, y1: 0.7, z0: 1.25, z1: 1.35, color: '#6a4a2c' }, { x0: -32.00, x1: -30.40, y0: 0, y1: 0.7, z0: 4.65, z1: 4.75, color: '#6a4a2c' } ],
       trusses: { x0: -32.6, x1: 18.8, spacing: 1.22, color: '#6e4a2a' }, ceilingBanners: { x0: -32.4, x1: -2, under: true } },
@@ -421,14 +422,21 @@ export function buildCampBuilding(cfg, renderer) {
     if (I.wallLower || I.wallUpper) for (const [x0, x1, z0, z1] of BODY) { const e = 0.08, sp = I.split || 1.3;
       const segs = (zz, a, b, side) => { let r = [[a, b]]; for (const op of cfg.openLong || []) if (op.side === side) r = r.flatMap(([u, v]) => (op.x1 <= u || op.x0 >= v) ? [[u, v]] : [[u, op.x0], [op.x1, v]].filter(([p1, p2]) => p2 - p1 > 0.05)); return r.map(([u, v]) => [zz, u, v]); };
       for (const [z, a, b] of [...segs(z0 + e, x0 + e, x1 - e, -1), ...segs(z1 - e, x0 + e, x1 - e, 1)]) { const top = roofY(z) - 0.05;
-        quad([[a, F, z], [b, F, z], [b, F + sp, z], [a, F + sp, z]], cmat(I.wallLower || I.wallUpper)); quad([[a, F + sp, z], [b, F + sp, z], [b, top, z], [a, top, z]], cmat(I.wallUpper || I.wallLower)); }
+        /* inner wall finish with real holes where the outer wall has windows (Henry: windows should be see-through from inside too) */
+        const wins = OPEN_IN.filter(o => !o.door && o.nz && Math.abs(o.z - z) < 0.6 && o.x - o.w / 2 > a + 0.02 && o.x + o.w / 2 < b - 0.02);
+        const band = (y0, y1, c) => { const hs = wins.filter(o => o.y - o.h / 2 < y1 && o.y + o.h / 2 > y0); if (!hs.length) { quad([[a, y0, z], [b, y0, z], [b, y1, z], [a, y1, z]], cmat(c)); return; }
+          const sh = new THREE.Shape(); sh.moveTo(a, y0); sh.lineTo(b, y0); sh.lineTo(b, y1); sh.lineTo(a, y1); sh.lineTo(a, y0);
+          for (const o of hs) { const ya = Math.max(y0 + 0.01, o.y - o.h / 2), yb = Math.min(y1 - 0.01, o.y + o.h / 2), hl = new THREE.Path(); hl.moveTo(o.x - o.w / 2, ya); hl.lineTo(o.x - o.w / 2, yb); hl.lineTo(o.x + o.w / 2, yb); hl.lineTo(o.x + o.w / 2, ya); hl.lineTo(o.x - o.w / 2, ya); sh.holes.push(hl); }
+          const m = new THREE.Mesh(new THREE.ShapeGeometry(sh), cmat(c)); m.material.side = THREE.DoubleSide; m.position.z = z; root.add(m); };
+        band(F, F + sp, I.wallLower || I.wallUpper); band(F + sp, top, I.wallUpper || I.wallLower); }
       for (const x of [x0 + e, x1 - e]) { const sh = new THREE.Shape(); sh.moveTo(z0 + e, F); sh.lineTo(z1 - e, F); sh.lineTo(z1 - e, roofY(z1 - e) - 0.05);
         for (const [pz] of [...PROF].reverse()) if (pz > z0 && pz < z1) sh.lineTo(pz, roofY(pz) - 0.05); sh.lineTo(z0 + e, roofY(z0 + e) - 0.05); sh.lineTo(z0 + e, F);
         const m = new THREE.Mesh(new THREE.ShapeGeometry(sh), cmat(I.wallEnd || I.wallLower || '#e8e2d0')); m.rotation.y = -Math.PI / 2; m.position.x = x; root.add(m); } }
-    if (I.wallLower || I.wallUpper) { const glassIn = mat({ color: 0xdfeefa, emissive: 0xbfd8ea, emissiveIntensity: 0.6 }), trimIn = mat({ color: new THREE.Color(I.trim || '#b07a3c') });
+    if (I.wallLower || I.wallUpper) { const glassIn = mat({ color: 0xcfe2ee, transparent: true, opacity: 0.18, depthWrite: false }), trimIn = mat({ color: new THREE.Color(I.trim || '#b07a3c') });
       for (const o of OPEN_IN) { const d = 0.11, px = o.x - o.nx * d, pz = o.z - o.nz * d, ry = o.nx ? -o.nx * Math.PI / 2 : (o.nz > 0 ? Math.PI : 0);
         const pane = new THREE.Mesh(new THREE.PlaneGeometry(o.w, o.h), o.door ? mat({ color: new THREE.Color(o.color || '#8a6a4a'), emissive: new THREE.Color(o.color || '#8a6a4a'), emissiveIntensity: 0.35 }) : glassIn); pane.position.set(px, o.y, pz); pane.rotation.y = ry; root.add(pane);
-        const fr = new THREE.Mesh(new THREE.BoxGeometry(o.w + 0.16, o.h + 0.16, 0.03), trimIn); fr.position.set(px + o.nx * 0.02, o.y, pz + o.nz * 0.02); fr.rotation.y = ry; root.add(fr); } }
+        const fg = new THREE.Group(); fg.position.set(px + o.nx * 0.02, o.y, pz + o.nz * 0.02); fg.rotation.y = ry; root.add(fg);   // trim as a frame (four bars), not a solid board, so the window stays see-through
+        for (const [bw, bh, bx, by] of [[o.w + 0.16, 0.08, 0, o.h / 2 + 0.04], [o.w + 0.16, 0.08, 0, -o.h / 2 - 0.04], [0.08, o.h, o.w / 2 + 0.04, 0], [0.08, o.h, -o.w / 2 - 0.04, 0]]) { const bar = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, 0.03), trimIn); bar.position.set(bx, by, 0); fg.add(bar); } } }
     if (I.ceiling) for (let i = 1; i < PROF.length; i++) { const [z0, h0] = PROF[i - 1], [z1, h1] = PROF[i]; const [bx0, bx1] = [Math.min(...BODY.map(b => b[0])), Math.max(...BODY.map(b => b[1]))];
       quad([[bx0, h0 - 0.18, z0], [bx1, h0 - 0.18, z0], [bx1, h1 - 0.18, z1], [bx0, h1 - 0.18, z1]], cmat(I.ceiling)); }
     if (I.frames) { const fm = cmat(I.frames.color || '#3a3d42'); const [bx0, bx1] = [Math.min(...BODY.map(b => b[0])), Math.max(...BODY.map(b => b[1]))]; const zA = BODY[0][2] + 0.25, zB = BODY[0][3] - 0.25;
@@ -444,7 +452,7 @@ export function buildCampBuilding(cfg, renderer) {
       c2.fillStyle = bg === '#f4f1e6' || bg === '#f2c12e' ? '#111' : '#fff'; c2.font = 'bold 30px sans-serif'; c2.textAlign = 'center'; c2.fillText(words[k % words.length], 128, 42); c2.font = 'bold 22px sans-serif'; c2.fillText(String(2001 + (k * 7) % 15), 128, 148);
       const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return new THREE.MeshStandardMaterial({ map: t, emissive: 0xffffff, emissiveMap: t, emissiveIntensity: 0.3, side: THREE.DoubleSide }); };
     let bk = 0; for (const b of I.blocks || []) { if (b.banner) { const bm = bannerMat(b.color, bk++); bm.side = THREE.FrontSide; for (const ry of [0, Math.PI]) { const pl = new THREE.Mesh(new THREE.PlaneGeometry(b.x1 - b.x0, b.y1 - b.y0), bm); pl.rotation.y = ry; pl.position.set((b.x0 + b.x1) / 2, F + (b.y0 + b.y1) / 2, (b.z0 + b.z1) / 2 + (ry ? -0.01 : 0.01)); root.add(pl); } continue; }
-      box(b.x1 - b.x0, b.y1 - b.y0, b.z1 - b.z0, cmat(b.color), (b.x0 + b.x1) / 2, F + (b.y0 + b.y1) / 2, (b.z0 + b.z1) / 2); }
+      box(b.x1 - b.x0, b.y1 - b.y0, b.z1 - b.z0, b.glass ? mat({ color: 0xcfe2ee, transparent: true, opacity: 0.18, depthWrite: false }) : cmat(b.color), (b.x0 + b.x1) / 2, F + (b.y0 + b.y1) / 2, (b.z0 + b.z1) / 2); }
 
     /* Henry Nov 16: these halls have triangular trusses (horizontal bottom chord, angled top chords up to the ridge, web members), no arches */
     if (I.trusses) { const T = I.trusses, tm = cmat(T.color || '#7a5530'), zA = BODY[0][2] + 0.2, zB = BODY[0][3] - 0.2, yb = Math.min(roofY(zA), roofY(zB)) - (T.drop || 0.35);
@@ -482,10 +490,12 @@ function mergeByMaterial(root) {
 }
 
 export function buildExtra(e) {
-  if (e.type === 'steps') {   // stone stair run between low stone cheek walls, descending along local +x by e.drop over e.len (group origin = mid-height)
-    const g0 = new THREE.Group(); const st = new THREE.MeshStandardMaterial({ color: 0x9a9890, roughness: 0.95 }); const D = e.drop, n = Math.max(2, Math.round(D / 0.17)), L = e.len, W = e.w || 2.4;
-    for (let k = 0; k < n; k++) { const top = D / 2 - k * D / n, h = top + D / 2 + 0.3; const t = new THREE.Mesh(new THREE.BoxGeometry(L / n + 0.02, h, W), st); t.position.set(-L / 2 + (k + 0.5) * L / n, top - h / 2, 0); g0.add(t); }
-    for (const sz of [-1, 1]) { const cw = new THREE.Mesh(new THREE.BoxGeometry(L + 0.4, D + 0.7, 0.45), st); cw.position.set(0, 0.05, sz * (W / 2 + 0.22)); g0.add(cw); }
+  if (e.type === 'steps') {   // flagstone steps down along local +x by e.drop over e.len (origin = mid-height); low stone walls flank the bottom end (Henry: the stonework)
+    const g0 = new THREE.Group(); const fl = new THREE.MeshStandardMaterial({ color: 0x9b958a, roughness: 0.95 }), sw = new THREE.MeshStandardMaterial({ color: 0x7d7468, roughness: 1 });
+    const D = e.drop, n = Math.max(2, Math.round(D / 0.17)), L = e.len, W = e.w || 2.4;
+    for (let k = 0; k < n; k++) { const top = D / 2 - k * D / n, h = top + D / 2 + 0.3; const t = new THREE.Mesh(new THREE.BoxGeometry(L / n + 0.02, h, W), fl); t.position.set(-L / 2 + (k + 0.5) * L / n, top - h / 2, 0); g0.add(t);
+      for (let j = 0; j < 3; j++) { const fs = new THREE.Mesh(new THREE.BoxGeometry(L / n - 0.06, 0.02, W / 3 - 0.06), new THREE.MeshStandardMaterial({ color: [0xa7a196, 0x928b80, 0xb0aa9f][(k + j) % 3], roughness: 0.95 })); fs.position.set(-L / 2 + (k + 0.5) * L / n, top + 0.01, -W / 3 + j * W / 3); g0.add(fs); } }
+    for (const sz of [-1, 1]) for (let j = 0; j < 3; j++) { const st = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.55 + (j % 2) * 0.08, 0.5), sw); st.position.set(L / 2 - 0.25 - j * 0.48, -D / 2 + 0.25, sz * (W / 2 + 0.28)); g0.add(st); }
     return g0; }
   if (e.type === 'benches') {   // park benches (red slats, pale legs) at map offsets [dx, dy, facingDeg (compass bearing the sitter looks toward)]
     const g0 = new THREE.Group(); const red = new THREE.MeshStandardMaterial({ color: 0xb24a3c, roughness: 0.8 }), leg = new THREE.MeshStandardMaterial({ color: 0xe8e2d4, roughness: 0.8 });
@@ -579,8 +589,17 @@ export function buildExtra(e) {
     for (const [lx, lz] of [[-W / 2, -D / 2], [W / 2, D / 2]]) { const lp = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.13, 9, 8), M(0x8c949a)); lp.position.set(lx, pad + 4.5, lz); g.add(lp);
       for (const sg of [-1, 1]) { const hd = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.35, 0.3), M(0xd8dadb)); hd.position.set(lx + sg * 0.35, pad + 9.0, lz); g.add(hd); } }
     /* skate-park features on the court: quarter pipes, launch ramps, grind boxes and rails */
-    for (const [rx, rz, rdeg, kind] of e.ramps || []) { const rg = new THREE.Group(); rg.position.set(rx, pad, rz); rg.rotation.y = THREE.MathUtils.degToRad(rdeg); const wood = M(0xb88a5a), side = M(0x2a2a2a), steel = M(0xb8bcc0);
-      if (kind === 'quarter') { const sh = new THREE.Shape(); sh.moveTo(0, 0); for (let k = 0; k <= 8; k++) { const t = k / 8 * Math.PI / 2; sh.lineTo(1.8 - 1.8 * Math.cos(t), 1.8 - 1.8 * Math.sin(t)); } sh.lineTo(1.8, 1.8); sh.lineTo(2.1, 1.8); sh.lineTo(2.1, 0); sh.lineTo(0, 0);
+    for (const [rx, rz, rdeg, kind, o = {}] of e.ramps || []) { const rg = new THREE.Group(); rg.position.set(rx, pad, rz); rg.rotation.y = THREE.MathUtils.degToRad(rdeg); const wood = M(0xb88a5a), side = M(0x2a2a2a), steel = M(0xb8bcc0), grey = M(0x6f7478);
+      const qp = (R, W, mat, x0, flip) => { const sh = new THREE.Shape(); sh.moveTo(0, 0); for (let k = 0; k <= 12; k++) { const t = k / 12 * Math.PI / 2; sh.lineTo(R - R * Math.cos(t), R - R * Math.sin(t)); } sh.lineTo(R, R); sh.lineTo(R + 0.6, R); sh.lineTo(R + 0.6, 0); sh.lineTo(0, 0);
+        const ge = new THREE.ExtrudeGeometry(sh, { depth: W, bevelEnabled: false }); ge.translate(0, 0, -W / 2); const m = new THREE.Mesh(ge, [side, mat]); if (flip) { m.scale.x = -1; side.side = THREE.DoubleSide; mat.side = THREE.DoubleSide; } m.position.x = x0; rg.add(m);
+        const cope = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, W, 8), steel); cope.rotation.x = Math.PI / 2; cope.position.set(x0 + (flip ? -R : R), R, 0); rg.add(cope); };
+      if (kind === 'half') { const R = o.r || 1.6, W = o.w || 5, F = o.flat || 3; qp(R, W, grey, F / 2, false); qp(R, W, grey, -F / 2, true); const fb = new THREE.Mesh(new THREE.BoxGeometry(F, 0.05, W), grey); fb.position.y = 0.025; rg.add(fb); }   /* Henry: the half pipe on the west side */
+      else if (kind === 'qtall') qp(o.r || 2.2, o.w || 2.4, wood, -1.1, false);
+      else if (kind === 'funbox') { const L = o.l || 4, Wd = o.w || 2.2, H = o.h || 0.6; const top = new THREE.Mesh(new THREE.BoxGeometry(L, H, Wd), [side, side, wood, side, side, side]); top.position.y = H / 2; rg.add(top);
+        for (const sg of [-1, 1]) { const sh = new THREE.Shape(); sh.moveTo(0, 0); sh.lineTo(1.6, H); sh.lineTo(1.6, 0); sh.lineTo(0, 0); const ge = new THREE.ExtrudeGeometry(sh, { depth: Wd, bevelEnabled: false }); ge.translate(-1.6, 0, -Wd / 2); const m = new THREE.Mesh(ge, [side, wood]); if (sg > 0) { m.scale.x = -1; side.side = THREE.DoubleSide; wood.side = THREE.DoubleSide; } m.position.x = sg * -L / 2 - (sg > 0 ? 0 : 0); m.position.x = sg < 0 ? -L / 2 : L / 2; rg.add(m); }
+        const rl = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, L + 2.4, 8), steel); rl.rotation.z = Math.PI / 2; rl.position.set(0, H + 0.35, Wd / 2 - 0.15); rg.add(rl);
+        for (const dx of [-(L / 2 + 1.0), L / 2 + 1.0]) { const lg = new THREE.Mesh(new THREE.BoxGeometry(0.06, H + 0.35, 0.06), steel); lg.position.set(dx, (H + 0.35) / 2, Wd / 2 - 0.15); rg.add(lg); } }
+      else if (kind === 'quarter') { const sh = new THREE.Shape(); sh.moveTo(0, 0); for (let k = 0; k <= 8; k++) { const t = k / 8 * Math.PI / 2; sh.lineTo(1.8 - 1.8 * Math.cos(t), 1.8 - 1.8 * Math.sin(t)); } sh.lineTo(1.8, 1.8); sh.lineTo(2.1, 1.8); sh.lineTo(2.1, 0); sh.lineTo(0, 0);
         const ge = new THREE.ExtrudeGeometry(sh, { depth: 2.4, bevelEnabled: false }); ge.translate(-1.05, 0, -1.2); rg.add(new THREE.Mesh(ge, [side, wood])); }
       else if (kind === 'launch') { const sh = new THREE.Shape(); sh.moveTo(0, 0); sh.lineTo(1.8, 0.6); sh.lineTo(1.8, 0); sh.lineTo(0, 0); const ge = new THREE.ExtrudeGeometry(sh, { depth: 1.4, bevelEnabled: false }); ge.translate(-0.9, 0, -0.7); rg.add(new THREE.Mesh(ge, [side, wood])); }
       else if (kind === 'box') { const bx = new THREE.Mesh(new THREE.BoxGeometry(3.0, 0.4, 1.0), side); bx.position.y = 0.2; rg.add(bx); }
@@ -617,7 +636,7 @@ export function buildExtra(e) {
     const deck = new THREE.Mesh(new THREE.CylinderGeometry(R, R, 0.5, 8), M(0x7a6248)); deck.rotation.y = Math.PI / 8; deck.position.y = 0.25; g.add(deck);
     for (let k = 0; k < 8; k++) { const a2 = Math.PI / 8 + k * Math.PI / 4, px = Math.cos(a2) * (R - 0.25), pz = Math.sin(a2) * (R - 0.25);
       const p = new THREE.Mesh(new THREE.BoxGeometry(0.2, eh, 0.2), M(0xa58a6a)); p.position.set(px, 0.5 + eh / 2, pz); g.add(p);
-      if (k !== 2) { const a3 = a2 + Math.PI / 8, sl = 2 * (R - 0.25) * Math.sin(Math.PI / 8), cx = Math.cos(a3) * (R - 0.25) * Math.cos(Math.PI / 8), cz = Math.sin(a3) * (R - 0.25) * Math.cos(Math.PI / 8);
+      if (!(e.openSides || [2]).includes(k)) { const a3 = a2 + Math.PI / 8, sl = 2 * (R - 0.25) * Math.sin(Math.PI / 8), cx = Math.cos(a3) * (R - 0.25) * Math.cos(Math.PI / 8), cz = Math.sin(a3) * (R - 0.25) * Math.cos(Math.PI / 8);
         const rail = new THREE.Mesh(new THREE.BoxGeometry(sl, 0.08, 0.1), M(0xa58a6a)); rail.position.set(cx, 1.4, cz); rail.rotation.y = -a3 + Math.PI / 2; g.add(rail);
         const bench = new THREE.Mesh(new THREE.BoxGeometry(sl - 0.3, 0.06, 0.4), M(0x8a7050)); bench.position.set(cx * 0.9, 0.95, cz * 0.9); bench.rotation.y = -a3 + Math.PI / 2; g.add(bench); } }
     const fas = new THREE.Mesh(new THREE.CylinderGeometry(R + 0.4, R + 0.4, 0.25, 8, 1, true), M(0xf1efe8)); fas.rotation.y = Math.PI / 8; fas.position.y = 0.5 + eh; g.add(fas);
@@ -634,10 +653,31 @@ export function buildExtra(e) {
   }
   if (e.type === 'gaga') {   // octagonal gaga pit: low wooden walls round a dirt floor
     const R = e.r || 3.5, h = e.h || 0.8, M = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.95, side: THREE.DoubleSide });
-    const fl = new THREE.Mesh(new THREE.CylinderGeometry(R, R, 0.3, 8), M(0x8f7556)); fl.rotation.y = Math.PI / 8; fl.position.y = 0.0; g.add(fl);
+    const fl = new THREE.Mesh(new THREE.CylinderGeometry(R - 0.02, R - 0.02, 1.2, 8), M(0xc4ad83)); fl.rotation.y = Math.PI / 8; fl.position.y = -0.12; g.add(fl);   // Henry: sand like the volleyball court, a touch darker
     const wall = new THREE.Mesh(new THREE.CylinderGeometry(R, R, h, 8, 1, true), M(0x7a5c3e)); wall.rotation.y = Math.PI / 8; wall.position.y = h / 2; g.add(wall);
     const cap = new THREE.Mesh(new THREE.TorusGeometry(R, 0.06, 4, 8), M(0x5e4630)); cap.rotation.x = Math.PI / 2; cap.rotation.z = Math.PI / 8; cap.position.y = h; g.add(cap);
   }
+  if (e.type === 'closet') {   // free-standing wooden storage closet with a door
+    const c = new THREE.Mesh(new THREE.BoxGeometry(e.w, e.h, e.d), new THREE.MeshStandardMaterial({ color: 0x4a3426, roughness: 0.9 })); c.position.y = e.h / 2; g.add(c);
+    const rf = new THREE.Mesh(new THREE.BoxGeometry(e.w + 0.15, 0.08, e.d + 0.15), new THREE.MeshStandardMaterial({ color: 0x2e241c })); rf.position.y = e.h + 0.04; g.add(rf);
+    const dl = new THREE.Mesh(new THREE.BoxGeometry(0.02, e.h - 0.3, 0.02), new THREE.MeshStandardMaterial({ color: 0x1e1610 })); dl.position.set(0, (e.h - 0.3) / 2 + 0.1, e.d / 2 + 0.01); g.add(dl);
+    return g; }
+  if (e.type === 'entrance') {   // camp entrance: big CAMP LOHIKAN sign on two posts beside the road, a small guard booth and a red/white gate arm across the road (local x along the road)
+    const M = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.9 }), wd = M(0x5a4634), RW = e.roadW || 6;
+    const cv = document.createElement('canvas'); cv.width = 512; cv.height = 160; const c2 = cv.getContext('2d'); c2.fillStyle = '#2f4a2c'; c2.fillRect(0, 0, 512, 160); c2.strokeStyle = '#e8d9a8'; c2.lineWidth = 8; c2.strokeRect(8, 8, 496, 144);
+    c2.fillStyle = '#f2e6c0'; c2.font = 'bold 64px serif'; c2.textAlign = 'center'; c2.fillText('CAMP LOHIKAN', 256, 92); c2.font = '28px serif'; c2.fillText('Lake Como, PA', 256, 134);
+    const tx = new THREE.CanvasTexture(cv); tx.colorSpace = THREE.SRGBColorSpace; const sm = new THREE.MeshStandardMaterial({ map: tx });
+    const sg = new THREE.Group(); sg.position.set(-3, 0, RW / 2 + 2.5); g.add(sg);
+    for (const sx of [-1.9, 1.9]) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.25, 2.6, 0.25), wd); p.position.set(sx, 1.3, 0); sg.add(p); }
+    const bd = new THREE.Mesh(new THREE.BoxGeometry(3.6, 1.15, 0.12), [wd, wd, wd, wd, sm, sm]); bd.position.set(0, 1.9, 0); bd.rotation.y = Math.PI / 2 * 0; sg.add(bd); sg.rotation.y = Math.PI / 2 - 0.5;
+    const bth = new THREE.Group(); bth.position.set(4, 0, -(RW / 2 + 1.8)); g.add(bth);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(2.2, 2.4, 2.0), M(0xf1eee6)); body.position.y = 1.2; bth.add(body);
+    const roof = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.18, 2.4), M(0x3b3b3b)); roof.position.y = 2.5; bth.add(roof);
+    for (const [x, z] of [[0, 1.01], [1.11, 0]]) { const w = new THREE.Mesh(new THREE.BoxGeometry(x ? 0.04 : 1.4, 0.8, x ? 1.2 : 0.04), new THREE.MeshStandardMaterial({ color: 0xbfd8e6, transparent: true, opacity: 0.4 })); w.position.set(x, 1.55, z); bth.add(w); }
+    const arm = new THREE.Group(); arm.position.set(4.8, 1.0, -(RW / 2 + 0.4)); g.add(arm);
+    const pst = new THREE.Mesh(new THREE.BoxGeometry(0.3, 1.0, 0.3), M(0x444444)); pst.position.y = -0.5; arm.add(pst);
+    for (let k = 0; k < 6; k++) { const seg = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.1, (RW + 0.4) / 6), M(k % 2 ? 0xffffff : 0xd8262b)); seg.position.set(0, 0, (k + 0.5) * (RW + 0.4) / 6); arm.add(seg); }
+    return g; }
   if (e.type === 'gateway') {   // timber gateway: two posts, crossbeam, hanging name board, split-rail fence either side (local x along the fence)
     const M = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.95 }), wd = M(0x5a4634), span = 3.2, ph = 3.4;
     for (const sx of [-1, 1]) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.22, ph, 0.22), wd); p.position.set(sx * span / 2, ph / 2, 0); g.add(p); }
@@ -660,21 +700,19 @@ export function buildExtra(e) {
     const cv = document.createElement('canvas'); cv.width = 512; cv.height = 512; const c2 = cv.getContext('2d'); c2.fillStyle = '#8a5a2e'; c2.fillRect(0, 0, 512, 512);
     for (let i = 0; i < 16; i++) { c2.strokeStyle = '#e0a868'; c2.lineWidth = 6; c2.beginPath(); c2.moveTo(0, i * 32 + 16); c2.lineTo(512, i * 32 + 16); c2.stroke(); }   // purlins/planks along the length
     const tx = new THREE.CanvasTexture(cv); tx.colorSpace = THREE.SRGBColorSpace; tx.wrapS = tx.wrapT = THREE.RepeatWrapping; tx.repeat.set(L / 6, 4);
-    { /* Henry: bowstring trusses: a flat bottom chord (the "ceiling") at eave height with web members up to the curved roof, one per post bay */
+    { /* Henry (v5 rework): a triangular (gable) roof, no arches; trusses like the circus: flat bottom chord, triangular top, much more frequent */
       const tw = new THREE.MeshStandardMaterial({ color: 0xd9a868, roughness: 0.8, emissive: 0x6a4420, emissiveIntensity: 0.35 });
-      const arcY = z => EH + RISE - (R - Math.sqrt(Math.max(0, R * R - z * z)));
-      for (let x = x0 + 0.2; x <= x1 + 0.01; x += 4.0) { const xx = Math.min(x, x1 - 0.2);
-        const bc = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.28, 2 * HW), tw); bc.position.set(xx, EH, 0); g.add(bc);
-        const N = 12; for (let k = 0; k < N; k++) { const za = -HW + 2 * HW * k / N, zb = -HW + 2 * HW * (k + 1) / N, ya = arcY(za) - 0.15, yb = arcY(zb) - 0.15;
-          const tc = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.24, Math.hypot(zb - za, yb - ya) + 0.05), tw); tc.position.set(xx, (ya + yb) / 2, (za + zb) / 2); tc.rotation.x = -Math.atan2(yb - ya, zb - za); g.add(tc);
-          if (k > 0) { const h = ya - EH; if (h > 0.2) { const v = new THREE.Mesh(new THREE.BoxGeometry(0.12, h, 0.12), tw); v.position.set(xx, EH + h / 2, za); g.add(v); }
-            } } } }
+      const top = z => EH + RISE * (1 - Math.abs(z) / HW);
+      const mem = (x, za, ya, zb, yb, t) => { const m = new THREE.Mesh(new THREE.BoxGeometry(t, t, Math.hypot(zb - za, yb - ya) + 0.04), tw); m.position.set(x, (ya + yb) / 2, (za + zb) / 2); m.rotation.x = -Math.atan2(yb - ya, zb - za); g.add(m); };
+      for (let x = x0 + 0.6; x < x1 - 0.3; x += 1.22) {
+        mem(x, -HW, EH, HW, EH, 0.14); mem(x, -HW, EH, 0, top(0) - 0.1, 0.13); mem(x, 0, top(0) - 0.1, HW, EH, 0.13); mem(x, 0, EH, 0, top(0) - 0.1, 0.09);
+        for (const zq of [-HW / 2, HW / 2]) { mem(x, zq, EH, zq, top(zq) - 0.1, 0.08); mem(x, zq, EH, 0, (EH + top(0)) / 2, 0.08); } } }
     if (e.endDoor) { const dw = e.endDoor.w || 3.6, dh = e.endDoor.h || 3.8, dz = e.endDoor.z || 0;   // Henry: the big door in the end wall into the stall barn
       const op = new THREE.Mesh(new THREE.BoxGeometry(0.12, dh, dw), M(0x2a2018)); op.position.set(x1 - 0.08, dh / 2, dz); g.add(op);
       for (const sz of [-1, 1]) { const jamb = new THREE.Mesh(new THREE.BoxGeometry(0.2, dh + 0.2, 0.2), M(0xcfc6b4)); jamb.position.set(x1 - 0.12, (dh + 0.2) / 2, dz + sz * (dw / 2 + 0.1)); g.add(jamb); }
       const hd2 = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.2, dw + 0.4), M(0xcfc6b4)); hd2.position.set(x1 - 0.12, dh + 0.1, dz); g.add(hd2); }
-    const vg = new THREE.CylinderGeometry(R, R, L, 64, 1, true, -HALF, 2 * HALF); vg.rotateZ(Math.PI / 2);
-    const vault = new THREE.Mesh(vg, new THREE.MeshStandardMaterial({ map: tx, side: THREE.DoubleSide, roughness: 0.8, emissive: 0x7a4c24, emissiveIntensity: 0.7 })); vault.rotateX(-Math.PI / 2); vault.position.set(CX, EH + RISE - R, 0); g.add(vault);
+    for (const sz of [-1, 1]) { const sl = Math.hypot(HW, RISE); const pl = new THREE.Mesh(new THREE.PlaneGeometry(L, sl + 0.4), new THREE.MeshStandardMaterial({ map: tx, side: THREE.DoubleSide, roughness: 0.8, emissive: 0x7a4c24, emissiveIntensity: 0.7 }));
+      pl.rotation.x = -Math.PI / 2 + sz * Math.atan2(RISE, HW); pl.position.set(CX, EH + RISE / 2 + 0.05, sz * HW / 2); g.add(pl); }   // gable roof planes
     for (const jx of [CX - 8, CX + 6]) for (const sz of [-1, 1]) { const st = new THREE.Mesh(new THREE.BoxGeometry(0.15, 1.5, 0.6), M(0xf2f2f2)); st.position.set(jx, 0.75, sz * 1.8); g.add(st); }
     for (const jx of [CX - 8, CX + 6]) { const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 3.6, 6), M(0xf2f2f2)); pole.rotation.x = Math.PI / 2; pole.position.set(jx, 0.9, 0); g.add(pole); }
   }
@@ -804,7 +842,7 @@ export function buildExtra(e) {
     /* Henry: 4 benches on the south deck, facing the pool (backrests on the south side) */
     for (const bx of [-10.5, -4.5, 1.5, 7.5]) { const bw = M(0x6b5236);
       const seat = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.06, 0.45), bw); seat.position.set(bx, 0.45, 8.9); P0.add(seat);
-      const back = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.45, 0.05), bw); back.position.set(bx, 0.72, 9.12); back.rotation.x = -0.12; P0.add(back);
+      const back = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.45, 0.05), bw); back.position.set(bx, 0.72, 8.68); back.rotation.x = 0.12; P0.add(back);   // backrest on the other side (Henry v5 rework)
       for (const lx of [-1.05, 1.05]) { const leg = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.45, 0.4), bw); leg.position.set(bx + lx, 0.22, 8.9); P0.add(leg); } }
   }
   if (e.type === 'dirttrack') {   // dirt ribbons along ellipses [cx, cz, a, b, width, tyreEdges]; tyre walls as instanced rings
