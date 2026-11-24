@@ -461,7 +461,7 @@ function openDD(btn){
 function showSub(k){ const dd=$('dd'), g=DATA.groups.find(x=>x.name===dd.dataset.group), it=g&&g.items[k]; if(!it||it.ref) return;
   dd.querySelectorAll('[data-sub]').forEach(b=>b.setAttribute('aria-expanded',String(+b.dataset.sub===k)));
   const item=x=>x.ref?itemBtn(x):(()=>{ const inner=(x.items||[]).map(item).join(''); return inner?`<div class="ddg"><div class="ddh">${esc(x.name)}</div>${inner}</div>`:''; })();
-  $('ddsub').innerHTML=(it.items||[]).map(item).join(''); $('ddsub').dataset.sub=k; }
+  $('ddsub').innerHTML=(it.items||[]).map(item).join(''); $('ddsub').dataset.cur=k; }
 function showChanges(){
   closeDD(); disposeSpheres(); document.body.classList.add('changes'); const C=DATA.changes||[];
   $('changes').innerHTML=`<h2>What's changed in the model</h2><p class="blurb">Each update to the model, with before and after pictures. Comment on any of them like a normal view.</p>`+(C.length?C.slice().reverse().map(v=>`<h3 style="margin-top:18px">${esc(v.version)} · ${esc(v.date||'')}</h3>${(v.items||[]).map(it=>`<div class="chg"><div class="by">${esc(it.place||'')}</div><b>${esc(it.title)}</b>${it.note?`<p class="hint">${esc(it.note)}</p>`:''}<div class="media"><div class="pane flat"><img src="${esc(it.before)}" alt="Before"><span class="tag">Before</span></div><div class="pane flat"><img src="${esc(it.after)}" alt="After"><span class="tag">After</span></div></div></div>`).join('')}`).join(''):'<p class="by">No model updates yet. They will show up here after the first round of fixes.</p>');
