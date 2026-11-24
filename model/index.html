@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Camp Lohikan — 3D</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#9fc3e0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-user-select:none;user-select:none}
+  canvas{display:block;touch-action:none}
+  #ui{position:fixed;top:10px;left:10px;right:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;pointer-events:none;z-index:3}
+  .card{pointer-events:auto;background:#0f1d14e0;color:#eef3ec;border:1px solid #ffffff2a;border-radius:12px;padding:8px 10px}
+  h1{font-size:15px;margin:0}.sub{font-size:11.5px;opacity:.75}
+  .seg{display:flex;gap:4px;flex-wrap:wrap}
+  .seg button{font:inherit;font-size:13px;background:#21362a;color:#fff;border:1px solid #ffffff30;border-radius:8px;padding:6px 10px;cursor:pointer}
+  .seg button.on{background:#3f7d55;border-color:#9fd3af}
+  #help{position:fixed;bottom:10px;left:10px;font-size:12px;max-width:380px;z-index:3}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;background:#0f1d14;z-index:9;text-align:center;padding:20px}
+  .pinlbl{background:#000b;color:#fff;font-size:12px;padding:2px 7px;border-radius:999px;white-space:nowrap;cursor:pointer;border:1px dashed #ffb44d;text-decoration:none}
+  .placelbl{background:#0f1d14cc;color:#e9f5e4;font-size:11px;padding:1px 6px;border-radius:6px;white-space:nowrap;border:1px solid #9fd3af66}
+  .pinlbl:hover{background:#ff8a00}
+  #cross{position:fixed;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:#fff9;display:none;z-index:2}
+  #stick{position:fixed;left:24px;bottom:24px;width:120px;height:120px;border-radius:50%;background:#0006;border:2px solid #fff5;display:none;z-index:4;touch-action:none}
+  .panel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;display:none;width:min(92vw,360px);max-height:80vh;overflow:auto;font-size:14px}
+  .panel .ptitle{font-weight:600;margin-bottom:6px}
+  .panel .row{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .panel button{font:inherit;font-size:14px;background:#21362a;color:#fff;border:1px solid #ffffff30;border-radius:8px;padding:7px 10px;cursor:pointer}
+  #goList button{display:block;width:100%;text-align:left;margin:3px 0}
+  #noteText{width:100%;box-sizing:border-box;font:inherit;font-size:14px;border-radius:8px;padding:6px;background:#fff;color:#111}
+  .notelbl{pointer-events:auto;cursor:pointer;background:#ffe27a;color:#222;border-radius:10px;padding:2px 7px;font-size:12px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 3px #0006}
+  #adj{position:fixed;right:10px;bottom:10px;z-index:5;display:none;max-width:300px;font-size:13px}
+  #adj .row{display:flex;gap:4px;margin:4px 0;flex-wrap:wrap;align-items:center}
+  #adj button,#adj select{font:inherit;font-size:13px;background:#21362a;color:#fff;border:1px solid #ffffff30;border-radius:8px;padding:6px 9px}
+  #adj pre{white-space:pre-wrap;font-size:11px;margin:4px 0;opacity:.85}
+  #knob{position:absolute;left:40px;top:40px;width:40px;height:40px;border-radius:50%;background:#fffb}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+  "@sparkjsdev/spark": "https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"
+}}
+</script>
+</head>
+<body>
+<div id="loading">Loading Camp Lohikan…</div>
+<div id="ui">
+  <div class="card"><h1>Camp Lohikan · 3D</h1><div class="sub"><a href="../" style="color:#ffd27a">← Back to the review site</a></div><div class="sub" id="splatStat" hidden></div><div class="sub" id="ver">whole camp v2.0 · photo-real drone areas · 61 LiDAR buildings · real terrain</div></div>
+  <div class="card seg" id="years"></div>
+  <div class="card seg">
+    <button id="walkBtn" type="button">🚶 Walk</button>
+    <button id="flyBtn" type="button" class="on">🛩 Overview</button>
+    <button id="speedBtn" type="button">Speed: walk</button>
+    <button id="treesBtn" type="button" class="on">Trees</button>
+    <button id="pinsBtn" type="button" class="on">360° spots</button>
+    <button id="namesBtn" type="button" class="on">Names</button>
+    <button id="photoBtn" type="button" hidden>Drone scans: off</button>
+    <button id="fadeBtn" type="button" hidden>Drone fade: off</button>
+    <button id="peopleBtn" type="button" hidden>People: off</button>
+    <button id="adjBtn" type="button" hidden>Adjust</button>
+    <button id="goBtn" type="button">📍 Go to…</button>
+    <button id="noteBtn" type="button">✏️ Leave a note</button>
+    <button id="notesBtn" type="button" class="on">Notes on map</button>
+    <button id="listBtn" type="button">📋 All notes</button>
+  </div>
+</div>
+<div id="goPanel" class="card panel"><div class="ptitle">Go to an area</div><div id="goList"></div><div class="row"><button id="goClose">Close</button></div></div>
+<div id="listPanel" class="card panel"><div class="ptitle">Notes from everyone</div><div id="listBody" style="max-height:55vh;overflow:auto"></div><div class="row"><button id="listClose">Close</button></div></div>
+<div id="notePanel" class="card panel"><div class="ptitle">Leave a note</div><div class="sub" id="noteWhere"></div>
+  <label class="sub" style="display:block;margin:6px 0"><input type="checkbox" id="notePin" checked> Pin it to this exact spot and view (untick for general advice about the whole model)</label>
+  <input id="noteName" maxlength="60" placeholder="Your name (optional)" style="width:100%;margin-bottom:6px;padding:6px;border-radius:6px;border:1px solid #888;background:#fff;color:#222">
+  <textarea id="noteText" rows="4" maxlength="1000" placeholder="e.g. The canteen windows were bigger, about 4 ft wide"></textarea>
+  <div class="row"><button id="noteSave">Save note</button><button id="noteCancel">Cancel</button></div><div class="sub" id="noteMsg"></div></div>
+<div id="cross"></div>
+<div id="stick"><div id="knob"></div></div>
+<div id="help" class="card"></div>
+<div id="adj" class="card">
+  <div class="row"><b>Adjust drone scene</b></div>
+  <div class="row"><select id="adjSel"></select><button id="adjTop">View from above</button></div>
+  <div class="row">Rotate <button data-r="-15">⟲15°</button><button data-r="-2">⟲2°</button><button data-r="2">⟳2°</button><button data-r="15">⟳15°</button></div>
+  <div class="row">Move <button data-m="0,1">N</button><button data-m="0,-1">S</button><button data-m="-1,0">W</button><button data-m="1,0">E</button><button id="adjStep">step 1 m</button></div>
+  <div class="row">Height <button data-z="0.5">Up</button><button data-z="-0.5">Down</button> Size <button data-s="0.97">−</button><button data-s="1.03">+</button></div>
+  <pre id="adjOut"></pre>
+  <div class="row"><button id="adjCopy">Copy numbers</button><button id="adjReset">Reset</button><button id="adjClose">Close</button></div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+addEventListener('error',e=>{const el=document.getElementById('splatStat'); if(el) el.textContent='Error: '+e.message;});
+addEventListener('unhandledrejection',e=>{const el=document.getElementById('splatStat'); if(el) el.textContent='Error: '+(e.reason&&e.reason.message||e.reason);});
+import { MapControls } from 'three/addons/controls/MapControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { SplatMesh, SplatFileType, SparkRenderer } from '@sparkjsdev/spark';
+import { buildSportsCenter, SC } from './sportscenter.js';
+import { BUILDINGS, buildCampBuilding, EXTRAS, buildExtra } from './campbuildings.js';
+import { TessellateModifier } from 'three/addons/modifiers/TessellateModifier.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+const TOUR = 'https://claude.ai/artifact/2pSJXirafT5JpSVPqKU59v';
+const TILE_L = 473409.90326720476, TILE_B = 4631704.397881644, W = 3224, H = 3212, Z_BASE = 440;
+const YEARS = ['2010','2015','2019'];
+const PINS = [["s02", "Waterfront Aerial", 1212.1, 1250.6], ["s03", "Lower Sports Aerial", 1881.6, 1601.9], ["s04", "Equestrian Aerial", 1982.1, 1855.6], ["s05", "Golf", 1511.9, 1403.7], ["s06", "Paintball Aerial", 1337.5, 1116.0], ["s07", "Circus", 1791.6, 1609.9], ["s08", "ATVs and Quads", 1761.0, 1705.5], ["s11", "Equestrian Barn - Indoor Ring", 2022.1, 1935.6], ["s12", "Art Center", 1393.0, 1578.8], ["s13", "Dining Hall", 1352.0, 1549.8], ["s14", "Basketball", 1684.2, 1566.2], ["s17", "Amphitheater / Lower Office", 1459.0, 1491.8], ["s18", "Rec Hall", 1491.0, 1645.0], ["s19", "Dance Studio", 1784.8, 1620.4], ["s21", "Rock Band - Music", 1474.1, 1650.7], ["s22", "Pool Program", 1612.1, 1615.6], ["s23", "Tennis", 1617.1, 1681.6], ["s24", "Laser Tag", 1314.7, 1528.7], ["s25", "Archery", 1494.7, 1723.0], ["s27", "Baseball & Softball", 1702.1, 1765.6], ["s29", "Bungee Trampoline", 1643.1, 1565.7], ["s30", "Pottery", 1418.6, 1582.6], ["s31", "The Flagpole Quad", 1395.0, 1528.7], ["s32", "Cooking", 1514.9, 1701.6], ["s34", "Gymnastics", 1744.4, 1621.7], ["s36", "Mountain Boarding", 1422.4, 1461.5], ["s37", "Skate Park", 1455.2, 1581.7], ["s39", "Water Trampoline", 1177.1, 1230.6], ["s40", "Waterslide", 1250.0, 1183.3]];
+const PLACES = [["Ski Patrol", 1275.0, 1325.5], ["Cabin 12", 1537.4, 1724.1], ["Cabin 13", 1555.9, 1736.9], ["Cabin 14", 1575.0, 1749.6], ["Cabin 15", 1598.1, 1755.5], ["Media Arts", 1615.4, 1753.6], ["Staff Lounge", 1621.0, 1752.8], ["Upper Office", 1621.4, 1762.0], ["Condo", 1636.5, 1753.0], ["Cooler", 1640.8, 1746.6], ["Cabin 19", 1525.6, 1809.4], ["Cabin 18", 1551.4, 1787.4], ["Cabin 17", 1528.1, 1776.3], ["Cabin 16", 1506.9, 1761.9], ["Cabin 20", 1699.6, 1643.5], ["Cabin 21", 1703.9, 1664.4], ["Cabin 22", 1810.8, 1676.0], ["Cabin 23", 1857.4, 1679.0], ["Cabin 24", 1886.6, 1672.5], ["Cabin 10", 1563.4, 1554.1], ["Cabin 11", 1588.0, 1553.6], ["Cabin 1", 1307.9, 1566.8], ["Staff Parking Lot", 1286.0, 1609.7], ["Senior Dining Hall", 1393.9, 1548.6], ["Cabin 4", 1423.6, 1543.0], ["Infirmary", 1453.3, 1535.5], ["Lower Office", 1436.1, 1495.8], ["Cabin 3", 1399.1, 1494.6], ["Cabin 2", 1369.4, 1502.9], ["Cabin 6", 1533.4, 1494.6], ["Cabin 9", 1579.3, 1509.0], ["Cabin 7", 1523.1, 1527.1], ["Cabin 8", 1543.6, 1519.6], ["Volley Ball", 1690.6, 1600.6], ["Upper Field", 1790.0, 1834.0], ["Outdoor Trapeze", 1570.4, 1615.5], ["Sports Center", 1747.8, 1608.3], ["Canteen", 1758.8, 1593.6], ["The Middle Field", 1938.0, 1778.0], ["Laundry / EP Closet", 1300.9, 1583.9], ["Maintenance Sheds", 1333.5, 1610.0], ["Old Ski Lift (Mount Tone slopes)", 1327.5, 1841.0], ["Riflery", 1456.0, 1697.0], ["The Shortcut", 1412.0, 1632.0], ["Dirtbikes", 1559.5, 1442.5], ["Lacrosse (Upper Field)", 1790.0, 1820.0], ["Soccer (Lower Field)", 1865.0, 1609.0]];
+const isTouch = matchMedia('(pointer:coarse)').matches;
+const decode = b64 => { const s = atob(b64); const u = new Uint8Array(s.length); for (let i=0;i<s.length;i++) u[i]=s.charCodeAt(i); return new Uint16Array(u.buffer); };
+
+// ---------- data ----------
+const [outerMeta, coreMeta] = await Promise.all([fetch('height.json').then(r=>r.json()), fetch('core_height.json').then(r=>r.json())]);
+const ON = outerMeta.n, outerH = Float32Array.from(decode(outerMeta.data_b64_u16le), v => outerMeta.zmin + v*outerMeta.scale);
+const CNX = coreMeta.nx, CNY = coreMeta.ny, CR = coreMeta.res;
+const coreH = Float32Array.from(decode(coreMeta.data_b64_u16le), v => coreMeta.zmin + v*coreMeta.scale);
+const CE0 = coreMeta.E0 - TILE_L, CN1 = coreMeta.N1 - TILE_B;       // core NW corner in map coords
+const CE1 = CE0 + (CNX-1)*CR, CN0 = CN1 - (CNY-1)*CR;
+
+function bilinear(arr, nx, ny, c, r){
+  c = Math.min(nx-1, Math.max(0,c)); r = Math.min(ny-1, Math.max(0,r));
+  const c0=Math.floor(c), r0=Math.floor(r), c1=Math.min(nx-1,c0+1), r1=Math.min(ny-1,r0+1), fx=c-c0, fy=r-r0;
+  return (arr[r0*nx+c0]*(1-fx)+arr[r0*nx+c1]*fx)*(1-fy)+(arr[r1*nx+c0]*(1-fx)+arr[r1*nx+c1]*fx)*fy;
+}
+function groundZ(mx, my){ // map coords -> absolute elevation
+  if (mx>=CE0 && mx<=CE1 && my>=CN0 && my<=CN1) return bilinear(coreH, CNX, CNY, (mx-CE0)/CR, (CN1-my)/CR);
+  return bilinear(outerH, ON, ON, mx/W*(ON-1), (H-my)/H*(ON-1));
+}
+const mapToWorld = (mx,my,z)=> new THREE.Vector3(mx-W/2, z-Z_BASE, -(my-H/2));
+const worldToMap = v => [v.x+W/2, H/2 - v.z];
+
+// ---------- renderer ----------
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, isTouch?1.5:2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+const labels = new CSS2DRenderer(); labels.setSize(innerWidth, innerHeight);
+Object.assign(labels.domElement.style,{position:'fixed',top:'0',left:'0',pointerEvents:'none'});
+document.body.appendChild(labels.domElement);
+const scene = new THREE.Scene();
+const SKY = 0xb3d1ea; scene.background = new THREE.Color(SKY); scene.fog = new THREE.Fog(SKY, 900, 4200);
+const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.3, 20000);
+scene.add(new THREE.HemisphereLight(0xf2f6ff, 0x4a5a38, 1.5));
+const sun = new THREE.DirectionalLight(0xfff3dd, 1.6); sun.position.set(-700,900,-400); scene.add(sun);
+const tl = new THREE.TextureLoader();
+const loadTex = url => new Promise((res,rej)=>tl.load(url, t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();res(t)}, undefined, rej));
+
+// ---------- outer terrain (3.2 km) ----------
+const og = new THREE.PlaneGeometry(W, H, ON-1, ON-1); og.rotateX(-Math.PI/2);
+{ const p = og.attributes.position;
+  for (let i=0;i<p.count;i++){ const mx=p.getX(i)+W/2, my=H/2-p.getZ(i); let y = outerH[i]-Z_BASE;
+    if (mx>CE0+6 && mx<CE1-6 && my>CN0+6 && my<CN1-6) y -= 4;   // sink under the detailed core patch
+    p.setY(i,y); }
+  og.computeVertexNormals(); }
+const outerMat = new THREE.MeshLambertMaterial(); const outer = new THREE.Mesh(og, outerMat); scene.add(outer);
+const skirt = new THREE.Mesh(new THREE.PlaneGeometry(30000,30000), new THREE.MeshBasicMaterial({color:0x4e6b3a}));
+skirt.rotateX(-Math.PI/2); skirt.position.y = -140; scene.add(skirt);
+
+// ---------- core terrain (1.5 m) ----------
+const cg = new THREE.PlaneGeometry(CE1-CE0, CN1-CN0, CNX-1, CNY-1); cg.rotateX(-Math.PI/2);
+{ const p = cg.attributes.position; for (let i=0;i<p.count;i++) p.setY(i, coreH[i]-Z_BASE); cg.computeVertexNormals(); }
+const coreMat = new THREE.MeshLambertMaterial(); const core = new THREE.Mesh(cg, coreMat);
+/* ground detail (Nov 17): a tiling grass/soil detail texture overlaid on the blurry aerial, strongest near the camera */
+{ const S=512, c=document.createElement('canvas'); c.width=c.height=S; const g=c.getContext('2d'); let sd=11; const rr=()=>(sd=(sd*16807)%2147483647)/2147483647;
+  g.fillStyle='rgb(128,128,128)'; g.fillRect(0,0,S,S);
+  for(let i=0;i<120;i++){ const x=rr()*S,y=rr()*S,r=10+rr()*60,v=100+rr()*56|0; for(const dx of [-S,0,S]) for(const dy of [-S,0,S]){ const gr=g.createRadialGradient(x+dx,y+dy,0,x+dx,y+dy,r); gr.addColorStop(0,`rgba(${v},${v},${v},0.5)`); gr.addColorStop(1,'rgba(128,128,128,0)'); g.fillStyle=gr; g.fillRect(x+dx-r,y+dy-r,2*r,2*r); } }
+  g.lineWidth=1; for(let i=0;i<60000;i++){ const x=rr()*S,y=rr()*S,v=70+rr()*130|0; g.strokeStyle=`rgba(${v},${v},${v},0.55)`; g.beginPath(); g.moveTo(x,y); g.lineTo(x+(rr()-0.5)*2,y-1.5-rr()*2.5); g.stroke(); }
+  const dt=new THREE.CanvasTexture(c); dt.wrapS=dt.wrapT=THREE.RepeatWrapping; dt.anisotropy=renderer.capabilities.getMaxAnisotropy();
+  const addDetail=m=>{ m.onBeforeCompile=sh=>{ sh.uniforms.detailMap={value:dt};
+      sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vWPos;').replace('#include <worldpos_vertex>','#include <worldpos_vertex>\nvWPos=(modelMatrix*vec4(transformed,1.0)).xyz;');
+      sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nuniform sampler2D detailMap; varying vec3 vWPos;').replace('#include <map_fragment>','#include <map_fragment>\n{ float dd=distance(cameraPosition,vWPos); float k=0.7*(1.0-smoothstep(60.0,320.0,dd)); float d1=texture2D(detailMap,vWPos.xz/6.0).r; float d2=texture2D(detailMap,vWPos.xz/23.0).g; float det=mix(1.0,(d1*0.65+d2*0.35)*2.0,k); diffuseColor.rgb*=det; }'); };
+    m.customProgramCacheKey=()=>'grounddetail'; m.needsUpdate=true; };
+  addDetail(coreMat); addDetail(outerMat); }
+core.position.set((CE0+CE1)/2 - W/2, 0, -((CN0+CN1)/2 - H/2)); scene.add(core);
+
+const outerTex = {}, coreTex = {};
+async function setYear(y){
+  const oy = y==='2019'?'2019':y; // outer layers exist for 2010/2015/2019/2022
+  [outerTex[oy], coreTex[y]] = await Promise.all([outerTex[oy]||loadTex(`aerial_${oy}.jpg`), coreTex[y]||loadTex(`core_${y}.jpg`)]);
+  outerMat.map = outerTex[oy]; outerMat.needsUpdate = true; coreMat.map = coreTex[y]; coreMat.needsUpdate = true;
+  document.querySelectorAll('#years button').forEach(b=>b.classList.toggle('on', b.dataset.y===y));
+}
+for (const y of YEARS){ const b=document.createElement('button'); b.type='button'; b.textContent=y; b.dataset.y=y; b.onclick=()=>setYear(y); document.getElementById('years').appendChild(b); }
+
+// ---------- photo-real drone scenes (Gaussian splats, pre-placed in camp coordinates) ----------
+const SPLATS = []; // photo scans not published yet
+const spark = new SparkRenderer({ renderer }); scene.add(spark);
+const splatGroup = new THREE.Group(); splatGroup.position.y = 0.35; scene.add(splatGroup);
+let photoOn = location.hash==='#scans', splatsStarted=false; splatGroup.visible = photoOn;
+async function loadSplats(){ if (splatsStarted) return; splatsStarted=true; for (const sp of SPLATS){ try{
+  const loadBytes = async list => { const bufs = await Promise.all(list.map(u=>fetch(u).then(r=>r.json()).then(j=>Uint8Array.from(atob(j.b64),c=>c.charCodeAt(0)))));
+    const n = bufs.reduce((a,b)=>a+b.length,0), all = new Uint8Array(n); let o=0; for (const b of bufs){ all.set(b,o); o+=b.length; } return all; };
+  const all = await loadBytes(sp.parts);
+  const mesh = new SplatMesh({ fileBytes: all, fileType: SplatFileType.SPLAT });
+  await mesh.initialized;
+  const c = mapToWorld(sp.map[0], sp.map[1], groundZ(sp.map[0], sp.map[1])); sp.c = c.clone();
+  const pivot = new THREE.Group(); pivot.position.copy(c); mesh.position.set(-c.x, -c.y, -c.z); pivot.add(mesh); splatGroup.add(pivot);
+  sp.pivot = pivot; sp.ok = true; sp.mesh = mesh; applyAdj(sp); fillAdjSel();
+  if (sp.people && sp.people.length){ const pb = await loadBytes(sp.people); const pm = new SplatMesh({ fileBytes: pb, fileType: SplatFileType.SPLAT }); await pm.initialized;
+    pm.position.copy(mesh.position); pm.visible = showPeople; pivot.add(pm); sp.peopleMesh = pm; }
+  console.log('splat loaded', sp.name, mesh.numSplats ?? '');
+  document.getElementById('splatStat').textContent = 'Photo-real areas loaded: '+SPLATS.filter(x=>x.ok).map(x=>x.name).join(', ');
+  applySplatHiding();
+} catch(e){ console.warn('splat failed', sp.name, e); document.getElementById('splatStat').textContent = 'Photo-real failed: '+(e&&e.message||e); } } }
+if (photoOn) loadSplats(); else document.getElementById('splatStat').textContent = 'Building models + LiDAR terrain · drone scans hidden (button to show)';
+
+
+// ---------- buildings ----------
+const colliders = []; const hideables = [];
+function applySplatHiding(){
+  const act = photoOn ? SPLATS.filter(sp=>sp.ok && sp.showing!==false) : [];
+  for (const o of hideables){ const [x,y]=o.userData.map; o.visible = !act.some(sp=>Math.hypot(x-sp.map[0],y-sp.map[1])<sp.r-25); }
+  if (window.__treeInst){ const {T,trunks,crowns}=window.__treeInst;
+    if (!window.__treeOrig){ window.__treeOrig=[trunks.instanceMatrix.array.slice(), crowns.instanceMatrix.array.slice()]; }
+    const [ot,oc]=window.__treeOrig; const ta=trunks.instanceMatrix.array, ca=crowns.instanceMatrix.array;
+    for(let i=0;i<T.length;i++){ const [mx,my]=T[i]; const hide = act.some(sp=>Math.hypot(mx-sp.map[0],my-sp.map[1])<sp.r-15);
+      for(let k=0;k<16;k++){ ta[i*16+k]= hide?0:ot[i*16+k]; ca[i*16+k]= hide?0:oc[i*16+k]; } }
+    trunks.instanceMatrix.needsUpdate=crowns.instanceMatrix.needsUpdate=true; } }
+
+// ---------- manual alignment tool ----------
+const ADJ_KEY='lohikanAdj1';
+let savedAdj={}; try{ savedAdj=JSON.parse(localStorage.getItem(ADJ_KEY)||'{}'); }catch(e){}
+function getAdj(sp){ return sp.adj || (sp.adj = Object.assign({rot:0,dx:0,dy:0,dz:0,s:1}, sp.adj0||{}, savedAdj[sp.name]||{})); }
+function applyAdj(sp){ if(!sp.pivot) return; const a=getAdj(sp);
+  sp.pivot.position.set(sp.c.x+a.dx, sp.c.y+a.dz, sp.c.z-a.dy); sp.pivot.rotation.y = -THREE.MathUtils.degToRad(a.rot); sp.pivot.scale.setScalar(a.s); showAdj(); }
+let adjStep=1;
+function curSp(){ const n=document.getElementById('adjSel').value; return SPLATS.find(x=>x.name===n); }
+function fillAdjSel(){ const sel=document.getElementById('adjSel'); const cur=sel.value; sel.innerHTML=SPLATS.filter(x=>x.ok).map(x=>`<option>${x.name}</option>`).join(''); if(cur) sel.value=cur; showAdj(); }
+function showAdj(){ const sp=curSp(); if(!sp) return; const a=getAdj(sp);
+  document.getElementById('adjOut').textContent = `${sp.name}: rotate ${a.rot.toFixed(0)}°, east ${a.dx.toFixed(1)} m, north ${a.dy.toFixed(1)} m, up ${a.dz.toFixed(1)} m, size ×${a.s.toFixed(2)}`; }
+function saveAdj(sp){ savedAdj[sp.name]=getAdj(sp); try{ localStorage.setItem(ADJ_KEY, JSON.stringify(savedAdj)); }catch(e){} }
+document.getElementById('adjSel').onchange=showAdj;
+document.querySelectorAll('#adj [data-r]').forEach(b=>b.onclick=()=>{ const sp=curSp(); if(!sp) return; getAdj(sp).rot+= +b.dataset.r; applyAdj(sp); saveAdj(sp); });
+document.querySelectorAll('#adj [data-m]').forEach(b=>b.onclick=()=>{ const sp=curSp(); if(!sp) return; const [e,n]=b.dataset.m.split(',').map(Number); const a=getAdj(sp); a.dx+=e*adjStep; a.dy+=n*adjStep; applyAdj(sp); saveAdj(sp); });
+document.querySelectorAll('#adj [data-z]').forEach(b=>b.onclick=()=>{ const sp=curSp(); if(!sp) return; getAdj(sp).dz+= +b.dataset.z; applyAdj(sp); saveAdj(sp); });
+document.querySelectorAll('#adj [data-s]').forEach(b=>b.onclick=()=>{ const sp=curSp(); if(!sp) return; getAdj(sp).s*= +b.dataset.s; applyAdj(sp); saveAdj(sp); });
+document.getElementById('adjStep').onclick=e=>{ adjStep = adjStep===1?5:(adjStep===5?0.2:1); e.target.textContent='step '+adjStep+' m'; };
+document.getElementById('adjReset').onclick=()=>{ const sp=curSp(); if(!sp) return; sp.adj=Object.assign({rot:0,dx:0,dy:0,dz:0,s:1}, sp.adj0||{}); delete savedAdj[sp.name]; try{ localStorage.setItem(ADJ_KEY, JSON.stringify(savedAdj)); }catch(e){} applyAdj(sp); };
+document.getElementById('adjCopy').onclick=async()=>{ const txt=JSON.stringify(Object.fromEntries(SPLATS.filter(x=>x.ok).map(x=>[x.name,getAdj(x)]))); try{ await navigator.clipboard.writeText(txt); document.getElementById('adjCopy').textContent='Copied ✓'; }catch(e){ document.getElementById('adjOut').textContent=txt; } };
+document.getElementById('adjClose').onclick=()=>{ document.getElementById('adj').style.display='none'; };
+document.getElementById('adjBtn').onclick=()=>{ document.getElementById('adj').style.display='block'; fillAdjSel(); };
+document.getElementById('adjTop').onclick=()=>{ const sp=curSp(); if(!sp) return; if(mode!=='fly') document.getElementById('flyBtn').click(); const t=sp.pivot.position; orbit.target.copy(t); camera.position.set(t.x, t.y+sp.r*1.6, t.z+0.01); orbit.update(); };
+let fadeOn=false; let showPeople=false;
+document.getElementById('peopleBtn').onclick=e=>{ showPeople=!showPeople; e.target.textContent='People: '+(showPeople?'on':'off'); e.target.classList.toggle('on',showPeople); for(const sp of SPLATS) if(sp.peopleMesh) sp.peopleMesh.visible=showPeople; };
+document.getElementById('photoBtn').onclick=e=>{ photoOn=!photoOn; e.target.textContent='Drone scans: '+(photoOn?'on':'off'); e.target.classList.toggle('on',photoOn); splatGroup.visible=photoOn; if(photoOn) loadSplats(); applySplatHiding(); };
+document.getElementById('fadeBtn').onclick=e=>{ fadeOn=!fadeOn; e.target.textContent='Drone fade: '+(fadeOn?'on':'off'); e.target.classList.toggle('on',fadeOn); for(const sp of SPLATS) sp.showing=true; applySplatHiding(); };
+
+// drone scenes only look right from the air: fade them out near the ground and bring the LiDAR model back
+function updateSplatFade(){
+  if (!photoOn) return;
+  const mx = camera.position.x + W/2, my = -camera.position.z + H/2;
+  const h = camera.position.y - (groundZ(mx,my) - Z_BASE);
+  let changed=false;
+  if (!fadeOn){ for (const sp of SPLATS){ if(sp.mesh){ sp.mesh.opacity=1; sp.mesh.visible=true; } if(sp.peopleMesh) sp.peopleMesh.visible=showPeople; } return; }
+  for (const sp of SPLATS){ if(!sp.mesh) continue;
+    const a = Math.min(1, Math.max(0, (h-8)/14)); sp.mesh.opacity=a; sp.mesh.visible = a>0.02; if(sp.peopleMesh){ sp.peopleMesh.opacity=a; sp.peopleMesh.visible = showPeople && a>0.02; }
+    const show = sp.showing===false ? h>16 : h>12; if (show!==(sp.showing!==false)){ sp.showing=show; changed=true; } }
+  if (changed) applySplatHiding();
+}
+try {
+  const bj = await fetch('buildings_glb.json').then(r=>r.json());
+  const bb = Uint8Array.from(atob(bj.b64), ch=>ch.charCodeAt(0)).buffer;
+  const gltf = await new GLTFLoader().parseAsync(bb, '');
+  gltf.scene.traverse(o=>{ if (o.isMesh){ const g0 = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry; g0.computeVertexNormals(); o.geometry = g0;
+      { const nrm=g0.attributes.normal, col=new Float32Array(nrm.count*3);
+        for (let i=0;i<nrm.count;i+=3){ const up=Math.abs(nrm.getY(i))>0.5; const c = up ? [0.42,0.42,0.44] : [0.55,0.40,0.27];
+          for (let k=0;k<3;k++) col.set(c,(i+k)*3); }
+        g0.setAttribute('color', new THREE.BufferAttribute(col,3)); }
+      o.material = new THREE.MeshLambertMaterial({vertexColors:true, side:THREE.DoubleSide}); o.castShadow=o.receiveShadow=true;
+      o.geometry.computeBoundingSphere(); const bc=o.geometry.boundingSphere.center.clone().applyMatrix4(o.matrixWorld); const bmx=bc.x+W/2, bmy=-bc.z+H/2;
+      o.userData.map=[bmx,bmy];
+      const bE=bmx+TILE_L, bN=bmy+TILE_B;
+      if (bE>475120 && bE<475225 && bN>4633285 && bN<4633345) o.visible=false;   // replaced by the detailed Sports Center + Circus model
+      else if (BUILDINGS.some(b=>Math.hypot(b.map[0]-bmx,b.map[1]-bmy)<7) || EXTRAS.some(e=>['bandshell','pavilion'].includes(e.type) && Math.hypot(e.map[0]-bmx,e.map[1]-bmy)<8)) o.visible=false;   // replaced by a detailed kit building
+      else { hideables.push(o); colliders.push(o); } } });
+  scene.add(gltf.scene);
+} catch(e){ console.warn('no buildings', e); }
+
+
+// ---------- detailed buildings ----------
+{ const mx=SC.E0-TILE_L, my=SC.N0-TILE_B; const sc=buildSportsCenter(renderer); sc.position.copy(mapToWorld(mx,my,groundZ(mx,my)+0.4)); scene.add(sc);
+  sc.traverse(o=>{ if(o.isMesh){ o.castShadow=o.receiveShadow=true; } }); window.__sc=sc; }
+for (const b of BUILDINGS){
+  // floors must clear the highest ground under the building (terrain would poke through otherwise)
+  { const a=THREE.MathUtils.degToRad(b.angleDeg), ca=Math.cos(a), sa=Math.sin(a); let top=-1e9;
+    for (const [x0,x1,z0,z1] of (b.body||[[-b.len/2,b.len/2,-b.wid/2,b.wid/2]])) for (let i=0;i<=4;i++) for (let j=0;j<=4;j++){ const x=x0+(x1-x0)*i/4, z=z0+(z1-z0)*j/4;
+      top=Math.max(top, groundZ(b.map[0]+x*ca+z*sa, b.map[1]+x*sa-z*ca)); }
+    const need=top-b.groundZ+0.08; if (need>b.floor){ b.floorRaisedFrom=b.floor; b.floor=need; } } }
+// buildings in the same levelGroup (e.g. a cabin pair) share one floor level
+{ const grp={}; for (const b of BUILDINGS) if (b.levelGroup) grp[b.levelGroup]=Math.max(grp[b.levelGroup]??-1e9, b.groundZ+b.floor);
+  for (const b of BUILDINGS) if (b.levelGroup) b.floor=grp[b.levelGroup]-b.groundZ; }
+for (const b of BUILDINGS){
+  const g=buildCampBuilding(b, renderer); g.position.copy(mapToWorld(b.map[0], b.map[1], b.groundZ)); g.rotation.y=THREE.MathUtils.degToRad(b.angleDeg);
+  g.traverse(o=>{ if(o.isMesh){ o.castShadow=o.receiveShadow=true; colliders.push(o); } }); scene.add(g); }
+for (const e of EXTRAS){ const g=buildExtra(e); g.position.copy(mapToWorld(e.map[0], e.map[1], groundZ(e.map[0], e.map[1]))); g.rotation.y=THREE.MathUtils.degToRad(e.angleDeg||0); g.name=e.name; g.traverse(o=>{ if(o.isMesh) o.castShadow=true; }); scene.add(g); }
+
+// ---------- lake surface (flat water at the LiDAR lake level, outline from the 1 m DTM) ----------
+try { const LK = await fetch('lake.json').then(r=>r.json());
+  const sh = new THREE.Shape(LK.o.map(([x,y])=>new THREE.Vector2(x,y))); for (const h of LK.h||[]) sh.holes.push(new THREE.Path(h.map(([x,y])=>new THREE.Vector2(x,y))));
+  const g = new THREE.ShapeGeometry(sh, 4); const pa = g.attributes.position;
+  for (let i=0;i<pa.count;i++){ const w = mapToWorld(pa.getX(i), pa.getY(i), LK.z); pa.setXYZ(i, w.x, w.y, w.z); }
+  g.computeVertexNormals();
+  const water = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: 0x2e5a6e, roughness: 0.12, metalness: 0.35, transparent: true, opacity: 0.88, side: THREE.DoubleSide }));
+  water.renderOrder = 1; scene.add(water); window.__water = water;
+} catch(e){ console.warn('no lake', e); }
+// ---------- roads, parking and sidewalks (traced from NAIP 2019; Henry: paved up the hills, by the lake and between the Dining Hall and Arts & Crafts, the rest dirt) ----------
+try {
+  const PATHS = await fetch('paths.json').then(r=>r.json());
+  /* procedural ground textures (Nov 17 rework): multi-scale value noise + material detail, 1024 px tiles, sized in metres via uv */
+  const noiseTex=(size,paint)=>{ const c=document.createElement('canvas'); c.width=c.height=size; const g=c.getContext('2d'); let sd=7; const rr=()=>(sd=(sd*16807)%2147483647)/2147483647;
+    paint(g,size,rr); const t=new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=renderer.capabilities.getMaxAnisotropy(); return t; };
+  const blotch=(g,S,rr,n,rmin,rmax,cols)=>{ for(let i=0;i<n;i++){ const x=rr()*S,y=rr()*S,r=rmin+rr()*(rmax-rmin), c=cols[(rr()*cols.length)|0]; for(const dx of [-S,0,S]) for(const dy of [-S,0,S]){ const gr=g.createRadialGradient(x+dx,y+dy,0,x+dx,y+dy,r); gr.addColorStop(0,c); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.fillRect(x+dx-r,y+dy-r,2*r,2*r); } } };
+  const speck=(g,S,rr,n,sz,f)=>{ for(let i=0;i<n;i++){ g.fillStyle=f(rr()); const s2=sz*(0.5+rr()); g.fillRect(rr()*S,rr()*S,s2,s2); } };
+  const TX={
+    paved: noiseTex(1024,(g,S,rr)=>{ g.fillStyle='#9a9993'; g.fillRect(0,0,S,S);
+      blotch(g,S,rr,60,40,160,['rgba(70,70,68,0.10)','rgba(200,198,190,0.10)','rgba(60,58,55,0.08)']);
+      speck(g,S,rr,90000,1.4,v=>v<0.5?`rgba(${60+v*80|0},${60+v*80|0},${58+v*80|0},0.35)`:`rgba(${170+v*70|0},${170+v*70|0},${165+v*70|0},0.30)`);
+      g.strokeStyle='rgba(45,45,42,0.35)'; g.lineWidth=1.2; for(let i=0;i<14;i++){ let x=rr()*S,y=rr()*S; g.beginPath(); g.moveTo(x,y); for(let k=0;k<12;k++){ x+=(rr()-0.5)*40; y+=(rr()-0.5)*40; g.lineTo(x,y); } g.stroke(); }
+      blotch(g,S,rr,8,20,60,['rgba(30,30,30,0.18)']); }),
+    dirt: noiseTex(1024,(g,S,rr)=>{ g.fillStyle='#a08a6a'; g.fillRect(0,0,S,S);
+      blotch(g,S,rr,80,40,180,['rgba(120,95,65,0.18)','rgba(190,170,135,0.16)','rgba(95,80,60,0.12)','rgba(110,120,70,0.10)']);
+      speck(g,S,rr,60000,2.2,v=>v<0.4?`rgba(${80+v*60|0},${68+v*50|0},${50+v*40|0},0.45)`:`rgba(${175+v*60|0},${160+v*55|0},${130+v*50|0},0.40)`);
+      speck(g,S,rr,2500,5,v=>`rgba(${150+v*80|0},${145+v*75|0},${135+v*70|0},0.55)`); }),
+    grass: noiseTex(1024,(g,S,rr)=>{ g.fillStyle='#5f8c3d'; g.fillRect(0,0,S,S);
+      for(let k=0;k<8;k++){ g.fillStyle=k%2?'rgba(255,255,220,0.045)':'rgba(0,30,0,0.045)'; g.fillRect(k*S/8,0,S/8,S); }
+      blotch(g,S,rr,90,30,170,['rgba(40,80,25,0.20)','rgba(140,170,70,0.16)','rgba(120,120,60,0.10)']);
+      g.lineWidth=1; for(let i=0;i<70000;i++){ const x=rr()*S,y=rr()*S,v=rr(); g.strokeStyle=v<0.5?`rgba(${40+v*40|0},${85+v*60|0},${25+v*30|0},0.45)`:`rgba(${110+v*60|0},${150+v*50|0},${60+v*30|0},0.35)`; g.beginPath(); g.moveTo(x,y); g.lineTo(x+(rr()-0.5)*2,y-2-rr()*3); g.stroke(); } }),
+    sand: noiseTex(1024,(g,S,rr)=>{ g.fillStyle='#d6c49c'; g.fillRect(0,0,S,S); blotch(g,S,rr,60,40,160,['rgba(170,150,110,0.18)','rgba(240,230,205,0.18)']); speck(g,S,rr,80000,1.5,v=>`rgba(${180+v*70|0},${165+v*65|0},${130+v*60|0},0.35)`); })
+  };
+  const TSCALE={paved:9, dirt:7, grass:14, sand:6};
+  const MATS={ paved:new THREE.MeshStandardMaterial({map:TX.paved, roughness:0.92, polygonOffset:true, polygonOffsetFactor:-4, polygonOffsetUnits:-4}),
+               dirt:new THREE.MeshStandardMaterial({map:TX.dirt, roughness:1, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3}),
+               sand:new THREE.MeshStandardMaterial({map:TX.sand, roughness:1, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2}),
+               grass:new THREE.MeshStandardMaterial({map:TX.grass, roughness:1, transparent:true, opacity:0.82, depthWrite:false, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2}) };
+  const tess=new TessellateModifier(2.5, 8); const byType={grass:[],sand:[],paved:[],dirt:[]};
+  for (const P of PATHS){ const sh=new THREE.Shape(P.o.map(([x,y])=>new THREE.Vector2(x-W/2, y-H/2)));
+    for (const h of P.h) sh.holes.push(new THREE.Path(h.map(([x,y])=>new THREE.Vector2(x-W/2, y-H/2))));
+    let geo=new THREE.ShapeGeometry(sh); try{ geo=tess.modify(geo); }catch(e){}
+    const pos=geo.attributes.position, uv=new Float32Array(pos.count*2);
+    for (let i=0;i<pos.count;i++){ const mx=pos.getX(i)+W/2, my=pos.getY(i)+H/2; pos.setXYZ(i, mx-W/2, groundZ(mx,my)-Z_BASE+0.12, -(my-H/2)); uv[2*i]=mx/(TSCALE[P.t]||8); uv[2*i+1]=my/(TSCALE[P.t]||8); }
+    geo.setAttribute('uv', new THREE.BufferAttribute(uv,2)); geo.deleteAttribute('normal'); geo.computeVertexNormals(); (byType[P.t]||byType.dirt).push(geo.index?geo.toNonIndexed():geo); }
+  const { mergeGeometries } = await import('three/addons/utils/BufferGeometryUtils.js');
+  for (const [t,gs] of Object.entries(byType)) if (gs.length){ const m=new THREE.Mesh(mergeGeometries(gs), MATS[t]); m.receiveShadow=true; m.name='paths_'+t; scene.add(m); }
+} catch(e){ console.warn('paths failed', e); }
+// ---------- trees ----------
+const treeGroup = new THREE.Group(); scene.add(treeGroup);
+try {
+  let T = await fetch('trees.json').then(r=>r.json());
+  // no trees on courts, sand courts, pits or pavilions (LiDAR "trees" there are poles, nets or noise)
+  { const keepOut = EXTRAS.filter(e=>['courts','sandcourt','gaga','pavilion','bungee','bandshell','tetherball','lamellaroof','arena','tenniscourts','pool','archery','ballfield','dirttrack','ropescourse','skilift','tent','watertramp','riflery','dock','iceberg','buoyline','ropeswing'].includes(e.type)).map(e=>{ const a=THREE.MathUtils.degToRad(e.angleDeg||0); const hw=(e.w|| (e.r? e.r*2 : 8))/2+1.5, hd=(e.d|| (e.r? e.r*2 : 8))/2+1.5; return {e,a,hw,hd}; });
+    T = T.filter(([mx,my])=>!keepOut.some(({e,a,hw,hd})=>{ const dx=mx-e.map[0], dy=my-e.map[1]; const x=dx*Math.cos(a)+dy*Math.sin(a), z=dx*Math.sin(a)-dy*Math.cos(a); return Math.abs(x)<hw && Math.abs(z)<hd; })); }
+  const n = T.length;
+  const trunkGeo = new THREE.CylinderGeometry(0.18, 0.28, 1, 5); trunkGeo.translate(0,0.5,0);
+  const crownGeo = new THREE.IcosahedronGeometry(1, 1);
+  const trunks = new THREE.InstancedMesh(trunkGeo, new THREE.MeshLambertMaterial({color:0x5a4330}), n);
+  const crowns = new THREE.InstancedMesh(crownGeo, new THREE.MeshLambertMaterial({color:0xffffff, flatShading:true}), n);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), c = new THREE.Color();
+  for (let i=0;i<n;i++){
+    const [mx,my,gz,h,r] = T[i]; const base = mapToWorld(mx,my,gz);
+    const trunkH = h*0.45; s.set(1,trunkH,1); m.compose(base, q, s); trunks.setMatrixAt(i,m);
+    const cy = gz + trunkH + (h-trunkH)/2;
+    s.set(r, (h-trunkH)/2*1.1, r); m.compose(mapToWorld(mx,my,cy), q, s); crowns.setMatrixAt(i,m);
+    c.setHSL(0.27+Math.random()*0.07, 0.38+Math.random()*0.15, 0.20+Math.random()*0.10); crowns.setColorAt(i,c);
+  }
+  treeGroup.add(trunks, crowns); window.__treeInst={T,trunks,crowns}; applySplatHiding();
+} catch(e){ console.warn('no trees', e); }
+
+// ---------- 360 pins ----------
+const pinGroup = new THREE.Group(); scene.add(pinGroup);
+for (const [id,name,mx,my] of PINS){
+  const el = document.createElement('a'); el.href = `${TOUR}#${id}`; el.target='_blank'; el.rel='noopener';
+  el.className='pinlbl'; el.textContent='◉ '+name; el.style.pointerEvents='auto';
+  const o = new CSS2DObject(el); o.position.copy(mapToWorld(mx,my,groundZ(mx,my)+6)); pinGroup.add(o);
+}
+const placeGroup = new THREE.Group(); scene.add(placeGroup);
+for (let [name,mx,my] of PLACES){
+  { const b=BUILDINGS.find(b=>b.name.toLowerCase()===name.toLowerCase()); if (b) [mx,my]=b.map; }   // label sits on the modelled building
+  const el = document.createElement('div'); el.className='placelbl'; el.textContent=name;
+  const o = new CSS2DObject(el); o.position.copy(mapToWorld(mx,my,groundZ(mx,my)+4)); placeGroup.add(o);
+}
+
+// ---------- overview controls ----------
+const orbit = new MapControls(camera, renderer.domElement);
+orbit.enableDamping = true; orbit.maxPolarAngle = Math.PI*0.48; orbit.minDistance = 8; orbit.maxDistance = 4500;
+function overviewHome(){ const t = mapToWorld(1640,1560,groundZ(1640,1560)); orbit.target.copy(t); camera.position.set(t.x-260, t.y+330, t.z+480); orbit.update(); }
+
+// ---------- walk mode ----------
+const SPEEDS=[['walk',7],['jog',16],['run',35],['zoom',80]]; let speedIdx=0;
+let mode = 'fly', yaw = 0, pitch = 0; const keys = {}; const EYE = 1.7;
+const walkPos = new THREE.Vector3();
+const stick = {x:0,y:0};
+function startWalk(){
+  mode='walk'; orbit.enabled=false;
+  const [mx,my] = worldToMap(orbit.target); walkPos.set(mx,my,0);
+  yaw = Math.atan2(camera.position.x-orbit.target.x, camera.position.z-orbit.target.z); pitch = 0;
+  document.getElementById('cross').style.display='block';
+  if (isTouch) document.getElementById('stick').style.display='block';
+  else renderer.domElement.requestPointerLock?.()?.catch?.(()=>{});
+  setButtons(); setHelp();
+}
+function startFly(){
+  mode='fly'; orbit.enabled=true; document.exitPointerLock?.();
+  document.getElementById('cross').style.display='none'; document.getElementById('stick').style.display='none';
+  const p = mapToWorld(walkPos.x, walkPos.y, groundZ(walkPos.x, walkPos.y));
+  orbit.target.copy(p); camera.position.set(p.x+Math.sin(yaw)*120, p.y+90, p.z+Math.cos(yaw)*120); orbit.update();
+  setButtons(); setHelp();
+}
+function setButtons(){ document.getElementById('walkBtn').classList.toggle('on',mode==='walk'); document.getElementById('flyBtn').classList.toggle('on',mode==='fly'); }
+function setHelp(){
+  document.getElementById('help').textContent = mode==='fly'
+    ? (isTouch ? 'Drag to rotate · two fingers to pan/zoom · tap Walk to drop in at the center of the view.' : 'Drag to rotate · right-drag to pan · scroll to zoom · WASD to move (Q/E down/up, Shift faster) · Walk drops you in at the center of the view.')
+    : (isTouch ? 'Left stick to walk · drag anywhere else to look around.' : 'Click to look with the mouse · WASD / arrows to walk · Shift to run · Esc releases the mouse.');
+}
+addEventListener('keydown', e=>{ keys[e.code]=true; if (e.code.startsWith('Arrow')||e.code==='PageUp'||e.code==='PageDown') e.preventDefault(); }); addEventListener('blur', ()=>{ for (const k in keys) keys[k]=false; }); addEventListener('keyup', e=>{ keys[e.code]=false; });
+renderer.domElement.addEventListener('click', ()=>{ if (mode==='walk' && !isTouch && document.pointerLockElement!==renderer.domElement) renderer.domElement.requestPointerLock?.()?.catch?.(()=>{}); });
+addEventListener('mousemove', e=>{ if (mode==='walk' && document.pointerLockElement===renderer.domElement){ yaw -= e.movementX*0.0025; pitch = Math.max(-1.3, Math.min(1.3, pitch - e.movementY*0.0025)); } });
+// touch look (right side) and joystick (left)
+let lookId=null, lx=0, ly=0;
+renderer.domElement.addEventListener('pointerdown', e=>{ if (mode==='walk' && e.pointerType!=='mouse'){ lookId=e.pointerId; lx=e.clientX; ly=e.clientY; } });
+addEventListener('pointermove', e=>{ if (e.pointerId===lookId){ yaw -= (e.clientX-lx)*0.005; pitch=Math.max(-1.3,Math.min(1.3,pitch-(e.clientY-ly)*0.005)); lx=e.clientX; ly=e.clientY; } });
+addEventListener('pointerup', e=>{ if (e.pointerId===lookId) lookId=null; });
+{ const st=document.getElementById('stick'), kn=document.getElementById('knob'); let sid=null;
+  const upd=e=>{ const r=st.getBoundingClientRect(); let dx=e.clientX-(r.left+60), dy=e.clientY-(r.top+60); const d=Math.hypot(dx,dy); if(d>45){dx*=45/d;dy*=45/d;} kn.style.left=(40+dx)+'px'; kn.style.top=(40+dy)+'px'; stick.x=dx/45; stick.y=dy/45; };
+  st.addEventListener('pointerdown',e=>{sid=e.pointerId;st.setPointerCapture(sid);upd(e);e.stopPropagation();});
+  st.addEventListener('pointermove',e=>{if(e.pointerId===sid)upd(e);});
+  st.addEventListener('pointerup',e=>{if(e.pointerId===sid){sid=null;stick.x=stick.y=0;kn.style.left='40px';kn.style.top='40px';}}); }
+
+const ray = new THREE.Raycaster(); const dirV = new THREE.Vector3();
+// WASD / arrows in overview + fly: slide the view over the ground (speed scales with height); Q/E or PageDown/PageUp to sink/rise
+const flyV = new THREE.Vector3(), flyR = new THREE.Vector3();
+function flyStep(dt){
+  const ae=document.activeElement; if (ae && (ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT')) return;
+  const f=(keys.KeyW||keys.ArrowUp?1:0)-(keys.KeyS||keys.ArrowDown?1:0), r=(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0), u=(keys.KeyE||keys.PageUp?1:0)-(keys.KeyQ||keys.PageDown?1:0);
+  if (!f && !r && !u) return;
+  const h = Math.max(5, camera.position.distanceTo(orbit.target));
+  const v = h * 0.6 * dt * (keys.ShiftLeft||keys.ShiftRight ? 3 : 1);
+  camera.getWorldDirection(flyV); flyV.y = 0; if (flyV.lengthSq() < 1e-6) flyV.set(0,0,-1); flyV.normalize();
+  flyR.set(-flyV.z, 0, flyV.x);
+  const d = flyV.multiplyScalar(f*v).add(flyR.multiplyScalar(r*v)); d.y = u*v*0.6;
+  camera.position.add(d); orbit.target.add(d);
+}
+function walkStep(dt){
+  let f = (keys.KeyW||keys.ArrowUp?1:0) - (keys.KeyS||keys.ArrowDown?1:0) - stick.y;
+  let s = (keys.KeyD||keys.ArrowRight?1:0) - (keys.KeyA||keys.ArrowLeft?1:0) + stick.x;
+  const speed = SPEEDS[speedIdx][1] * (keys.ShiftLeft||keys.ShiftRight ? 2.5 : 1) * dt;
+  if (f||s){
+    const dx = (-Math.sin(yaw)*f + Math.cos(yaw)*s)*speed, dy = (Math.cos(yaw)*f + Math.sin(yaw)*s)*speed; // map coords: +y north
+    // simple collision: don't walk into buildings
+    const from = mapToWorld(walkPos.x, walkPos.y, groundZ(walkPos.x,walkPos.y)+1.0);
+    dirV.set(dx,0,-dy); const len = dirV.length(); dirV.normalize();
+    ray.set(from, dirV); ray.far = len+0.4;
+    if (!colliders.length || ray.intersectObjects(colliders,false).length===0){ walkPos.x += dx; walkPos.y += dy; }
+  }
+  const p = mapToWorld(walkPos.x, walkPos.y, groundZ(walkPos.x,walkPos.y)+EYE);
+  camera.position.copy(p);
+  camera.rotation.set(pitch, yaw, 0, 'YXZ');
+}
+
+document.getElementById('walkBtn').onclick = ()=> mode==='walk' ? null : startWalk();
+document.getElementById('flyBtn').onclick = ()=> mode==='fly' ? overviewHome() : startFly();
+document.getElementById('speedBtn').onclick = e=>{ speedIdx=(speedIdx+1)%SPEEDS.length; e.target.textContent='Speed: '+SPEEDS[speedIdx][0]; };
+document.getElementById('treesBtn').onclick = e=>{ treeGroup.visible=!treeGroup.visible; e.target.classList.toggle('on',treeGroup.visible); };
+document.getElementById('namesBtn').onclick = e=>{ placeGroup.visible=!placeGroup.visible; e.target.classList.toggle('on',placeGroup.visible); };
+document.getElementById('pinsBtn').onclick = e=>{ pinGroup.visible=!pinGroup.visible; e.target.classList.toggle('on',pinGroup.visible); };
+addEventListener('resize', ()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); labels.setSize(innerWidth,innerHeight); });
+
+overviewHome(); setHelp(); window.__scene=scene; window.__cam=camera; window.__renderer=renderer;
+window.__mapToWorld=mapToWorld; window.__groundZ=groundZ;
+const HASHV={'#waterfront':[1203,1244],'#dininghall':[1351,1552],'#tennis':[1611,1680],'#circus':[475200-473409.9,4633315-4631704.4],'#dining':[1315,1530],'#zeiger':[1315,1530],'#courts':[1450,1585],'#atv':[1757,1706],'#cabins':[1565,1740],'#seniors':[1790,1665],'#juniors':[1555,1525]}; if (location.hash==='#ground-dining'){ const t=mapToWorld(1290,1560,groundZ(1290,1560)); camera.position.set(t.x,t.y+1.7,t.z); orbit.target.set(t.x+20,t.y+3,t.z+15); orbit.update(); }
+if (location.hash.startsWith('#top-')){ const k='#'+location.hash.slice(5); const [hx,hy]=HASHV[k]; const t=mapToWorld(hx,hy,groundZ(hx,hy)); orbit.target.copy(t); camera.position.set(t.x,t.y+90,t.z+0.01); orbit.update(); }
+else if (HASHV[location.hash]){ const [hx,hy]=HASHV[location.hash]; const t=mapToWorld(hx,hy,groundZ(hx,hy)); orbit.target.copy(t); camera.position.set(t.x-25,t.y+30,t.z+35); orbit.update(); }
+if (location.hash==='#pool'){ const t=mapToWorld(1612,1600,groundZ(1612,1600)); orbit.target.copy(t); camera.position.set(t.x-40,t.y+35,t.z+60); orbit.update(); }
+if (location.hash==='#eq'){ const t=mapToWorld(2010,1880,groundZ(2010,1880)); orbit.target.copy(t); camera.position.set(t.x-90,t.y+70,t.z+110); orbit.update(); }
+
+// ---------- areas (Go to… menu and #area=<key> links) ----------
+const AREAS = [
+  ['sports','Sports Center (court)','walk',[1730,1610],[1760,1610]],
+  ['canteen','Canteen','walk',[1745,1600],[1760,1598]],
+  ['circus','Circus','walk',[1790,1610],[1815,1610]],
+  ['dining','Dining Hall + tent','fly',[1353,1535]],
+  ['art','Art Center','walk',[1376,1580],[1395,1585]],
+  ['quad','Flagpole Quad','fly',[1395,1528]],
+  ['rechall','Rec Hall','fly',[1491,1645]],
+  ['waterfront','Waterfront','fly',[1203,1244]],
+  ['pool','Pool','fly',[1612,1600]],
+  ['tennis','Tennis','fly',[1611,1680]],
+  ['courts','Skate park + courts','fly',[1450,1585]],
+  ['cabins','Junior cabins','fly',[1565,1740]],
+  ['seniors','Senior cabins','fly',[1790,1665]],
+  ['equestrian','Equestrian','fly',[2010,1880]],
+  ['middlefield','The Middle Field','fly',[1938,1778]],
+  ['skilift','Old ski lift','walk',[1330,1830],[1327.5,1841]],
+  ['ropes','Rocks & ropes','fly',[1458,1872]],
+  ['dirtbikes','Dirtbike loop','fly',[1559.5,1442.5]],
+  ['riflery','Riflery (via the shortcut)','walk',[1468,1690],[1446,1700]],
+];
+function goWalkTo(a,b){ startFly(); walkPos.set(a[0],a[1],0); mode='walk'; orbit.enabled=false; yaw=Math.atan2(-(b[0]-a[0]), b[1]-a[1]); pitch=0;
+  document.getElementById('cross').style.display='block'; if (isTouch) document.getElementById('stick').style.display='block'; setButtons(); setHelp(); }
+function goFlyTo(a,dist=1){ if (mode!=='fly') startFly(); const t=mapToWorld(a[0],a[1],groundZ(a[0],a[1])); orbit.target.copy(t); camera.position.set(t.x-30*dist,t.y+35*dist,t.z+45*dist); orbit.update(); }
+function goArea(k){ const A=AREAS.find(a=>a[0]===k); if(!A) return false; if (A[2]==='walk') goWalkTo(A[3],A[4]); else goFlyTo(A[3]); return true; }
+{ const gl=document.getElementById('goList'); for (const [k,name] of AREAS){ const b=document.createElement('button'); b.textContent=name; b.onclick=()=>{ document.getElementById('goPanel').style.display='none'; goArea(k); try{ history.replaceState(null,'','#area='+k); }catch(e){} }; gl.appendChild(b); } }
+document.getElementById('goBtn').onclick=()=>{ document.exitPointerLock?.(); document.getElementById('goPanel').style.display='block'; };
+document.getElementById('goClose').onclick=()=>{ document.getElementById('goPanel').style.display='none'; };
+
+// ---------- reviewer notes (shared db: notes/<id> = {text, view, by, at}) ----------
+const noteGroup = new THREE.Group(); scene.add(noteGroup);
+const API='https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec';
+const LS=(k,v)=>{try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null;}};
+const rid=()=>Math.random().toString(36).slice(2,10);
+const me={id:LS('lrv_id')||'', token:LS('lrv_tok')||''}; if(!me.id){ me.id='r'+rid(); me.token=rid()+rid(); LS('lrv_id',me.id); LS('lrv_tok',me.token); }
+let allRows=[], serverMine=null; const notePanel=document.getElementById('notePanel'), noteMsg=document.getElementById('noteMsg');
+const escH=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function currentView(){ if (mode==='walk') return {mode:'walk', mx:+walkPos.x.toFixed(2), my:+walkPos.y.toFixed(2), yaw:+yaw.toFixed(3), pitch:+pitch.toFixed(3)};
+  const [mx,my]=worldToMap(orbit.target); return {mode:'fly', mx:+mx.toFixed(2), my:+my.toFixed(2), cx:+(camera.position.x-orbit.target.x).toFixed(2), cy:+(camera.position.y-orbit.target.y).toFixed(2), cz:+(camera.position.z-orbit.target.z).toFixed(2)}; }
+function showView(v){ if(!v) return; if (v.mode==='walk'){ startFly(); walkPos.set(v.mx,v.my,0); mode='walk'; orbit.enabled=false; yaw=v.yaw||0; pitch=v.pitch||0; document.getElementById('cross').style.display='block'; if (isTouch) document.getElementById('stick').style.display='block'; setButtons(); setHelp(); }
+  else { if (mode!=='fly') startFly(); const t=mapToWorld(v.mx,v.my,groundZ(v.mx,v.my)); orbit.target.copy(t); camera.position.set(t.x+(v.cx||-30),t.y+(v.cy||35),t.z+(v.cz||45)); orbit.update(); } }
+function nearestPlace(mx,my){ let best='', bd=1e9; for (const [n,x,y] of [...PLACES, ...PINS.map(q=>[q[1],q[2],q[3]])]){ const d=Math.hypot(x-mx,y-my); if (d<bd){ bd=d; best=n; } } return bd<80 ? 'near '+best : ''; }
+function localMine(){ try{ return JSON.parse(LS('lrv_data')||'null')||{}; }catch(e){ return {}; } }
+async function pullNotes(){ try{ const r=await fetch(API+'?action=all&t='+Date.now()); const j=await r.json(); const tri=(j.admin||{}).tri||{};
+    serverMine=((j.reviews||[]).find(x=>x&&x.id===me.id)||{}).data||null;
+    allRows=(j.reviews||[]).flatMap(x=>((x.data||{}).world||[]).filter(n=>n&&n.text&&!['done','invalid'].includes((tri[x.id+'|w|'+n.id]||{}).s)).map(n=>({...n, me:x.id===me.id, who:(x.data||{}).name||'A reviewer'})));
+  }catch(e){ console.warn('notes offline', e); }
+  const pend=(localMine().world||[]); for (const n of pend) if(!allRows.some(q=>q.id===n.id)) allRows.push({...n, me:true, who:'You'});
+  renderNotes(allRows); paintList(); }
+document.getElementById('noteBtn').onclick=()=>{ document.exitPointerLock?.(); const v=currentView(); notePanel._view=v;
+  document.getElementById('noteWhere').textContent=(nearestPlace(v.mx,v.my)?'You are '+nearestPlace(v.mx,v.my)+'. ':'')+'No login needed; everyone reviewing can see notes.';
+  document.getElementById('noteName').value=(serverMine&&serverMine.name)||localMine().name||''; noteMsg.textContent=''; notePanel.style.display='block'; };
+document.getElementById('noteCancel').onclick=()=>{ notePanel.style.display='none'; };
+document.getElementById('noteSave').onclick=async()=>{ const text=document.getElementById('noteText').value.trim(); if(!text){ noteMsg.textContent='Write something first.'; return; }
+  const pin=document.getElementById('notePin').checked, v=notePanel._view;
+  const note={id:rid(), text:text.slice(0,2000), view:pin?v:null, where:pin?nearestPlace(v.mx,v.my):'General', at:Date.now()};
+  // merge into this reviewer's saved doc (shared with the review site), never overwrite their other notes
+  const doc=Object.assign({entries:{},areas:{},gfb:{}}, localMine(), serverMine||{}); doc.world=[...(doc.world||[]).filter(n=>n.id!==note.id), note];
+  const nm=document.getElementById('noteName').value.trim(); if(nm) doc.name=nm; doc.at=new Date().toISOString();
+  LS('lrv_data', JSON.stringify(doc)); LS('lrv_dirty','1'); noteMsg.textContent='Saving…';
+  try{ const r=await fetch(API,{method:'POST',body:JSON.stringify({action:'save',id:me.id,token:me.token,data:doc})}); const j=await r.json(); if(!j.ok) throw new Error(j.error||'failed');
+    LS('lrv_dirty',''); serverMine=doc; noteMsg.textContent='Thanks! Saved.'; }
+  catch(e){ noteMsg.textContent='Saved in this browser; it will upload next time you open the review site.'; }
+  document.getElementById('noteText').value=''; allRows.push({...note, me:true, who:nm||'You'}); renderNotes(allRows); paintList(); setTimeout(()=>{ notePanel.style.display='none'; },1100); };
+document.getElementById('notesBtn').onclick=e=>{ noteGroup.visible=!noteGroup.visible; e.target.classList.toggle('on',noteGroup.visible); };
+const listPanel=document.getElementById('listPanel');
+document.getElementById('listBtn').onclick=()=>{ document.exitPointerLock?.(); paintList(); listPanel.style.display='block'; };
+document.getElementById('listClose').onclick=()=>{ listPanel.style.display='none'; };
+function paintList(){ const b=document.getElementById('listBody'); if(!b) return; const rows=[...allRows].sort((a,c)=>(c.at||0)-(a.at||0));
+  b.innerHTML=rows.length?rows.map((r,i)=>`<div style="padding:6px 0;border-bottom:1px solid #ffffff22"><b>${escH(r.who)}</b> <span class="sub">${escH(r.where||'')}</span><br>${escH(r.text)}${r.view?` <button data-go="${i}">Go there</button>`:''}</div>`).join(''):'<div class="sub">No notes yet. Use ✏️ Leave a note.</div>';
+  b.querySelectorAll('[data-go]').forEach(el=>el.onclick=()=>{ showView(rows[+el.dataset.go].view); listPanel.style.display='none'; }); }
+function renderNotes(rows){ for (const o of [...noteGroup.children]){ o.element?.remove(); noteGroup.remove(o); }
+  for (const r of rows){ const v=r.view; if(!v || typeof v.mx!=='number') continue; const el=document.createElement('div'); el.className='notelbl'; el.textContent='📝 '+String(r.text||'').slice(0,60); el.title=(r.who||'')+': '+String(r.text||'');
+    el.onclick=()=>{ showView(v); }; const o=new CSS2DObject(el); o.position.copy(mapToWorld(v.mx,v.my,groundZ(v.mx,v.my)+2.6)); noteGroup.add(o); } }
+pullNotes(); setInterval(pullNotes, 120000);
+if (location.hash.startsWith('#area=')) goArea(decodeURIComponent(location.hash.slice(6)));
+await setYear('2015');
+document.getElementById('loading').remove();
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(()=>{
+  updateSplatFade();
+  const dt = Math.min(0.1, clock.getDelta());
+  if (window.__fixedCam) {} else if (mode==='walk') walkStep(dt); else { flyStep(dt); orbit.update(); }
+  renderer.render(scene, camera); labels.render(scene, camera);
+});
+</script>
+</body>
+</html>

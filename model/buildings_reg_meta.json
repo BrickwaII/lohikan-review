@@ -1,0 +1,917 @@
+[
+ {
+  "id": "b001",
+  "map_xy": [
+   1374.9,
+   2404.7
+  ],
+  "area_m2": 24.5,
+  "ground_z": 490.1,
+  "eave_m": 4.9,
+  "ridge_m": 4.9,
+  "roof": "flat",
+  "angle_deg": 68.2,
+  "rect": 0.75,
+  "fit_rmse": 0.19
+ },
+ {
+  "id": "b002",
+  "map_xy": [
+   2025.7,
+   1930.6
+  ],
+  "area_m2": 1698.2,
+  "ground_z": 477.34,
+  "eave_m": 6.3,
+  "ridge_m": 11.2,
+  "roof": "gable_long",
+  "angle_deg": -115.7,
+  "rect": 0.92,
+  "fit_rmse": 0.17
+ },
+ {
+  "id": "b003",
+  "map_xy": [
+   1766.2,
+   1811.6
+  ],
+  "area_m2": 17.5,
+  "ground_z": 477.43,
+  "eave_m": 3.9,
+  "ridge_m": 3.9,
+  "roof": "flat",
+  "angle_deg": 146.3,
+  "rect": 0.86,
+  "fit_rmse": 0.11
+ },
+ {
+  "id": "b004",
+  "map_xy": [
+   1522.2,
+   1808.9
+  ],
+  "area_m2": 195.2,
+  "ground_z": 473.47,
+  "eave_m": 5.4,
+  "ridge_m": 8.5,
+  "roof": "gable_short",
+  "angle_deg": -63.4,
+  "rect": 0.77,
+  "fit_rmse": 0.79
+ },
+ {
+  "id": "b005",
+  "map_xy": [
+   1548.7,
+   1787.2
+  ],
+  "area_m2": 219.0,
+  "ground_z": 470.99,
+  "eave_m": 4.4,
+  "ridge_m": 8.5,
+  "roof": "gable_short",
+  "angle_deg": 114.4,
+  "rect": 0.73,
+  "fit_rmse": 0.16
+ },
+ {
+  "id": "b006",
+  "map_xy": [
+   1525.2,
+   1775.5
+  ],
+  "area_m2": 213.2,
+  "ground_z": 470.45,
+  "eave_m": 4.8,
+  "ridge_m": 8.4,
+  "roof": "gable_short",
+  "angle_deg": 125.5,
+  "rect": 0.83,
+  "fit_rmse": 0.33
+ },
+ {
+  "id": "b007",
+  "map_xy": [
+   1502.7,
+   1761.6
+  ],
+  "area_m2": 147.4,
+  "ground_z": 469.62,
+  "eave_m": 4.8,
+  "ridge_m": 8.1,
+  "roof": "gable_short",
+  "angle_deg": 135.0,
+  "rect": 0.71,
+  "fit_rmse": 0.2
+ },
+ {
+  "id": "b008",
+  "map_xy": [
+   1617.2,
+   1757.2
+  ],
+  "area_m2": 228.8,
+  "ground_z": 468.31,
+  "eave_m": 4.3,
+  "ridge_m": 8.4,
+  "roof": "gable_short",
+  "angle_deg": 84.8,
+  "rect": 0.81,
+  "fit_rmse": 0.18
+ },
+ {
+  "id": "b009",
+  "map_xy": [
+   1595.4,
+   1753.5
+  ],
+  "area_m2": 166.0,
+  "ground_z": 467.78,
+  "eave_m": 4.3,
+  "ridge_m": 6.6,
+  "roof": "gable_short",
+  "angle_deg": -82.9,
+  "rect": 0.7,
+  "fit_rmse": 0.28
+ },
+ {
+  "id": "b010",
+  "map_xy": [
+   1576.2,
+   1750.0
+  ],
+  "area_m2": 125.8,
+  "ground_z": 467.5,
+  "eave_m": 4.3,
+  "ridge_m": 5.3,
+  "roof": "gable_short",
+  "angle_deg": 101.3,
+  "rect": 0.72,
+  "fit_rmse": 0.41
+ },
+ {
+  "id": "b011",
+  "map_xy": [
+   1635.4,
+   1756.0
+  ],
+  "area_m2": 270.5,
+  "ground_z": 467.82,
+  "eave_m": 6.2,
+  "ridge_m": 8.5,
+  "roof": "hip",
+  "angle_deg": 97.6,
+  "rect": 0.55,
+  "fit_rmse": 0.93
+ },
+ {
+  "id": "b012",
+  "map_xy": [
+   1553.6,
+   1737.0
+  ],
+  "area_m2": 151.2,
+  "ground_z": 466.22,
+  "eave_m": 4.4,
+  "ridge_m": 6.2,
+  "roof": "gable_long",
+  "angle_deg": 45.0,
+  "rect": 0.8,
+  "fit_rmse": 0.32
+ },
+ {
+  "id": "b013",
+  "map_xy": [
+   1885.1,
+   1723.1
+  ],
+  "area_m2": 25.0,
+  "ground_z": 471.47,
+  "eave_m": 3.1,
+  "ridge_m": 4.2,
+  "roof": "gable_long",
+  "angle_deg": 0.0,
+  "rect": 0.83,
+  "fit_rmse": 0.26
+ },
+ {
+  "id": "b014",
+  "map_xy": [
+   1537.3,
+   1723.9
+  ],
+  "area_m2": 133.2,
+  "ground_z": 464.92,
+  "eave_m": 4.6,
+  "ridge_m": 6.3,
+  "roof": "gable_long",
+  "angle_deg": 45.0,
+  "rect": 0.78,
+  "fit_rmse": 0.3
+ },
+ {
+  "id": "b015",
+  "map_xy": [
+   1512.5,
+   1705.7
+  ],
+  "area_m2": 128.0,
+  "ground_z": 463.54,
+  "eave_m": 3.7,
+  "ridge_m": 5.3,
+  "roof": "gable_long",
+  "angle_deg": 39.8,
+  "rect": 0.87,
+  "fit_rmse": 0.18
+ },
+ {
+  "id": "b016",
+  "map_xy": [
+   1483.6,
+   1691.2
+  ],
+  "area_m2": 12.5,
+  "ground_z": 462.67,
+  "eave_m": 3.1,
+  "ridge_m": 4.2,
+  "roof": "shed_u",
+  "angle_deg": -33.7,
+  "rect": 0.83,
+  "fit_rmse": 0.23
+ },
+ {
+  "id": "b017",
+  "map_xy": [
+   1550.1,
+   1689.6
+  ],
+  "area_m2": 14.0,
+  "ground_z": 462.03,
+  "eave_m": 3.2,
+  "ridge_m": 3.2,
+  "roof": "flat",
+  "angle_deg": 90.0,
+  "rect": 0.88,
+  "fit_rmse": 0.17
+ },
+ {
+  "id": "b018",
+  "map_xy": [
+   1728.2,
+   1690.0
+  ],
+  "area_m2": 26.5,
+  "ground_z": 464.12,
+  "eave_m": 2.9,
+  "ridge_m": 4.1,
+  "roof": "shed_u",
+  "angle_deg": 0.0,
+  "rect": 0.88,
+  "fit_rmse": 0.3
+ },
+ {
+  "id": "b019",
+  "map_xy": [
+   1855.3,
+   1677.2
+  ],
+  "area_m2": 240.8,
+  "ground_z": 462.13,
+  "eave_m": 3.6,
+  "ridge_m": 7.8,
+  "roof": "gable_short",
+  "angle_deg": -110.6,
+  "rect": 0.81,
+  "fit_rmse": 0.27
+ },
+ {
+  "id": "b020",
+  "map_xy": [
+   1809.8,
+   1675.7
+  ],
+  "area_m2": 235.5,
+  "ground_z": 460.67,
+  "eave_m": 3.8,
+  "ridge_m": 7.9,
+  "roof": "gable_short",
+  "angle_deg": 63.4,
+  "rect": 0.79,
+  "fit_rmse": 0.3
+ },
+ {
+  "id": "b021",
+  "map_xy": [
+   1886.3,
+   1671.1
+  ],
+  "area_m2": 239.0,
+  "ground_z": 462.73,
+  "eave_m": 3.6,
+  "ridge_m": 7.8,
+  "roof": "gable_short",
+  "angle_deg": -111.8,
+  "rect": 0.79,
+  "fit_rmse": 0.27
+ },
+ {
+  "id": "b022",
+  "map_xy": [
+   1702.7,
+   1663.4
+  ],
+  "area_m2": 244.0,
+  "ground_z": 459.81,
+  "eave_m": 4.9,
+  "ridge_m": 9.2,
+  "roof": "gable_short",
+  "angle_deg": 0.0,
+  "rect": 0.89,
+  "fit_rmse": 0.19
+ },
+ {
+  "id": "b023",
+  "map_xy": [
+   1700.4,
+   1642.3
+  ],
+  "area_m2": 212.8,
+  "ground_z": 457.53,
+  "eave_m": 4.4,
+  "ridge_m": 8.5,
+  "roof": "gable_short",
+  "angle_deg": -4.1,
+  "rect": 0.85,
+  "fit_rmse": 0.29
+ },
+ {
+  "id": "b024",
+  "map_xy": [
+   1485.4,
+   1646.9
+  ],
+  "area_m2": 727.5,
+  "ground_z": 459.26,
+  "eave_m": 5.1,
+  "ridge_m": 6.9,
+  "roof": "gable_long",
+  "angle_deg": 172.2,
+  "rect": 0.86,
+  "fit_rmse": 0.15
+ },
+ {
+  "id": "b025",
+  "map_xy": [
+   1625.3,
+   1625.4
+  ],
+  "area_m2": 23.5,
+  "ground_z": 458.07,
+  "eave_m": 2.5,
+  "ridge_m": 3.8,
+  "roof": "gable_short",
+  "angle_deg": 0.0,
+  "rect": 0.78,
+  "fit_rmse": 0.16
+ },
+ {
+  "id": "b026",
+  "map_xy": [
+   1333.9,
+   1615.4
+  ],
+  "area_m2": 59.0,
+  "ground_z": 453.68,
+  "eave_m": 3.9,
+  "ridge_m": 3.9,
+  "roof": "flat",
+  "angle_deg": -6.3,
+  "rect": 0.77,
+  "fit_rmse": 0.03
+ },
+ {
+  "id": "b027",
+  "map_xy": [
+   1332.6,
+   1604.9
+  ],
+  "area_m2": 68.8,
+  "ground_z": 452.64,
+  "eave_m": 3.2,
+  "ridge_m": 3.2,
+  "roof": "flat",
+  "angle_deg": 172.9,
+  "rect": 0.73,
+  "fit_rmse": 0.32
+ },
+ {
+  "id": "b028",
+  "map_xy": [
+   1762.2,
+   1610.4
+  ],
+  "area_m2": 3259.6,
+  "ground_z": 454.2,
+  "eave_m": 2.5,
+  "ridge_m": 12.6,
+  "roof": "gable_long",
+  "angle_deg": 0.0,
+  "rect": 0.95,
+  "fit_rmse": 1.19
+ },
+ {
+  "id": "b029",
+  "map_xy": [
+   1385.8,
+   1589.6
+  ],
+  "area_m2": 1031.2,
+  "ground_z": 451.98,
+  "eave_m": 4.0,
+  "ridge_m": 5.5,
+  "roof": "gable_long",
+  "angle_deg": -8.5,
+  "rect": 0.81,
+  "fit_rmse": 0.58
+ },
+ {
+  "id": "b030",
+  "map_xy": [
+   1302.0,
+   1584.0
+  ],
+  "area_m2": 198.2,
+  "ground_z": 450.98,
+  "eave_m": 5.1,
+  "ridge_m": 6.4,
+  "roof": "gable_long",
+  "angle_deg": 173.7,
+  "rect": 0.82,
+  "fit_rmse": 0.26
+ },
+ {
+  "id": "b031",
+  "map_xy": [
+   1821.1,
+   1574.1
+  ],
+  "area_m2": 28.0,
+  "ground_z": 453.59,
+  "eave_m": 3.7,
+  "ridge_m": 3.7,
+  "roof": "flat",
+  "angle_deg": 0.0,
+  "rect": 0.93,
+  "fit_rmse": 0.18
+ },
+ {
+  "id": "b032",
+  "map_xy": [
+   1307.1,
+   1566.5
+  ],
+  "area_m2": 217.5,
+  "ground_z": 449.39,
+  "eave_m": 2.9,
+  "ridge_m": 4.4,
+  "roof": "gable_long",
+  "angle_deg": 175.2,
+  "rect": 0.85,
+  "fit_rmse": 0.22
+ },
+ {
+  "id": "b033",
+  "map_xy": [
+   1649.5,
+   1555.7
+  ],
+  "area_m2": 49.5,
+  "ground_z": 453.48,
+  "eave_m": 3.9,
+  "ridge_m": 5.4,
+  "roof": "hip",
+  "angle_deg": 90.0,
+  "rect": 0.88,
+  "fit_rmse": 0.36
+ },
+ {
+  "id": "b034",
+  "map_xy": [
+   1586.7,
+   1553.7
+  ],
+  "area_m2": 160.8,
+  "ground_z": 449.48,
+  "eave_m": 5.2,
+  "ridge_m": 6.5,
+  "roof": "shed_v",
+  "angle_deg": 0.0,
+  "rect": 0.74,
+  "fit_rmse": 0.44
+ },
+ {
+  "id": "b035",
+  "map_xy": [
+   1563.1,
+   1555.2
+  ],
+  "area_m2": 281.5,
+  "ground_z": 449.31,
+  "eave_m": 5.0,
+  "ridge_m": 5.0,
+  "roof": "flat",
+  "angle_deg": 0.0,
+  "rect": 0.75,
+  "fit_rmse": 0.51
+ },
+ {
+  "id": "b036",
+  "map_xy": [
+   1393.8,
+   1547.3
+  ],
+  "area_m2": 210.0,
+  "ground_z": 447.99,
+  "eave_m": 3.1,
+  "ridge_m": 5.6,
+  "roof": "gable_long",
+  "angle_deg": -9.5,
+  "rect": 0.68,
+  "fit_rmse": 0.26
+ },
+ {
+  "id": "b037",
+  "map_xy": [
+   1422.3,
+   1542.4
+  ],
+  "area_m2": 178.0,
+  "ground_z": 447.85,
+  "eave_m": 5.0,
+  "ridge_m": 7.0,
+  "roof": "gable_long",
+  "angle_deg": 0.0,
+  "rect": 0.81,
+  "fit_rmse": 0.34
+ },
+ {
+  "id": "b038",
+  "map_xy": [
+   1353.8,
+   1548.5
+  ],
+  "area_m2": 956.2,
+  "ground_z": 446.76,
+  "eave_m": 4.1,
+  "ridge_m": 7.7,
+  "roof": "gable_long",
+  "angle_deg": -10.1,
+  "rect": 0.83,
+  "fit_rmse": 0.35
+ },
+ {
+  "id": "b039",
+  "map_xy": [
+   1454.8,
+   1536.0
+  ],
+  "area_m2": 223.8,
+  "ground_z": 447.68,
+  "eave_m": 5.4,
+  "ridge_m": 7.1,
+  "roof": "gable_long",
+  "angle_deg": -11.3,
+  "rect": 0.72,
+  "fit_rmse": 0.24
+ },
+ {
+  "id": "b040",
+  "map_xy": [
+   1520.7,
+   1526.6
+  ],
+  "area_m2": 73.2,
+  "ground_z": 446.94,
+  "eave_m": 3.8,
+  "ridge_m": 4.8,
+  "roof": "gable_short",
+  "angle_deg": -90.0,
+  "rect": 0.81,
+  "fit_rmse": 0.16
+ },
+ {
+  "id": "b041",
+  "map_xy": [
+   1543.9,
+   1516.4
+  ],
+  "area_m2": 52.5,
+  "ground_z": 445.1,
+  "eave_m": 4.1,
+  "ridge_m": 5.0,
+  "roof": "gable_short",
+  "angle_deg": 123.7,
+  "rect": 0.71,
+  "fit_rmse": 0.38
+ },
+ {
+  "id": "b042",
+  "map_xy": [
+   1581.8,
+   1508.0
+  ],
+  "area_m2": 211.8,
+  "ground_z": 439.75,
+  "eave_m": 4.3,
+  "ridge_m": 6.9,
+  "roof": "gable_long",
+  "angle_deg": 172.9,
+  "rect": 0.78,
+  "fit_rmse": 0.24
+ },
+ {
+  "id": "b043",
+  "map_xy": [
+   1393.2,
+   1495.3
+  ],
+  "area_m2": 27.8,
+  "ground_z": 442.54,
+  "eave_m": 3.5,
+  "ridge_m": 4.5,
+  "roof": "shed_u",
+  "angle_deg": 90.0,
+  "rect": 0.79,
+  "fit_rmse": 0.28
+ },
+ {
+  "id": "b044",
+  "map_xy": [
+   1435.3,
+   1496.0
+  ],
+  "area_m2": 124.0,
+  "ground_z": 443.98,
+  "eave_m": 7.6,
+  "ridge_m": 8.9,
+  "roof": "hip",
+  "angle_deg": 0.0,
+  "rect": 0.73,
+  "fit_rmse": 0.37
+ },
+ {
+  "id": "b045",
+  "map_xy": [
+   1528.8,
+   1495.6
+  ],
+  "area_m2": 173.5,
+  "ground_z": 441.98,
+  "eave_m": 4.5,
+  "ridge_m": 6.0,
+  "roof": "gable_long",
+  "angle_deg": 180.0,
+  "rect": 0.79,
+  "fit_rmse": 0.28
+ },
+ {
+  "id": "b046",
+  "map_xy": [
+   1491.9,
+   1467.8
+  ],
+  "area_m2": 30.5,
+  "ground_z": 438.92,
+  "eave_m": 5.8,
+  "ridge_m": 7.3,
+  "roof": "shed_u",
+  "angle_deg": 78.7,
+  "rect": 0.77,
+  "fit_rmse": 0.21
+ },
+ {
+  "id": "b047",
+  "map_xy": [
+   1482.9,
+   1446.7
+  ],
+  "area_m2": 46.5,
+  "ground_z": 434.42,
+  "eave_m": 3.7,
+  "ridge_m": 4.6,
+  "roof": "shed_v",
+  "angle_deg": 45.0,
+  "rect": 0.69,
+  "fit_rmse": 0.33
+ },
+ {
+  "id": "b048",
+  "map_xy": [
+   1275.2,
+   1327.3
+  ],
+  "area_m2": 60.5,
+  "ground_z": 418.38,
+  "eave_m": 3.2,
+  "ridge_m": 4.5,
+  "roof": "shed_v",
+  "angle_deg": -26.6,
+  "rect": 0.72,
+  "fit_rmse": 0.12
+ },
+ {
+  "id": "b049",
+  "map_xy": [
+   1210.8,
+   1284.5
+  ],
+  "area_m2": 103.0,
+  "ground_z": 410.43,
+  "eave_m": 5.2,
+  "ridge_m": 6.7,
+  "roof": "gable_long",
+  "angle_deg": 135.0,
+  "rect": 0.74,
+  "fit_rmse": 0.31
+ },
+ {
+  "id": "b050",
+  "map_xy": [
+   1272.7,
+   1253.0
+  ],
+  "area_m2": 89.0,
+  "ground_z": 411.43,
+  "eave_m": 7.6,
+  "ridge_m": 8.3,
+  "roof": "hip",
+  "angle_deg": 0.0,
+  "rect": 0.76,
+  "fit_rmse": 0.23
+ },
+ {
+  "id": "b051",
+  "map_xy": [
+   1532.4,
+   1210.7
+  ],
+  "area_m2": 24.0,
+  "ground_z": 411.01,
+  "eave_m": 4.1,
+  "ridge_m": 4.1,
+  "roof": "flat",
+  "angle_deg": 0.0,
+  "rect": 0.86,
+  "fit_rmse": 0.05
+ },
+ {
+  "id": "b052",
+  "map_xy": [
+   1890.6,
+   1168.6
+  ],
+  "area_m2": 17.0,
+  "ground_z": 408.96,
+  "eave_m": 7.1,
+  "ridge_m": 8.3,
+  "roof": "hip",
+  "angle_deg": 143.1,
+  "rect": 0.89,
+  "fit_rmse": 0.22
+ },
+ {
+  "id": "b053",
+  "map_xy": [
+   2004.4,
+   1169.4
+  ],
+  "area_m2": 121.5,
+  "ground_z": 412.28,
+  "eave_m": 6.6,
+  "ridge_m": 8.3,
+  "roof": "gable_long",
+  "angle_deg": 172.9,
+  "rect": 0.85,
+  "fit_rmse": 0.21
+ },
+ {
+  "id": "b054",
+  "map_xy": [
+   2059.4,
+   1159.5
+  ],
+  "area_m2": 114.1,
+  "ground_z": 413.1,
+  "eave_m": 4.7,
+  "ridge_m": 5.6,
+  "roof": "gable_long",
+  "angle_deg": -21.8,
+  "rect": 0.6,
+  "fit_rmse": 0.32
+ },
+ {
+  "id": "b055",
+  "map_xy": [
+   1349.9,
+   1151.2
+  ],
+  "area_m2": 20.2,
+  "ground_z": 416.56,
+  "eave_m": 2.3,
+  "ridge_m": 4.0,
+  "roof": "gable_long",
+  "angle_deg": 180.0,
+  "rect": 0.72,
+  "fit_rmse": 0.11
+ },
+ {
+  "id": "b056",
+  "map_xy": [
+   2315.5,
+   1134.8
+  ],
+  "area_m2": 12.0,
+  "ground_z": 431.25,
+  "eave_m": 3.7,
+  "ridge_m": 4.4,
+  "roof": "shed_u",
+  "angle_deg": -153.4,
+  "rect": 0.86,
+  "fit_rmse": 0.15
+ },
+ {
+  "id": "b057",
+  "map_xy": [
+   2320.0,
+   1130.5
+  ],
+  "area_m2": 49.8,
+  "ground_z": 430.54,
+  "eave_m": 5.2,
+  "ridge_m": 6.9,
+  "roof": "shed_u",
+  "angle_deg": 39.8,
+  "rect": 0.63,
+  "fit_rmse": 0.42
+ },
+ {
+  "id": "b058",
+  "map_xy": [
+   2504.4,
+   1117.2
+  ],
+  "area_m2": 37.5,
+  "ground_z": 445.47,
+  "eave_m": 2.9,
+  "ridge_m": 6.0,
+  "roof": "hip",
+  "angle_deg": 101.3,
+  "rect": 0.55,
+  "fit_rmse": 0.61
+ },
+ {
+  "id": "b059",
+  "map_xy": [
+   1398.3,
+   1110.9
+  ],
+  "area_m2": 44.5,
+  "ground_z": 415.51,
+  "eave_m": 5.7,
+  "ridge_m": 5.7,
+  "roof": "flat",
+  "angle_deg": 0.0,
+  "rect": 0.79,
+  "fit_rmse": 0.24
+ },
+ {
+  "id": "b060",
+  "map_xy": [
+   2349.4,
+   1036.1
+  ],
+  "area_m2": 45.0,
+  "ground_z": 420.06,
+  "eave_m": 4.6,
+  "ridge_m": 4.6,
+  "roof": "flat",
+  "angle_deg": -126.9,
+  "rect": 0.82,
+  "fit_rmse": 0.26
+ },
+ {
+  "id": "b061",
+  "map_xy": [
+   2411.8,
+   1024.1
+  ],
+  "area_m2": 172.6,
+  "ground_z": 420.83,
+  "eave_m": 8.0,
+  "ridge_m": 8.0,
+  "roof": "flat",
+  "angle_deg": -18.4,
+  "rect": 0.74,
+  "fit_rmse": 0.4
+ }
+]
