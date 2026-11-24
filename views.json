@@ -58,8 +58,7 @@
        "modelPano": "pano/mp_sc_court.jpg",
        "short": "Court 360\u00b0",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 178.4,
-       "modelPanoPhoto": "pano/mp_sc_court.jpg"
+       "yaw0": 178.4
       },
       {
        "id": "mp_sc_cantdoor",
@@ -68,8 +67,7 @@
        "modelPano": "pano/mp_sc_cantdoor.jpg",
        "short": "Canteen entrance",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 91.0,
-       "modelPanoPhoto": "pano/mp_sc_cantdoor.jpg"
+       "yaw0": 91.0
       },
       {
        "id": "mp_sc_benches",
@@ -78,8 +76,7 @@
        "modelPano": "pano/mp_sc_benches.jpg",
        "short": "Benches",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 0.0,
-       "modelPanoPhoto": "pano/mp_sc_benches.jpg"
+       "yaw0": 0.0
       },
       {
        "id": "mp_sc_dj",
@@ -88,8 +85,7 @@
        "modelPano": "pano/mp_sc_dj.jpg",
        "short": "DJ booth",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 19.4,
-       "modelPanoPhoto": "pano/mp_sc_dj.jpg"
+       "yaw0": 19.4
       },
       {
        "id": "mp_sc_window",
@@ -98,8 +94,7 @@
        "modelPano": "pano/mp_sc_window.jpg",
        "short": "Canteen windows",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 92.0,
-       "modelPanoPhoto": "pano/mp_sc_window.jpg"
+       "yaw0": 92.0
       },
       {
        "id": "sc-in-w",
