@@ -106,7 +106,7 @@ for k, v in CABINS.items():
     units = [n + l for n in nums for l in ('A', 'B')] if k != '5' else [k]
     if k.isdigit() and 16 <= int(k) <= 24: units += [f'{k}-{i} (senior staff)' for i in range(1, 5)]
     units += {'1': ['Gaga court', 'Tetherballs'], '2-3': ['Tetherball (between 2 & 3)'], '4': ['Tetherball (between 3 & 4)']}.get(k, [])
-    PLACES.append(P('cabin-' + k, 'Cabins 2 & 3' if k == '2-3' else 'Cabin ' + k, 'Cabin 24 burned around 2024; this shows it as it was.' if k == '24' else ('Cabin 5 was overflow and almost never used.' if k == '5' else ''),
+    PLACES.append(P('cabin-' + k, 'Cabins 2 & 3' if k == '2-3' else ('Cabin 24 - Pre 2024 fire' if k == '24' else 'Cabin ' + k), 'Cabin 24 burned around 2024; this shows it as it was.' if k == '24' else ('Cabin 5 was overflow and almost never used.' if k == '5' else ''),
                     c=v[:2] if v else None, w=max(30, v[2] * 2.2 + 10) if v else 40, auto=bool(v), soon=units))
 
 def cab(*ks): return [{"ref": 'cabin-' + k} for k in ks if k in CABINS]
