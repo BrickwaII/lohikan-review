@@ -5036,7 +5036,21 @@
        "area": "cabin-22",
        "view": "cabin-22-top",
        "label": "From above",
-       "key": "rmwttdq5k66osel0|mwty9uupriy2wk8"
+       "key": "rmwttdq5k66osel0|mwty9uupriy2wk8",
+       "shots": [
+        {
+         "label": "Real photo",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty9uupriy2wk8_0.jpg"
+        },
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty9uupriy2wk8_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty9uupriy2wk8_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5053,7 +5067,17 @@
        "area": "tennis",
        "view": "tennis-se",
        "label": "From the southeast",
-       "key": "rmwttdq5k66osel0|mwty3akf4rezinr"
+       "key": "rmwttdq5k66osel0|mwty3akf4rezinr",
+       "shots": [
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty3akf4rezinr_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty3akf4rezinr_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5070,7 +5094,17 @@
        "area": "volleyball",
        "view": "vb-1",
        "label": "Sand court from the southwest",
-       "key": "rmwttdq5k66osel0|mwtxy11wbhqpwo1"
+       "key": "rmwttdq5k66osel0|mwtxy11wbhqpwo1",
+       "shots": [
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxy11wbhqpwo1_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxy11wbhqpwo1_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5087,7 +5121,17 @@
        "area": "soccer",
        "view": "soccer-se",
        "label": "From the southeast",
-       "key": "rmwttdq5k66osel0|mwty0ervrmjhtff"
+       "key": "rmwttdq5k66osel0|mwty0ervrmjhtff",
+       "shots": [
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty0ervrmjhtff_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty0ervrmjhtff_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5095,7 +5139,17 @@
        "area": "soccer",
        "view": "soccer-se",
        "label": "From the southeast",
-       "key": "rmwttdq5k66osel0|mwty0rqnqg2c4dc"
+       "key": "rmwttdq5k66osel0|mwty0rqnqg2c4dc",
+       "shots": [
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty0rqnqg2c4dc_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwty0rqnqg2c4dc_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5112,7 +5166,17 @@
        "area": "amphitheater",
        "view": "amphitheater-se",
        "label": "From the southeast",
-       "key": "rmwtx81orci1cerp|mwtym9uyxbatpxt"
+       "key": "rmwtx81orci1cerp|mwtym9uyxbatpxt",
+       "shots": [
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtym9uyxbatpxt_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtym9uyxbatpxt_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry (phone)",
@@ -5120,7 +5184,21 @@
        "area": "amphitheater",
        "view": "s17-360",
        "label": "Amphitheater & Lower Office in 360\u00b0",
-       "key": "rmwtx81orci1cerp|mwtymovmwr59gsh"
+       "key": "rmwtx81orci1cerp|mwtymovmwr59gsh",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtymovmwr59gsh_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtymovmwr59gsh_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtymovmwr59gsh_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry (phone)",
@@ -5128,7 +5206,21 @@
        "area": "amphitheater",
        "view": "s17-360",
        "label": "Amphitheater & Lower Office in 360\u00b0",
-       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc"
+       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtyn0yknehllsc_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtyn0yknehllsc_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtyn0yknehllsc_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry (phone)",
@@ -5136,7 +5228,21 @@
        "area": "amphitheater",
        "view": "s17-360",
        "label": "Amphitheater & Lower Office in 360\u00b0",
-       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo"
+       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtynwlzuvzgpgo_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtynwlzuvzgpgo_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtynwlzuvzgpgo_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5152,7 +5258,21 @@
        "area": "basketball",
        "view": "basketball-top",
        "label": "From above",
-       "key": "rmwttdq5k66osel0|mwtz7nd05qnx5cn"
+       "key": "rmwttdq5k66osel0|mwtz7nd05qnx5cn",
+       "shots": [
+        {
+         "label": "Real photo",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtz7nd05qnx5cn_0.jpg"
+        },
+        {
+         "label": "Model before (pin here)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtz7nd05qnx5cn_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtz7nd05qnx5cn_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5169,7 +5289,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwttvk7rd3sdd3u"
+       "key": "rmwttdq5k66osel0|mwttvk7rd3sdd3u",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwttvk7rd3sdd3u_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwttvk7rd3sdd3u_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwttvk7rd3sdd3u_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5177,7 +5311,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtty0ncanp4ph7"
+       "key": "rmwttdq5k66osel0|mwtty0ncanp4ph7",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtty0ncanp4ph7_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtty0ncanp4ph7_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtty0ncanp4ph7_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5185,7 +5333,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvra45p8qt8ik"
+       "key": "rmwttdq5k66osel0|mwtvra45p8qt8ik",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvra45p8qt8ik_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvra45p8qt8ik_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvra45p8qt8ik_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5193,7 +5355,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvsbpww1og9ju"
+       "key": "rmwttdq5k66osel0|mwtvsbpww1og9ju",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvsbpww1og9ju_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvsbpww1og9ju_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvsbpww1og9ju_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5201,7 +5377,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvth6zp3susjw"
+       "key": "rmwttdq5k66osel0|mwtvth6zp3susjw",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvth6zp3susjw_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvth6zp3susjw_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvth6zp3susjw_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5209,7 +5399,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvucqhbjm7jpw"
+       "key": "rmwttdq5k66osel0|mwtvucqhbjm7jpw",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvucqhbjm7jpw_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvucqhbjm7jpw_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvucqhbjm7jpw_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5217,7 +5421,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvuofitufcywi"
+       "key": "rmwttdq5k66osel0|mwtvuofitufcywi",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvuofitufcywi_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvuofitufcywi_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvuofitufcywi_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5225,7 +5443,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvvch7gi509yv"
+       "key": "rmwttdq5k66osel0|mwtvvch7gi509yv",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvvch7gi509yv_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvvch7gi509yv_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvvch7gi509yv_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5233,7 +5465,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvwv0cdr8gfcu"
+       "key": "rmwttdq5k66osel0|mwtvwv0cdr8gfcu",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5241,7 +5487,21 @@
        "area": "circus",
        "view": "s07-360",
        "label": "Circus floor in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtvxktkyjel4ix"
+       "key": "rmwttdq5k66osel0|mwtvxktkyjel4ix",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvxktkyjel4ix_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvxktkyjel4ix_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtvxktkyjel4ix_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5258,7 +5518,21 @@
        "area": "pottery",
        "view": "s30-360",
        "label": "Pottery in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtxvswuzo1aetw"
+       "key": "rmwttdq5k66osel0|mwtxvswuzo1aetw",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxvswuzo1aetw_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxvswuzo1aetw_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxvswuzo1aetw_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5266,7 +5540,21 @@
        "area": "pottery",
        "view": "s30-360",
        "label": "Pottery in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtxw4dm1gyh1ci"
+       "key": "rmwttdq5k66osel0|mwtxw4dm1gyh1ci",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxw4dm1gyh1ci_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxw4dm1gyh1ci_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxw4dm1gyh1ci_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5274,7 +5562,21 @@
        "area": "pottery",
        "view": "s30-360",
        "label": "Pottery in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtxwhu4eeom2wu"
+       "key": "rmwttdq5k66osel0|mwtxwhu4eeom2wu",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwhu4eeom2wu_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwhu4eeom2wu_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwhu4eeom2wu_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5282,7 +5584,21 @@
        "area": "pottery",
        "view": "s30-360",
        "label": "Pottery in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtxwhu4eeom2wu"
+       "key": "rmwttdq5k66osel0|mwtxwhu4eeom2wu",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwhu4eeom2wu_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwhu4eeom2wu_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwhu4eeom2wu_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5290,7 +5606,21 @@
        "area": "pottery",
        "view": "s30-360",
        "label": "Pottery in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtxwtawomugs0n"
+       "key": "rmwttdq5k66osel0|mwtxwtawomugs0n",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwtawomugs0n_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwtawomugs0n_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxwtawomugs0n_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5298,7 +5628,21 @@
        "area": "pottery",
        "view": "s30-360",
        "label": "Pottery in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtxxk2sr3yxu5v"
+       "key": "rmwttdq5k66osel0|mwtxxk2sr3yxu5v",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5315,7 +5659,21 @@
        "area": "horses",
        "view": "s11-360",
        "label": "Barn & indoor ring in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwu0fq4blqnep96"
+       "key": "rmwttdq5k66osel0|mwu0fq4blqnep96",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu0fq4blqnep96_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu0fq4blqnep96_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu0fq4blqnep96_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry",
@@ -5323,7 +5681,21 @@
        "area": "horses",
        "view": "s11-360",
        "label": "Barn & indoor ring in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwu0g5vr8gove3u"
+       "key": "rmwttdq5k66osel0|mwu0g5vr8gove3u",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu0g5vr8gove3u_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu0g5vr8gove3u_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu0g5vr8gove3u_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5340,7 +5712,21 @@
        "area": "gym",
        "view": "s34-360",
        "label": "Gymnastics room in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwtteebejwywjrt"
+       "key": "rmwttdq5k66osel0|mwtteebejwywjrt",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtteebejwywjrt_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtteebejwywjrt_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwtteebejwywjrt_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5373,7 +5759,21 @@
        "area": "pool",
        "view": "s22-360",
        "label": "Pool in 360\u00b0",
-       "key": "rmwttdq5k66osel0|mwu13jgr0hstto2"
+       "key": "rmwttdq5k66osel0|mwu13jgr0hstto2",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu13jgr0hstto2_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu13jgr0hstto2_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwttdq5k66osel0_mwu13jgr0hstto2_2.jpg"
+        }
+       ]
       }
      ]
     },
@@ -5390,7 +5790,21 @@
        "area": "amphitheater",
        "view": "s17-360",
        "label": "Amphitheater & Lower Office in 360\u00b0",
-       "key": "rmwtx81orci1cerp|mwtymovmwr59gsh"
+       "key": "rmwtx81orci1cerp|mwtymovmwr59gsh",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtymovmwr59gsh_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtymovmwr59gsh_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtymovmwr59gsh_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry (phone)",
@@ -5398,7 +5812,21 @@
        "area": "amphitheater",
        "view": "s17-360",
        "label": "Amphitheater & Lower Office in 360\u00b0",
-       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc"
+       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtyn0yknehllsc_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtyn0yknehllsc_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtyn0yknehllsc_2.jpg"
+        }
+       ]
       },
       {
        "who": "Henry (phone)",
@@ -5406,7 +5834,21 @@
        "area": "amphitheater",
        "view": "s17-360",
        "label": "Amphitheater & Lower Office in 360\u00b0",
-       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo"
+       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtynwlzuvzgpgo_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtynwlzuvzgpgo_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v5_rmwtx81orci1cerp_mwtynwlzuvzgpgo_2.jpg"
+        }
+       ]
       }
      ]
     },
