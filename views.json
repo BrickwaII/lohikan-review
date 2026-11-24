@@ -5035,7 +5035,8 @@
        "t": "the cabin appears to be at the wrong angle and also completely backwards, the stairs should be facing the other direction torwards the road, so it needs to be rotated like 160 degrees clockwise or something",
        "area": "cabin-22",
        "view": "cabin-22-top",
-       "label": "From above"
+       "label": "From above",
+       "key": "rmwttdq5k66osel0|mwty9uupriy2wk8"
       }
      ]
     },
@@ -5051,7 +5052,8 @@
        "t": "the 3 back courts should have the same textures as the rest, but it looks cut off and replaced with google maps data.",
        "area": "tennis",
        "view": "tennis-se",
-       "label": "From the southeast"
+       "label": "From the southeast",
+       "key": "rmwttdq5k66osel0|mwty3akf4rezinr"
       }
      ]
     },
@@ -5067,7 +5069,8 @@
        "t": "The entire sand bit for the volley ball court should be consistent.",
        "area": "volleyball",
        "view": "vb-1",
-       "label": "Sand court from the southwest"
+       "label": "Sand court from the southwest",
+       "key": "rmwttdq5k66osel0|mwtxy11wbhqpwo1"
       }
      ]
     },
@@ -5083,14 +5086,16 @@
        "t": "on this edge of the entire field there is a metal fence that wraps around to the east side as well.  All the area within the fence (bordered by the road with between the field and circus, and the hill up towards 23 and 24 should be one flat consisteny field the areas up the hill and such should not be the same sports field texture.",
        "area": "soccer",
        "view": "soccer-se",
-       "label": "From the southeast"
+       "label": "From the southeast",
+       "key": "rmwttdq5k66osel0|mwty0ervrmjhtff"
       },
       {
        "who": "Henry",
        "t": "this is the hill up to 23 and 24, no longer the field",
        "area": "soccer",
        "view": "soccer-se",
-       "label": "From the southeast"
+       "label": "From the southeast",
+       "key": "rmwttdq5k66osel0|mwty0rqnqg2c4dc"
       }
      ]
     },
@@ -5106,28 +5111,32 @@
        "t": "You can\u2019t see the L from the back",
        "area": "amphitheater",
        "view": "amphitheater-se",
-       "label": "From the southeast"
+       "label": "From the southeast",
+       "key": "rmwtx81orci1cerp|mwtym9uyxbatpxt"
       },
       {
        "who": "Henry (phone)",
        "t": "The stairway here is missing",
        "area": "amphitheater",
        "view": "s17-360",
-       "label": "Amphitheater & Lower Office in 360\u00b0"
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtymovmwr59gsh"
       },
       {
        "who": "Henry (phone)",
        "t": "The wooden fence on the other side of the wall is missing",
        "area": "amphitheater",
        "view": "s17-360",
-       "label": "Amphitheater & Lower Office in 360\u00b0"
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc"
       },
       {
        "who": "Henry (phone)",
        "t": "It\u2019s a bit hard to see from this angle but there are red benches on top of the hill circling the amphitheater, and they are missing",
        "area": "amphitheater",
        "view": "s17-360",
-       "label": "Amphitheater & Lower Office in 360\u00b0"
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo"
       }
      ]
     },
@@ -5142,7 +5151,8 @@
        "t": "this google maps image has bad contrast, can we just fix the colors of this a bit by editing the contrast settings for this picure?",
        "area": "basketball",
        "view": "basketball-top",
-       "label": "From above"
+       "label": "From above",
+       "key": "rmwttdq5k66osel0|mwtz7nd05qnx5cn"
       }
      ]
     },
@@ -5158,70 +5168,80 @@
        "t": "the two rows of windows this wall are missing, and the walls do not go all the way down to the floor.",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwttvk7rd3sdd3u"
       },
       {
        "who": "Henry",
        "t": "the silks floatin in the air here right now are distracting, the circus building as many arrangements of different circus equipment being raised and lowered, lets just begin with no equipment dangling.  Only the flying trapeze because it is always there (except for circus shows), and is always in the same place.  Later on we can adapt the buiding to have options for lowering and raising different circus equipment.",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtty0ncanp4ph7"
       },
       {
        "who": "Henry",
        "t": "This area should be open, and the area to the left should be closed",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvra45p8qt8ik"
       },
       {
        "who": "Henry",
        "t": "this is a door to backstage, there should be a door here (two doors folding inward), and the room behind it is circus backstage which should have its own section on this page.",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvsbpww1og9ju"
       },
       {
        "who": "Henry",
        "t": "look at the pin on the real image and not the model for this one, it looks like there is a bit out of sync here.  this is another set of double doors which opens up to the circus shed, its own sub area here.",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvth6zp3susjw"
       },
       {
        "who": "Henry",
        "t": "this panel should be open, and from here you should see a door to gymnastics and the door to get into dance. on around the corner on the right",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvucqhbjm7jpw"
       },
       {
        "who": "Henry",
        "t": "this area of the wall should have the same star patters",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvuofitufcywi"
       },
       {
        "who": "Henry",
        "t": "this area, where the panels are open on the corner of the building should be represented right.",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvvch7gi509yv"
       },
       {
        "who": "Henry",
        "t": "there should be windows along this wall, and all around the buildings the windows do not go all the way to the top before the rafters, there should be another chunk of all before the rafters, and the blue start patter does not continue into the rafters.  the poles on this wall are also not painted right, the red paint isn't there.",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvwv0cdr8gfcu"
       },
       {
        "who": "Henry",
        "t": "The density of the rafters isn't correct.  there are more of them, but they are thin than the ones in the model.",
        "area": "circus",
        "view": "s07-360",
-       "label": "Circus floor in 360\u00b0"
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvxktkyjel4ix"
       }
      ]
     },
@@ -5237,42 +5257,48 @@
        "t": "the back room with the kiln is missing",
        "area": "pottery",
        "view": "s30-360",
-       "label": "Pottery in 360\u00b0"
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxvswuzo1aetw"
       },
       {
        "who": "Henry",
        "t": "i don't know what this room is but it is also missing, probably a closet.",
        "area": "pottery",
        "view": "s30-360",
-       "label": "Pottery in 360\u00b0"
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxw4dm1gyh1ci"
       },
       {
        "who": "Henry",
        "t": "window is missing",
        "area": "pottery",
        "view": "s30-360",
-       "label": "Pottery in 360\u00b0"
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxwhu4eeom2wu"
       },
       {
        "who": "Henry",
        "t": "window is missing",
        "area": "pottery",
        "view": "s30-360",
-       "label": "Pottery in 360\u00b0"
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxwhu4eeom2wu"
       },
       {
        "who": "Henry",
        "t": "there should be two windows on either side of the door",
        "area": "pottery",
        "view": "s30-360",
-       "label": "Pottery in 360\u00b0"
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxwtawomugs0n"
       },
       {
        "who": "Henry",
        "t": "the ceiling in this room is flat.  You cannot see into the arts and crafts building at all/",
        "area": "pottery",
        "view": "s30-360",
-       "label": "Pottery in 360\u00b0"
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxxk2sr3yxu5v"
       }
      ]
     },
@@ -5288,14 +5314,16 @@
        "t": "the celing should be flat, with rafters going from the ceiling to the actual roof.",
        "area": "horses",
        "view": "s11-360",
-       "label": "Barn & indoor ring in 360\u00b0"
+       "label": "Barn & indoor ring in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu0fq4blqnep96"
       },
       {
        "who": "Henry",
        "t": "the door is missing, and the wall should go all the way to the ground",
        "area": "horses",
        "view": "s11-360",
-       "label": "Barn & indoor ring in 360\u00b0"
+       "label": "Barn & indoor ring in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu0g5vr8gove3u"
       }
      ]
     },
@@ -5311,7 +5339,8 @@
        "t": "This window and all the other windows are missing on this wall of the building",
        "area": "gym",
        "view": "s34-360",
-       "label": "Gymnastics room in 360\u00b0"
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtteebejwywjrt"
       }
      ]
     },
@@ -5343,7 +5372,8 @@
        "t": "the benches on the south end of the pool model are facing the wrong way and there should be 4 of them",
        "area": "pool",
        "view": "s22-360",
-       "label": "Pool in 360\u00b0"
+       "label": "Pool in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu13jgr0hstto2"
       }
      ]
     },
@@ -5359,21 +5389,24 @@
        "t": "The stairway here is missing",
        "area": "amphitheater",
        "view": "s17-360",
-       "label": "Amphitheater & Lower Office in 360\u00b0"
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtymovmwr59gsh"
       },
       {
        "who": "Henry (phone)",
        "t": "The wooden fence on the other side of the wall is missing",
        "area": "amphitheater",
        "view": "s17-360",
-       "label": "Amphitheater & Lower Office in 360\u00b0"
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc"
       },
       {
        "who": "Henry (phone)",
        "t": "It\u2019s a bit hard to see from this angle but there are red benches on top of the hill circling the amphitheater, and they are missing",
        "area": "amphitheater",
        "view": "s17-360",
-       "label": "Amphitheater & Lower Office in 360\u00b0"
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo"
       }
      ]
     },
