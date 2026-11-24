@@ -1,5 +1,5 @@
 {
- "version": "v7",
+ "version": "v8",
  "title": "Camp Lohikan 3D review",
  "api": "https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec",
  "areas": {
@@ -6828,6 +6828,441 @@
        "label": "Anything else",
        "key": "rmwttdq5k66osel0|a|skate"
       }
+     ]
+    }
+   ]
+  },
+  {
+   "version": "v8",
+   "date": "Nov 24, 2026",
+   "items": [
+    {
+     "place": "Circus",
+     "title": "Redo: north wall now 13 bays (~2.6 m posts, measured in the 360) with the 5 bays from the middle to the NE corner open; south stays 10 bays; east wall back to a ~2.8 m opening with a raised middle section; two rows of windows cut right through the east wall (and the high row through the west wall) so you see outside, not the star wall; triangle artifact removed (plain navy gable); star doors centred in their bays",
+     "before": "img/changes/v8_circus_before.jpg",
+     "after": "img/changes/v8_circus_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the two rows of windows this wall are missing, and the walls do not go all the way down to the floor.\n\u21b3 On the v7 fix: the second row of windows is still not present, the height of the walls was raised instead which is incorrect, it was closer to correct before (but there should be a heighted section in the middle.  there is now some weird triangular artifact which shouldn't be there, there still aren't the right number of pillars on this wall",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwttvk7rd3sdd3u",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwttvk7rd3sdd3u_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwttvk7rd3sdd3u_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwttvk7rd3sdd3u_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "this area, where the panels are open on the corner of the building should be represented right.\n\u21b3 On the v7 fix: still the wrong number of supports and how many of them are open.",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvvch7gi509yv",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtvvch7gi509yv_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtvvch7gi509yv_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtvvch7gi509yv_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "there should be windows along this wall, and all around the buildings the windows do not go all the way to the top before the rafters, there should be another chunk of all before the rafters, and the blue start patter does not continue into the rafters.  the poles on this wall are also not painted right, the red paint isn't there.\n\u21b3 On the v7 fix: the last version of the fix was correct, i don't understand what happened.  it looks like you made the windows transparent but now instead of seeing outside i see the start wall.  the windows need to go all the way through the wall",
+       "area": "circus",
+       "view": "s07-360",
+       "label": "Circus floor in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtvwv0cdr8gfcu",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtvwv0cdr8gfcu_2.jpg"
+        }
+       ]
+      }
+     ],
+     "replaces": [
+      "v7-0"
+     ]
+    },
+    {
+     "place": "Pottery",
+     "title": "Redo: back window moved into the right-hand corner; second east window so there is one either side; kiln in the back room; ceiling thickened and tucked into every wall to close the gap",
+     "before": "img/changes/v8_pottery_before.jpg",
+     "after": "img/changes/v8_pottery_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the back room with the kiln is missing",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxvswuzo1aetw",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxvswuzo1aetw_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxvswuzo1aetw_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxvswuzo1aetw_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "window is missing\n\u21b3 On the v7 fix: this window is in the wrong place",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxw9s0jwelria",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxw9s0jwelria_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxw9s0jwelria_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxw9s0jwelria_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "there should be two windows on either side of the door",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxwtawomugs0n",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxwtawomugs0n_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxwtawomugs0n_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxwtawomugs0n_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the ceiling in this room is flat.  You cannot see into the arts and crafts building at all/\n\u21b3 On the v7 fix: there is still a gap i can see through",
+       "area": "pottery",
+       "view": "s30-360",
+       "label": "Pottery in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtxxk2sr3yxu5v",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtxxk2sr3yxu5v_2.jpg"
+        }
+       ]
+      }
+     ],
+     "replaces": [
+      "v7-1"
+     ]
+    },
+    {
+     "place": "Barn indoor ring",
+     "title": "Redo: end door open (daylight down the stall-barn aisle), moved right to where the 360 shows it; end wall runs down to the ground",
+     "before": "img/changes/v8_barn_before.jpg",
+     "after": "img/changes/v8_barn_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the door is missing, and the wall should go all the way to the ground\n\u21b3 On the v7 fix: the door is still not there and open",
+       "area": "horses",
+       "view": "s11-360",
+       "label": "Barn & indoor ring in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu0g5vr8gove3u",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwu0g5vr8gove3u_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwu0g5vr8gove3u_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwu0g5vr8gove3u_2.jpg"
+        }
+       ]
+      }
+     ],
+     "replaces": [
+      "v7-2"
+     ]
+    },
+    {
+     "place": "Gymnastics",
+     "title": "Redo: both end walls smooth mint with the door in the middle and a window either side; north windows are real openings now, you can see outside through them",
+     "before": "img/changes/v8_gym_before.jpg",
+     "after": "img/changes/v8_gym_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "This window and all the other windows are missing on this wall of the building",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwtteebejwywjrt",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtteebejwywjrt_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtteebejwywjrt_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwtteebejwywjrt_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the tumble track should be all the way against the tall wall, and it shouldn't go as far to toward the east end.",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv39sa29jnkbsy",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv39sa29jnkbsy_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv39sa29jnkbsy_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv39sa29jnkbsy_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the door is missing\n\u21b3 On the v7 fix: the door is there, but too close to the wall, it should be in the middle.  also tat wall should all be the same color and not the same teture as the wall on the south end, its all a smooth mint color",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv39xsm8diyt8w",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv39xsm8diyt8w_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv39xsm8diyt8w_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv39xsm8diyt8w_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry",
+       "t": "the door is missing\n\u21b3 On the v7 fix: the door should be in the middle with windows on either side of it",
+       "area": "gym",
+       "view": "s34-360",
+       "label": "Gymnastics room in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv3a6roz2o97vq",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv3a6roz2o97vq_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv3a6roz2o97vq_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv3a6roz2o97vq_2.jpg"
+        }
+       ]
+      }
+     ],
+     "replaces": [
+      "v7-3"
+     ]
+    },
+    {
+     "place": "Pool",
+     "title": "Redo: the 4 benches moved to the far end deck past the end of the pool, in a row facing back along the lanes toward the pool",
+     "before": "img/changes/v8_pool_before.jpg",
+     "after": "img/changes/v8_pool_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the benches on the south end of the pool model are facing the wrong way and there should be 4 of them\n\u21b3 On the v7 fix: the benches are still facing the wrong way",
+       "area": "pool",
+       "view": "s22-360",
+       "label": "Pool in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwu13jgr0hstto2",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwu13jgr0hstto2_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwu13jgr0hstto2_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwu13jgr0hstto2_2.jpg"
+        }
+       ]
+      }
+     ],
+     "replaces": [
+      "v7-4"
+     ]
+    },
+    {
+     "place": "Amphitheater",
+     "title": "Removed the split-rail fence (waiting on your guidance from another angle)",
+     "before": "img/changes/v8_amph_before.jpg",
+     "after": "img/changes/v8_amph_after.jpg",
+     "notes": [
+      {
+       "who": "Henry (phone)",
+       "t": "The wooden fence on the other side of the wall is missing\n\u21b3 On the v7 fix: remove this fence, it is all wrong and ill need to give you more guidance from another angle i think",
+       "area": "amphitheater",
+       "view": "s17-360",
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtyn0yknehllsc",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwtx81orci1cerp_mwtyn0yknehllsc_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwtx81orci1cerp_mwtyn0yknehllsc_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwtx81orci1cerp_mwtyn0yknehllsc_2.jpg"
+        }
+       ]
+      },
+      {
+       "who": "Henry (phone)",
+       "t": "It\u2019s a bit hard to see from this angle but there are red benches on top of the hill circling the amphitheater, and they are missing",
+       "area": "amphitheater",
+       "view": "s17-360",
+       "label": "Amphitheater & Lower Office in 360\u00b0",
+       "key": "rmwtx81orci1cerp|mwtynwlzuvzgpgo",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwtx81orci1cerp_mwtynwlzuvzgpgo_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwtx81orci1cerp_mwtynwlzuvzgpgo_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwtx81orci1cerp_mwtynwlzuvzgpgo_2.jpg"
+        }
+       ]
+      }
+     ],
+     "replaces": [
+      "v7-5"
+     ]
+    },
+    {
+     "place": "Bungee trampoline",
+     "title": "Storage closet moved to the gazebo edge between the basketball fence and the gazebo, door facing the gazebo",
+     "before": "img/changes/v8_bungee_before.jpg",
+     "after": "img/changes/v8_bungee_after.jpg",
+     "notes": [
+      {
+       "who": "Henry",
+       "t": "the storage closet here is missing\n\u21b3 On the v7 fix: the closet is between the basket ball fense and the gazebo, openning towards the gazebo, its in the wrong place",
+       "area": "bungee",
+       "view": "s29-360",
+       "label": "Bungee trampoline in 360\u00b0",
+       "key": "rmwttdq5k66osel0|mwv3c8tjaqoghb6",
+       "shots": [
+        {
+         "label": "Real 360 (what they saw)",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv3c8tjaqoghb6_0.jpg"
+        },
+        {
+         "label": "Model before",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv3c8tjaqoghb6_1.jpg"
+        },
+        {
+         "label": "Model after",
+         "src": "img/changes/pins/v8_rmwttdq5k66osel0_mwv3c8tjaqoghb6_2.jpg"
+        }
+       ]
+      }
+     ],
+     "replaces": [
+      "v7-7"
      ]
     }
    ]

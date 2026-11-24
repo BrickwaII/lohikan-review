@@ -73,6 +73,14 @@ export function buildSportsCenter(renderer, opts = {}) {
   };
 
   // helper: plane between two points along x, spanning y0..y1 at fixed z, or sloped roof planes
+  /* v8: flat wall from xa..xb, y0..y1 at depth z, with rectangular holes [[hx0, hy0, hx1, hy1], ...] so windows are real openings */
+  function holedWall(xa, xb, y0, y1, z, holes, material, uvs = 4) {
+    const sh = new THREE.Shape(); sh.moveTo(xa, y0); sh.lineTo(xb, y0); sh.lineTo(xb, y1); sh.lineTo(xa, y1); sh.lineTo(xa, y0);
+    for (const [a, b, c, d] of holes) { const h = new THREE.Path(); h.moveTo(a, b); h.lineTo(c, b); h.lineTo(c, d); h.lineTo(a, d); h.lineTo(a, b); sh.holes.push(h); }
+    const g = new THREE.ShapeGeometry(sh); const uv = g.attributes.uv, p = g.attributes.position; for (let i = 0; i < uv.count; i++) uv.setXY(i, p.getX(i) / uvs, p.getY(i) / uvs);
+    const m = new THREE.Mesh(g, material); m.position.z = z; return m;
+  }
+  const glassMat = () => mat({ color: 0xcfe3ef, roughness: 0.1, transparent: true, opacity: 0.22, depthWrite: false });
   function quad(p0, p1, p2, p3, material, uvScale = [1, 1]) {
     const g = new THREE.BufferGeometry();
     const P = [p0, p1, p2, p3]; const pos = new Float32Array([...P[0], ...P[1], ...P[2], ...P[0], ...P[2], ...P[3]]);
@@ -88,15 +96,19 @@ export function buildSportsCenter(renderer, opts = {}) {
   // ---------- WEST SECTION (gymnastics / sports hall) ----------
   {
     const x0 = S.westX0, x1 = S.westX1, H = S.halfW;
+    const GZM = (-S.halfW + 0.1 - 10.5) / 2;   /* middle of the gym's end walls */
+    const NWIN = []; for (let x = x0 + 2.5; x < x1 - 1.5; x += 3.2) NWIN.push(x);   /* north wall windows */
     for (const s of [-1, 1]) {
       ext.add(quad([x0, S.westEave, s * H], [x1, S.westEave, s * H], [x1, S.westRidge, 0], [x0, S.westRidge, 0], mat({ map: tex(greenRoof, 1, 1) }), [4, 4]));
-      ext.add(quad([x0, 0, s * H], [x1, 0, s * H], [x1, S.westEave, s * H], [x0, S.westEave, s * H], mat({ map: tex(siding, 1, 1) }), [4, 4]));
+      if (s < 0) ext.add(holedWall(x0, x1, 0, S.westEave, -H, NWIN.map(x => [x - 0.55, 1.05, x + 0.55, 1.95]), mat({ map: tex(siding, 1, 1) })));   /* v8: north wall windows are see-through */
+      else ext.add(quad([x0, 0, s * H], [x1, 0, s * H], [x1, S.westEave, s * H], [x0, S.westEave, s * H], mat({ map: tex(siding, 1, 1) }), [4, 4]));
       // eave overhang shadow line
       const fas = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.25, 0.3), mat({ color: 0x2e241a })); fas.position.set((x0 + x1) / 2, S.westEave, s * (H + 0.1)); ext.add(fas);
     }
     // west gable end with big white X barn doors ("SPORTS CENTER" sign side)
     const sh = new THREE.Shape(); sh.moveTo(-H, 0); sh.lineTo(H, 0); sh.lineTo(H, S.westEave); sh.lineTo(0, S.westRidge); sh.lineTo(-H, S.westEave); sh.lineTo(-H, 0);
     { const hl = new THREE.Path(); hl.moveTo(-1.5, 0); hl.lineTo(-1.5, 3.7); hl.lineTo(1.5, 3.7); hl.lineTo(1.5, 0); hl.lineTo(-1.5, 0); sh.holes.push(hl); }   // open doorway into the hall (IMG_8261)
+    for (const dz of [GZM - 2.0, GZM + 2.0]) { const h = new THREE.Path(); h.moveTo(dz - 0.45, 1.15); h.lineTo(dz + 0.45, 1.15); h.lineTo(dz + 0.45, 2.05); h.lineTo(dz - 0.45, 2.05); h.lineTo(dz - 0.45, 1.15); sh.holes.push(h); }   /* v8: gym windows open right through */
     const gw = new THREE.Mesh(new THREE.ShapeGeometry(sh), mat({ map: tex(siding, 0.25, 0.25) })); gw.rotation.y = -Math.PI / 2; gw.position.x = x0; ext.add(gw);
     const doorM = mat({ color: 0x5a4430 }), xM = mat({ color: 0xf1efe8 });
     // two white-X sliding barn doors, slid open to either side of the doorway (Ghost photo IMG_8261)
@@ -109,11 +121,11 @@ export function buildSportsCenter(renderer, opts = {}) {
       const lin = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.3, 3.0), mat({ color: 0x3b2c1e })); lin.position.set(x0 - 0.05, 3.85, 0); ext.add(lin); }
     // small doors and windows on the west end: north door (gymnastics side) and Henry's south door into the canteen
     { const wd = mat({ color: 0x9a7a55 }), tr = mat({ color: 0xf1efe8 }), gl = mat({ color: 0x23303a, roughness: 0.3 });
-      for (const dz of [-17.2, 16.4]) { const d = new THREE.Mesh(new THREE.BoxGeometry(0.1, 2.1, 0.95), wd); d.position.set(x0 - 0.06, 1.05, dz); ext.add(d);
+      for (const dz of [GZM, 16.4]) { const d = new THREE.Mesh(new THREE.BoxGeometry(0.1, 2.1, 0.95), wd); d.position.set(x0 - 0.06, 1.05, dz); ext.add(d);
         for (const [fy, fz, fhh, fww] of [[2.15, 0, 0.1, 1.15], [1.05, -0.52, 2.2, 0.1], [1.05, 0.52, 2.2, 0.1]]) { const f = new THREE.Mesh(new THREE.BoxGeometry(0.08, fhh, fww), tr); f.position.set(x0 - 0.1, fy, dz + fz); ext.add(f); } }
-      for (const dz of [-19.2, -15.0, 14.3, 18.6]) { const w = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.9, 0.9), gl); w.position.set(x0 - 0.05, 1.6, dz); ext.add(w);
+      for (const dz of [GZM - 2.0, GZM + 2.0, 14.3, 18.6]) { const w = new THREE.Mesh(dz < 0 ? new THREE.PlaneGeometry(0.9, 0.9) : new THREE.BoxGeometry(0.08, 0.9, 0.9), dz < 0 ? glassMat() : gl); if (dz < 0) w.rotation.y = Math.PI / 2; w.position.set(x0 - 0.05, 1.6, dz); ext.add(w);
         const fr = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.05, 1.05), tr); fr.position.set(x0 - 0.03, 1.6, dz); ext.add(fr); }
-      const pl = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.25), mat({ color: 0xf1efe8 })); pl.rotation.y = -Math.PI / 2; pl.position.set(x0 - 0.12, 2.5, -17.2); ext.add(pl); }
+      const pl = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.25), mat({ color: 0xf1efe8 })); pl.rotation.y = -Math.PI / 2; pl.position.set(x0 - 0.12, 2.5, GZM); ext.add(pl); }
     // concrete walk along the west end, with red benches on the south half
     { const walk = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.5, 2 * H + 0.6), mat({ color: 0xb8b5ae, roughness: 0.95 })); walk.position.set(x0 - 1.3, -0.22, 0); ext.add(walk);
       const red = mat({ color: 0x9c2f2a });
@@ -126,8 +138,8 @@ export function buildSportsCenter(renderer, opts = {}) {
     for (let x = x0 + 4; x < x1 - 2; x += 5) { const w = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.0, 0.1), winM); w.position.set(x, 1.7, H + 0.06); ext.add(w); }
     // Henry (gymnastics 360): windows all along the north wall too: wood-framed, set high, visible from inside and out
     { const frameM = mat({ color: 0xc8954e, roughness: 0.7 }), glassM = mat({ color: 0xcfe3ef, roughness: 0.15, emissive: 0x8fb4c8, emissiveIntensity: 0.35 });
-      for (let x = x0 + 2.5; x < x1 - 1.5; x += 3.2) { const fr = new THREE.Mesh(new THREE.BoxGeometry(1.35, 1.15, 0.42), frameM); fr.position.set(x, 1.5, -H); ext.add(fr);
-        const gl = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.9, 0.46), glassM); gl.position.set(x, 1.5, -H); ext.add(gl);   /* Henry: lower (v5 rework) */ } }
+      for (const x of NWIN) { for (const [w, h, dx, dy] of [[1.3, 0.12, 0, 0.51], [1.3, 0.12, 0, -0.51], [0.12, 1.1, 0.6, 0], [0.12, 1.1, -0.6, 0], [0.05, 0.9, 0, 0]]) { const fr = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.42), frameM); fr.position.set(x + dx, 1.5 + dy, -H); ext.add(fr); }
+        const gl = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.9), glassMat()); gl.position.set(x, 1.5, -H); ext.add(gl);   /* Henry: lower (v5 rework); v8: transparent */ } }
     // ===== interior, from photos =====
     // Evidence: Henry (court + canteen are one open space; gymnastics is a walled-off room); 15 confirmed court photos 2001–2014
     // (blue painted floor with white court lines, roller-hockey goals, wood-slat curved ceiling with lights, flags of many
@@ -146,7 +158,7 @@ export function buildSportsCenter(renderer, opts = {}) {
     // sloping up under the roof to the top of the cream/yellow partition
     { const zA = -H + 0.15, yW = 2.55, yP = ceilY(GZ) - 0.05;
       inn.add(quad([x0 + 0.2, yW, zA], [gx1, yW, zA], [gx1, yP, GZ - 0.02], [x0 + 0.2, yP, GZ - 0.02], mat({ color: 0xf2f1ec, emissive: 0x9a9a9a, emissiveIntensity: 0.55, side: THREE.DoubleSide }), [1, 1]));
-      inn.add(quad([x0 + 0.2, 0, zA + 0.02], [gx1, 0, zA + 0.02], [gx1, yW, zA + 0.02], [x0 + 0.2, yW, zA + 0.02], mat({ color: 0xece7d2, emissive: 0x6d6a5e, emissiveIntensity: 0.45 }), [1, 1]));
+      inn.add(holedWall(x0 + 0.2, gx1, 0, yW, zA + 0.02, NWIN.map(x => [x - 0.55, 1.05, x + 0.55, 1.95]), mat({ color: 0xece7d2, emissive: 0x6d6a5e, emissiveIntensity: 0.45 })));
       const trimG = new THREE.Mesh(new THREE.BoxGeometry(gx1 - x0 - 0.2, 0.16, 0.05), mat({ color: 0xb07a3c })); trimG.position.set((x0 + 0.2 + gx1) / 2, yW - 0.1, zA + 0.05); inn.add(trimG);
       for (let k = 0; k < 9; k++) { const lt = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.08, 12), mat({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0.9 })); const z = (zA + GZ) / 2, y = yW + (yP - yW) * 0.5 - 0.06; lt.position.set(x0 + 4 + k * 5, y, z); inn.add(lt); } }
     // open hall: exposed rafters and purlins under the roof boards, with steel tie rods (2026 Ghost photos IMG_8308/8311)
@@ -171,7 +183,8 @@ export function buildSportsCenter(renderer, opts = {}) {
       for (let x = 6; x < w; x += 46 + rnd() * 20) { g.fillStyle = cols[(rnd() * cols.length) | 0]; const bw = 34 + rnd() * 18; g.fillRect(x, 12 + rnd() * 10, bw, h - 34 - rnd() * 10); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(x + 4, 30, bw - 8, 6); } }, 1, 1);
     for (const s of [-1, 1]) {
       const zw = s * (H - 0.08);
-      if (s > 0 || true) inn.add(quad([x0, 0, zw], [x1, 0, zw], [x1, S.westEave, zw], [x0, S.westEave, zw], mat({ map: tex(woodBoards, 1, 1) }), [3, 3]));
+      if (s > 0) inn.add(quad([x0, 0, zw], [x1, 0, zw], [x1, S.westEave, zw], [x0, S.westEave, zw], mat({ map: tex(woodBoards, 1, 1) }), [3, 3]));
+      else inn.add(holedWall(x0, x1, 0, S.westEave, zw, NWIN.map(x => [x - 0.55, 1.05, x + 0.55, 1.95]), mat({ map: tex(woodBoards, 1, 1) }), 3));   /* v8: windows through */
     }
     { const band = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0 - 2, 1.4), mat({ map: tex(muralTex, 3, 1) })); band.position.set((x0 + x1) / 2, 2.0, H - 0.15); band.rotation.y = Math.PI; inn.add(band); }
     // camp murals: a mosaic of painted boards (one per cabin/year) covering the upper walls — west gable inside and the gymnastics partition (IMG_8308/8311)
@@ -313,7 +326,11 @@ export function buildSportsCenter(renderer, opts = {}) {
       for (const side of [1, -1]) inn.add(quad([gx0, 0, GZ + side * 0.05], [gx1, 0, GZ + side * 0.05], [gx1, ph, GZ + side * 0.05], [gx0, ph, GZ + side * 0.05], mat({ map: tex(partTex, 1, 1) }), [4, ph]));
       // east end wall of the room with a door
       const eh = ceilY(-H + 0.5);
-      inn.add(quad([gx1, 0, -H + 0.1], [gx1, 0, GZ], [gx1, ph, GZ], [gx1, eh, -H + 0.1], mat({ map: tex(partTex, 1, 1) }), [4, ph]));
+      const mint = mat({ color: 0xa9d8c0, roughness: 0.9 }), zm = (-H + 0.1 + GZ) / 2;   /* v8 (Henry): both end walls smooth mint, door in the middle with a window either side */
+      const endHoles = [[zm - 0.55, 0.0, zm + 0.55, 2.15], [zm - 2.6, 1.0, zm - 1.4, 2.0], [zm + 1.4, 1.0, zm + 2.6, 2.0]];
+      for (const xe of [gx1, gx0]) { const ew = holedWall(-H + 0.1, GZ, 0, ph, 0, endHoles.map(([a, b, c, d]) => [a, b, c, d]), mint); ew.position.z = 0; ew.rotation.y = -Math.PI / 2; ew.position.x = xe; inn.add(ew);
+        for (const dz of [-2.0, 2.0]) { const gl = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.0), glassMat()); gl.rotation.y = Math.PI / 2; gl.position.set(xe, 1.5, zm + dz); inn.add(gl);
+          for (const [hh, ww, dy, dzz] of [[0.08, 1.3, 0.54, 0], [0.08, 1.3, -0.54, 0], [1.1, 0.08, 0, 0.62], [1.1, 0.08, 0, -0.62]]) { const f = new THREE.Mesh(new THREE.BoxGeometry(0.14, hh, ww), mat({ color: 0xf2f0ea })); f.position.set(xe, 1.5 + dy, zm + dz + dzz); inn.add(f); } } }
       const door = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 2.2), mat({ color: 0xf2f0ea })); door.position.set(gx1 - 3, 1.1, GZ + 0.08); inn.add(door);   /* door through the partition into the hall */
       fl(gx0, gx1, -H + 0.2, GZ, mat({ color: 0xc9a77c }), 0.025);
       fl(gx0 + 1, gx1 - 1, -H + 1, GZ - 0.6, mat({ color: 0x2f62c8 }), 0.06);
@@ -322,7 +339,7 @@ export function buildSportsCenter(renderer, opts = {}) {
         const red = mat({ color: 0xc8262a }); for (const dz of [-1.12, 1.12]) { const e = new THREE.Mesh(new THREE.BoxGeometry(TL + 0.7, 0.62, 0.36), red); e.position.set(TX, 0.31, TZ + dz); inn.add(e); }
         for (const dx of [-(TL / 2 + 0.2), TL / 2 + 0.2]) { const e = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.62, 2.6), red); e.position.set(TX + dx, 0.31, TZ); inn.add(e); } }
       /* Henry (v6): the doors at both ends of the gym room (white), plus the partition door seen from the gym side */
-      for (const [x, z, ry] of [[gx1 - 0.06, -11.6, -Math.PI / 2], [gx0 + 0.06, -13.8, Math.PI / 2]]) { const d = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 2.1), mat({ color: 0xf2f0ea, side: THREE.DoubleSide })); d.rotation.y = ry; d.position.set(x, 1.05, z); inn.add(d);
+      for (const [x, z, ry] of [[gx1 - 0.06, zm, -Math.PI / 2], [gx0 + 0.06, zm, Math.PI / 2]]) { const d = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 2.1), mat({ color: 0xf2f0ea, side: THREE.DoubleSide })); d.rotation.y = ry; d.position.set(x, 1.05, z); inn.add(d);
         const fr = new THREE.Mesh(new THREE.PlaneGeometry(1.16, 2.2), mat({ color: 0x8a6440, side: THREE.DoubleSide })); fr.rotation.y = ry; fr.position.set(x + (ry < 0 ? 0.01 : -0.01), 1.1, z); inn.add(fr); }
       { const d2 = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 2.2), mat({ color: 0xf2f0ea })); d2.rotation.y = Math.PI; d2.position.set(gx1 - 3, 1.1, GZ - 0.08); inn.add(d2); }
       for (const z of [-19, -18]) { const bm = new THREE.Mesh(new THREE.BoxGeometry(5, 0.1, 0.1), mat({ color: 0xa47b52 })); bm.position.set(-34, 1.2, z); inn.add(bm);
@@ -330,14 +347,14 @@ export function buildSportsCenter(renderer, opts = {}) {
       for (const z of [-13, -12.3]) { const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 3.5, 6), mat({ color: 0xc9a46c })); bar.rotation.z = Math.PI / 2; bar.position.set(-6, 1.7, z); inn.add(bar); }
       for (let k = 0; k < 10; k++) { const wm = new THREE.Mesh(new THREE.BoxGeometry(1.85, 1.9, 0.12), mat({ color: k % 3 ? 0x2f62c8 : 0x2a58b8 })); wm.position.set(-27 + k * 1.9, 0.95, GZ - 0.15); wm.visible = (-27 + k * 1.9) > -13.5; inn.add(wm); }   /* row of blue wall mats along the partition */
       // windows along the north outer wall (seen in the gymnastics 360°)
-      for (let x = gx0 + 3; x < gx1 - 1; x += 4) { const w = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.9), mat({ color: 0xdfeefa, emissive: 0xbfd8ea, emissiveIntensity: 0.5 })); w.position.set(x, 1.9, -H + 0.12); inn.add(w);
-        const wo = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.9, 0.1), mat({ color: 0x23303a, roughness: 0.3 })); wo.position.set(x, 1.9, -H - 0.06); ext.add(wo); }
+      /* v8: the old opaque window panels are gone; the north windows are real openings (NWIN) */
     }
   }
 
   // ---------- CIRCUS SECTION ----------
   const cx0 = S.circX0, cx1 = S.circX1, L = cx1 - cx0, CX = (cx0 + cx1) / 2, H = S.halfW, NH = S.naveHalf;
   const SOUTH_OPEN_X = cx1 - 21.2;
+  const WIN_ROWS = [[4.0, 5.0], [S.clereTop - 3.0, S.clereTop - 1.0]];   /* end-wall window rows: low row above the opening, high row level with the clerestory */
   const R = (NH * NH + S.vaultRise * S.vaultRise) / (2 * S.vaultRise), HALF = Math.asin(NH / R);
   {
     for (const s of [-1, 1]) {
@@ -366,22 +383,22 @@ export function buildSportsCenter(renderer, opts = {}) {
     }
     // east end (faces the soccer field): big door in the middle
     {
-      const sh = endProfile(); const hole = new THREE.Path(); const hx0 = -(NH - 0.3), hx1 = H - 0.3, hh = 5.2;   /* measured from the 360: open ~5.2 m high */   /* Henry: the east wall doesn't reach the floor: open along the bottom across the nave and the north-east corner */
-      hole.moveTo(hx0, 0.01); hole.lineTo(hx1, 0.01); hole.lineTo(hx1, hh); hole.lineTo(hx0, hh); hole.lineTo(hx0, 0.01); sh.holes.push(hole);
+      /* v8 (Henry): open along the bottom ~2.8 m, a raised section in the middle, two rows of windows cut right through the wall */
+      const sh = endProfile(); const hole = new THREE.Path(); const hx0 = -(NH - 0.3), hx1 = H - 0.3, hh = 2.8, hm = 3.6, mz = 4.0;
+      hole.moveTo(hx0, 0.01); hole.lineTo(hx1, 0.01); hole.lineTo(hx1, hh); hole.lineTo(mz, hh); hole.lineTo(mz, hm); hole.lineTo(-mz, hm); hole.lineTo(-mz, hh); hole.lineTo(hx0, hh); hole.lineTo(hx0, 0.01); sh.holes.push(hole);
+      for (const [y0, y1] of WIN_ROWS) { const w = new THREE.Path(); w.moveTo(-NH + 0.4, y0); w.lineTo(NH - 0.4, y0); w.lineTo(NH - 0.4, y1); w.lineTo(-NH + 0.4, y1); w.lineTo(-NH + 0.4, y0); sh.holes.push(w); }
       const g = new THREE.ShapeGeometry(sh); const uv = g.attributes.uv, p = g.attributes.position; for (let i = 0; i < uv.count; i++) uv.setXY(i, p.getX(i) / 4, p.getY(i) / 4);
       const wOut = new THREE.Mesh(g, mat({ map: tex(siding, 1, 1), side: THREE.FrontSide })); wOut.rotation.y = Math.PI / 2; wOut.position.x = cx1 + 0.02; ext.add(wOut);
       const wIn = new THREE.Mesh(g.clone(), mat({ map: tex(starWall, 0.12, 0.12), side: THREE.BackSide })); wIn.rotation.y = Math.PI / 2; wIn.position.x = cx1 - 0.02; inn.add(wIn);
-      const door = new THREE.Mesh(new THREE.PlaneGeometry(10, 5.2), mat({ color: 0x6a5038, transparent: true, opacity: 0.0 })); door.visible = false; ext.add(door);
       const lintel = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, hx1 - hx0), mat({ color: 0x2e241a })); lintel.position.set(cx1, hh, -(hx0 + hx1) / 2); ext.add(lintel);
-      for (let k = 0; k <= 6; k++) { const zz = -(hx0 + (hx1 - hx0) * k / 6); const p = new THREE.Mesh(new THREE.BoxGeometry(0.35, hh, 0.35), mat({ color: k % 2 ? 0xd8262b : 0xf2d21f })); p.position.set(cx1 - 0.2, hh / 2, zz); inn.add(p); }
-      const win = new THREE.Mesh(new THREE.PlaneGeometry(14, 1.6), mat({ map: tex(clereOut, 6, 1) })); win.rotation.y = Math.PI / 2; win.position.set(cx1 + 0.05, 9.6, 0); ext.add(win);
+      for (const zz of [-H + 0.3, -15.6, -NH + 0.2, -8.6, -4.0, 0, 4.0, 8.6, NH - 0.5]) { const ph = Math.abs(zz) < 4.1 ? hm : hh; const p = new THREE.Mesh(new THREE.BoxGeometry(0.35, ph, 0.35), mat({ color: Math.round(Math.abs(zz)) % 2 ? 0xd8262b : 0xf2d21f })); p.position.set(cx1 - 0.2, ph / 2, zz); inn.add(p); }
     }
-    /* Henry: both end walls have the two rows of clerestory windows and a plain band below the rafters; the star pattern does not continue into the gable */
-    for (const [xw, dir] of [[cx1 - 0.06, -1], [cx0 + 0.12, 1]]) {
-      const wb = new THREE.Mesh(new THREE.PlaneGeometry(2 * NH - 0.4, 2.0), mat({ map: tex(clere, (2 * NH) / 3.4, 1), transparent: true, depthWrite: false, side: THREE.DoubleSide })); wb.rotation.y = dir * Math.PI / 2; wb.position.set(xw, S.clereTop - 2.0, 0); inn.add(wb);
-      const bb = new THREE.Mesh(new THREE.PlaneGeometry(2 * NH - 0.4, 1.0), mat({ color: 0x1f3f8c })); bb.rotation.y = dir * Math.PI / 2; bb.position.set(xw, S.clereTop - 0.5, 0); inn.add(bb);
+    /* Henry: both end walls have the two rows of windows (real openings, glass you can see through) and a plain band below the rafters */
+    for (const [xw, dir, rows] of [[cx1 - 0.06, -1, WIN_ROWS], [cx0 + 0.12, 1, WIN_ROWS.slice(1)]]) for (const [y0, y1] of rows) {
+      const wb = new THREE.Mesh(new THREE.PlaneGeometry(2 * NH - 0.8, y1 - y0), mat({ map: tex(clere, 7, 1), transparent: true, depthWrite: false, side: THREE.DoubleSide })); wb.rotation.y = dir * Math.PI / 2; wb.position.set(xw, (y0 + y1) / 2, 0); inn.add(wb); }
+    for (const [xw, dir] of [[cx1 - 0.05, -1], [cx0 + 0.07, 1]]) {   /* plain navy boards in the gable (no stars up in the rafters), flush with the wall */
       const tri = new THREE.Shape(); tri.moveTo(-NH, S.clereTop); tri.lineTo(NH, S.clereTop); tri.lineTo(0, S.ridge); tri.lineTo(-NH, S.clereTop);
-      const tg = new THREE.Mesh(new THREE.ShapeGeometry(tri), mat({ map: tex(woodBoards, 1, 1), side: THREE.DoubleSide })); tg.rotation.y = Math.PI / 2; tg.position.x = xw; inn.add(tg); }
+      const tg = new THREE.Mesh(new THREE.ShapeGeometry(tri), mat({ color: 0x1f3f8c, side: dir < 0 ? THREE.BackSide : THREE.FrontSide })); tg.rotation.y = Math.PI / 2; tg.position.x = xw; inn.add(tg); }
     // shared wall with the Sports Center (x = cx0), from the circus 360° looking west: the lower ~4.6 m between the nave posts is
     // OPEN framing (posts, diagonal braces, low wooden knee walls / benches, one full-height walk-through), so you can see straight
     // into the Sports Center (its hanging flags are visible). Above that: a band of blue boards, then star panels up to the vault.
@@ -389,6 +406,7 @@ export function buildSportsCenter(renderer, opts = {}) {
       const OPEN_TOP = 4.6, BAND_TOP = 6.4;
       const sh = endProfile();
       const hole = new THREE.Path(); hole.moveTo(-NH + 0.3, 0.01); hole.lineTo(NH - 0.3, 0.01); hole.lineTo(NH - 0.3, OPEN_TOP); hole.lineTo(-NH + 0.3, OPEN_TOP); hole.lineTo(-NH + 0.3, 0.01); sh.holes.push(hole);
+      { const [y0, y1] = WIN_ROWS[1]; const w = new THREE.Path(); w.moveTo(-NH + 0.4, y0); w.lineTo(NH - 0.4, y0); w.lineTo(NH - 0.4, y1); w.lineTo(-NH + 0.4, y1); w.lineTo(-NH + 0.4, y0); sh.holes.push(w); }   /* v8: the high window row goes right through */
       const g = new THREE.ShapeGeometry(sh); const uv = g.attributes.uv, p = g.attributes.position; for (let i = 0; i < uv.count; i++) uv.setXY(i, p.getX(i) / 3, p.getY(i) / 3);
       const wIn = new THREE.Mesh(g, mat({ map: tex(starWall, 0.35, 0.35) })); wIn.rotation.y = Math.PI / 2; wIn.position.x = cx0 + 0.04; inn.add(wIn);
       const wOut = new THREE.Mesh(g.clone(), mat({ map: tex(woodBoards, 1, 1) })); wOut.rotation.y = Math.PI / 2; wOut.position.x = cx0 - 0.04; root.add(wOut);
@@ -441,14 +459,15 @@ export function buildSportsCenter(renderer, opts = {}) {
       inn.add(quad([sx0, 0, z0], [sx0, 0, z1], [sx0, S.aisleEave, z1], [sx0, S.aisleEave, z0], wall2, [3, 3]));
       const sd = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 2.2), mat({ color: 0x6a5038 })); sd.position.set((sx0 + sx1) / 2, 1.1, z0 - 0.04); inn.add(sd); }
     /* Henry (07 Circus pins): double doors in the nave's south wall into the backstage and into the circus shed; a door from the north aisle into gymnastics */
-    for (const dxc of [29.3, 42.0]) { const ln = mat({ color: 0x0e1a3a });   /* Henry: the doors are star-painted and blend into the wall: draw only their outlines + a centre seam */
+    for (const dxc of [28.7, 42.3]) { const ln = mat({ color: 0x0e1a3a });   /* Henry: the doors are star-painted and blend into the wall: draw only their outlines + a centre seam */
       for (const [w, h, x, y] of [[1.8, 0.05, dxc, 2.45], [0.05, 2.45, dxc - 0.9, 1.225], [0.05, 2.45, dxc + 0.9, 1.225], [0.03, 2.4, dxc, 1.2]]) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.03), ln); m.position.set(x, y, NH - 0.04); inn.add(m); }
       for (const sg of [-1, 1]) { const kb = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 0.06), mat({ color: 0xcccccc, metalness: 0.7 })); kb.position.set(dxc + sg * 0.12, 1.1, NH - 0.07); inn.add(kb); } }
     { const gd = new THREE.Mesh(new THREE.BoxGeometry(0.06, 2.1, 1.0), mat({ color: 0xf1efe8 })); gd.position.set(cx0 + 0.1, 1.05, -16.5); inn.add(gd); }
     // nave walls: lower star panels (some bays open to the aisle), upper star band, clerestory window band
-    const nb = 10, bay = L / nb;   /* Henry (v5 rework): 10 bays (~3.4 m) along each long wall, counted from the circus 360 */
-    const openBays = { '-1': [0, 7, 8, 9], '1': [0] }, openH = { '1': { 0: 2.7 } }, BR = { '1': [[4, 1], [6, -1]], '-1': [[6, 1]] };   /* north: west bay + the east half open to the NE corner; south: only the west bay, a low opening; single blue diagonals where the 360 shows them */   /* Henry (07 Circus pins): south: west bay open, next one closed, backstage + shed bays closed with double doors; north: west bay and the NE corner bay open, middle bays star panels */
+    const NB = { '-1': 13, '1': 10 };   /* v8: posts measured in the circus 360: north wall ~2.6 m apart (13 bays), south ~3.4 m (10 bays) */
+    const openBays = { '-1': [0, 8, 9, 10, 11, 12], '1': [0] }, openH = { '1': { 0: 2.7 } }, BR = { '1': [[4, 1], [6, -1]], '-1': [[2, -1], [6, 1], [8, -1]] };   /* v8 north: from the post at ~31 m east to the NE corner the lower bays are open (5 bays), blue diagonals in bays 2, 6 and 8 */   /* north: west bay + the east half open to the NE corner; south: only the west bay, a low opening; single blue diagonals where the 360 shows them */   /* Henry (07 Circus pins): south: west bay open, next one closed, backstage + shed bays closed with double doors; north: west bay and the NE corner bay open, middle bays star panels */
     for (const s of [-1, 1]) {
+      const nb = NB[s], bay = L / nb;
       for (let i = 0; i < nb; i++) {
         const xa = cx0 + i * bay;
         const y0 = openBays[s].includes(i) ? ((openH[s] || {})[i] ?? null) : 0; if (y0 !== null) inn.add(quad([xa, y0, s * NH], [xa + bay, y0, s * NH], [xa + bay, S.aisleTop, s * NH], [xa, S.aisleTop, s * NH], mat({ map: tex(starWall, 1, 1) }), [5, 5]));
@@ -457,7 +476,7 @@ export function buildSportsCenter(renderer, opts = {}) {
       inn.add(quad([cx0, S.aisleTop, s * (NH - 0.02)], [cx1, S.aisleTop, s * (NH - 0.02)], [cx1, S.clereTop - 3.0, s * (NH - 0.02)], [cx0, S.clereTop - 3.0, s * (NH - 0.02)], mat({ color: 0x1f3f8c }), [5, 5]));   /* plain blue boards below the windows */
       inn.add(quad([cx0, S.clereTop - 1.0, s * (NH - 0.02)], [cx1, S.clereTop - 1.0, s * (NH - 0.02)], [cx1, S.clereTop, s * (NH - 0.02)], [cx0, S.clereTop, s * (NH - 0.02)], mat({ map: tex(starWall, 1, 1) }), [5, 5]));   /* star band above the windows */   /* Henry: a band of wall between the windows and the rafters; no stars up there */
       inn.add(quad([cx0, S.clereTop - 3.0, s * (NH - 0.03)], [cx1, S.clereTop - 3.0, s * (NH - 0.03)], [cx1, S.clereTop - 1.0, s * (NH - 0.03)], [cx0, S.clereTop - 1.0, s * (NH - 0.03)],
-        mat({ map: tex(clere, L / 3.4, 1), transparent: true, depthWrite: false, side: THREE.DoubleSide }), [L, 2.0]));
+        mat({ map: tex(clere, nb, 1), transparent: true, depthWrite: false, side: THREE.DoubleSide }), [L, 2.0]));
       // posts (alternating red / yellow) and top beam
       for (let i = 0; i <= nb; i++) {
         const post = new THREE.Mesh(new THREE.BoxGeometry(0.42, S.clereTop, 0.42), mat({ color: i % 2 ? 0xd8262b : 0xf2d21f, roughness: 0.6 }));
