@@ -455,6 +455,19 @@
      ]
     },
     {
+     "kind": "Floor plan",
+     "entries": [
+      {
+       "id": "rec-plan",
+       "type": "model",
+       "label": "Draft floor plan",
+       "model": "img/rec-hall_plan.jpg",
+       "cap": "Draft plan from Henry's description: about 30 ft from the back of the stage to the back wall; a light/sound tech area right of the stage with stairs up to the black box behind it and stairs down to the hallway. The black box theater and the music area layouts are NOT known. Pin anything you remember.",
+       "modelPhoto": "img/rec-hall_plan.jpg"
+      }
+     ]
+    },
+    {
      "kind": "Music / Rock Band",
      "entries": [
       {
@@ -464,7 +477,7 @@
        "realPano": "pano/s21_real.jpg",
        "modelPano": "pano/s21_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
-       "yaw0": 61.6
+       "yaw0": 230.5
       }
      ]
     },
