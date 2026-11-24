@@ -2,6 +2,7 @@
 // Local frame: x = east (m), y = up, z = south. Origin = E 475172, N 4633315 (UTM 18N), at floor level.
 // Dimensions from 2019 LiDAR cross-sections; finishes from the 360° tour + ~1,100 camp photos.
 import * as THREE from 'three';
+import { Reflector } from 'three/addons/objects/Reflector.js'
 
 export const SC = {
   E0: 475172, N0: 4633315,
@@ -52,9 +53,8 @@ export function buildSportsCenter(renderer, opts = {}) {
   const greyRoof = roofTex('#5f6265', '#4f5255'), greenRoof = roofTex('#40594a', '#33483c');
   const starWall = T(512, 512, (g, w, h) => { g.fillStyle = '#1c3a86'; g.fillRect(0, 0, w, h);
     g.fillStyle = '#f4f1e6'; for (let i = 0; i < 110; i++) star(g, rnd() * w, rnd() * h, 4 + rnd() * 5); }, 1, 1);
-  const clere = T(256, 64, (g, w, h) => { g.fillStyle = '#f2f7fb'; g.fillRect(0, 0, w, h); g.fillStyle = '#dce9f3'; g.fillRect(0, h * .55, w, h * .45);
-    g.strokeStyle = '#ffffff'; g.lineWidth = 5; for (let x = 0; x <= w; x += w / 6) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); } g.beginPath(); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.stroke(); }, 1, 1);
-  const clereOut = T(256, 64, (g, w, h) => { g.fillStyle = '#2b3138'; g.fillRect(0, 0, w, h); g.fillStyle = '#6f8597'; for (let x = 0; x < w; x += w / 6) g.fillRect(x + 4, 4, w / 6 - 8, h - 8); }, 1, 1);
+  const clere = T(256, 64, (g, w, h) => { g.fillStyle = '#f2f7fb'; g.fillRect(0, 0, w, h); g.strokeStyle = '#6a7680'; g.lineWidth = 3; for (let x = 0; x <= w; x += w / 6) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); } g.lineWidth = 5; g.beginPath(); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.stroke(); g.strokeRect(0, 0, w, h); }, 1, 1);   /* Henry: two rows of clerestory windows */
+  const clereOut = T(256, 64, (g, w, h) => { g.fillStyle = '#2b3138'; g.fillRect(0, 0, w, h); g.fillStyle = '#6f8597'; for (let x = 0; x < w; x += w / 6) { g.fillRect(x + 4, 4, w / 6 - 8, h / 2 - 6); g.fillRect(x + 4, h / 2 + 2, w / 6 - 8, h / 2 - 6); } }, 1, 1);
   const floorTex = T(1024, 1024, (g, w, h) => { g.fillStyle = '#a19d97'; g.fillRect(0, 0, w, h);
     for (let i = 0; i < 6000; i++) { const v = 135 + rnd() * 40 | 0; g.fillStyle = `rgba(${v},${v - 3},${v - 8},0.10)`; g.beginPath(); g.arc(rnd() * w, rnd() * h, 4 + rnd() * 34, 0, 7); g.fill(); }
     g.strokeStyle = 'rgba(70,70,70,.35)'; g.lineWidth = 2; for (let x = 0; x <= w; x += w / 2) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); g.beginPath(); g.moveTo(0, x); g.lineTo(w, x); g.stroke(); } }, 1, 1);
@@ -123,6 +123,10 @@ export function buildSportsCenter(renderer, opts = {}) {
     // square windows along the south wall
     const winM = mat({ color: 0x23303a, roughness: 0.3 });
     for (let x = x0 + 4; x < x1 - 2; x += 5) { const w = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.0, 0.1), winM); w.position.set(x, 1.7, H + 0.06); ext.add(w); }
+    // Henry (gymnastics 360): windows all along the north wall too: wood-framed, set high, visible from inside and out
+    { const frameM = mat({ color: 0xc8954e, roughness: 0.7 }), glassM = mat({ color: 0xcfe3ef, roughness: 0.15, emissive: 0x8fb4c8, emissiveIntensity: 0.35 });
+      for (let x = x0 + 2.5; x < x1 - 1.5; x += 3.2) { const fr = new THREE.Mesh(new THREE.BoxGeometry(1.35, 1.15, 0.42), frameM); fr.position.set(x, 2.1, -H); ext.add(fr);
+        const gl = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.9, 0.46), glassM); gl.position.set(x, 2.1, -H); ext.add(gl); } }
     // ===== interior, from photos =====
     // Evidence: Henry (court + canteen are one open space; gymnastics is a walled-off room); 15 confirmed court photos 2001–2014
     // (blue painted floor with white court lines, roller-hockey goals, wood-slat curved ceiling with lights, flags of many
@@ -333,12 +337,14 @@ export function buildSportsCenter(renderer, opts = {}) {
     for (const s of [-1, 1]) {
       // exterior: aisle lean-to roof, clerestory wall with windows, nave gable roof
       ext.add(quad([cx0, S.aisleEave, s * H], [cx1, S.aisleEave, s * H], [cx1, S.aisleTop, s * NH], [cx0, S.aisleTop, s * NH], mat({ map: tex(greyRoof, 1, 1) }), [4, 4]));
-      { const xw = s > 0 ? SOUTH_OPEN_X : cx0; ext.add(quad([xw, 0, s * H], [cx1, 0, s * H], [cx1, S.aisleEave, s * H], [xw, S.aisleEave, s * H], mat({ map: tex(siding, 1, 1) }), [4, 4])); }
+      { const xw = s > 0 ? SOUTH_OPEN_X : cx0, xe = s > 0 ? cx1 : cx1 - 4.9; ext.add(quad([xw, 0, s * H], [xe, 0, s * H], [xe, S.aisleEave, s * H], [xw, S.aisleEave, s * H], mat({ map: tex(siding, 1, 1) }), [4, 4]));
+        if (s < 0) for (const px of [cx1 - 4.9, cx1 - 2.45, cx1 - 0.2]) { const pp = new THREE.Mesh(new THREE.BoxGeometry(0.25, S.aisleEave, 0.25), mat({ color: 0x3a2c1e })); pp.position.set(px, S.aisleEave / 2, s * H); ext.add(pp); } }   /* Henry: the north-east corner panels are open */
       ext.add(quad([cx0, S.ridge, 0], [cx1, S.ridge, 0], [cx1, S.clereTop, s * NH], [cx0, S.clereTop, s * NH], mat({ map: tex(greyRoof, 1, 1) }), [4, 4]));
-      const cw = quad([cx0, S.aisleTop, s * (NH + 0.05)], [cx1, S.aisleTop, s * (NH + 0.05)], [cx1, S.clereTop - 2.2, s * (NH + 0.05)], [cx0, S.clereTop - 2.2, s * (NH + 0.05)], mat({ map: tex(siding, 1, 1) }), [4, 4]);   // double-sided: the inner star wall must never show outside
+      const cw = quad([cx0, S.aisleTop, s * (NH + 0.05)], [cx1, S.aisleTop, s * (NH + 0.05)], [cx1, S.clereTop - 3.0, s * (NH + 0.05)], [cx0, S.clereTop - 3.0, s * (NH + 0.05)], mat({ map: tex(siding, 1, 1) }), [4, 4]);   // double-sided: the inner star wall must never show outside
       if (s < 0) cw.geometry.scale(1, 1, 1);
       ext.add(cw);
-      const cwin = quad([cx0, S.clereTop - 2.2, s * (NH + 0.06)], [cx1, S.clereTop - 2.2, s * (NH + 0.06)], [cx1, S.clereTop - 0.3, s * (NH + 0.06)], [cx0, S.clereTop - 0.3, s * (NH + 0.06)], mat({ map: tex(clereOut, L / 4.86, 1) }), [L, 1.9]);
+      ext.add(quad([cx0, S.clereTop - 1.0, s * (NH + 0.05)], [cx1, S.clereTop - 1.0, s * (NH + 0.05)], [cx1, S.clereTop, s * (NH + 0.05)], [cx0, S.clereTop, s * (NH + 0.05)], mat({ map: tex(siding, 1, 1) }), [4, 4]));
+      const cwin = quad([cx0, S.clereTop - 3.0, s * (NH + 0.06)], [cx1, S.clereTop - 3.0, s * (NH + 0.06)], [cx1, S.clereTop - 1.0, s * (NH + 0.06)], [cx0, S.clereTop - 1.0, s * (NH + 0.06)], mat({ map: tex(clereOut, L / 4.86, 1) }), [L, 1.9]);
       ext.add(cwin);
       // big doors in the aisle outer walls (light comes in at ground level in the 360° photo)
       if (s < 0) for (const dx of [-11, 3]) { const d = new THREE.Mesh(new THREE.BoxGeometry(5, 2.6, 0.15), mat({ color: 0x3a2c1e })); d.position.set(CX + dx, 1.3, s * (H + 0.08)); ext.add(d); }
@@ -354,14 +360,22 @@ export function buildSportsCenter(renderer, opts = {}) {
     }
     // east end (faces the soccer field): big door in the middle
     {
-      const sh = endProfile(); const hole = new THREE.Path(); hole.moveTo(-5, 0.01); hole.lineTo(5, 0.01); hole.lineTo(5, 5.2); hole.lineTo(-5, 5.2); hole.lineTo(-5, 0.01); sh.holes.push(hole);
+      const sh = endProfile(); const hole = new THREE.Path(); const hx0 = -(NH - 0.3), hx1 = H - 0.3, hh = 2.8;   /* Henry: the east wall doesn't reach the floor: open along the bottom across the nave and the north-east corner */
+      hole.moveTo(hx0, 0.01); hole.lineTo(hx1, 0.01); hole.lineTo(hx1, hh); hole.lineTo(hx0, hh); hole.lineTo(hx0, 0.01); sh.holes.push(hole);
       const g = new THREE.ShapeGeometry(sh); const uv = g.attributes.uv, p = g.attributes.position; for (let i = 0; i < uv.count; i++) uv.setXY(i, p.getX(i) / 4, p.getY(i) / 4);
       const wOut = new THREE.Mesh(g, mat({ map: tex(siding, 1, 1), side: THREE.FrontSide })); wOut.rotation.y = Math.PI / 2; wOut.position.x = cx1 + 0.02; ext.add(wOut);
       const wIn = new THREE.Mesh(g.clone(), mat({ map: tex(starWall, 0.12, 0.12), side: THREE.BackSide })); wIn.rotation.y = Math.PI / 2; wIn.position.x = cx1 - 0.02; inn.add(wIn);
       const door = new THREE.Mesh(new THREE.PlaneGeometry(10, 5.2), mat({ color: 0x6a5038, transparent: true, opacity: 0.0 })); door.visible = false; ext.add(door);
-      const lintel = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 10.6), mat({ color: 0x2e241a })); lintel.position.set(cx1, 5.3, 0); ext.add(lintel);
+      const lintel = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, hx1 - hx0), mat({ color: 0x2e241a })); lintel.position.set(cx1, hh, -(hx0 + hx1) / 2); ext.add(lintel);
+      for (let k = 0; k <= 6; k++) { const zz = -(hx0 + (hx1 - hx0) * k / 6); const p = new THREE.Mesh(new THREE.BoxGeometry(0.35, hh, 0.35), mat({ color: k % 2 ? 0xd8262b : 0xf2d21f })); p.position.set(cx1 - 0.2, hh / 2, zz); inn.add(p); }
       const win = new THREE.Mesh(new THREE.PlaneGeometry(14, 1.6), mat({ map: tex(clereOut, 6, 1) })); win.rotation.y = Math.PI / 2; win.position.set(cx1 + 0.05, 9.6, 0); ext.add(win);
     }
+    /* Henry: both end walls have the two rows of clerestory windows and a plain band below the rafters; the star pattern does not continue into the gable */
+    for (const [xw, dir] of [[cx1 - 0.06, -1], [cx0 + 0.12, 1]]) {
+      const wb = new THREE.Mesh(new THREE.PlaneGeometry(2 * NH - 0.4, 2.0), mat({ map: tex(clere, (2 * NH) / 4.86, 1), emissive: 0xffffff, emissiveIntensity: 0.45, emissiveMap: tex(clere, (2 * NH) / 4.86, 1) })); wb.rotation.y = dir * Math.PI / 2; wb.position.set(xw, S.clereTop - 2.0, 0); inn.add(wb);
+      const bb = new THREE.Mesh(new THREE.PlaneGeometry(2 * NH - 0.4, 1.0), mat({ color: 0x1f3f8c })); bb.rotation.y = dir * Math.PI / 2; bb.position.set(xw, S.clereTop - 0.5, 0); inn.add(bb);
+      const tri = new THREE.Shape(); tri.moveTo(-NH, S.clereTop); tri.lineTo(NH, S.clereTop); tri.lineTo(0, S.ridge); tri.lineTo(-NH, S.clereTop);
+      const tg = new THREE.Mesh(new THREE.ShapeGeometry(tri), mat({ map: tex(woodBoards, 1, 1), side: THREE.DoubleSide })); tg.rotation.y = Math.PI / 2; tg.position.x = xw; inn.add(tg); }
     // shared wall with the Sports Center (x = cx0), from the circus 360° looking west: the lower ~4.6 m between the nave posts is
     // OPEN framing (posts, diagonal braces, low wooden knee walls / benches, one full-height walk-through), so you can see straight
     // into the Sports Center (its hanging flags are visible). Above that: a band of blue boards, then star panels up to the vault.
@@ -377,7 +391,7 @@ export function buildSportsCenter(renderer, opts = {}) {
       const nOpen = 6, bw = (2 * NH - 0.6) / nOpen;
       for (let k = 0; k <= nOpen; k++) {
         const z = -NH + 0.3 + k * bw;
-        const post = new THREE.Mesh(new THREE.BoxGeometry(0.3, OPEN_TOP, 0.3), mat({ color: k === 2 || k === 4 ? 0xf2d21f : 0x8e5f30 })); post.position.set(cx0, OPEN_TOP / 2, z); root.add(post);
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.3, OPEN_TOP, 0.3), mat({ color: k % 2 ? 0xd8262b : 0xf2d21f })); post.position.set(cx0, OPEN_TOP / 2, z); root.add(post);
         if (k < nOpen) {
           if (k !== 3) {   // knee wall + bench in every bay except one walk-through
             const knee = new THREE.Mesh(new THREE.BoxGeometry(0.15, 1.05, bw - 0.3), mat({ map: tex(woodBoards, 1, 1) })); knee.position.set(cx0, 0.52, z + bw / 2); root.add(knee);
@@ -395,7 +409,7 @@ export function buildSportsCenter(renderer, opts = {}) {
     // aisle ceilings (underside of the lean-to roofs) in warm wood
     for (const s of [-1, 1]) inn.add(quad([cx0, S.aisleEave - 0.05, s * (H - 0.05)], [cx1, S.aisleEave - 0.05, s * (H - 0.05)], [cx1, S.aisleTop - 0.05, s * NH], [cx0, S.aisleTop - 0.05, s * NH], mat({ map: tex(woodBoards, 1, 1) }), [3, 3]));
     // aisle outer walls inside: wood with bright door openings
-    for (const s of [-1, 1]) inn.add(quad([s > 0 ? SOUTH_OPEN_X : cx0, 0, s * (H - 0.06)], [cx1, 0, s * (H - 0.06)], [cx1, S.aisleEave, s * (H - 0.06)], [s > 0 ? SOUTH_OPEN_X : cx0, S.aisleEave, s * (H - 0.06)], mat({ map: tex(woodBoards, 1, 1) }), [3, 3]));
+    for (const s of [-1, 1]) inn.add(quad([s > 0 ? SOUTH_OPEN_X : cx0, 0, s * (H - 0.06)], [s > 0 ? cx1 : cx1 - 4.9, 0, s * (H - 0.06)], [s > 0 ? cx1 : cx1 - 4.9, S.aisleEave, s * (H - 0.06)], [s > 0 ? SOUTH_OPEN_X : cx0, S.aisleEave, s * (H - 0.06)], mat({ map: tex(woodBoards, 1, 1) }), [3, 3]));
     for (const dx of [-11, 3]) { const d = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.6), mat({ color: 0x8a9a78, emissive: 0x3a4a2a, emissiveIntensity: 0.3 })); d.position.set(CX + dx, 1.3, -(H - 0.1)); inn.add(d); }
     { const d = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 2.7), mat({ color: 0x8a9a78, emissive: 0x3a4a2a, emissiveIntensity: 0.3 })); d.rotation.y = Math.PI; d.position.set(cx0 + 3.2, 1.35, H - 0.1); inn.add(d); }
     // weight-lifting room in the south aisle, east end (behind the doors): walls, rubber floor, benches and racks
@@ -420,9 +434,13 @@ export function buildSportsCenter(renderer, opts = {}) {
       inn.add(quad([sx0, 0, z0], [sx1, 0, z0], [sx1, S.aisleTop - 0.1, z0], [sx0, S.aisleTop - 0.1, z0], wall2, [3, 3]));
       inn.add(quad([sx0, 0, z0], [sx0, 0, z1], [sx0, S.aisleEave, z1], [sx0, S.aisleEave, z0], wall2, [3, 3]));
       const sd = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 2.2), mat({ color: 0x6a5038 })); sd.position.set((sx0 + sx1) / 2, 1.1, z0 - 0.04); inn.add(sd); }
+    /* Henry (07 Circus pins): double doors in the nave's south wall into the backstage and into the circus shed; a door from the north aisle into gymnastics */
+    for (const dxc of [31.0, 42.0]) for (const sg of [-1, 1]) { const leaf = new THREE.Mesh(new THREE.BoxGeometry(1.25, 2.5, 0.06), mat({ color: 0x5a3e28 })); leaf.position.set(dxc + sg * 0.64, 1.25, NH - 0.06); inn.add(leaf);
+      const kb = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.06, 0.08), mat({ color: 0xcccccc, metalness: 0.7 })); kb.position.set(dxc + sg * 0.12, 1.1, NH - 0.11); inn.add(kb); }
+    { const gd = new THREE.Mesh(new THREE.BoxGeometry(0.06, 2.1, 1.0), mat({ color: 0xf1efe8 })); gd.position.set(cx0 + 0.1, 1.05, -16.5); inn.add(gd); }
     // nave walls: lower star panels (some bays open to the aisle), upper star band, clerestory window band
     const nb = 7, bay = L / nb;
-    const openBays = { '-1': [2, 5], '1': [1, 3, 4] };
+    const openBays = { '-1': [0, 6], '1': [0, 3] };   /* Henry (07 Circus pins): south: west bay open, next one closed, backstage + shed bays closed with double doors; north: west bay and the NE corner bay open, middle bays star panels */
     for (const s of [-1, 1]) {
       for (let i = 0; i < nb; i++) {
         const xa = cx0 + i * bay;
@@ -430,9 +448,10 @@ export function buildSportsCenter(renderer, opts = {}) {
         // blue X brace in each bay
         for (const a of [1, -1]) { const len = Math.hypot(bay, S.aisleTop); const b = new THREE.Mesh(new THREE.BoxGeometry(len, 0.18, 0.14), mat({ color: 0x20367a }));   /* navy braces, subtle against the star wall (IMG_8265) */ b.position.set(xa + bay / 2, S.aisleTop / 2, s * (NH - 0.18)); b.rotation.z = a * Math.atan2(S.aisleTop, bay); inn.add(b); }
       }
-      inn.add(quad([cx0, S.aisleTop, s * (NH - 0.02)], [cx1, S.aisleTop, s * (NH - 0.02)], [cx1, S.clereTop - 2.2, s * (NH - 0.02)], [cx0, S.clereTop - 2.2, s * (NH - 0.02)], mat({ map: tex(starWall, 1, 1) }), [5, 5]));
-      inn.add(quad([cx0, S.clereTop - 2.2, s * (NH - 0.03)], [cx1, S.clereTop - 2.2, s * (NH - 0.03)], [cx1, S.clereTop - 0.3, s * (NH - 0.03)], [cx0, S.clereTop - 0.3, s * (NH - 0.03)],
-        mat({ map: tex(clere, L / 4.86, 1), emissive: 0xffffff, emissiveIntensity: 0.45, emissiveMap: tex(clere, L / 4.86, 1) }), [L, 1.9]));
+      inn.add(quad([cx0, S.aisleTop, s * (NH - 0.02)], [cx1, S.aisleTop, s * (NH - 0.02)], [cx1, S.clereTop - 3.0, s * (NH - 0.02)], [cx0, S.clereTop - 3.0, s * (NH - 0.02)], mat({ map: tex(starWall, 1, 1) }), [5, 5]));
+      inn.add(quad([cx0, S.clereTop - 1.0, s * (NH - 0.02)], [cx1, S.clereTop - 1.0, s * (NH - 0.02)], [cx1, S.clereTop, s * (NH - 0.02)], [cx0, S.clereTop, s * (NH - 0.02)], mat({ color: 0x1f3f8c }), [5, 5]));   /* Henry: a band of wall between the windows and the rafters; no stars up there */
+      inn.add(quad([cx0, S.clereTop - 3.0, s * (NH - 0.03)], [cx1, S.clereTop - 3.0, s * (NH - 0.03)], [cx1, S.clereTop - 1.0, s * (NH - 0.03)], [cx0, S.clereTop - 1.0, s * (NH - 0.03)],
+        mat({ map: tex(clere, L / 4.86, 1), emissive: 0xffffff, emissiveIntensity: 0.45, emissiveMap: tex(clere, L / 4.86, 1) }), [L, 2.0]));
       // posts (alternating red / yellow) and top beam
       for (let i = 0; i <= nb; i++) {
         const post = new THREE.Mesh(new THREE.BoxGeometry(0.42, S.clereTop, 0.42), mat({ color: i % 2 ? 0xd8262b : 0xf2d21f, roughness: 0.6 }));
@@ -446,9 +465,9 @@ export function buildSportsCenter(renderer, opts = {}) {
     /* Henry Nov 16: no vault — triangular trusses (horizontal bottom chord at the clerestory top, angled top chords to the ridge, webs) under the gable roof */
     { const tmC = mat({ color: 0x7f5326, emissive: 0x2a1a0c, emissiveIntensity: 0.5 }), yb = S.clereTop - 0.1, top = z => S.clereTop + (S.ridge - S.clereTop) * (1 - Math.abs(z) / NH) - 0.35;
       const cs = (x, za, ya, zb, yb2, t = 0.18) => { const m = new THREE.Mesh(new THREE.BoxGeometry(t, t, Math.hypot(zb - za, yb2 - ya)), tmC); m.position.set(x, (ya + yb2) / 2, (za + zb) / 2); m.rotation.x = -Math.atan2(yb2 - ya, zb - za); inn.add(m); };
-      for (let x = cx0 + 0.6; x < cx1 - 0.3; x += 1.22) { const zA = -NH + 0.3, zB = NH - 0.3;   /* trusses ~4 ft apart (Henry: much denser) */
-        cs(x, zA, yb, zB, yb, 0.26); cs(x, zA, yb, 0, top(0), 0.24); cs(x, 0, top(0), zB, yb, 0.24); cs(x, 0, yb, 0, top(0));
-        for (const zq of [zA / 2, zB / 2]) { cs(x, zq, yb, zq, top(zq)); cs(x, zq, yb, 0, (yb + top(0)) / 2); } }
+      for (let x = cx0 + 0.6; x < cx1 - 0.3; x += 0.61) { const zA = -NH + 0.3, zB = NH - 0.3;   /* Henry: more rafters, thinner (~2 ft apart) */
+        cs(x, zA, yb, zB, yb, 0.13); cs(x, zA, yb, 0, top(0), 0.12); cs(x, 0, top(0), zB, yb, 0.12); cs(x, 0, yb, 0, top(0), 0.09);
+        for (const zq of [zA / 2, zB / 2]) { cs(x, zq, yb, zq, top(zq), 0.08); cs(x, zq, yb, 0, (yb + top(0)) / 2, 0.08); } }
       for (const sg of [-1, 1]) { const zz = sg * (NH - 0.2); inn.add(quad([cx0, top(zz) + 0.3, zz], [cx1, top(zz) + 0.3, zz], [cx1, top(0) + 0.3, 0], [cx0, top(0) + 0.3, 0], mat({ map: tex(woodBoards, 1, 1), emissive: 0x2a1a0c, emissiveIntensity: 0.5, side: THREE.DoubleSide }), [4, 4])); } }
     // mats
     const blue = mat({ color: 0x2a5ac8 }), red = mat({ color: 0xd2302c }), yel = mat({ color: 0xf2c51f });
@@ -463,13 +482,7 @@ export function buildSportsCenter(renderer, opts = {}) {
     const lineM = new THREE.LineBasicMaterial({ color: 0xdddddd });
     const line = (a, b) => inn.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([a, b]), lineM));
     const top = (x, z) => S.clereTop - 0.1;   /* rigging hangs from the truss bottom chords */
-    for (const [x, z, c] of [[CX + 6, 6, 0xd42a2a], [CX + 9, 7, 0x2b63d6], [CX - 2, 8, 0xd42a2a]]) {
-      const silk = new THREE.Mesh(new THREE.PlaneGeometry(0.5, top(x, z) - 0.3), mat({ color: c })); silk.position.set(x, (top(x, z) + 0.3) / 2, z); silk.rotation.y = 0.5; inn.add(silk);
-    }
-    for (const [x, z] of [[CX + 3, 4.5], [CX - 5, 3]]) {
-      const hoop = new THREE.Mesh(new THREE.TorusGeometry(0.47, 0.03, 8, 40), mat({ color: 0xdedede, metalness: 0.5, roughness: 0.3 })); hoop.position.set(x, 2.2, z); inn.add(hoop);
-      line(new THREE.Vector3(x, 2.67, z), new THREE.Vector3(x, top(x, z), z));
-    }
+    /* Henry: no hanging equipment for now (silks/hoops get raised and lowered); only the flying trapeze, which is always up */
     // indoor flying trapeze along the north side (board at the west end, net, fly bar, catch trap)
     {
       const steel = mat({ color: 0xbfc4c8, metalness: 0.6, roughness: 0.35 });
@@ -511,7 +524,7 @@ export function buildSportsCenter(renderer, opts = {}) {
       { const b = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, dx1 - dx0 - 1, 6), trim); b.rotation.z = Math.PI / 2; b.position.set((dx0 + dx1) / 2, 1.05, z0 + 0.12); inn.add(b); }
       for (const x of [dx0 + 0.12, dx1 - 0.12]) { const b = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 2.0, 6), trim); b.rotation.x = Math.PI / 2; b.position.set(x, 1.05, z0 + 1.5); inn.add(b); }
       const step = new THREE.Mesh(new THREE.BoxGeometry(dx1 - dx0 - 0.2, 0.3, 0.6), mat({ color: 0xece4c8 })); step.position.set((dx0 + dx1) / 2, 0.15, z1 - 0.35); inn.add(step);
-      const mirror = new THREE.Mesh(new THREE.PlaneGeometry(dx1 - dx0 - 0.4, 1.7), mat({ color: 0xd8e6ee, metalness: 0.2, roughness: 0.12, emissive: 0x8fa6b2, emissiveIntensity: 0.5 })); mirror.rotation.y = Math.PI; mirror.position.set((dx0 + dx1) / 2, 0.3 + 0.95, z1 - 0.07); inn.add(mirror);
+      const mirror = new Reflector(new THREE.PlaneGeometry(dx1 - dx0 - 0.4, 1.7), { textureWidth: 1024, textureHeight: 256, color: 0xc4ccd0, clipBias: 0.003 });   /* Henry: mirrors should actually reflect */ mirror.rotation.y = Math.PI; mirror.position.set((dx0 + dx1) / 2, 0.3 + 0.95, z1 - 0.07); inn.add(mirror);
       for (const [x, ry] of [[dx0 + 0.05, Math.PI / 2], [dx1 - 0.05, -Math.PI / 2]]) { const d = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 2.05), mat({ color: 0xf6f4ee })); d.rotation.y = ry; d.position.set(x, 1.03, zc);   /* Henry 01:05: doors on the east and west walls, about in the middle */ inn.add(d); }
       for (const x of [dx0 + 2.5, dx0 + 6.5]) { const bn = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.4, 0.35), mat({ color: 0x3a6fc4 })); bn.position.set(x, 0.2, z0 + 0.4); inn.add(bn); }
     }

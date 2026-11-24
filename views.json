@@ -200,7 +200,7 @@
   },
   "circus": {
    "name": "Circus",
-   "blurb": "The 2008 circus building: trapeze rig, aerial rigging, mats, star-painted walls and the open south side.",
+   "blurb": "The 2008 circus building: flying trapeze, mats, star-painted walls, open panels, and the backstage and shed off the south side.",
    "parts": [
     {
      "kind": "Inside",
@@ -212,6 +212,28 @@
        "realPano": "pano/s07_real.jpg",
        "modelPano": "pano/s07_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons."
+      }
+     ]
+    },
+    {
+     "kind": "Backstage",
+     "soon": true,
+     "entries": [
+      {
+       "id": "circus--backstage",
+       "type": "soon",
+       "label": "Backstage"
+      }
+     ]
+    },
+    {
+     "kind": "Circus shed",
+     "soon": true,
+     "entries": [
+      {
+       "id": "circus--circus-shed",
+       "type": "soon",
+       "label": "Circus shed"
       }
      ]
     }
@@ -376,15 +398,15 @@
        "realPano": "pano/s17_real.jpg",
        "modelPano": "pano/s17_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
-       "yaw0": 111.9
+       "yaw0": 133.3
       }
      ]
     }
    ],
    "candidates": [],
    "xy": [
-    1475,
-    1480
+    1474,
+    1468
    ]
   },
   "rec-hall": {
@@ -442,7 +464,7 @@
        "realPano": "pano/s21_real.jpg",
        "modelPano": "pano/s21_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
-       "yaw0": 204.7
+       "yaw0": 61.6
       }
      ]
     },

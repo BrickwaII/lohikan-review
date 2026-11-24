@@ -46,6 +46,7 @@ h1,h2,h3{font-family:"Zilla Slab",Georgia,serif;line-height:1.05;text-wrap:balan
 .card h2{font-size:clamp(26px,3.4vw,38px);margin:6px 0 4px}
 .blurb{color:var(--mute);max-width:80ch;margin:0}
 .media{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+@media(max-width:700px){.media{grid-template-columns:1fr}}
 .media.one{grid-template-columns:1fr;max-width:900px}
 .pane{position:relative;border-radius:10px;overflow:hidden;background:#000;touch-action:none;user-select:none;-webkit-user-select:none}
 .pane.flat{touch-action:manipulation}
