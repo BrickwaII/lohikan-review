@@ -1,5 +1,5 @@
 {
- "version": "v4",
+ "version": "v5",
  "title": "Camp Lohikan 3D review",
  "api": "https://script.google.com/macros/s/AKfycbz9wsucMlop6CSVxTVdevAAZYXiCqe3mO4TZrM-ZEG2MQHOdMiLxMvg93yc6XmyapeFLA/exec",
  "areas": {
@@ -5005,7 +5005,111 @@
    ]
   }
  ],
- "changes": [],
+ "changes": [
+  {
+   "version": "v5",
+   "date": "Nov 23, 2026",
+   "items": [
+    {
+     "place": "Cabin 22",
+     "title": "Turned around so the stairs face the road",
+     "note": "",
+     "before": "img/changes/v5_cabin-22_se_before.jpg",
+     "after": "img/changes/v5_cabin-22_se_after.jpg"
+    },
+    {
+     "place": "Tennis",
+     "title": "Back three courts now match the rest",
+     "note": "",
+     "before": "img/changes/v5_tennis_se_before.jpg",
+     "after": "img/changes/v5_tennis_se_after.jpg"
+    },
+    {
+     "place": "Volleyball",
+     "title": "Sand is one consistent surface",
+     "note": "",
+     "before": "img/changes/v5_vb_before.jpg",
+     "after": "img/changes/v5_vb_after.jpg"
+    },
+    {
+     "place": "Soccer",
+     "title": "One flat fenced field; the hill up to 23 and 24 is no longer field",
+     "note": "Metal fence along the south edge, wrapping up the east side.",
+     "before": "img/changes/v5_soccer_se_before.jpg",
+     "after": "img/changes/v5_soccer_se_after.jpg"
+    },
+    {
+     "place": "Amphitheater",
+     "title": "Stage moved to where the 360 and aerial show it; steps, red benches and split-rail fence added; no L from behind",
+     "note": "",
+     "before": "img/changes/v5_amphitheater_se_before.jpg",
+     "after": "img/changes/v5_amphitheater_se_after.jpg"
+    },
+    {
+     "place": "Basketball",
+     "title": "Clearer overhead photo",
+     "before": "img/changes/v5_bb_before.jpg",
+     "after": "img/changes/v5_bb_after.jpg"
+    },
+    {
+     "place": "Circus",
+     "title": "Two rows of windows with a wall band above, red/yellow posts, more and thinner rafters, open and closed panels, backstage and shed doors, only the flying trapeze",
+     "note": "",
+     "before": "img/changes/v5_s07_before.jpg",
+     "after": "img/changes/v5_s07_after.jpg"
+    },
+    {
+     "place": "Pottery",
+     "title": "Kiln room and closet, windows, flat ceiling closing it off from Arts & Crafts",
+     "note": "",
+     "before": "img/changes/v5_s30_before.jpg",
+     "after": "img/changes/v5_s30_after.jpg"
+    },
+    {
+     "place": "Barn indoor ring",
+     "title": "Flat-bottomed trusses up to the roof; end wall to the ground with its door",
+     "note": "",
+     "before": "img/changes/v5_s11_before.jpg",
+     "after": "img/changes/v5_s11_after.jpg"
+    },
+    {
+     "place": "Gymnastics",
+     "title": "Windows along the north wall",
+     "note": "",
+     "before": "img/changes/v5_s34_before.jpg",
+     "after": "img/changes/v5_s34_after.jpg"
+    },
+    {
+     "place": "Dance studio",
+     "title": "The mirror actually reflects",
+     "note": "",
+     "before": "img/changes/v5_s19_before.jpg",
+     "after": "img/changes/v5_s19_after.jpg"
+    },
+    {
+     "place": "Pool",
+     "title": "Four benches on the south deck facing the pool; slide and lifeguard tower placed from the real 360",
+     "note": "",
+     "before": "img/changes/v5_s22_before.jpg",
+     "after": "img/changes/v5_s22_after.jpg"
+    },
+    {
+     "place": "Amphitheater",
+     "title": "Seen from the Lower Office lawn",
+     "note": "",
+     "before": "img/changes/v5_s17_before.jpg",
+     "after": "img/changes/v5_s17_after.jpg"
+    },
+    {
+     "place": "Whole camp",
+     "title": "Windows are see-through (real openings with glass) on the camp buildings",
+     "before": "img/changes/v5_s30_before.jpg",
+     "after": "img/changes/v5_s30_after.jpg",
+     "note": "Sports Center and circus windows still to do."
+    }
+   ]
+  }
+ ],
  "minimap": {
   "src": "img/minimap.jpg",
   "x0": 1150,
