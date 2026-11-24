@@ -63,11 +63,11 @@
       {
        "id": "mp_sc_cantdoor",
        "type": "mpano",
-       "label": "By the canteen entrance in 360\u00b0",
+       "label": "Inside the canteen entrance in 360\u00b0",
        "modelPano": "pano/mp_sc_cantdoor.jpg",
        "short": "Canteen entrance",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 90.9
+       "yaw0": 91.0
       },
       {
        "id": "mp_sc_benches",
@@ -85,7 +85,7 @@
        "modelPano": "pano/mp_sc_dj.jpg",
        "short": "DJ booth",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 173.3
+       "yaw0": 19.4
       },
       {
        "id": "mp_sc_window",
@@ -750,13 +750,16 @@
      ]
     },
     {
-     "kind": "Kitchen",
-     "soon": true,
+     "kind": "Inside",
      "entries": [
       {
-       "id": "cooking--kitchen",
-       "type": "soon",
-       "label": "Kitchen"
+       "id": "s32-360",
+       "type": "pano",
+       "label": "Cooking kitchen in 360\u00b0",
+       "realPano": "pano/s32_real.jpg",
+       "modelPano": "pano/s32_model.jpg",
+       "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
+       "yaw0": 303.0
       }
      ]
     }
@@ -1638,7 +1641,7 @@
        "realPano": "pano/s40_real.jpg",
        "modelPano": "pano/s40_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
-       "yaw0": 240.7
+       "yaw0": 237.7
       }
      ]
     }
@@ -4656,6 +4659,9 @@
      "ref": "baseball"
     },
     {
+     "ref": "tennis"
+    },
+    {
      "ref": "middle-field"
     }
    ]
@@ -4663,9 +4669,6 @@
   {
    "name": "Athletics",
    "items": [
-    {
-     "ref": "tennis"
-    },
     {
      "ref": "gym"
     },
@@ -4745,12 +4748,7 @@
      ]
     },
     {
-     "name": "Pool",
-     "items": [
-      {
-       "ref": "pool"
-      }
-     ]
+     "ref": "pool"
     }
    ]
   },
