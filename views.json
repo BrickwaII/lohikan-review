@@ -58,7 +58,8 @@
        "modelPano": "pano/mp_sc_court.jpg",
        "short": "Court 360\u00b0",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 178.4
+       "yaw0": 178.4,
+       "modelPanoPhoto": "pano/mp_sc_court.jpg"
       },
       {
        "id": "mp_sc_cantdoor",
@@ -67,7 +68,8 @@
        "modelPano": "pano/mp_sc_cantdoor.jpg",
        "short": "Canteen entrance",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 91.0
+       "yaw0": 91.0,
+       "modelPanoPhoto": "pano/mp_sc_cantdoor.jpg"
       },
       {
        "id": "mp_sc_benches",
@@ -76,7 +78,8 @@
        "modelPano": "pano/mp_sc_benches.jpg",
        "short": "Benches",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 0.0
+       "yaw0": 0.0,
+       "modelPanoPhoto": "pano/mp_sc_benches.jpg"
       },
       {
        "id": "mp_sc_dj",
@@ -85,7 +88,8 @@
        "modelPano": "pano/mp_sc_dj.jpg",
        "short": "DJ booth",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 19.4
+       "yaw0": 19.4,
+       "modelPanoPhoto": "pano/mp_sc_dj.jpg"
       },
       {
        "id": "mp_sc_window",
@@ -94,7 +98,8 @@
        "modelPano": "pano/mp_sc_window.jpg",
        "short": "Canteen windows",
        "cap": "Model only: a 360\u00b0 view rendered from the model. Drag to look around.",
-       "yaw0": 92.0
+       "yaw0": 92.0,
+       "modelPanoPhoto": "pano/mp_sc_window.jpg"
       },
       {
        "id": "sc-in-w",
@@ -1414,14 +1419,16 @@
        "type": "model",
        "label": "From the southeast",
        "model": "img/lasertag_se_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/lasertag_se_photo.jpg"
       },
       {
        "id": "lasertag-sw",
        "type": "model",
        "label": "From the southwest",
        "model": "img/lasertag_sw_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/lasertag_sw_photo.jpg"
       },
       {
        "id": "s24-360",
@@ -1460,7 +1467,8 @@
        "type": "model",
        "label": "From the southeast",
        "model": "img/atv_se_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/atv_se_photo.jpg"
       },
       {
        "id": "atv-sw",
@@ -1506,14 +1514,16 @@
        "type": "model",
        "label": "From the southeast",
        "model": "img/horses_se_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/horses_se_photo.jpg"
       },
       {
        "id": "horses-sw",
        "type": "model",
        "label": "From the southwest",
        "model": "img/horses_sw_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/horses_sw_photo.jpg"
       }
      ]
     },
@@ -1811,7 +1821,7 @@
        "realPano": "pano/s22_real.jpg",
        "modelPano": "pano/s22_model.jpg",
        "cap": "Real: 360\u00b0 tour photo (2023\u20132025). The model was rendered from about the same spot; if it's turned, use the turn buttons.",
-       "yaw0": 50.3
+       "yaw0": 84.3
       }
      ]
     },
@@ -1863,14 +1873,16 @@
        "type": "model",
        "label": "From the southeast",
        "model": "img/dh_se_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/dh_se_photo.jpg"
       },
       {
        "id": "dh-sw",
        "type": "model",
        "label": "From the southwest",
        "model": "img/dh_sw_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/dh_sw_photo.jpg"
       }
      ]
     },
@@ -1882,7 +1894,8 @@
        "type": "model",
        "label": "The tent from the southwest",
        "model": "img/dh_tent_model.jpg",
-       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it."
+       "cap": "Model only, trees hidden. No matching real photo yet; if you have one, attach it.",
+       "modelPhoto": "img/dh_tent_photo.jpg"
       }
      ]
     },
@@ -2456,6 +2469,28 @@
    "xy": [
     1621,
     1753
+   ]
+  },
+  "a-frame": {
+   "name": "The A-Frame",
+   "blurb": "The A-Frame staff building.",
+   "parts": [
+    {
+     "kind": "Inside",
+     "soon": true,
+     "entries": [
+      {
+       "id": "a-frame--inside",
+       "type": "soon",
+       "label": "Inside"
+      }
+     ]
+    }
+   ],
+   "candidates": [],
+   "xy": [
+    1498,
+    1530
    ]
   },
   "cooler": {
@@ -3693,46 +3728,32 @@
      ]
     },
     {
-     "kind": "16-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-16--16-1--senior-staff",
+       "id": "cabin-16--16-1",
        "type": "soon",
-       "label": "16-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "16-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "16-1",
+       "short": "16-1"
+      },
       {
-       "id": "cabin-16--16-2--senior-staff",
+       "id": "cabin-16--16-2",
        "type": "soon",
-       "label": "16-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "16-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "16-2",
+       "short": "16-2"
+      },
       {
-       "id": "cabin-16--16-3--senior-staff",
+       "id": "cabin-16--16-3",
        "type": "soon",
-       "label": "16-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "16-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "16-3",
+       "short": "16-3"
+      },
       {
-       "id": "cabin-16--16-4--senior-staff",
+       "id": "cabin-16--16-4",
        "type": "soon",
-       "label": "16-4 (senior staff)"
+       "label": "16-4",
+       "short": "16-4"
       }
      ]
     }
@@ -3797,46 +3818,32 @@
      ]
     },
     {
-     "kind": "17-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-17--17-1--senior-staff",
+       "id": "cabin-17--17-1",
        "type": "soon",
-       "label": "17-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "17-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "17-1",
+       "short": "17-1"
+      },
       {
-       "id": "cabin-17--17-2--senior-staff",
+       "id": "cabin-17--17-2",
        "type": "soon",
-       "label": "17-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "17-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "17-2",
+       "short": "17-2"
+      },
       {
-       "id": "cabin-17--17-3--senior-staff",
+       "id": "cabin-17--17-3",
        "type": "soon",
-       "label": "17-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "17-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "17-3",
+       "short": "17-3"
+      },
       {
-       "id": "cabin-17--17-4--senior-staff",
+       "id": "cabin-17--17-4",
        "type": "soon",
-       "label": "17-4 (senior staff)"
+       "label": "17-4",
+       "short": "17-4"
       }
      ]
     }
@@ -3901,46 +3908,32 @@
      ]
     },
     {
-     "kind": "18-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-18--18-1--senior-staff",
+       "id": "cabin-18--18-1",
        "type": "soon",
-       "label": "18-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "18-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "18-1",
+       "short": "18-1"
+      },
       {
-       "id": "cabin-18--18-2--senior-staff",
+       "id": "cabin-18--18-2",
        "type": "soon",
-       "label": "18-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "18-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "18-2",
+       "short": "18-2"
+      },
       {
-       "id": "cabin-18--18-3--senior-staff",
+       "id": "cabin-18--18-3",
        "type": "soon",
-       "label": "18-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "18-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "18-3",
+       "short": "18-3"
+      },
       {
-       "id": "cabin-18--18-4--senior-staff",
+       "id": "cabin-18--18-4",
        "type": "soon",
-       "label": "18-4 (senior staff)"
+       "label": "18-4",
+       "short": "18-4"
       }
      ]
     }
@@ -4005,46 +3998,32 @@
      ]
     },
     {
-     "kind": "19-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-19--19-1--senior-staff",
+       "id": "cabin-19--19-1",
        "type": "soon",
-       "label": "19-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "19-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "19-1",
+       "short": "19-1"
+      },
       {
-       "id": "cabin-19--19-2--senior-staff",
+       "id": "cabin-19--19-2",
        "type": "soon",
-       "label": "19-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "19-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "19-2",
+       "short": "19-2"
+      },
       {
-       "id": "cabin-19--19-3--senior-staff",
+       "id": "cabin-19--19-3",
        "type": "soon",
-       "label": "19-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "19-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "19-3",
+       "short": "19-3"
+      },
       {
-       "id": "cabin-19--19-4--senior-staff",
+       "id": "cabin-19--19-4",
        "type": "soon",
-       "label": "19-4 (senior staff)"
+       "label": "19-4",
+       "short": "19-4"
       }
      ]
     }
@@ -4109,46 +4088,32 @@
      ]
     },
     {
-     "kind": "20-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-20--20-1--senior-staff",
+       "id": "cabin-20--20-1",
        "type": "soon",
-       "label": "20-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "20-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "20-1",
+       "short": "20-1"
+      },
       {
-       "id": "cabin-20--20-2--senior-staff",
+       "id": "cabin-20--20-2",
        "type": "soon",
-       "label": "20-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "20-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "20-2",
+       "short": "20-2"
+      },
       {
-       "id": "cabin-20--20-3--senior-staff",
+       "id": "cabin-20--20-3",
        "type": "soon",
-       "label": "20-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "20-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "20-3",
+       "short": "20-3"
+      },
       {
-       "id": "cabin-20--20-4--senior-staff",
+       "id": "cabin-20--20-4",
        "type": "soon",
-       "label": "20-4 (senior staff)"
+       "label": "20-4",
+       "short": "20-4"
       }
      ]
     }
@@ -4213,46 +4178,32 @@
      ]
     },
     {
-     "kind": "21-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-21--21-1--senior-staff",
+       "id": "cabin-21--21-1",
        "type": "soon",
-       "label": "21-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "21-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "21-1",
+       "short": "21-1"
+      },
       {
-       "id": "cabin-21--21-2--senior-staff",
+       "id": "cabin-21--21-2",
        "type": "soon",
-       "label": "21-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "21-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "21-2",
+       "short": "21-2"
+      },
       {
-       "id": "cabin-21--21-3--senior-staff",
+       "id": "cabin-21--21-3",
        "type": "soon",
-       "label": "21-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "21-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "21-3",
+       "short": "21-3"
+      },
       {
-       "id": "cabin-21--21-4--senior-staff",
+       "id": "cabin-21--21-4",
        "type": "soon",
-       "label": "21-4 (senior staff)"
+       "label": "21-4",
+       "short": "21-4"
       }
      ]
     }
@@ -4317,46 +4268,32 @@
      ]
     },
     {
-     "kind": "22-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-22--22-1--senior-staff",
+       "id": "cabin-22--22-1",
        "type": "soon",
-       "label": "22-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "22-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "22-1",
+       "short": "22-1"
+      },
       {
-       "id": "cabin-22--22-2--senior-staff",
+       "id": "cabin-22--22-2",
        "type": "soon",
-       "label": "22-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "22-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "22-2",
+       "short": "22-2"
+      },
       {
-       "id": "cabin-22--22-3--senior-staff",
+       "id": "cabin-22--22-3",
        "type": "soon",
-       "label": "22-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "22-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "22-3",
+       "short": "22-3"
+      },
       {
-       "id": "cabin-22--22-4--senior-staff",
+       "id": "cabin-22--22-4",
        "type": "soon",
-       "label": "22-4 (senior staff)"
+       "label": "22-4",
+       "short": "22-4"
       }
      ]
     }
@@ -4421,46 +4358,32 @@
      ]
     },
     {
-     "kind": "23-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-23--23-1--senior-staff",
+       "id": "cabin-23--23-1",
        "type": "soon",
-       "label": "23-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "23-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "23-1",
+       "short": "23-1"
+      },
       {
-       "id": "cabin-23--23-2--senior-staff",
+       "id": "cabin-23--23-2",
        "type": "soon",
-       "label": "23-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "23-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "23-2",
+       "short": "23-2"
+      },
       {
-       "id": "cabin-23--23-3--senior-staff",
+       "id": "cabin-23--23-3",
        "type": "soon",
-       "label": "23-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "23-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "23-3",
+       "short": "23-3"
+      },
       {
-       "id": "cabin-23--23-4--senior-staff",
+       "id": "cabin-23--23-4",
        "type": "soon",
-       "label": "23-4 (senior staff)"
+       "label": "23-4",
+       "short": "23-4"
       }
      ]
     }
@@ -4525,46 +4448,32 @@
      ]
     },
     {
-     "kind": "24-1 (senior staff)",
+     "kind": "Senior staff rooms",
      "soon": true,
      "entries": [
       {
-       "id": "cabin-24--24-1--senior-staff",
+       "id": "cabin-24--24-1",
        "type": "soon",
-       "label": "24-1 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "24-2 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "24-1",
+       "short": "24-1"
+      },
       {
-       "id": "cabin-24--24-2--senior-staff",
+       "id": "cabin-24--24-2",
        "type": "soon",
-       "label": "24-2 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "24-3 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "24-2",
+       "short": "24-2"
+      },
       {
-       "id": "cabin-24--24-3--senior-staff",
+       "id": "cabin-24--24-3",
        "type": "soon",
-       "label": "24-3 (senior staff)"
-      }
-     ]
-    },
-    {
-     "kind": "24-4 (senior staff)",
-     "soon": true,
-     "entries": [
+       "label": "24-3",
+       "short": "24-3"
+      },
       {
-       "id": "cabin-24--24-4--senior-staff",
+       "id": "cabin-24--24-4",
        "type": "soon",
-       "label": "24-4 (senior staff)"
+       "label": "24-4",
+       "short": "24-4"
       }
      ]
     }
@@ -4711,9 +4620,6 @@
      "ref": "paintball"
     },
     {
-     "ref": "lasertag"
-    },
-    {
      "ref": "atv"
     },
     {
@@ -4757,6 +4663,9 @@
    "items": [
     {
      "ref": "media-arts"
+    },
+    {
+     "ref": "lasertag"
     }
    ]
   },
@@ -4934,6 +4843,9 @@
     },
     {
      "ref": "cooler"
+    },
+    {
+     "ref": "a-frame"
     },
     {
      "ref": "laundry"

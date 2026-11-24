@@ -84,6 +84,7 @@ PLACES = [
  P('upper-office', 'Upper Office', 'The Upper Office.', c=(1616, 1757), w=40, soon=['Inside']),
  P('condo', 'The Condo', 'The Condo staff housing.', c=(1634, 1758), w=45, soon=['Inside', 'Attic']),
  P('staff-lounge', 'Staff Lounge', 'The Staff Lounge.', auto=False, soon=['Outside', 'Inside'], xy=(1621, 1753)),
+ P('a-frame', 'The A-Frame', 'The A-Frame staff building.', c=(1498, 1530), w=35, soon=['Inside']),
  P('cooler', 'The Cooler', 'The Cooler.', auto=False, soon=['Outside', 'Inside'], xy=(1641, 1747)),
  P('staff-parking', 'Staff parking lot', 'The staff parking lot.', auto=False, soon=['Overview'], xy=(1286, 1610)),
  P('laundry', 'Laundry & EP closet', 'The laundry room; the evening-program closet is in its northwest corner.', c=(1301, 1584), w=35, soon=['Laundry inside', 'EP closet']),
@@ -104,7 +105,7 @@ CABINS['5'] = None
 for k, v in CABINS.items():
     nums = k.split('-') if k == '2-3' else [k]
     units = [n + l for n in nums for l in ('A', 'B')] if k != '5' else [k]
-    if k.isdigit() and 16 <= int(k) <= 24: units += [f'{k}-{i} (senior staff)' for i in range(1, 5)]
+    if k.isdigit() and 16 <= int(k) <= 24: units += [{'name': 'Senior staff rooms', 'rooms': [f'{k}-{i}' for i in range(1, 5)]}]
     units += {'1': ['Gaga court', 'Tetherballs'], '2-3': ['Tetherball (between 2 & 3)'], '4': ['Tetherball (between 3 & 4)']}.get(k, [])
     PLACES.append(P('cabin-' + k, 'Cabins 2 & 3' if k == '2-3' else ('Cabin 24 - Pre 2024 fire' if k == '24' else 'Cabin ' + k), 'Cabin 24 burned around 2024; this shows it as it was.' if k == '24' else ('Cabin 5 was overflow and almost never used.' if k == '5' else ''),
                     c=v[:2] if v else None, w=max(30, v[2] * 2.2 + 10) if v else 40, auto=bool(v), soon=units))
@@ -115,15 +116,15 @@ MENU = [
  {"name": "Creative Arts", "items": [{"ref": "ac"}, {"ref": "pottery"}, {"ref": "woodshop"}, {"ref": "cooking"}]},
  {"name": "Field & Court Sports", "items": [{"ref": "basketball"}, {"ref": "volleyball"}, {"ref": "soccer"}, {"ref": "lacrosse"}, {"ref": "baseball"}, {"ref": "tennis"}, {"ref": "middle-field"}]},
  {"name": "Athletics", "items": [{"ref": "gym"}, {"ref": "golf"}, {"ref": "archery"}, {"ref": "riflery"}, {"ref": "fencing"}, {"ref": "skate"}, {"ref": "mountainboard"}, {"ref": "bungee"}, {"ref": "gaga"}, {"ref": "tetherball"}]},
- {"name": "Adventure", "items": [{"ref": "ropes"}, {"ref": "paintball"}, {"ref": "lasertag"}, {"ref": "atv"}, {"ref": "dirtbikes"}, {"ref": "horses"}]},
+ {"name": "Adventure", "items": [{"ref": "ropes"}, {"ref": "paintball"}, {"ref": "atv"}, {"ref": "dirtbikes"}, {"ref": "horses"}]},
  {"name": "Lake & Pool", "items": [{"name": "Lake", "items": [{"ref": "waterfront"}, {"ref": "waterslide"}, {"ref": "watertramp"}, {"ref": "ropeswing"}, {"ref": "jetski"}]}, {"ref": "pool"}]},
- {"name": "Other Activities", "items": [{"ref": "media-arts"}]},
+ {"name": "Other Activities", "items": [{"ref": "media-arts"}, {"ref": "lasertag"}]},
  {"name": "Cabins", "items": [{"name": "Junior Boys", "items": cab('1', '2-3')}, {"name": "Inter Boys", "items": cab('12', '13', '14', '15')}, {"name": "Senior Boys", "items": cab('16', '17', '18', '19')},
    {"name": "Junior Girls", "items": cab('6', '7', '8')}, {"name": "Inter Girls", "items": cab('9', '10', '11')}, {"name": "Senior Girls", "items": cab('20', '21', '22', '23', '24')},
    {"name": "Other Cabins", "items": cab('4', '5')}, {"name": "Unsorted photos", "items": [{"ref": "cabins-photos"}]}]},
  {"name": "Camp Buildings", "items": [{"ref": "sc"}, {"ref": "dh"}, {"ref": "rec-hall"}, {"ref": "quad"}, {"ref": "lower-office"}, {"ref": "infirmary"}]},
  {"name": "Outdoors", "items": [{"ref": "overview"}, {"ref": "roads"}, {"ref": "shortcut"}, {"ref": "skilift"}, {"ref": "entrance"}]},
- {"name": "Staff Areas", "items": [{"ref": "upper-office"}, {"ref": "condo"}, {"ref": "staff-lounge"}, {"ref": "cooler"}, {"ref": "laundry"}, {"ref": "maint"}, {"ref": "staff-parking"}]},
+ {"name": "Staff Areas", "items": [{"ref": "upper-office"}, {"ref": "condo"}, {"ref": "staff-lounge"}, {"ref": "cooler"}, {"ref": "a-frame"}, {"ref": "laundry"}, {"ref": "maint"}, {"ref": "staff-parking"}]},
 ]
 
 def topdown(p):
@@ -147,7 +148,7 @@ for p in PLACES:
               "cap": "Real: 360° tour photo (2023–2025). The model was rendered from about the same spot; if it's turned, use the turn buttons."}
         (ins if p['key'] in ('ac', 'cooking', 'circus', 'dance', 'gym', 'rec-hall', 'rock-band', 'pottery', 'horses') else out).append(pv)
     SPOT = {'s07': (1791.6, 1609.9), 's12': (1393.9, 1584.9), 's14': (1684.2, 1566.2), 's19': (1786.1, 1627.1), 's34': (1744.1, 1625.5), 's17': (1459.0, 1491.8), 's18': (1491.0, 1645.0),
-            's21': (1474.1, 1650.7), 's22': (1612.1, 1615.6), 's30': (1418.6, 1582.6), 's31': (1395.0, 1528.7), 's23': (1617.1, 1681.6), 's29': (1643.1, 1565.7), 's37': (1455.2, 1581.7),
+            's21': (1474.1, 1650.7), 's22': (1612.7, 1605.1), 's30': (1418.6, 1582.6), 's31': (1395.0, 1528.7), 's23': (1617.1, 1681.6), 's29': (1643.1, 1565.7), 's37': (1455.2, 1581.7),
             's25': (1494.7, 1723.0), 's27': (1702.1, 1765.6), 's24': (1314.7, 1528.7), 's36': (1422.4, 1461.5), 's05': (1511.9, 1403.7), 's40': (1250.0, 1183.3), 's39': (1177.1, 1230.6), 's11': (2022.1, 1935.6), 's08': (1761.0, 1705.5), 's32': (1513.8, 1703.0)}
     SH = json.load(open(f'{SITE}/pano/shifts.json')) if os.path.exists(f'{SITE}/pano/shifts.json') else {}
     for e in out + ins + [x for v in p['sections'].values() for x in v]:
@@ -158,6 +159,9 @@ for p in PLACES:
                 b = math.degrees(math.atan2(tgt[0] - cam[0], tgt[1] - cam[1])); sh = 0 if e['type'] == 'mpano' else SH.get(sid, 180)
                 e['yaw0'] = round((b + sh - 90) % 360, 1)
             e.pop('cam', None); e.pop('look', None)
+    for e in out + ins + [x for v in p['sections'].values() for x in v]:
+        if e.get('model') and os.path.exists(f"{SITE}/{e['model'].replace('_model.jpg', '_photo.jpg')}"): e['modelPhoto'] = e['model'].replace('_model.jpg', '_photo.jpg')
+        if e.get('modelPano') and os.path.exists(f"{SITE}/{e['modelPano'].replace('_model.jpg', '_photo.jpg')}"): e['modelPanoPhoto'] = e['modelPano'].replace('_model.jpg', '_photo.jpg')
     exists = lambda e: all(os.path.exists(f"{SITE}/{e[k]}") for k in ('real', 'model', 'realPano', 'modelPano') if k in e)
     out = [e for e in out if exists(e)]; ins = [e for e in ins if exists(e)]
     parts = [x for x in [{"kind": "Outside", "entries": out}, {"kind": p['inside_name'], "entries": ins}] if x['entries']]
@@ -168,10 +172,12 @@ for p in PLACES:
         ents = [e for e in ents if exists(e)] + [{"id": f"{other}--inside", "type": "soon", "label": "Inside"}]
         parts.append({"kind": sname, "entries": ents})
     parts = [x for x in parts if x['entries']]
+    slugf = lambda t: ''.join(ch if ch.isalnum() else '-' for ch in t.lower()).strip('-')
     for sname in p['soon']:
+        if isinstance(sname, dict):
+            parts.append({"kind": sname['name'], "soon": True, "entries": [{"id": f"{p['key']}--{slugf(r)}", "type": "soon", "label": r, "short": r} for r in sname['rooms']]}); continue
         if any(x['kind'] == sname for x in parts): continue
-        slug = ''.join(ch if ch.isalnum() else '-' for ch in sname.lower()).strip('-')
-        parts.append({"kind": sname, "soon": True, "entries": [{"id": f"{p['key']}--{slug}", "type": "soon", "label": sname}]})
+        parts.append({"kind": sname, "soon": True, "entries": [{"id": f"{p['key']}--{slugf(sname)}", "type": "soon", "label": sname}]})
     if not parts: parts.append({"kind": "Overview", "soon": True, "entries": [{"id": f"{p['key']}--overview", "type": "soon", "label": "Overview"}]})
     gl = p['gal'] if isinstance(p['gal'], list) else ([p['gal']] if p['gal'] else [])
     cands = [dict(c) for g in gl for c in GAL.get(g, [])]

@@ -168,7 +168,7 @@ textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
     <label>Your name (optional)<input id="rname" autocomplete="name" maxlength="60"></label>
     <label>Years at camp (optional)<input id="ryears" placeholder="e.g. 2006–2012, staff 2010–12" maxlength="80"></label>
   </div>
-  <div class="status" id="status">Loading…</div>
+  <div class="status"><span id="status">Loading…</span> <button class="small" id="photobtn" style="margin-left:10px;min-height:30px;padding:2px 10px"></button></div>
 </header>
 <nav class="topnav" aria-label="Places"><button class="arr" id="navl" aria-label="Scroll places left" hidden>‹</button><div class="navrow" id="navrow"></div><button class="arr" id="navr" aria-label="Scroll places right" hidden>›</button><button class="nt" id="chgbtn">What's changed</button><button id="menubtn" aria-haspopup="true">☰ Places</button></nav>
 <div class="dd" id="dd" role="menu"></div><div class="picker" id="picker" role="menu" aria-label="Pick a place"></div>
@@ -207,6 +207,8 @@ const toast=t=>{const el=$('toast');el.textContent=t;el.classList.add('on');clea
 const status=t=>{$('status').textContent=t};
 const rid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,9);
 const LS=(k,v)=>{try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null;}};
+let photoOn=LS('lrv_photo')!=='0';
+const mImg=e=>photoOn&&e.modelPhoto?e.modelPhoto:e.model; const mTag=e=>photoOn&&e.modelPhoto?'Model + photo scan':'Model';
 const TRI={todo:'Needs fixing',done:'Fixed',invalid:'Not valid'};
 let DATA=null, AREAS=[], area=null, VIEWS=[], vi=0, others=[], showAll=false, adminKey='', isOwner=false;
 let ADM={hidden:[],rot:{},tri:{},gal:{}};
@@ -280,7 +282,7 @@ function setupSpheres(entry){
     const scene=new THREE.Scene(), cam=new THREE.PerspectiveCamera(75,1,0.1,1000);
     const g=new THREE.SphereGeometry(500,64,40); g.scale(-1,1,1);
     const mat=new THREE.MeshBasicMaterial({color:0x333333}); const mesh=new THREE.Mesh(g,mat); scene.add(mesh);
-    new THREE.TextureLoader().load(kind==='real'?entry.realPano:entry.modelPano,t=>{mat.map=t;mat.color.set(0xffffff);mat.needsUpdate=true;draw();});
+    new THREE.TextureLoader().load(kind==='real'?entry.realPano:(photoOn&&entry.modelPanoPhoto?entry.modelPanoPhoto:entry.modelPano),t=>{mat.map=t;mat.color.set(0xffffff);mat.needsUpdate=true;draw();});
     st.panes.push({kind,el,r,scene,cam,mesh});
   }
   const draw=()=>{ for(const p of st.panes){ const w=p.el.clientWidth,h=p.el.clientHeight; if(!w) continue; p.r.setSize(w,h,false); p.cam.aspect=w/h; p.cam.fov=st.fov; p.cam.updateProjectionMatrix();
@@ -397,12 +399,12 @@ function viewHtml(e){
     <div><h3>Your photos</h3><span class="file"><button tabindex="-1" class="small">Attach photos</button><input type="file" accept="image/*" multiple id="pfile" aria-label="Attach photos"></span><div class="thumbs" id="thumbs"></div></div></div>`;
   if(!e) return '<p class="blurb">No views here yet. Use the box below to tell us what this place looked like, or attach photos.</p>';
   let h=`<h3 class="vt">${esc(e.label)}${(ADM.hidden||[]).includes(e.id)?' <span class="st">removed for reviewers</span>':''}</h3>`;
-  if(e.type==='mpano') h+=`<div class="media one"><div class="pane sphere" data-k="model"><span class="tag">Model 360°</span><div class="pins"></div></div></div>
+  if(e.type==='mpano') h+=`<div class="media one"><div class="pane sphere" data-k="model"><span class="tag">${photoOn&&e.modelPanoPhoto?'Model + photo scan 360°':'Model 360°'}</span><div class="pins"></div></div></div>
     <p class="hint">Drag to look around. Pinch or scroll to zoom. ${esc(e.cap||'')}</p><div class="ctrl"><button id="pinbtn">Add a pin</button></div>`;
-  else if(e.type==='pano') h+=`<div class="media"><div class="pane sphere" data-k="real"><span class="tag">Real 360°</span><div class="pins"></div></div><div class="pane sphere" data-k="model"><span class="tag">Model 360°</span><div class="pins"></div></div></div>
+  else if(e.type==='pano') h+=`<div class="media"><div class="pane sphere" data-k="real"><span class="tag">Real 360°</span><div class="pins"></div></div><div class="pane sphere" data-k="model"><span class="tag">${photoOn&&e.modelPanoPhoto?'Model + photo scan 360°':'Model 360°'}</span><div class="pins"></div></div></div>
     <p class="hint">Drag either picture to look around; both turn together. Pinch or scroll to zoom. ${esc(e.cap||'')}</p>
     <div class="ctrl"><button id="pinbtn">Add a pin</button><span class="by">Model turned the wrong way?</span><button class="small" data-rot="-5" aria-label="Turn model left">⟲ 5°</button><button class="small" data-rot="5" aria-label="Turn model right">⟳ 5°</button></div>`;
-  else h+=`<div class="media${e.real?'':' one'}">${e.real?`<div class="pane flat" data-k="real"><img src="${esc(e.real)}" alt="Real: ${esc(e.label)}"><span class="tag">Real</span><div class="pins"></div></div>`:''}<div class="pane flat" data-k="model"><img src="${esc(e.model)}" alt="Model: ${esc(e.label)}"><span class="tag">Model</span><div class="pins"></div></div></div>
+  else h+=`<div class="media${e.real?'':' one'}">${e.real?`<div class="pane flat" data-k="real"><img src="${esc(e.real)}" alt="Real: ${esc(e.label)}"><span class="tag">Real</span><div class="pins"></div></div>`:''}<div class="pane flat" data-k="model"><img src="${esc(mImg(e))}" alt="Model: ${esc(e.label)}"><span class="tag">${mTag(e)}</span><div class="pins"></div></div></div>
     <p class="hint">${esc(e.cap||'')}</p><div class="ctrl"><button id="pinbtn">Add a pin</button></div>`;
   const nUse=others.filter(o=>((o.entries||{})[e.id]||{}).flag==='useless').length+(E(e.id).flag==='useless'?1:0);
   h+=`<div class="draft" id="draft"><textarea placeholder="What's wrong at this spot, and what should it be?" maxlength="600"></textarea><div class="ctrl"><button class="primary" id="savepin">Save pin</button><button id="cancelpin">Cancel</button></div></div>
@@ -433,7 +435,8 @@ function renderView(){
 function paintSiteFb(){ if(document.activeElement!==$('sitefb')) $('sitefb').value=mine.site||''; $('sitefbo').innerHTML=isOwner?others.filter(o=>o.site).map(o=>`<li><span class="n txt">✎</span><span>${esc(o.site)}<br><span class="by">${esc(who(o))}</span></span><span></span></li>`).join(''):''; }
 function paintMini(){ const M=DATA.minimap, d=$('minidot'); if(!M){ $('mini').style.display='none'; return; } if(!$('miniimg').src) $('miniimg').src=M.src;
   if(area&&area.xy){ d.style.display=''; d.style.left=((area.xy[0]-M.x0)/(M.x1-M.x0)*100)+'%'; d.style.top=((M.y1-area.xy[1])/(M.y1-M.y0)*100)+'%'; } else d.style.display='none'; }
-function renderPlace(){ paintSiteFb(); paintMini();
+function paintPhotoBtn(){ $('photobtn').textContent='Realistic Photo Scans: '+(photoOn?'On':'Off'); $('photobtn').title='Where a drone photo scan exists, show it blended into the model'; }
+function renderPlace(){ paintSiteFb(); paintPhotoBtn(); paintMini();
   $('crumb').textContent=curPath.join(' › '); $('pname').textContent=area.name; $('pblurb').textContent=area.blurb||'';
   $('wtitle').textContent=`Anything else about ${area.name}?`;
   $('stext').value=A(area.key).text||''; $('sang').value=A(area.key).angles||'';
@@ -545,6 +548,7 @@ document.addEventListener('click',async e=>{
     closePicker(); paintGallery(); }
   else if(t.dataset.pg!==undefined&&t.closest('#picker')){ pickGroup(+t.dataset.pg); }
   else if(t.dataset.galmove&&isOwner){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmove]={to:t.dataset.to}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.to)); }
+  else if(t.id==='photobtn'){ photoOn=!photoOn; LS('lrv_photo',photoOn?'1':'0'); paintPhotoBtn(); renderView(); }
   else if(t.id==='showall'){ showAll=!showAll; t.setAttribute('aria-pressed',String(showAll)); t.textContent=showAll?'Hide fixed & not-valid notes':'Show fixed & not-valid notes'; paintPins(); paintOthers(); }
   else if(t.id==='alogin'){ const k=$('akey').value.trim(); if(!k||!API()) return;
     try{ await api({action:'checkkey',key:k}); adminKey=k; isOwner=true; LS('lrv_admin',k); $('astate').textContent='Unlocked'; refresh(); renderView(); }catch(err){ $('astate').textContent='Wrong passcode'; } }
