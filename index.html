@@ -294,8 +294,12 @@ let curPath=[];
 let PH=null, phCur=null, phLast=null;
 async function loadPH(){ if(PH) return PH; try{ PH=(await (await fetch('photos.json?t='+Date.now(),{cache:'no-store'})).json()).photos||[]; }catch(e){ PH=[]; } return PH; }
 function phVotes(id){ const v=[]; for(const o of [mine,...others]){ const a=(o.ph||{})[id]; if(a) v.push({a,own:!!o.owner||(o===mine&&isOwner)}); } return v; }
-function phState(id){ const v=phVotes(id), own=v.find(x=>x.own&&x.a!=='skip'); if(own) return own.a==='x'?{s:'dropped'}:{s:'placed',a:own.a};
-  const c={}; for(const x of v) if(x.a!=='skip') c[x.a]=(c[x.a]||0)+1; const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
+const phMap=a=>typeof a==='string'&&a.startsWith('m:')?a.slice(2).split(',').map(Number):null;
+function phState(id){ const v=phVotes(id), mp=v.map(x=>phMap(x.a)).filter(Boolean);
+  const ownM=v.find(x=>x.own&&phMap(x.a)); if(ownM) return {s:'mapped',m:phMap(ownM.a)};
+  for(let i=0;i<mp.length;i++) for(let j=i+1;j<mp.length;j++) if(Math.hypot(mp[i][0]-mp[j][0],mp[i][1]-mp[j][1])<=40) return {s:'mapped',m:[(mp[i][0]+mp[j][0])/2,(mp[i][1]+mp[j][1])/2]};   // two approximate pins within ~40 m agree
+  const own=v.find(x=>x.own&&x.a!=='skip'&&!phMap(x.a)); if(own) return own.a==='x'?{s:'dropped'}:{s:'placed',a:own.a};
+  const c={}; for(const x of v) if(x.a!=='skip'&&!phMap(x.a)) c[x.a]=(c[x.a]||0)+1; const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
   if(top&&top[1]>=2) return top[0]==='x'?{s:'dropped'}:{s:'placed',a:top[0]}; return {s:'open',n:v.filter(x=>x.a!=='skip').length}; }
 const areaName=k=>(AREAS.find(a=>a.key===k)||{}).name||k;
 function phNext(){ const seed=[...(me.id||'x')].reduce((h,c)=>(h*31+c.charCodeAt(0))>>>0,7), r=s=>((s*2654435761)>>>0)%1000;
@@ -303,7 +307,7 @@ function phNext(){ const seed=[...(me.id||'x')].reduce((h,c)=>(h*31+c.charCodeAt
   open.sort((a,b)=>(b.st.n-a.st.n)||(a.i<300?0:1)-(b.i<300?0:1)||(r(seed^a.i)-r(seed^b.i))); return open[0]?open[0].p:null; }
 async function showPhotos(){ await loadPH(); closeDD(); disposeSpheres(); document.body.classList.remove('changes','questions'); document.body.classList.add('photos'); $('menu').classList.remove('on'); phCur=phNext(); paintPh(); scrollTo(0,0); }
 function paintPh(){
-  const all=PH.map(p=>phState(p.id)), placed=all.filter(x=>x.s==='placed').length, dropped=all.filter(x=>x.s==='dropped').length, mineN=Object.keys(mine.ph||{}).length;
+  const all=PH.map(p=>phState(p.id)), placed=all.filter(x=>x.s==='placed'||x.s==='mapped').length, dropped=all.filter(x=>x.s==='dropped').length, mineN=Object.keys(mine.ph||{}).length;
   const back=`<button class="small" data-goarea="${esc(area?area.key:AREAS[0].key)}">← Back to ${esc(area?area.name:'places')}</button>`;
   const head=`<div class="row1" style="justify-content:space-between">${back}<span class="by">${placed} placed · ${dropped} set aside · ${PH.length-placed-dropped} to go · you've done ${mineN}</span></div>
     <h2 style="margin:8px 0 4px">Where was this photo taken?</h2><p class="hint" style="margin:0 0 8px">Old camp photos from the website and Instagram. Pick the place you recognise. When two people agree, the photo goes into that place's gallery and helps get the 3D model right.</p>`;
@@ -311,10 +315,21 @@ function paintPh(){
   const p=phCur, g=(p.guess||[]).filter(k=>AREAS.some(a=>a.key===k));
   $('photos').innerHTML=head+`<img class="phimg" src="${esc(p.src)}" alt="Archive camp photo">
     <div class="phbtns">${g.map(k=>`<button class="go" data-pha="${esc(k)}">✓ ${esc(areaName(k))}</button>`).join('')}</div>
-    <div class="phbtns"><button class="pick" data-pick="${esc(p.id)}" data-mode="photo">Somewhere else ▾</button></div>
+    <div class="phbtns"><button class="pick" data-pick="${esc(p.id)}" data-mode="photo">Somewhere else ▾</button><button data-phmap="1">📍 Pin it on the map</button></div><div id="phmapbox"></div>
     <div class="phbtns"><button data-pha="x">Not useful (no buildings or places to see)</button><button data-pha="skip">Not sure, skip</button></div>${phUndoBtn()}`;
 }
-function phUndoBtn(){ return phLast?`<p><button class="small" data-phundo="1">↶ Undo last answer (${esc(phLast.a==='x'?'not useful':phLast.a==='skip'?'skipped':areaName(phLast.a))})</button></p>`:''; }
+/* "Pin it on the map": for photos taken between places (a road, a path). Pins are approximate; earlier pins show so people can agree. */
+let phPick=null;
+function phMapOpen(){ const M=DATA.minimap; if(!M||!phCur) return; phPick=null;
+  const pins=[...others.map(o=>phMap((o.ph||{})[phCur.id]))].filter(Boolean);
+  $('phmapbox').innerHTML=`<p class="hint" style="margin:6px 0">Tap roughly where the photo was taken. Pins are approximate, near is good enough.${pins.length?' Orange dots are where others put it.':''}</p>
+    <div id="phmap" style="position:relative;touch-action:manipulation"><img src="${esc(M.src)}" alt="Camp map" style="width:100%;display:block;border-radius:8px;cursor:crosshair" id="phmapimg">
+    ${pins.map(m=>`<span style="position:absolute;left:${(m[0]-M.x0)/(M.x1-M.x0)*100}%;top:${(m[1]-M.y0)/(M.y1-M.y0)*100}%;width:14px;height:14px;margin:-7px;border-radius:50%;background:#f28a2e;border:2px solid #111"></span>`).join('')}
+    <span id="phmapdot" style="display:none;position:absolute;width:18px;height:18px;margin:-9px;border-radius:50%;background:#e53935;border:3px solid #fff;box-shadow:0 0 0 2px #111"></span></div>
+    <div class="phbtns"><button class="go" data-phmapsave="1" disabled id="phmapsave">Save this spot</button><button data-phmapcancel="1">Cancel</button></div>`; $('phmapbox').scrollIntoView({block:'nearest'}); }
+function phMapTap(e){ const M=DATA.minimap, im=$('phmapimg'), r=im.getBoundingClientRect(); const fx=(e.clientX-r.left)/r.width, fy=(e.clientY-r.top)/r.height; if(fx<0||fx>1||fy<0||fy>1) return;
+  phPick=[Math.round(M.x0+fx*(M.x1-M.x0)),Math.round(M.y0+fy*(M.y1-M.y0))]; const d=$('phmapdot'); d.style.left=fx*100+'%'; d.style.top=fy*100+'%'; d.style.display='block'; $('phmapsave').disabled=false; }
+function phUndoBtn(){ return phLast?`<p><button class="small" data-phundo="1">↶ Undo last answer (${esc(phLast.a==='x'?'not useful':phLast.a==='skip'?'skipped':phMap(phLast.a)?'pin on the map':areaName(phLast.a))})</button></p>`:''; }
 function phAnswer(a){ if(!phCur) return; mine.ph={...(mine.ph||{}),[phCur.id]:a}; phLast={id:phCur.id,a}; queueSave(); phCur=phNext(); paintPh(); }
 function phUndo(){ if(!phLast) return; const m={...(mine.ph||{})}; delete m[phLast.id]; mine.ph=m; queueSave(); phCur=PH.find(p=>p.id===phLast.id)||phNext(); phLast=null; paintPh(); }
 async function paintCampPh(){ const box=$('campph'); if(!box||!area) return; await loadPH(); const list=PH.filter(p=>{ const s=phState(p.id); return s.s==='placed'&&s.a===area.key; });
@@ -690,6 +705,7 @@ document.addEventListener('click',async e=>{
   if(e.target.closest('#big')){ $('big').classList.remove('on'); return; }
   if(e.target===$('menu')){ $('menu').classList.remove('on'); return; }
   if(!e.target.closest('#dd,.nt')) closeDD(); if(!e.target.closest('#picker,.pick')) closePicker();
+  if(e.target.id==='phmapimg'){ phMapTap(e); return; }
   const t=e.target.closest('button'); if(!t) return; const c=curE();
   if(t.id==='menubtn'){ $('menu').classList.add('on'); }
   else if(t.id==='menuclose'){ $('menu').classList.remove('on'); }
@@ -703,6 +719,9 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.qundo){ qUndo(t.dataset.qundo); }
   else if(t.dataset.qdone){ const d={...(ADM.qdone||{})}; if(d[t.dataset.qdone]) delete d[t.dataset.qdone]; else d[t.dataset.qdone]=new Date().toISOString(); saveAdm({qdone:d}).then(paintQ); }
   else if(t.dataset.pha){ phAnswer(t.dataset.pha); }
+  else if(t.dataset.phmap){ phMapOpen(); }
+  else if(t.dataset.phmapsave){ if(phPick) phAnswer('m:'+phPick.join(',')); }
+  else if(t.dataset.phmapcancel){ $('phmapbox').innerHTML=''; }
   else if(t.dataset.phundo){ phUndo(); }
   else if(t.dataset.zoom){ window.open(t.dataset.zoom,'_blank'); }
   else if(t.id==='chgbtn'||t.id==='chgbtn2'){ $('menu').classList.remove('on'); showChanges(); }
