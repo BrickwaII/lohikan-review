@@ -312,17 +312,15 @@ try {
       speck(g,S,rr,90000,1.4,v=>v<0.5?`rgba(${60+v*80|0},${60+v*80|0},${58+v*80|0},0.35)`:`rgba(${170+v*70|0},${170+v*70|0},${165+v*70|0},0.30)`);
       g.strokeStyle='rgba(45,45,42,0.35)'; g.lineWidth=1.2; for(let i=0;i<14;i++){ let x=rr()*S,y=rr()*S; g.beginPath(); g.moveTo(x,y); for(let k=0;k<12;k++){ x+=(rr()-0.5)*40; y+=(rr()-0.5)*40; g.lineTo(x,y); } g.stroke(); }
       blotch(g,S,rr,8,20,60,['rgba(30,30,30,0.18)']); }),
-    dirt: noiseTex(1024,(g,S,rr)=>{ g.fillStyle='#a08a6a'; g.fillRect(0,0,S,S);
-      blotch(g,S,rr,80,40,180,['rgba(120,95,65,0.18)','rgba(190,170,135,0.16)','rgba(95,80,60,0.12)','rgba(110,120,70,0.10)']);
-      speck(g,S,rr,60000,2.2,v=>v<0.4?`rgba(${80+v*60|0},${68+v*50|0},${50+v*40|0},0.45)`:`rgba(${175+v*60|0},${160+v*55|0},${130+v*50|0},0.40)`);
-      speck(g,S,rr,2500,5,v=>`rgba(${150+v*80|0},${145+v*75|0},${135+v*70|0},0.55)`); }),
+    /* Henry: dirt roads use a real texture made from a camp photo of the road south of the pool (model/core/textures/dirt_road.jpg, ~3.5 m per tile) */
+    dirt: (()=>{ const t=new THREE.TextureLoader().load('core/textures/dirt_road.jpg'); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=renderer.capabilities.getMaxAnisotropy(); return t; })(),
     grass: noiseTex(1024,(g,S,rr)=>{ g.fillStyle='#5f8c3d'; g.fillRect(0,0,S,S);
       for(let k=0;k<8;k++){ g.fillStyle=k%2?'rgba(255,255,220,0.045)':'rgba(0,30,0,0.045)'; g.fillRect(k*S/8,0,S/8,S); }
       blotch(g,S,rr,90,30,170,['rgba(40,80,25,0.20)','rgba(140,170,70,0.16)','rgba(120,120,60,0.10)']);
       g.lineWidth=1; for(let i=0;i<70000;i++){ const x=rr()*S,y=rr()*S,v=rr(); g.strokeStyle=v<0.5?`rgba(${40+v*40|0},${85+v*60|0},${25+v*30|0},0.45)`:`rgba(${110+v*60|0},${150+v*50|0},${60+v*30|0},0.35)`; g.beginPath(); g.moveTo(x,y); g.lineTo(x+(rr()-0.5)*2,y-2-rr()*3); g.stroke(); } }),
     sand: noiseTex(1024,(g,S,rr)=>{ g.fillStyle='#d6c49c'; g.fillRect(0,0,S,S); blotch(g,S,rr,60,40,160,['rgba(170,150,110,0.18)','rgba(240,230,205,0.18)']); speck(g,S,rr,80000,1.5,v=>`rgba(${180+v*70|0},${165+v*65|0},${130+v*60|0},0.35)`); })
   };
-  const TSCALE={paved:9, dirt:7, grass:14, sand:6};
+  const TSCALE={paved:9, dirt:3.5, grass:14, sand:6};
   const MATS={ paved:new THREE.MeshStandardMaterial({map:TX.paved, roughness:0.92, polygonOffset:true, polygonOffsetFactor:-4, polygonOffsetUnits:-4}),
                dirt:new THREE.MeshStandardMaterial({map:TX.dirt, roughness:1, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3}),
                sand:new THREE.MeshStandardMaterial({map:TX.sand, roughness:1, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2}),

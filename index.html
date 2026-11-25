@@ -349,7 +349,7 @@ function phCut(spec){ const dir=spec[0], n=+spec[1], im=document.querySelector('
 function phUndoBtn(){ return phLast?`<p><button class="small" data-phundo="1">↶ Undo last answer (${esc(phLast.a==='x'?'not useful':phLast.a==='skip'?'skipped':phMap(phLast.a)?'pin on the map':areaName(phLast.a))})</button></p>`:''; }
 let phSub=null;
 function phNoteBox(p){ return `<textarea id="phnote" data-phid="${esc(p.id)}" placeholder="Anything else about this photo? (optional: what's in it, the year, a closer spot...)" style="width:100%;min-height:54px;margin-top:8px">${esc((mine.phn||{})[p.id]||'')}</textarea>`; }
-function phAnswer(a){ if(!phCur) return; const subs=(DATA.subs||{})[a]; if(subs&&subs.length&&!phSub&&!a.includes('/')&&!a.includes(':')&&a!=='x'&&a!=='skip'){ phSub=a; paintPh(); return; }
+function phAnswer(a,noSub){ if(!phCur) return; const subs=(DATA.subs||{})[a]; if(!noSub&&subs&&subs.length&&!phSub&&!a.includes('/')&&!a.includes(':')&&a!=='x'&&a!=='skip'){ phSub=a; paintPh(); return; }
   mine.ph={...(mine.ph||{}),[phCur.id]:a}; phLast={id:phCur.id,a}; phSub=null; queueSave(); phCur=phNext(); paintPh(); }
 function phUndo(){ if(!phLast) return; const m={...(mine.ph||{})}; delete m[phLast.id]; mine.ph=m; queueSave(); phCur=PH.find(p=>p.id===phLast.id)||phNext(); phLast=null; paintPh(); }
 async function paintCampPh(){ const box=$('campph'); if(!box||!area) return; await loadPH(); const list=PH.filter(p=>{ const s=phState(p.id); return s.s==='placed'&&s.a===area.key; });
@@ -741,7 +741,7 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.qdone){ const d={...(ADM.qdone||{})}; if(d[t.dataset.qdone]) delete d[t.dataset.qdone]; else d[t.dataset.qdone]=new Date().toISOString(); saveAdm({qdone:d}).then(paintQ); }
   else if(t.dataset.pha){ phAnswer(t.dataset.pha); }
   else if(t.dataset.phmap){ phMapOpen(); }
-  else if(t.dataset.phsub!==undefined){ const a=phSub; phSub=null; if(a) phAnswer(t.dataset.phsub?a+'/'+t.dataset.phsub:a); }
+  else if(t.dataset.phsub!==undefined){ const a=phSub; phSub=null; if(a) phAnswer(t.dataset.phsub?a+'/'+t.dataset.phsub:a,true); }
   else if(t.dataset.phsplit){ phSplitOpen(); }
   else if(t.dataset.phcut){ phCut(t.dataset.phcut); }
   else if(t.dataset.phmapsave){ if(phPick) phAnswer('m:'+phPick.join(',')); }

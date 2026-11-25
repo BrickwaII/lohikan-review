@@ -1692,6 +1692,28 @@
     1190
    ]
   },
+  "onwater": {
+   "name": "On the water",
+   "blurb": "Photos out on the lake: boating, kayaks, canoes, sailing, tubing (Henry).",
+   "parts": [
+    {
+     "kind": "Overview",
+     "soon": true,
+     "entries": [
+      {
+       "id": "onwater--overview",
+       "type": "soon",
+       "label": "Overview"
+      }
+     ]
+    }
+   ],
+   "candidates": [],
+   "xy": [
+    1170,
+    1290
+   ]
+  },
   "watertramp": {
    "name": "Water Trampoline & Iceberg",
    "blurb": "The water trampoline and the inflatable iceberg in the swim area. Both float, so their exact spots moved from year to year (Henry).",
@@ -4862,6 +4884,9 @@
        "ref": "waterslide"
       },
       {
+       "ref": "onwater"
+      },
+      {
        "ref": "watertramp"
       },
       {
@@ -7945,6 +7970,12 @@
   "infirmary": [
    "Inside",
    "Outside"
+  ],
+  "onwater": [
+   "Boats / kayaks / canoes",
+   "Sailing",
+   "Tubing / towables",
+   "Swimming out in the lake"
   ]
  }
 }
