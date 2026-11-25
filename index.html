@@ -229,7 +229,10 @@ let photoOn=LS('lrv_photo')!=='0';
 const mImg=e=>photoOn&&e.modelPhoto?e.modelPhoto:e.model; const mTag=e=>photoOn&&e.modelPhoto?'Model + photo scan':'Model';
 const TRI={todo:'Needs fixing',done:'Fixed',invalid:'Not valid'};
 let DATA=null, AREAS=[], area=null, VIEWS=[], vi=0, others=[], showAll=false, adminKey='', isOwner=false;
-let ADM={hidden:[],rot:{},tri:{},gal:{}};
+/* Only show pins and notes once we know which are active: start from the last copy of everyone's reviews + admin state (if any),
+   and show nothing (not everything) until the first pull finishes. */
+let READY=false; try{ const c=JSON.parse(localStorage.getItem('lrv_cache')||'null'); if(c&&c.adm){ others=c.others||[]; READY=true; } }catch(e){}
+let ADM=(()=>{ try{ const c=JSON.parse(localStorage.getItem('lrv_cache')||'null'); if(c&&c.adm) return {hidden:[],rot:{},tri:{},gal:{},...c.adm}; }catch(e){} return {hidden:[],rot:{},tri:{},gal:{}}; })();
 let me={id:LS('lrv_id')||'', token:LS('lrv_tok')||''}; if(!me.id){ me.id='r'+rid(); me.token=rid()+rid(); LS('lrv_id',me.id); LS('lrv_tok',me.token); }
 let mine={name:'',years:'',entries:{},areas:{},gfb:{},at:''};
 try{const s=JSON.parse(LS('lrv_data')||'null'); if(s&&s.entries) mine=Object.assign(mine,s);}catch(e){}
@@ -249,13 +252,13 @@ async function pull(){
   if(!API()) return;
   try{ const r=await fetch(API()+'?action=all&t='+Date.now()); const j=await r.json();
     others=(j.reviews||[]).filter(x=>x&&x.id!==me.id).map(x=>({...(x.data||{}),__u:x.id}));
-    ADM={hidden:[],rot:{},tri:{},gal:{},...(j.admin||{})};
+    ADM={hidden:[],rot:{},tri:{},gal:{},...(j.admin||{})}; READY=true; try{ localStorage.setItem('lrv_cache',JSON.stringify({adm:j.admin||{},others})); }catch(e){}
     const mineSrv=(j.reviews||[]).find(x=>x&&x.id===me.id);
     const strip=o=>JSON.stringify({...o,at:''});
     if(!pull.done){ pull.done=true; if(LS('lrv_data')&&(!mineSrv||strip(mineSrv.data||{})!==strip(mine))&&(Object.keys(mine.entries).length||Object.keys(mine.gfb||{}).length)) LS('lrv_dirty','1'); }
     if(mineSrv&&!dirty&&!Object.keys(mine.entries).length&&!Object.keys(mine.areas).length){ mine=Object.assign(mine,mineSrv.data||{}); $('rname').value=mine.name||''; $('ryears').value=mine.years||''; }
     status(online?'Your notes save automatically.':'Connected. Your notes save automatically.'); online=true; refresh(); if(document.body.classList.contains('changes')&&!(document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.chg)) showChanges();
-  }catch(e){ status("Can't reach saved notes right now. Your notes stay in this browser."); }
+  }catch(e){ status("Can't reach saved notes right now. Your notes stay in this browser."); if(!READY){ READY=true; refresh(); } }
 }
 let online=false, saveT=null, saving=false, dirty=false;
 function queueSave(){ LS('lrv_data',JSON.stringify(mine)); LS('lrv_dirty','1'); dirty=true; status('Saving…'); clearTimeout(saveT); saveT=setTimeout(flush,1200); }
@@ -386,6 +389,7 @@ function placeSpherePins(){
 /* ---------- pins, notes, photos ---------- */
 let armed=false, pending=null;
 function pinList(eid){
+  if(!READY) return [];
   const out=[]; let n=0;
   for(const p of (E(eid).pins||[])){ const k=me.id+'|'+p.id; if(hiddenTri(k)) continue; out.push({...p,key:k,me:true,who:'You',cls:'',n:++n}); }
   for(const o of others) for(const p of (((o.entries||{})[eid]||{}).pins||[])) if(p&&typeof p.t==='string'){ const k=o.__u+'|'+p.id; if(hiddenTri(k)) continue; out.push({...p,key:k,me:false,who:who(o),cls:'other',n:++n}); }
@@ -394,7 +398,7 @@ function pinList(eid){
 }
 function startDraft(pos){ armed=false; document.querySelectorAll('.pane').forEach(p=>p.classList.remove('arming')); pending={eid:curE().id,...pos}; const d=$('draft'); d.querySelector('textarea').value=''; d.classList.add('on'); d.querySelector('textarea').focus({preventScroll:true}); paintPins(); }
 function paintPins(){
-  const e=curE(); if(!e||!$('pinlist')) return; const list=pinList(e.id);
+  const e=curE(); if(!e||!$('pinlist')) return; if(!READY){ $('pinlist').innerHTML='<li class="by">Loading notes…</li>'; return; } const list=pinList(e.id);
   if(e.type!=='pano'&&e.type!=='mpano') for(const el of document.querySelectorAll('.pane.flat')){ const k=el.dataset.k;
     el.querySelector('.pins').innerHTML=list.filter(q=>q.img===k).map(q=>`<div class="pin ${q.cls}" style="left:${+q.x}%;top:${+q.y}%">${q.n}</div>`).join(''); }
   else if(spheres) placeSpherePins();
@@ -402,6 +406,7 @@ function paintPins(){
   $('pinlist').innerHTML=L.length?L.map(q=>`<li><span class="n ${q.cls}">${q.n}</span><span>${esc(q.t)}<br><span class="by">${esc(q.who)}${q.img?` · on the ${q.img==='real'?'real photo':'model'}`:''}</span> ${chip(q.key,q.ver)}</span>${q.me?`<button data-delpin="${esc(q.id)}">Delete</button>`:'<span></span>'}</li>`).join(''):'<li class="empty">No pins yet.</li>';
 }
 function paintOthers(){
+  if(!READY){ for(const id of ['otext','otextA']) if($(id)) $(id).innerHTML=''; return; }
   const all=[...others.map(o=>[o,o.__u,who(o)]),[mine,me.id,'You']], e=curE();
   const li=r=>`<li><span class="n txt">✎</span><span>${esc(r.t)}<br><span class="by">${esc(r.w)}</span> ${chip(r.k,r.ver)}</span><span></span></li>`;
   const keep=r=>!hiddenTri(r.k)&&(!r.me||isOwner);
