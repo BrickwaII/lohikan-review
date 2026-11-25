@@ -331,6 +331,7 @@ function paintQ(){ const done=ADM.qdone||{}, open=QS.filter(q=>!done[q.id]), clo
   const card=q=>{ const ans=others.map(o=>({w:who(o),t:((o.qa||{})[q.id]||'').trim()})).filter(a=>a.t);
     return `<div class="qcard"><div class="by">${esc(q.place||'')}${q.area?` · <a href="#${esc(q.area)}" data-goarea="${esc(q.area)}">see this place</a>`:''}</div><b>${esc(q.q)}</b>${q.why?`<p class="hint">${esc(q.why)}</p>`:''}${q.view?`<div class="sph" data-cfg="${esc(JSON.stringify({pano:q.view.pano,pins:q.pins||[],q:q.id}))}"><span class="cap">Drag to look around · yellow = what the question is about</span></div><div class="qtools"><button class="small on" data-qmode="look" data-qid="${esc(q.id)}">👆 Look</button><button class="small" data-qmode="pin" data-qid="${esc(q.id)}">📍 Add pin</button><button class="small" data-qmode="draw" data-qid="${esc(q.id)}">✏️ Draw</button><button class="small" data-qundo="${esc(q.id)}">↶ Undo</button></div>${qMarksLine(q)}`:q.img?`<img src="${esc(q.img)}" alt="" loading="lazy">`:''}
       ${ans.length?`<ul class="qans">${ans.map(a=>`<li><b>${esc(a.w)}:</b> ${esc(a.t)}</li>`).join('')}</ul>`:''}
+      ${qPhotos(q)}<span class="file"><button tabindex="-1" class="small">📷 Add a photo</button><input type="file" accept="image/*" multiple data-qphoto="${esc(q.id)}" aria-label="Add a photo for this question"></span>
       <textarea data-qa="${esc(q.id)}" placeholder="Your answer (anything you remember helps, even a guess)">${esc((mine.qa||{})[q.id]||'')}</textarea>
       ${isOwner?`<button class="small" data-qdone="${esc(q.id)}">${done[q.id]?'Reopen question':'Mark as answered'}</button>`:''}</div>`; };
   $('questions').innerHTML=`<div class="row1">${back}</div><h2 style="margin:8px 0 4px">Questions about camp</h2><p class="hint" style="margin:0">Details needed to build the model. Answer any you know; answers save automatically and everyone can see them.</p>
@@ -340,6 +341,14 @@ function paintQ(){ const done=ADM.qdone||{}, open=QS.filter(q=>!done[q.id]), clo
    Viewers start when they scroll into view and are freed when far away, so only a few run at once.
    On questions anyone can add pins or draw; marks are stored per reviewer as qm:{questionId:{pins:[{d,t}], strokes:[[d,...]]}}. ---- */
 const SPH=new Map(); let sphIO=null; const QMODE={};
+function qPhotos(q){ const ph=[...others.map(o=>[o,who(o)]),[mine,'You']].flatMap(([o,w])=>(((o.qp||{})[q.id])||[]).map(r=>({r,w}))).filter(x=>photoUrl(x.r));
+  return ph.length?`<div class="thumbs">${ph.map(x=>`<img src="${esc(photoUrl(x.r))}" alt="Photo from ${esc(x.w)}" title="${esc(x.w)}" loading="lazy">`).join('')}</div>`:''; }
+async function addQPhotos(qid,files){ if(!API()){ toast("Photos can't be uploaded yet. Send them to Henry directly."); return; }
+  for(const f of files){ if(!f.type.startsWith('image/')){ toast('Only photos can be attached'); continue; }
+    try{ toast('Uploading…'); const d=await shrink(f,2000,0.85); const j=await api({action:'photo',id:me.id,token:me.token,name:f.name.slice(0,60),b64:d.split(',')[1]});
+      if(okId(j.fileId)){ mine.qp={...(mine.qp||{}),[qid]:[...(((mine.qp||{})[qid])||[]),{g:j.fileId,c:f.name.slice(0,40)}]}; queueSave(); toast('Photo added'); } }
+    catch(e){ toast("Couldn't upload that photo"); } }
+  paintQ(); }
 function qMarksLine(q){ const n=[mine,...others].reduce((a,o)=>{ const m=(o.qm||{})[q.id]; return a+(m?(m.pins||[]).length+(m.strokes||[]).length:0); },0); return n?`<div class="by">${n} pin${n>1?'s':''}/drawing${n>1?'s':''} from reviewers on this view</div>`:''; }
 function wireSph(root){ if(!window.THREE) return; if(!sphIO) sphIO=new IntersectionObserver(es=>{ for(const e of es){ if(e.isIntersecting) mountSph(e.target); else unmountSph(e.target); } },{rootMargin:'250px'});
   for(const [el] of SPH) if(!document.body.contains(el)) unmountSph(el);
@@ -670,6 +679,7 @@ document.addEventListener('input',e=>{ if(e.target.dataset&&e.target.dataset.chg
 });
 document.addEventListener('change',e=>{ const t=e.target;
   if(t.id==='pfile'||t.id==='pfileA'){ addPhotos([...t.files],t.id==='pfileA'?'area':'view'); t.value=''; }
+  if(t.dataset&&t.dataset.qphoto){ addQPhotos(t.dataset.qphoto,[...t.files]); t.value=''; }
   if(t.dataset.gto){ const g=(mine.gfb??={})[t.dataset.gto]??={}; g.to=t.value; queueSave(); paintGallery(); toast('Thanks! Saved.'); }
   if(t.dataset.galmovesel&&isOwner&&t.value){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmovesel]={to:t.value,at:Date.now()}; saveAdm({gal}); toast('Moved to '+placeName(t.value)); }
   if(t.dataset.tri&&isOwner){ const tri={...(ADM.tri||{})}; if(t.value) tri[t.dataset.tri]={s:t.value,at:new Date().toISOString(),ver:VER()}; else delete tri[t.dataset.tri]; saveAdm({tri}); } });
