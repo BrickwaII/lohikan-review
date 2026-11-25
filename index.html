@@ -129,7 +129,8 @@ select.tri{font:inherit;font-size:13px;min-height:30px;border-radius:6px;border:
 .vb[aria-selected=true]{background:var(--green);border-color:var(--green);color:var(--sheet)}
 h3.vt{font-size:22px;margin-top:10px}
 body{padding-bottom:24px}
-#changes{display:none}body.changes #changes{display:block}#photos{display:none}body.photos #photos{display:block}#questions{display:none}body.questions #questions{display:block}body.questions main>section:not(#questions),body.questions .drawer{display:none}.qcard{border-top:1px solid #ddd;padding:12px 0}.qcard img{max-width:100%;border-radius:8px;margin:6px 0}.qcard textarea{width:100%;min-height:70px}.qans{margin:6px 0;padding-left:16px}body.photos main>section:not(#photos),body.photos .drawer{display:none}
+#changes{display:none}body.changes #changes{display:block}#photos{display:none}body.photos #photos{display:block}#qv{display:none;position:fixed;inset:0;z-index:60;background:#111;flex-direction:column}#qv.on{display:flex}.qvbar,.qvtools{display:flex;gap:8px;align-items:center;padding:8px;background:#1d2b22;color:#fff;flex-wrap:wrap}.qvbar b{flex:1;font-size:15px}#qvhost{position:relative;flex:1;touch-action:none;overflow:hidden}#qvhost canvas{position:absolute;inset:0;width:100%;height:100%}#qvover{pointer-events:none;z-index:2}.qvtools button.on{background:#f2c12e;color:#111}.qvtools .by{color:#cfd8d2}.qprev{position:relative;cursor:pointer}.qprev span{position:absolute;right:8px;bottom:14px;background:rgba(0,0,0,.7);color:#fff;padding:4px 8px;border-radius:6px;font-size:13px}
+#questions{display:none}body.questions #questions{display:block}body.questions main>section:not(#questions),body.questions .drawer{display:none}.qcard{border-top:1px solid #ddd;padding:12px 0}.qcard img{max-width:100%;border-radius:8px;margin:6px 0}.qcard textarea{width:100%;min-height:70px}.qans{margin:6px 0;padding-left:16px}body.photos main>section:not(#photos),body.photos .drawer{display:none}
 .phimg{width:100%;max-height:62vh;object-fit:contain;background:#111;border-radius:8px;display:block}.phbtns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.phbtns button{flex:1 1 auto;min-height:44px}.phbtns .go{background:#2f6f3e;color:#fff;border-color:#2f6f3e}.phgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px}.phgrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;cursor:zoom-in}body.changes main>section:not(#changes),body.changes .drawer{display:none}
 .chg{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 @media(max-width:899px){#chgbtn{display:none}}
@@ -208,6 +209,7 @@ textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
   </section>
 </main>
 <div class="big" id="big" role="dialog" aria-label="Photo"><img id="bigimg" alt=""></div>
+<div id="qv" role="dialog" aria-label="Question 360 view"><div class="qvbar"><b id="qvtitle"></b><button class="small" id="qvclose">Done</button></div><div id="qvhost"><canvas id="qvover"></canvas></div><div class="qvtools"><button class="small on" data-qvmode="look">👆 Look</button><button class="small" data-qvmode="pin">📍 Add pin</button><button class="small" data-qvmode="draw">✏️ Draw</button><button class="small" id="qvundo">↶ Undo</button><span class="by" id="qvhint">Drag to look around. Yellow = the spot the question is about.</span></div></div>
 <div class="big" id="pano" role="dialog" aria-label="360 photo"><div id="panohost" style="width:min(1200px,96vw);height:min(720px,80vh);border-radius:10px;overflow:hidden;touch-action:none;cursor:grab"></div><button id="pclose" style="position:fixed;top:12px;right:12px">Close</button></div>
 <div class="planner" id="planner" role="dialog" aria-label="Suggest 360 spots">
   <div class="phead"><b>Suggest 360° spots</b><span class="by">Drag to move · scroll or pinch to zoom · tap a spot to drop a pin and name it</span><button class="small" id="planclose">Close</button></div>
@@ -328,12 +330,52 @@ async function showQuestions(){ if(!QS){ try{ QS=(await (await fetch('questions.
 function paintQ(){ const done=ADM.qdone||{}, open=QS.filter(q=>!done[q.id]), closed=QS.filter(q=>done[q.id]);
   const back=`<button class="small" data-goarea="${esc(area?area.key:AREAS[0].key)}">← Back to ${esc(area?area.name:'places')}</button>`;
   const card=q=>{ const ans=others.map(o=>({w:who(o),t:((o.qa||{})[q.id]||'').trim()})).filter(a=>a.t);
-    return `<div class="qcard"><div class="by">${esc(q.place||'')}${q.area?` · <a href="#${esc(q.area)}" data-goarea="${esc(q.area)}">see this place</a>`:''}</div><b>${esc(q.q)}</b>${q.why?`<p class="hint">${esc(q.why)}</p>`:''}${q.img?`<img src="${esc(q.img)}" alt="" loading="lazy">`:''}
+    return `<div class="qcard"><div class="by">${esc(q.place||'')}${q.area?` · <a href="#${esc(q.area)}" data-goarea="${esc(q.area)}">see this place</a>`:''}</div><b>${esc(q.q)}</b>${q.why?`<p class="hint">${esc(q.why)}</p>`:''}${q.view?`<div class="qprev" data-qopen="${esc(q.id)}"><img src="${esc(q.preview)}" alt="" loading="lazy" data-qopen="${esc(q.id)}"><span data-qopen="${esc(q.id)}">Open 360° · pin or draw ▸</span></div>${qMarksLine(q)}`:q.img?`<img src="${esc(q.img)}" alt="" loading="lazy">`:''}
       ${ans.length?`<ul class="qans">${ans.map(a=>`<li><b>${esc(a.w)}:</b> ${esc(a.t)}</li>`).join('')}</ul>`:''}
       <textarea data-qa="${esc(q.id)}" placeholder="Your answer (anything you remember helps, even a guess)">${esc((mine.qa||{})[q.id]||'')}</textarea>
       ${isOwner?`<button class="small" data-qdone="${esc(q.id)}">${done[q.id]?'Reopen':'Mark settled'}</button>`:''}</div>`; };
   $('questions').innerHTML=`<div class="row1">${back}</div><h2 style="margin:8px 0 4px">Questions about camp</h2><p class="hint" style="margin:0">Details needed to build the model. Answer any you know; answers save automatically and everyone can see them.</p>
     ${open.map(card).join('')||'<p>No open questions right now.</p>'}${closed.length?`<details><summary>Settled (${closed.length})</summary>${closed.map(card).join('')}</details>`:''}`; }
+
+/* ---- Question 360 viewer: shows the question's 360 with the AI pin (yellow); anyone can add pins or draw on it.
+   Marks are stored per reviewer as qm:{questionId:{pins:[{d:[x,y,z],t}], strokes:[[[x,y,z],...]]}} (directions, same convention as place pins). ---- */
+let qv=null;
+function qMarksLine(q){ const n=[mine,...others].reduce((a,o)=>{ const m=(o.qm||{})[q.id]; return a+(m?(m.pins||[]).length+(m.strokes||[]).length:0); },0); return n?`<div class="by">${n} pin${n>1?'s':''}/drawing${n>1?'s':''} from reviewers on this view</div>`:''; }
+function openQV(id){ const q=(QS||[]).find(x=>x.id===id); if(!q||!q.view||!window.THREE) return; closeQV();
+  const box=$('qv'), host=$('qvhost'); box.classList.add('on'); $('qvtitle').textContent=q.q;
+  const r=new THREE.WebGLRenderer({antialias:true}); r.setPixelRatio(Math.min(2,devicePixelRatio||1)); host.prepend(r.domElement);
+  const sc=new THREE.Scene(), cam=new THREE.PerspectiveCamera(75,1,0.1,1000), g=new THREE.SphereGeometry(500,64,40); g.scale(-1,1,1);
+  const m=new THREE.MeshBasicMaterial({color:0x333333}); sc.add(new THREE.Mesh(g,m));
+  const p0=(q.pins||[])[0], st={yaw:p0?Math.atan2(p0.d[0],-p0.d[2])*180/Math.PI:+(q.view.yaw0||0),pitch:p0?Math.asin(p0.d[1])*180/Math.PI:0,fov:70,mode:'look'};
+  const ov=$('qvover'), ctx=ov.getContext('2d');
+  const proj=d=>{ const v=new THREE.Vector3(d[0],d[1],d[2]); const f=new THREE.Vector3(); cam.getWorldDirection(f); if(v.dot(f)<=0.05) return null; v.project(cam); return [(v.x+1)/2*ov.width,(1-v.y)/2*ov.height]; };
+  const dpr=Math.min(2,devicePixelRatio||1);
+  const drawOver=()=>{ ctx.clearRect(0,0,ov.width,ov.height); ctx.lineWidth=4*dpr; ctx.lineJoin=ctx.lineCap='round'; ctx.font=`bold ${14*dpr}px system-ui`;
+    const marks=[...others.map(o=>[(o.qm||{})[q.id],'#5aa9ff',who(o)]),[(mine.qm||{})[q.id],'#ff5a4e','You']];
+    for(const [mk,col] of marks){ if(!mk) continue; ctx.strokeStyle=col; for(const s of mk.strokes||[]){ ctx.beginPath(); let on=false; for(const d of s){ const p=proj(d); if(!p){ on=false; continue; } on?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]); on=true; } ctx.stroke(); } }
+    const pin=(d,t,col)=>{ const p=proj(d); if(!p) return; ctx.fillStyle=col; ctx.strokeStyle='#111'; ctx.beginPath(); ctx.arc(p[0],p[1],9*dpr,0,7); ctx.fill(); ctx.stroke(); if(t){ const w=ctx.measureText(t).width; ctx.fillStyle='rgba(0,0,0,.75)'; ctx.fillRect(p[0]+12*dpr,p[1]-12*dpr,w+10*dpr,22*dpr); ctx.fillStyle=col; ctx.fillText(t,p[0]+17*dpr,p[1]+4*dpr); } };
+    for(const pq of q.pins||[]) pin(pq.d,pq.t,'#f2c12e');
+    for(const [mk,col,w] of marks) for(const pp of (mk&&mk.pins)||[]) pin(pp.d,(w==='You'?'':w+': ')+(pp.t||''),col); };
+  const draw=()=>{ const w=host.clientWidth,h=host.clientHeight; r.setSize(w,h,false); ov.width=w*dpr; ov.height=h*dpr; cam.aspect=w/h; cam.fov=st.fov; cam.updateProjectionMatrix();
+    const y=st.yaw*Math.PI/180,x=st.pitch*Math.PI/180; cam.lookAt(Math.sin(y)*Math.cos(x),Math.sin(x),-Math.cos(y)*Math.cos(x)); r.render(sc,cam); drawOver(); };
+  new THREE.TextureLoader().load(q.view.pano,t=>{ m.map=t; m.color.set(0xffffff); m.needsUpdate=true; draw(); });
+  const dirAt=e=>{ const rc=host.getBoundingClientRect(); const v=new THREE.Vector3(((e.clientX-rc.left)/rc.width)*2-1,-((e.clientY-rc.top)/rc.height)*2+1,0.5).unproject(cam).normalize(); return [+v.x.toFixed(3),+v.y.toFixed(3),+v.z.toFixed(3)]; };
+  const mineM=()=>{ mine.qm={...(mine.qm||{})}; const mk=mine.qm[q.id]={pins:[],strokes:[],...(mine.qm[q.id]||{})}; return mk; };
+  let d=null, stroke=null, last=null;
+  host.onpointerdown=e=>{ host.setPointerCapture(e.pointerId); d={x:e.clientX,y:e.clientY,yaw:st.yaw,pitch:st.pitch,moved:false};
+    if(st.mode==='draw'){ stroke=[dirAt(e)]; last=[e.clientX,e.clientY]; const mk=mineM(); mk.strokes=[...mk.strokes,stroke]; } };
+  host.onpointermove=e=>{ if(!d) return; if(st.mode==='draw'&&stroke){ if(Math.hypot(e.clientX-last[0],e.clientY-last[1])>5){ stroke.push(dirAt(e)); last=[e.clientX,e.clientY]; drawOver(); } return; }
+    if(Math.abs(e.clientX-d.x)+Math.abs(e.clientY-d.y)>5) d.moved=true; const k=st.fov/host.clientHeight; st.yaw=d.yaw-(e.clientX-d.x)*k; st.pitch=Math.max(-85,Math.min(85,d.pitch+(e.clientY-d.y)*k)); draw(); };
+  host.onpointerup=e=>{ if(st.mode==='draw'&&stroke){ stroke=null; queueSave(); }
+    else if(st.mode==='pin'&&d&&!d.moved){ const t=prompt('What is here? (short label, optional)','')||''; const mk=mineM(); mk.pins=[...mk.pins,{d:dirAt(e),t:t.slice(0,60)}]; queueSave(); drawOver(); }
+    d=null; };
+  host.onwheel=e=>{ e.preventDefault(); st.fov=Math.max(30,Math.min(100,st.fov+e.deltaY*0.04)); draw(); };
+  const ro=new ResizeObserver(draw); ro.observe(host); qv={r,g,m,ro,st,q,drawOver}; setQVMode('look'); }
+function setQVMode(mode){ if(!qv) return; qv.st.mode=mode; document.querySelectorAll('[data-qvmode]').forEach(b=>b.classList.toggle('on',b.dataset.qvmode===mode));
+  $('qvhint').textContent=mode==='pin'?'Tap a spot to drop a pin.':mode==='draw'?'Drag to draw (switch to Look to move around).':'Drag to look around. Yellow = the spot the question is about.'; }
+function qvUndo(){ if(!qv) return; const mk=(mine.qm||{})[qv.q.id]; if(!mk) return; const lastS=(mk.strokes||[]).length, lastP=(mk.pins||[]).length; if(!lastS&&!lastP) return;
+  mine.qm={...mine.qm,[qv.q.id]:{pins:lastP&&(!lastS||qv.st.mode==='pin')?mk.pins.slice(0,-1):mk.pins,strokes:lastS&&!(lastP&&qv.st.mode==='pin')?mk.strokes.slice(0,-1):mk.strokes}}; queueSave(); qv.drawOver(); }
+function closeQV(){ $('qv').classList.remove('on'); if(!qv) return; qv.ro.disconnect(); qv.g.dispose(); if(qv.m.map) qv.m.map.dispose(); qv.m.dispose(); qv.r.domElement.remove(); qv.r.dispose(); qv=null; if(document.body.classList.contains('questions')) paintQ(); }
 
 function setArea(key,vid,path){ document.body.classList.remove('changes','photos','questions'); area=AREAS.find(a=>a.key===key)||AREAS[0]; curPath=path||area.path; buildViews(); vi=Math.max(0,VIEWS.findIndex(v=>v.id===vid)); renderPlace(); }
 function buildViews(){ VIEWS=[]; for(const p of area.parts) for(const e of p.entries) if(isOwner||!(ADM.hidden||[]).includes(e.id)) VIEWS.push({...e,kind:p.kind}); }
@@ -638,6 +680,7 @@ document.addEventListener('click',async e=>{
   if(e.target.closest('#big')){ $('big').classList.remove('on'); return; }
   if(e.target===$('menu')){ $('menu').classList.remove('on'); return; }
   if(!e.target.closest('#dd,.nt')) closeDD(); if(!e.target.closest('#picker,.pick')) closePicker();
+  const qo=e.target.closest('[data-qopen]'); if(qo){ openQV(qo.dataset.qopen); return; }
   const t=e.target.closest('button'); if(!t) return; const c=curE();
   if(t.id==='menubtn'){ $('menu').classList.add('on'); }
   else if(t.id==='menuclose'){ $('menu').classList.remove('on'); }
@@ -647,6 +690,10 @@ document.addEventListener('click',async e=>{
     $('menu').classList.remove('on'); closeDD(); setArea(t.dataset.area,t.dataset.goto||null,path); window.scrollTo({top:0}); }
   else if(t.id==='phbtn'||t.id==='phbtn2'){ showPhotos(); }
   else if(t.id==='qbtn'||t.id==='qbtn2'){ showQuestions(); }
+  else if(t.dataset.qopen){ openQV(t.dataset.qopen); }
+  else if(t.dataset.qvmode){ setQVMode(t.dataset.qvmode); }
+  else if(t.id==='qvundo'){ qvUndo(); }
+  else if(t.id==='qvclose'){ closeQV(); }
   else if(t.dataset.qdone){ const d={...(ADM.qdone||{})}; if(d[t.dataset.qdone]) delete d[t.dataset.qdone]; else d[t.dataset.qdone]=new Date().toISOString(); saveAdm({qdone:d}).then(paintQ); }
   else if(t.dataset.pha){ phAnswer(t.dataset.pha); }
   else if(t.dataset.phundo){ phUndo(); }
