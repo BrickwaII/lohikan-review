@@ -1,0 +1,22 @@
+{
+ "zone": "staff",
+ "title": "Staff and office buildings (mostly generated): infirmary, upper office, condo, staff lounge, A-frame, cooler, parking, laundry, maintenance, cooking",
+ "review_areas": [
+  "infirmary",
+  "upper-office",
+  "condo",
+  "staff-lounge",
+  "a-frame",
+  "cooler",
+  "staff-parking",
+  "laundry",
+  "maint",
+  "cooking"
+ ],
+ "spots": {
+  "s32": [
+   1513.8,
+   1703.0
+  ]
+ }
+}

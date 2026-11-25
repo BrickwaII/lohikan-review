@@ -1,0 +1,33 @@
+{
+ "zone": "activities",
+ "title": "Activity areas up the hill: archery, riflery, ropes course, paintball, laser tag, golf, fencing, ATVs, dirt bikes",
+ "review_areas": [
+  "archery",
+  "riflery",
+  "ropes",
+  "paintball",
+  "lasertag",
+  "golf",
+  "fencing",
+  "atv",
+  "dirtbikes"
+ ],
+ "spots": {
+  "s25": [
+   1494.7,
+   1723.0
+  ],
+  "s24": [
+   1314.7,
+   1528.7
+  ],
+  "s05": [
+   1511.9,
+   1403.7
+  ],
+  "s08": [
+   1761.0,
+   1705.5
+  ]
+ }
+}

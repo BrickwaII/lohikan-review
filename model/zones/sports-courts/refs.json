@@ -1,0 +1,20 @@
+{
+ "zone": "sports-courts",
+ "title": "Outdoor courts by the Sports Center: basketball, volleyball, gaga, bungee + gazebo",
+ "review_areas": [
+  "basketball",
+  "volleyball",
+  "gaga",
+  "bungee"
+ ],
+ "spots": {
+  "s14": [
+   1684.2,
+   1566.2
+  ],
+  "s29": [
+   1643.1,
+   1565.7
+  ]
+ }
+}

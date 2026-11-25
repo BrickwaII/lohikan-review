@@ -1,0 +1,25 @@
+{
+ "zone": "art-center",
+ "title": "Art Center building (Arts & Crafts, woodshop, media arts, pottery), open pavilion, skate park",
+ "review_areas": [
+  "ac",
+  "woodshop",
+  "media-arts",
+  "pottery",
+  "skate"
+ ],
+ "spots": {
+  "s12": [
+   1393.9,
+   1584.9
+  ],
+  "s30": [
+   1418.6,
+   1582.6
+  ],
+  "s37": [
+   1455.2,
+   1581.7
+  ]
+ }
+}

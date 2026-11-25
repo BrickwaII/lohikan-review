@@ -1,0 +1,16 @@
+{
+ "zone": "fields",
+ "title": "Lower field (soccer), upper field (lacrosse), middle field, baseball/softball",
+ "review_areas": [
+  "soccer",
+  "lacrosse",
+  "middle-field",
+  "baseball"
+ ],
+ "spots": {
+  "s27": [
+   1702.1,
+   1765.6
+  ]
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "zone": "waterfront",
+ "title": "Waterfront: swim dock, iceberg, buoy line, water trampoline, rope swing, waterslide, jet ski dock",
+ "review_areas": [
+  "waterfront",
+  "waterslide",
+  "watertramp",
+  "ropeswing",
+  "jetski"
+ ],
+ "spots": {
+  "s40": [
+   1250.0,
+   1183.3
+  ],
+  "s39": [
+   1177.1,
+   1230.6
+  ]
+ }
+}

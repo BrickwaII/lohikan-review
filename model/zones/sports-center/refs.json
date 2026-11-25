@@ -1,0 +1,24 @@
+{
+ "zone": "sports-center",
+ "title": "Sports Center + Circus (one connected building: hall, indoor court, canteen, gymnastics, circus, dance studio)",
+ "review_areas": [
+  "sc",
+  "circus",
+  "dance",
+  "gym"
+ ],
+ "spots": {
+  "s07": [
+   1791.6,
+   1609.9
+  ],
+  "s19": [
+   1786.1,
+   1627.1
+  ],
+  "s34": [
+   1744.1,
+   1625.5
+  ]
+ }
+}

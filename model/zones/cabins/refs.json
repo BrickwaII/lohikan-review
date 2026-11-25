@@ -1,0 +1,32 @@
+{
+ "zone": "cabins",
+ "title": "Cabins 1-24 (cabins 2/3 hand-built, the rest generated), tetherball, hill signs",
+ "review_areas": [
+  "cabins-photos",
+  "tetherball",
+  "cabin-1",
+  "cabin-2-3",
+  "cabin-4",
+  "cabin-5",
+  "cabin-6",
+  "cabin-7",
+  "cabin-8",
+  "cabin-9",
+  "cabin-10",
+  "cabin-11",
+  "cabin-12",
+  "cabin-13",
+  "cabin-14",
+  "cabin-15",
+  "cabin-16",
+  "cabin-17",
+  "cabin-18",
+  "cabin-19",
+  "cabin-20",
+  "cabin-21",
+  "cabin-22",
+  "cabin-23",
+  "cabin-24"
+ ],
+ "spots": {}
+}

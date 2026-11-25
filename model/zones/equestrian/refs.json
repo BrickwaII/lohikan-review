@@ -1,0 +1,13 @@
+{
+ "zone": "equestrian",
+ "title": "Equestrian center: indoor ring, stall barn, outdoor rings",
+ "review_areas": [
+  "horses"
+ ],
+ "spots": {
+  "s11": [
+   2022.1,
+   1935.6
+  ]
+ }
+}

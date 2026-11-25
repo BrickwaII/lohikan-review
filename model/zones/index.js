@@ -1,0 +1,22 @@
+// Every zone's data, gathered for the viewer. To add a zone: create zones/<zone>/extras.js and/or buildings.js and list it here.
+import { EXTRAS as DINING_E } from './dining/extras.js';
+import { EXTRAS as LOWER_OFFICE_E } from './lower-office/extras.js';
+import { EXTRAS as CABINS_E } from './cabins/extras.js';
+import { EXTRAS as SPORTS_COURTS_E } from './sports-courts/extras.js';
+import { EXTRAS as ENTRANCE_E } from './entrance/extras.js';
+import { EXTRAS as EQUESTRIAN_E } from './equestrian/extras.js';
+import { EXTRAS as ART_CENTER_E } from './art-center/extras.js';
+import { EXTRAS as TENNIS_E } from './tennis/extras.js';
+import { EXTRAS as POOL_E } from './pool/extras.js';
+import { EXTRAS as ACTIVITIES_E } from './activities/extras.js';
+import { EXTRAS as FIELDS_E } from './fields/extras.js';
+import { EXTRAS as WATERFRONT_E } from './waterfront/extras.js';
+import { EXTRAS as SKI_HILL_E } from './ski-hill/extras.js';
+import { BUILDINGS as DINING_B } from './dining/buildings.js';
+import { BUILDINGS as CABINS_B } from './cabins/buildings.js';
+import { BUILDINGS as ART_CENTER_B } from './art-center/buildings.js';
+import { BUILDINGS as REC_HALL_B } from './rec-hall/buildings.js';
+import { BUILDINGS as _GENERATED_GENERIC_BUILDINGS_B } from './_generated/generic-buildings.js';
+import { BUILDINGS as CABINS_CABINS_GENERATED_B } from './cabins/cabins.generated.js';
+export const EXTRAS = [...DINING_E, ...LOWER_OFFICE_E, ...CABINS_E, ...SPORTS_COURTS_E, ...ENTRANCE_E, ...EQUESTRIAN_E, ...ART_CENTER_E, ...TENNIS_E, ...POOL_E, ...ACTIVITIES_E, ...FIELDS_E, ...WATERFRONT_E, ...SKI_HILL_E];
+export const BUILDINGS = [...DINING_B, ...CABINS_B, ...ART_CENTER_B, ...REC_HALL_B, ..._GENERATED_GENERIC_BUILDINGS_B, ...CABINS_CABINS_GENERATED_B];

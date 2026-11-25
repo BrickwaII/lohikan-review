@@ -1,0 +1,15 @@
+{
+ "zone": "dining",
+ "title": "Dining Hall, Senior Dining Hall, the flagpole quad and the dining tent",
+ "review_areas": [
+  "dh",
+  "sr-dining",
+  "quad"
+ ],
+ "spots": {
+  "s31": [
+   1395.0,
+   1528.7
+  ]
+ }
+}

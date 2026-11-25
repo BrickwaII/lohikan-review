@@ -1,0 +1,19 @@
+{
+ "zone": "lower-office",
+ "title": "Lower Office, amphitheater stage, lawn steps, hill benches, mountain boarding",
+ "review_areas": [
+  "lower-office",
+  "amphitheater",
+  "mountainboard"
+ ],
+ "spots": {
+  "s17": [
+   1459.0,
+   1491.8
+  ],
+  "s36": [
+   1422.4,
+   1461.5
+  ]
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "zone": "tennis",
+ "title": "Tennis courts",
+ "review_areas": [
+  "tennis"
+ ],
+ "spots": {
+  "s23": [
+   1617.1,
+   1681.6
+  ]
+ }
+}

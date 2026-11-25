@@ -1,0 +1,11 @@
+// waterfront: outdoor objects (built by model/kinds/<type>.js)
+// map = position on the camp map; see notes in ./NOTES.md before changing anything here.
+export const EXTRAS = [
+  { type: 'dock', name: 'Waterfront swim dock', map: [1215.0, 1243.0], angleDeg: 0, segs: [[[-1.7, 14.5], [-13.3, 1.2]], [[-13.3, 1.2], [3.0, -13.5]], [[3.0, -13.5], [15.0, -0.5]], [[15.0, -0.5], [51.0, -2.5]], [[-1.7, 14.5], [1.8, 19.5]]], wid: 2.4, deck: 0.35, w: 70, d: 36 },   /* NAIP 2015 walkway runs east to x 1266; NAIP 2019: square swim-crib dock (~22 m sides, ~2.4 m boards) open on the shore side, plus a walkway along the shore */
+  { type: 'iceberg', name: 'Inflatable iceberg', map: [1188.0, 1219.0], angleDeg: 20, w: 6, d: 6 },   /* 02 Waterfront Aerial 360: white inflatable climbing iceberg in the swim area near the water trampoline; spot estimated */
+  { type: 'buoyline', name: 'Swim area buoy line', map: [1215.0, 1243.0], angleDeg: 0, pts: [[-13.3, 1.2], [-30, -2], [-44, -14], [-35, -27], [-14, -21], [3.0, -13.5]], w: 50, d: 40 },   /* rope of floats enclosing the trampoline + iceberg area off the dock (360) */
+  { type: 'watertramp', name: 'Water trampoline', map: [1177.1, 1230.6], angleDeg: 0, r: 3.0, w: 7, d: 7 },   /* 39 Water Trampoline 360: round floating trampoline, black mat, padded rim in alternating red/blue segments with a yellow top band (~20 ft) */
+  { type: 'ropeswing', name: 'Rope swing', map: [1228.0, 1191.0], angleDeg: 113.5, h: 8, span: 5, w: 6, d: 3 },   /* Henry 10:16 AM Nov 17: by the waterslide, ~20-30 ft to its right seen from the lake; H-frame from the 02 Waterfront Aerial 360 */
+  { type: 'dock', name: 'Jet ski dock', map: [1181.0, 1141.0], angleDeg: 0, segs: [[[0.0, 4.5], [-2.2, -0.5]], [[-2.6, -2.0], [-4.6, -7.0]]], wid: 2.0, deck: 0.25, w: 12, d: 14 },   /* Henry 11:00 AM Nov 17: two white floating sections just off the shore SW of the swim beach (Water Trampoline 360 + bright patch in NAIP 2015) */
+  { type: 'waterslide', name: 'Waterslide', map: [1248.0, 1186.0], angleDeg: 90, len: 15.0, drop: 4.1, top: 2.2, w: 12, d: 6 },   /* 40 Waterslide 360 + Henry 12:55 PM: ~30 ft blue/yellow chute running down toward the lake (north) from two green steel columns between boulders */
+];

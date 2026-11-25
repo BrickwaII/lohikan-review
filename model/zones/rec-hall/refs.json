@@ -1,0 +1,17 @@
+{
+ "zone": "rec-hall",
+ "title": "Rec Hall (stage, black box, rock band / music area)",
+ "review_areas": [
+  "rec-hall"
+ ],
+ "spots": {
+  "s18": [
+   1491.0,
+   1645.0
+  ],
+  "s21": [
+   1468.6,
+   1649.4
+  ]
+ }
+}

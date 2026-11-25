@@ -1,0 +1,76 @@
+{
+ "zone": "roads",
+ "title": "Roads and paths (data/paths.json); road 360 spots",
+ "review_areas": [
+  "roads"
+ ],
+ "spots": {
+  "road01": [
+   1255.7,
+   1282.3
+  ],
+  "road02": [
+   1344.1,
+   1280.9
+  ],
+  "road03": [
+   1459.5,
+   1484.1
+  ],
+  "road04": [
+   1461.8,
+   1551.8
+  ],
+  "road05": [
+   1378.6,
+   1561.4
+  ],
+  "road06": [
+   1509.5,
+   1615.0
+  ],
+  "road07": [
+   1639.1,
+   1586.4
+  ],
+  "road08": [
+   1815.9,
+   1637.7
+  ],
+  "road09": [
+   1699.5,
+   1699.1
+  ],
+  "road10": [
+   1776.1,
+   1786.8
+  ],
+  "road11": [
+   1650.2,
+   1737.7
+  ],
+  "road12": [
+   1531.1,
+   1670.9
+  ],
+  "road13": [
+   1567.7,
+   1728.2
+  ]
+ },
+ "spot_names": {
+  "road01": "Lake Road",
+  "road02": "Camp Entrance",
+  "road03": "Lower Office roadside",
+  "road04": "Infirmary parking lot",
+  "road05": "Arts & Crafts to the Dining Hall",
+  "road06": "Base of the Hill",
+  "road07": "Entrance to the Sports Center area",
+  "road08": "Senior Girls Hill",
+  "road09": "To the Upper Field",
+  "road10": "To the Barn",
+  "road11": "Cooler parking lot",
+  "road12": "Boys Hill",
+  "road13": "Road to Senior Boys Hill"
+ }
+}
