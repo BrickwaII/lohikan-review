@@ -7,7 +7,7 @@ import * as THREE from 'three';
 export const PALETTE = {
   // outside wall boards: [board colour, gap/batten colour]. 'darkbrown' is the camp standard.
   siding: { darkbrown: ['#2a221c', '#1f1915'], brown: ['#5a4330', '#47342a'], charcoal: ['#262220', '#141210'],
-            corrugated: ['#9a978f', '#77746d'] },   // Henry: the Rec Hall alone has corrugated metal walls (colour still to confirm)
+            corrugated: ['#b8a582', '#958463'] },   // Henry: the Rec Hall alone has corrugated metal walls, painted tan outside
   // roofs: [base, line colour]
   roof: { grey: ['#7a7c7e', '#68696b'], green: ['#4a6553', '#3c5444'], metal: ['#d4d6d6', '#b9bcbd'] },
   trim: { white: 0xf1efe8, brown: 0x4a3426, dark: 0x2e241c },
