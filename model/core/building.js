@@ -6,6 +6,7 @@
 
 // Henry: two flagpoles stand between the two Senior Dining porches (not in the middle of the quad)
 import * as THREE from 'three';
+import { PALETTE, sidingTexture, roofTexture, STANDARD_SIDING } from './materials.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 export function canvasTex(renderer, w, h, draw) {
@@ -20,21 +21,13 @@ export function buildCampBuilding(cfg, renderer) {
   const mat = o => new THREE.MeshStandardMaterial({ roughness: 0.88, metalness: 0, side: THREE.DoubleSide, ...o });
   const T = (w, h, d) => canvasTex(renderer, w, h, d);
   const rep = (t, rx, ry) => { const c = t.clone(); c.needsUpdate = true; c.repeat.set(rx, ry); return c; };
-  const SID = { darkbrown: ['#2a221c', '#1f1915'], charcoal: ['#262220', '#141210'], brown: ['#5a4330', '#47342a'] }[cfg.siding] || ['#2a221c', '#1f1915'];
-  const siding = cfg.sidingStyle === 'liveedge' ? T(256, 256, (g, w, h) => { g.fillStyle = SID[0]; g.fillRect(0, 0, w, h);   // horizontal waney-edge boards (Lower Office photos)
-      for (let y = 0; y < h; y += 26) { const a = rnd() * 6, f = 1 + rnd() * 2; g.fillStyle = SID[1]; g.beginPath(); g.moveTo(0, y);
-        for (let x = 0; x <= w; x += 8) g.lineTo(x, y + 4 + Math.sin(x / w * Math.PI * 2 * f + a) * 3.5); g.lineTo(w, y); g.fill();
-        g.fillStyle = `rgba(255,235,210,${0.03 + rnd() * 0.05})`; g.fillRect(0, y + 9, w, 3); } })
-    : T(256, 256, (g, w, h) => { g.fillStyle = SID[0]; g.fillRect(0, 0, w, h);
-    for (let x = 0; x < w; x += 28) { g.fillStyle = SID[1]; g.fillRect(x, 0, 4, h); g.fillStyle = `rgba(255,235,210,${0.02 + rnd() * 0.04})`; g.fillRect(x + 4, 0, 24, h); } });
-  const RC = { grey: ['#7a7c7e', '#68696b'], green: ['#4a6553', '#3c5444'], metal: ['#d4d6d6', '#b9bcbd'] }[cfg.roof] || ['#7a7c7e', '#68696b'];
-  const shingles = cfg.roof === 'metal' ? T(256, 256, (g, w, h) => { g.fillStyle = RC[0]; g.fillRect(0, 0, w, h); for (let x = 0; x < w; x += 32) { g.fillStyle = RC[1]; g.fillRect(x, 0, 5, h); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(x + 5, 0, 3, h); } }) : T(256, 256, (g, w, h) => { g.fillStyle = RC[0]; g.fillRect(0, 0, w, h);
-    for (let y = 0; y < h; y += 16) { g.fillStyle = RC[1]; g.fillRect(0, y, w, 2); for (let x = (y / 16 % 2) * 16; x < w; x += 32) g.fillRect(x, y, 2, 16); }
-    for (let i = 0; i < 500; i++) { const v = rnd(); g.fillStyle = v > .5 ? `rgba(255,255,255,${(v - .5) * .12})` : `rgba(0,0,0,${v * .14})`; g.fillRect(rnd() * w, rnd() * h, 14, 7); } });
+  /* Henry: most buildings share the same dark brown board siding outside: siding and roof textures come from the camp-wide core/materials.js */
+  const siding = sidingTexture(cfg.siding || STANDARD_SIDING, cfg.sidingStyle === 'liveedge' ? 'liveedge' : 'board');
+  const shingles = roofTexture(cfg.roof || 'grey');
   const deck = T(256, 256, (g, w, h) => { g.fillStyle = '#6b5440'; g.fillRect(0, 0, w, h); for (let y = 0; y < h; y += 20) { g.fillStyle = 'rgba(0,0,0,.25)'; g.fillRect(0, y, w, 2); } });
   const lattice = T(128, 128, (g, w, h) => { g.fillStyle = '#141110'; g.fillRect(0, 0, w, h); g.strokeStyle = '#2c241d'; g.lineWidth = 6;
     for (let i = -w; i < 2 * w; i += 24) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i + h, h); g.stroke(); g.beginPath(); g.moveTo(i, h); g.lineTo(i + h, 0); g.stroke(); } });
-  const white = cfg.trim === 'white', trimC = white ? 0xece9e1 : 0x3a2a1c, postC = 0x4a3826;
+  const white = cfg.trim === 'white', trimC = white ? 0xece9e1 : 0x3a2a1c, postC = PALETTE.wood.post;
   const M = { roof: mat({ map: rep(shingles, cfg.len / 4, cfg.wid / 4) }), trim: mat({ color: trimC }), post: mat({ color: postC }), win: mat({ color: 0xbfd8e6, roughness: 0.05, metalness: 0.1, transparent: true, opacity: 0.22, depthWrite: false }),   /* Henry: windows you can see through (the walls have real holes) */
     winFrame: mat({ color: white ? 0xe8e4da : 0x6a5a48 }), door: mat({ color: 0x2c2118 }), deck: mat({ map: rep(deck, 4, 1) }), skirt: mat({ map: rep(lattice, 8, 1) }),
     vent: mat({ color: 0x9aa0a6, metalness: 0.6, roughness: 0.4 }), rail: mat({ color: cfg.railWhite ? 0xe6e2d8 : 0x9c958a }), siding: (rx, ry) => mat({ map: rep(siding, rx, ry) }) };

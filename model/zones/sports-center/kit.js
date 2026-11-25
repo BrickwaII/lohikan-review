@@ -1,6 +1,7 @@
 // Shared kit for the Sports Center + Circus: materials, canvas textures, wall helpers (quad, holedWall), groups ext/inn/root.
 // Everything here was the top of buildSportsCenter; each part file receives these through the kit object.
 import * as THREE from 'three';
+import { sidingTexture, STANDARD_SIDING } from '../../core/materials.js';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 import { SC } from './data.js';
 
@@ -19,8 +20,8 @@ export function makeKit(renderer, opts = {}) {
   const T = (w, h, d, rx, ry) => canvasTex(renderer, w, h, d, rx, ry);
 
   // ---------- textures ----------
-  const siding = T(256, 256, (g, w, h) => { g.fillStyle = '#2b221d'; g.fillRect(0, 0, w, h);
-    for (let x = 0; x < w; x += 32) { g.fillStyle = '#1d1714'; g.fillRect(x, 0, 6, h); g.fillStyle = `rgba(255,230,200,${0.02 + rnd() * 0.03})`; g.fillRect(x + 6, 0, 26, h); } }, 1, 1);
+  /* Henry: same dark brown board siding as every other camp building (shared texture from core/materials.js; one tile = SIDING_TILE m) */
+  const siding = sidingTexture(STANDARD_SIDING);
   const roofTex = (base, dark) => T(256, 256, (g, w, h) => { g.fillStyle = base; g.fillRect(0, 0, w, h);
     for (let y = 0; y < h; y += 16) { g.fillStyle = dark; g.fillRect(0, y, w, 2); for (let x = (y / 16 % 2) * 16; x < w; x += 32) g.fillRect(x, y, 2, 16); }
     for (let i = 0; i < 400; i++) { g.fillStyle = `rgba(0,0,0,${rnd() * 0.08})`; g.fillRect(rnd() * w, rnd() * h, 6, 3); } }, 1, 1);

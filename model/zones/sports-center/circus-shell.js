@@ -1,6 +1,7 @@
 // Circus building outside + end walls: aisle roofs, clerestory walls and windows, east end opening and posts, window rows, gable boards, shared west wall with the Sports Center.
 // Part of the Sports Center + Circus zone; called in order by ./index.js. Read ./NOTES.md before changing.
 import * as THREE from 'three';
+import { SIDING_TILE } from '../../core/materials.js';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 
 export function buildCircusShell(k) {
@@ -8,13 +9,13 @@ export function buildCircusShell(k) {
     for (const s of [-1, 1]) {
       // exterior: aisle lean-to roof, clerestory wall with windows, nave gable roof
       ext.add(quad([cx0, S.aisleEave, s * H], [cx1, S.aisleEave, s * H], [cx1, S.aisleTop, s * NH], [cx0, S.aisleTop, s * NH], mat({ map: tex(greyRoof, 1, 1) }), [4, 4]));
-      { const xw = s > 0 ? SOUTH_OPEN_X : cx0, xe = s > 0 ? cx1 : cx1 - 4.9; ext.add(quad([xw, 0, s * H], [xe, 0, s * H], [xe, S.aisleEave, s * H], [xw, S.aisleEave, s * H], mat({ map: tex(siding, 1, 1) }), [4, 4]));
+      { const xw = s > 0 ? SOUTH_OPEN_X : cx0, xe = s > 0 ? cx1 : cx1 - 4.9; ext.add(quad([xw, 0, s * H], [xe, 0, s * H], [xe, S.aisleEave, s * H], [xw, S.aisleEave, s * H], mat({ map: tex(siding, 4 / SIDING_TILE, 4 / SIDING_TILE) }), [4, 4]));
         if (s < 0) for (const px of [cx1 - 4.9, cx1 - 2.45, cx1 - 0.2]) { const pp = new THREE.Mesh(new THREE.BoxGeometry(0.25, S.aisleEave, 0.25), mat({ color: 0x3a2c1e })); pp.position.set(px, S.aisleEave / 2, s * H); ext.add(pp); } }   /* Henry: the north-east corner panels are open */
       ext.add(quad([cx0, S.ridge, 0], [cx1, S.ridge, 0], [cx1, S.clereTop, s * NH], [cx0, S.clereTop, s * NH], mat({ map: tex(greyRoof, 1, 1) }), [4, 4]));
-      const cw = quad([cx0, S.aisleTop, s * (NH + 0.05)], [cx1, S.aisleTop, s * (NH + 0.05)], [cx1, S.clereTop - 3.0, s * (NH + 0.05)], [cx0, S.clereTop - 3.0, s * (NH + 0.05)], mat({ map: tex(siding, 1, 1) }), [4, 4]);   // double-sided: the inner star wall must never show outside
+      const cw = quad([cx0, S.aisleTop, s * (NH + 0.05)], [cx1, S.aisleTop, s * (NH + 0.05)], [cx1, S.clereTop - 3.0, s * (NH + 0.05)], [cx0, S.clereTop - 3.0, s * (NH + 0.05)], mat({ map: tex(siding, 4 / SIDING_TILE, 4 / SIDING_TILE) }), [4, 4]);   // double-sided: the inner star wall must never show outside
       if (s < 0) cw.geometry.scale(1, 1, 1);
       ext.add(cw);
-      ext.add(quad([cx0, S.clereTop - 1.0, s * (NH + 0.05)], [cx1, S.clereTop - 1.0, s * (NH + 0.05)], [cx1, S.clereTop, s * (NH + 0.05)], [cx0, S.clereTop, s * (NH + 0.05)], mat({ map: tex(siding, 1, 1) }), [4, 4]));
+      ext.add(quad([cx0, S.clereTop - 1.0, s * (NH + 0.05)], [cx1, S.clereTop - 1.0, s * (NH + 0.05)], [cx1, S.clereTop, s * (NH + 0.05)], [cx0, S.clereTop, s * (NH + 0.05)], mat({ map: tex(siding, 4 / SIDING_TILE, 4 / SIDING_TILE) }), [4, 4]));
       const cwin = quad([cx0, S.clereTop - 3.0, s * (NH + 0.06)], [cx1, S.clereTop - 3.0, s * (NH + 0.06)], [cx1, S.clereTop - 1.0, s * (NH + 0.06)], [cx0, S.clereTop - 1.0, s * (NH + 0.06)], mat({ map: tex(clere, L / 3.4, 1), transparent: true, depthWrite: false, side: THREE.DoubleSide }), [L, 2.0]);   /* see-through from outside too */
       ext.add(cwin);
       // big doors in the aisle outer walls (light comes in at ground level in the 360° photo)
@@ -37,7 +38,7 @@ export function buildCircusShell(k) {
       hole.moveTo(hx0, 0.01); hole.lineTo(hx1, 0.01); hole.lineTo(hx1, hh); hole.lineTo(mz, hh); hole.lineTo(mz, hm); hole.lineTo(-mz, hm); hole.lineTo(-mz, hh); hole.lineTo(hx0, hh); hole.lineTo(hx0, 0.01); sh.holes.push(hole);
       for (const [y0, y1] of WIN_ROWS) { const w = new THREE.Path(); w.moveTo(-NH + 0.4, y0); w.lineTo(NH - 0.4, y0); w.lineTo(NH - 0.4, y1); w.lineTo(-NH + 0.4, y1); w.lineTo(-NH + 0.4, y0); sh.holes.push(w); }
       const g = new THREE.ShapeGeometry(sh); const uv = g.attributes.uv, p = g.attributes.position; for (let i = 0; i < uv.count; i++) uv.setXY(i, p.getX(i) / 4, p.getY(i) / 4);
-      const wOut = new THREE.Mesh(g, mat({ map: tex(siding, 1, 1), side: THREE.FrontSide })); wOut.rotation.y = Math.PI / 2; wOut.position.x = cx1 + 0.02; ext.add(wOut);
+      const wOut = new THREE.Mesh(g, mat({ map: tex(siding, 4 / SIDING_TILE, 4 / SIDING_TILE), side: THREE.FrontSide })); wOut.rotation.y = Math.PI / 2; wOut.position.x = cx1 + 0.02; ext.add(wOut);
       const wIn = new THREE.Mesh(g.clone(), mat({ map: tex(starWall, 0.12, 0.12), side: THREE.BackSide })); wIn.rotation.y = Math.PI / 2; wIn.position.x = cx1 - 0.02; inn.add(wIn);
       const lintel = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, hx1 - hx0), mat({ color: 0x2e241a })); lintel.position.set(cx1, hh, -(hx0 + hx1) / 2); ext.add(lintel);
       for (const zz of [-H + 0.3, -15.6, -NH + 0.2, -8.6, -4.0, 0, 4.0, 8.6, NH - 0.5]) { const ph = Math.abs(zz) < 4.1 ? hm : hh; const p = new THREE.Mesh(new THREE.BoxGeometry(0.35, ph, 0.35), mat({ color: Math.round(Math.abs(zz)) % 2 ? 0xd8262b : 0xf2d21f })); p.position.set(cx1 - 0.2, ph / 2, zz); inn.add(p); }

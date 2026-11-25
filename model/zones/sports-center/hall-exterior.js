@@ -1,6 +1,7 @@
 // Sports Center hall outside: roof, siding, west gable with the barn doors and SPORTS CENTER sign, west-end doors/windows, concrete walk + benches, south and north wall windows.
 // Part of the Sports Center + Circus zone; called in order by ./index.js. Read ./NOTES.md before changing.
 import * as THREE from 'three';
+import { SIDING_TILE } from '../../core/materials.js';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 
 export function buildHallExterior(k) {
@@ -10,8 +11,8 @@ export function buildHallExterior(k) {
     const NWIN = []; for (let x = x0 + 2.5; x < x1 - 1.5; x += 3.2) NWIN.push(x);   /* north wall windows */
     for (const s of [-1, 1]) {
       ext.add(quad([x0, S.westEave, s * H], [x1, S.westEave, s * H], [x1, S.westRidge, 0], [x0, S.westRidge, 0], mat({ map: tex(greenRoof, 1, 1) }), [4, 4]));
-      if (s < 0) ext.add(holedWall(x0, x1, 0, S.westEave, -H, NWIN.map(x => [x - 0.55, 1.05, x + 0.55, 1.95]), mat({ map: tex(siding, 1, 1) })));   /* v8: north wall windows are see-through */
-      else ext.add(quad([x0, 0, s * H], [x1, 0, s * H], [x1, S.westEave, s * H], [x0, S.westEave, s * H], mat({ map: tex(siding, 1, 1) }), [4, 4]));
+      if (s < 0) ext.add(holedWall(x0, x1, 0, S.westEave, -H, NWIN.map(x => [x - 0.55, 1.05, x + 0.55, 1.95]), mat({ map: tex(siding, 4 / SIDING_TILE, 4 / SIDING_TILE) })));   /* v8: north wall windows are see-through */
+      else ext.add(quad([x0, 0, s * H], [x1, 0, s * H], [x1, S.westEave, s * H], [x0, S.westEave, s * H], mat({ map: tex(siding, 4 / SIDING_TILE, 4 / SIDING_TILE) }), [4, 4]));
       // eave overhang shadow line
       const fas = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.25, 0.3), mat({ color: 0x2e241a })); fas.position.set((x0 + x1) / 2, S.westEave, s * (H + 0.1)); ext.add(fas);
     }
@@ -19,7 +20,7 @@ export function buildHallExterior(k) {
     const sh = new THREE.Shape(); sh.moveTo(-H, 0); sh.lineTo(H, 0); sh.lineTo(H, S.westEave); sh.lineTo(0, S.westRidge); sh.lineTo(-H, S.westEave); sh.lineTo(-H, 0);
     { const hl = new THREE.Path(); hl.moveTo(-1.5, 0); hl.lineTo(-1.5, 3.7); hl.lineTo(1.5, 3.7); hl.lineTo(1.5, 0); hl.lineTo(-1.5, 0); sh.holes.push(hl); }   // open doorway into the hall (IMG_8261)
     for (const dz of [GZM - 2.0, GZM + 2.0]) { const h = new THREE.Path(); h.moveTo(dz - 0.45, 1.15); h.lineTo(dz + 0.45, 1.15); h.lineTo(dz + 0.45, 2.05); h.lineTo(dz - 0.45, 2.05); h.lineTo(dz - 0.45, 1.15); sh.holes.push(h); }   /* v8: gym windows open right through */
-    const gw = new THREE.Mesh(new THREE.ShapeGeometry(sh), mat({ map: tex(siding, 0.25, 0.25) })); gw.rotation.y = -Math.PI / 2; gw.position.x = x0; ext.add(gw);
+    const gw = new THREE.Mesh(new THREE.ShapeGeometry(sh), mat({ map: tex(siding, 1 / SIDING_TILE, 1 / SIDING_TILE) })); gw.rotation.y = -Math.PI / 2; gw.position.x = x0; ext.add(gw);
     const doorM = mat({ color: 0x5a4430 }), xM = mat({ color: 0xf1efe8 });
     // two white-X sliding barn doors, slid open to either side of the doorway (Ghost photo IMG_8261)
     for (const dz of [-2.75, 2.75]) {

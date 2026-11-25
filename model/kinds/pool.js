@@ -1,5 +1,6 @@
 // Outdoor object kind 'pool' (used by EXTRAS entries with type: 'pool').
 import * as THREE from 'three';
+import { PALETTE } from '../core/materials.js';
 
 export function pool(e, g) {   // outdoor pool: deck, recessed water with brick coping, lane rope, slide, lifeguard chair, benches, chain-link fence
     const P0 = new THREE.Group(); P0.position.y = e.lift || 0; g.add(P0); const W = e.w, D = e.d, [PW, PD] = e.water, PX = e.waterX || 0, M = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.85 });
@@ -32,7 +33,7 @@ export function pool(e, g) {   // outdoor pool: deck, recessed water with brick 
     const fence = new THREE.MeshStandardMaterial({ color: 0x5a6266, metalness: 0.4, roughness: 0.6, transparent: true, opacity: 0.3, side: THREE.DoubleSide, depthWrite: false });
     for (const [fx, fz, fw, rot] of [[0, -D / 2, W, 0], [0, D / 2, W, 0], [-W / 2, 0, D, Math.PI / 2], [W / 2, 0, D, Math.PI / 2]]) { const f = new THREE.Mesh(new THREE.PlaneGeometry(fw, 1.8), fence); f.position.set(fx, 0.95, fz); f.rotation.y = rot; P0.add(f); }
       /* v8 (Henry, pool 360): the 4 benches stand on the far (east) end deck past the end of the pool, in a row, facing back along the lanes toward the pool */
-    for (const bz of [-7.2, -2.4, 2.4, 7.2]) { const bw = M(0x6b5236), bx = PX + PW / 2 + 3.4;
+    for (const bz of [-7.2, -2.4, 2.4, 7.2]) { const bw = M(PALETTE.wood.bench), bx = PX + PW / 2 + 3.4;
       const seat = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.06, 2.4), bw); seat.position.set(bx, 0.45, bz); P0.add(seat);
       const back = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.45, 2.4), bw); back.position.set(bx + 0.22, 0.72, bz); back.rotation.z = 0.12; P0.add(back);
       for (const lz of [-1.05, 1.05]) { const leg = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.45, 0.06), bw); leg.position.set(bx, 0.22, bz + lz); P0.add(leg); } }

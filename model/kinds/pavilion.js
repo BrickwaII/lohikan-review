@@ -1,5 +1,6 @@
 // Outdoor object kind 'pavilion' (used by EXTRAS entries with type: 'pavilion').
 import * as THREE from 'three';
+import { PALETTE } from '../core/materials.js';
 
 export function pavilion_octagon(e, g) {   // octagonal gazebo (29 Bungee Trampoline 360): raised wood deck, 8 posts, brown shingle roof, white fascia, square cupola
     const R = e.r || 5.0, eh = e.eave || 2.6, top = e.top || 4.6, M = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.85, side: THREE.DoubleSide });
@@ -18,7 +19,7 @@ export function pavilion_octagon(e, g) {   // octagonal gazebo (29 Bungee Trampo
 export function pavilion(e, g) {   // open pavilion: posts, low rail, hip roof
     const W = e.w, D = e.d, eh = e.eave || 2.6, top = e.top || 4.4, M = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.85, side: THREE.DoubleSide });
     const fl = new THREE.Mesh(new THREE.BoxGeometry(W, 0.3, D), M(0x8d8a83)); fl.position.y = 0.15; g.add(fl);
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.22, eh, 0.22), M(0x4a3826)); p.position.set(sx * (W / 2 - 0.2), eh / 2, sz * (D / 2 - 0.2)); g.add(p); }
-    for (const sx of [-1, 0, 1]) for (const sz of [-1, 1]) if (sx === 0) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.2, eh, 0.2), M(0x4a3826)); p.position.set(0, eh / 2, sz * (D / 2 - 0.2)); g.add(p); }
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.22, eh, 0.22), M(PALETTE.wood.post)); p.position.set(sx * (W / 2 - 0.2), eh / 2, sz * (D / 2 - 0.2)); g.add(p); }
+    for (const sx of [-1, 0, 1]) for (const sz of [-1, 1]) if (sx === 0) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.2, eh, 0.2), M(PALETTE.wood.post)); p.position.set(0, eh / 2, sz * (D / 2 - 0.2)); g.add(p); }
     const r = Math.hypot(W, D) / 2 + 0.5; const roof = new THREE.Mesh(new THREE.ConeGeometry(r, top - eh, 4, 1, true), M(0x5b4636)); roof.rotation.y = Math.PI / 4; roof.scale.set((W + 1) / (r * Math.SQRT2), 1, (D + 1) / (r * Math.SQRT2)); roof.position.y = eh + (top - eh) / 2; g.add(roof);
   }
