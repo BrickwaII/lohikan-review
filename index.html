@@ -129,7 +129,8 @@ select.tri{font:inherit;font-size:13px;min-height:30px;border-radius:6px;border:
 .vb[aria-selected=true]{background:var(--green);border-color:var(--green);color:var(--sheet)}
 h3.vt{font-size:22px;margin-top:10px}
 body{padding-bottom:24px}
-#changes{display:none}body.changes #changes{display:block}body.changes main>section:not(#changes),body.changes .drawer{display:none}
+#changes{display:none}body.changes #changes{display:block}#photos{display:none}body.photos #photos{display:block}#questions{display:none}body.questions #questions{display:block}body.questions main>section:not(#questions),body.questions .drawer{display:none}.qcard{border-top:1px solid #ddd;padding:12px 0}.qcard img{max-width:100%;border-radius:8px;margin:6px 0}.qcard textarea{width:100%;min-height:70px}.qans{margin:6px 0;padding-left:16px}body.photos main>section:not(#photos),body.photos .drawer{display:none}
+.phimg{width:100%;max-height:62vh;object-fit:contain;background:#111;border-radius:8px;display:block}.phbtns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.phbtns button{flex:1 1 auto;min-height:44px}.phbtns .go{background:#2f6f3e;color:#fff;border-color:#2f6f3e}.phgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px}.phgrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;cursor:zoom-in}body.changes main>section:not(#changes),body.changes .drawer{display:none}
 .chg{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 @media(max-width:899px){#chgbtn{display:none}}
 .sb{min-height:46px;padding:8px 22px;font-size:17px}.sb[aria-selected=true]{background:var(--green);border-color:var(--green);color:var(--sheet)}
@@ -181,10 +182,10 @@ textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
   </div>
   <div class="status"><span id="status">Loading…</span> <button class="small" id="photobtn" style="margin-left:10px;min-height:30px;padding:2px 10px"></button></div>
 </header>
-<nav class="topnav" aria-label="Places"><button class="arr" id="navl" aria-label="Scroll places left" hidden>‹</button><div class="navrow" id="navrow"></div><button class="arr" id="navr" aria-label="Scroll places right" hidden>›</button><button class="nt" id="chgbtn">What's changed</button><button id="menubtn" aria-haspopup="true">☰ Places</button></nav>
+<nav class="topnav" aria-label="Places"><button class="arr" id="navl" aria-label="Scroll places left" hidden>‹</button><div class="navrow" id="navrow"></div><button class="arr" id="navr" aria-label="Scroll places right" hidden>›</button><button class="nt" id="qbtn">❓ Questions</button><button class="nt" id="phbtn">📷 Place photos</button><button class="nt" id="chgbtn">What's changed</button><button id="menubtn" aria-haspopup="true">☰ Places</button></nav>
 <div class="dd" id="dd" role="menu"></div><div class="picker" id="picker" role="menu" aria-label="Pick a place"></div>
-<div class="menu" id="menu"><div class="panel" role="navigation" aria-label="Places"><div class="ctrl" style="margin:0 0 8px;justify-content:space-between"><h3 style="margin:0">Places</h3><button class="small" id="menuclose">Close</button></div><div id="tree"></div><button class="item" id="chgbtn2" style="margin-top:10px">What's changed</button></div></div>
-<main class="wrap"><section class="card" id="changes"></section>
+<div class="menu" id="menu"><div class="panel" role="navigation" aria-label="Places"><div class="ctrl" style="margin:0 0 8px;justify-content:space-between"><h3 style="margin:0">Places</h3><button class="small" id="menuclose">Close</button></div><div id="tree"></div><button class="item" id="chgbtn2" style="margin-top:10px">What's changed</button><button class="item" id="phbtn2" style="margin-top:6px">📷 Place photos</button><button class="item" id="qbtn2" style="margin-top:6px">❓ Questions</button></div></div>
+<main class="wrap"><section class="card" id="changes"></section><section class="card" id="photos"></section><section class="card" id="questions"></section>
   <section class="card">
     <div class="crumb" id="crumb"></div>
     <h2 id="pname"></h2><p class="blurb" id="pblurb"></p>
@@ -196,7 +197,7 @@ textarea,.in{background:light-dark(#ffffff,#0f1712)!important}
     <div class="grid2"><div><h3>Whole place</h3><textarea id="stext" maxlength="3000" placeholder="Overall impressions, things that are missing, how it changed over the years…"></textarea>
       <h3 style="margin-top:14px">New angles to add</h3><textarea id="sang" maxlength="1500" placeholder="e.g. the canteen counter; the woodshop; the patio from the road"></textarea></div>
       <div><h3>From other reviewers</h3><ul class="notes" id="otextA"></ul>
-      <h3 style="margin-top:14px">Photos for this place</h3><span class="file"><button tabindex="-1" class="small">Attach photos</button><input type="file" accept="image/*" multiple id="pfileA" aria-label="Attach photos for this place"></span><div class="thumbs" id="thumbsA"></div></div></div>
+      <h3 style="margin-top:14px">Photos for this place</h3><span class="file"><button tabindex="-1" class="small">Attach photos</button><input type="file" accept="image/*" multiple id="pfileA" aria-label="Attach photos for this place"></span><div class="thumbs" id="thumbsA"></div><div id="campph"></div></div></div>
   </section>
   <details class="drawer" id="gdrawer"><summary id="gsum">Photo gallery</summary><div class="gal" id="gal"></div></details>
   <details class="drawer" id="udrawer"><summary id="usum">Help sort unverified photos</summary><p class="by">Photos that might show this place. Tell us if they're right, then Henry adds the good ones to the gallery.</p><div class="gal" id="ugal"></div></details>
@@ -283,7 +284,55 @@ function treeHtml(items,depth){
 }
 function pathOf(key,items=DATA.groups,path=[]){ for(const it of items){ if(it.ref===key) return path; if(it.items){ const r=pathOf(key,it.items,[...path,it.name]); if(r) return r; } } return null; }
 let curPath=[];
-function setArea(key,vid,path){ document.body.classList.remove('changes'); area=AREAS.find(a=>a.key===key)||AREAS[0]; curPath=path||area.path; buildViews(); vi=Math.max(0,VIEWS.findIndex(v=>v.id===vid)); renderPlace(); }
+
+/* ---- Place photos: every reviewer says where archive photos were taken. Stored in each reviewer's doc as ph:{photoId: areaKey | 'x'}.
+   A photo is placed when 2 people agree on an area (Henry's answer decides on its own); dropped when 2 say "not useful". ---- */
+let PH=null, phCur=null, phLast=null;
+async function loadPH(){ if(PH) return PH; try{ PH=(await (await fetch('photos.json?t='+Date.now(),{cache:'no-store'})).json()).photos||[]; }catch(e){ PH=[]; } return PH; }
+function phVotes(id){ const v=[]; for(const o of [mine,...others]){ const a=(o.ph||{})[id]; if(a) v.push({a,own:!!o.owner||(o===mine&&isOwner)}); } return v; }
+function phState(id){ const v=phVotes(id), own=v.find(x=>x.own&&x.a!=='skip'); if(own) return own.a==='x'?{s:'dropped'}:{s:'placed',a:own.a};
+  const c={}; for(const x of v) if(x.a!=='skip') c[x.a]=(c[x.a]||0)+1; const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
+  if(top&&top[1]>=2) return top[0]==='x'?{s:'dropped'}:{s:'placed',a:top[0]}; return {s:'open',n:v.filter(x=>x.a!=='skip').length}; }
+const areaName=k=>(AREAS.find(a=>a.key===k)||{}).name||k;
+function phNext(){ const seed=[...(me.id||'x')].reduce((h,c)=>(h*31+c.charCodeAt(0))>>>0,7), r=s=>((s*2654435761)>>>0)%1000;
+  const open=PH.map((p,i)=>({p,i,st:phState(p.id)})).filter(x=>x.st.s==='open'&&!(mine.ph||{})[x.p.id]);
+  open.sort((a,b)=>(b.st.n-a.st.n)||(a.i<300?0:1)-(b.i<300?0:1)||(r(seed^a.i)-r(seed^b.i))); return open[0]?open[0].p:null; }
+async function showPhotos(){ await loadPH(); closeDD(); disposeSpheres(); document.body.classList.remove('changes','questions'); document.body.classList.add('photos'); $('menu').classList.remove('on'); phCur=phNext(); paintPh(); scrollTo(0,0); }
+function paintPh(){
+  const all=PH.map(p=>phState(p.id)), placed=all.filter(x=>x.s==='placed').length, dropped=all.filter(x=>x.s==='dropped').length, mineN=Object.keys(mine.ph||{}).length;
+  const opts=AREAS.map(a=>`<option value="${esc(a.key)}">${esc(a.name)}</option>`).join('');
+  const back=`<button class="small" data-goarea="${esc(area?area.key:AREAS[0].key)}">← Back to ${esc(area?area.name:'places')}</button>`;
+  const head=`<div class="row1" style="justify-content:space-between">${back}<span class="by">${placed} placed · ${dropped} set aside · ${PH.length-placed-dropped} to go · you've done ${mineN}</span></div>
+    <h2 style="margin:8px 0 4px">Where was this photo taken?</h2><p class="hint" style="margin:0 0 8px">Old camp photos from the website and Instagram. Pick the place you recognise. When two people agree, the photo goes into that place's gallery and helps get the 3D model right.</p>`;
+  if(!phCur){ $('photos').innerHTML=head+`<p><b>You've been through every photo that still needs answers. Thank you!</b> More batches are coming.</p>${phUndoBtn()}`; return; }
+  const p=phCur, g=(p.guess||[]).filter(k=>AREAS.some(a=>a.key===k));
+  $('photos').innerHTML=head+`<img class="phimg" src="${esc(p.src)}" alt="Archive camp photo">
+    <div class="phbtns">${g.map(k=>`<button class="go" data-pha="${esc(k)}">✓ ${esc(areaName(k))}</button>`).join('')}</div>
+    <div class="phbtns"><select id="phsel" aria-label="Somewhere else"><option value="">Somewhere else…</option>${opts}</select></div>
+    <div class="phbtns"><button data-pha="x">Not useful (no buildings or places to see)</button><button data-pha="skip">Not sure, skip</button></div>${phUndoBtn()}`;
+}
+function phUndoBtn(){ return phLast?`<p><button class="small" data-phundo="1">↶ Undo last answer (${esc(phLast.a==='x'?'not useful':phLast.a==='skip'?'skipped':areaName(phLast.a))})</button></p>`:''; }
+function phAnswer(a){ if(!phCur) return; mine.ph={...(mine.ph||{}),[phCur.id]:a}; phLast={id:phCur.id,a}; queueSave(); phCur=phNext(); paintPh(); }
+function phUndo(){ if(!phLast) return; const m={...(mine.ph||{})}; delete m[phLast.id]; mine.ph=m; queueSave(); phCur=PH.find(p=>p.id===phLast.id)||phNext(); phLast=null; paintPh(); }
+async function paintCampPh(){ const box=$('campph'); if(!box||!area) return; await loadPH(); const list=PH.filter(p=>{ const s=phState(p.id); return s.s==='placed'&&s.a===area.key; });
+  box.innerHTML=list.length?`<h3 style="margin-top:14px">Camp photos placed here by reviewers (${list.length})</h3><div class="phgrid">${list.map(p=>`<img src="${esc(p.src)}" alt="Camp photo" loading="lazy" data-zoom="${esc(p.src)}">`).join('')}</div>`:''; }
+
+/* ---- Questions: details the modeller needs, answerable by anyone. Answers live in each reviewer's doc as qa:{questionId: text};
+   Henry can mark a question settled (ADM.qdone). ---- */
+let QS=null;
+async function showQuestions(){ if(!QS){ try{ QS=(await (await fetch('questions.json?t='+Date.now(),{cache:'no-store'})).json()).questions||[]; }catch(e){ QS=[]; } }
+  closeDD(); disposeSpheres(); document.body.classList.remove('changes','photos'); document.body.classList.add('questions'); $('menu').classList.remove('on'); paintQ(); scrollTo(0,0); }
+function paintQ(){ const done=ADM.qdone||{}, open=QS.filter(q=>!done[q.id]), closed=QS.filter(q=>done[q.id]);
+  const back=`<button class="small" data-goarea="${esc(area?area.key:AREAS[0].key)}">← Back to ${esc(area?area.name:'places')}</button>`;
+  const card=q=>{ const ans=others.map(o=>({w:who(o),t:((o.qa||{})[q.id]||'').trim()})).filter(a=>a.t);
+    return `<div class="qcard"><div class="by">${esc(q.place||'')}${q.area?` · <a href="#${esc(q.area)}" data-goarea="${esc(q.area)}">see this place</a>`:''}</div><b>${esc(q.q)}</b>${q.why?`<p class="hint">${esc(q.why)}</p>`:''}${q.img?`<img src="${esc(q.img)}" alt="" loading="lazy">`:''}
+      ${ans.length?`<ul class="qans">${ans.map(a=>`<li><b>${esc(a.w)}:</b> ${esc(a.t)}</li>`).join('')}</ul>`:''}
+      <textarea data-qa="${esc(q.id)}" placeholder="Your answer (anything you remember helps, even a guess)">${esc((mine.qa||{})[q.id]||'')}</textarea>
+      ${isOwner?`<button class="small" data-qdone="${esc(q.id)}">${done[q.id]?'Reopen':'Mark settled'}</button>`:''}</div>`; };
+  $('questions').innerHTML=`<div class="row1">${back}</div><h2 style="margin:8px 0 4px">Questions about camp</h2><p class="hint" style="margin:0">Details needed to build the model. Answer any you know; answers save automatically and everyone can see them.</p>
+    ${open.map(card).join('')||'<p>No open questions right now.</p>'}${closed.length?`<details><summary>Settled (${closed.length})</summary>${closed.map(card).join('')}</details>`:''}`; }
+
+function setArea(key,vid,path){ document.body.classList.remove('changes','photos','questions'); area=AREAS.find(a=>a.key===key)||AREAS[0]; curPath=path||area.path; buildViews(); vi=Math.max(0,VIEWS.findIndex(v=>v.id===vid)); renderPlace(); }
 function buildViews(){ VIEWS=[]; for(const p of area.parts) for(const e of p.entries) if(isOwner||!(ADM.hidden||[]).includes(e.id)) VIEWS.push({...e,kind:p.kind}); }
 const curE=()=>VIEWS[vi]||null;
 
@@ -360,6 +409,7 @@ function paintOthers(){
   if($('otextA')) $('otextA').innerHTML=all.flatMap(([o,u,w])=>{ const x=(o.areas||{})[area.key]||{}; return [x.text&&{t:x.text,w,k:u+'|s|'+area.key,ver:x.ver,me:o===mine},x.angles&&{t:'New angles: '+x.angles,w,k:u+'|a|'+area.key,ver:x.ver,me:o===mine}].filter(Boolean); }).filter(keep).map(li).join('');
 }
 function paintPhotos(){
+  paintCampPh();
   const e=curE();
   for(const [box,mineList,get] of [[$('thumbs'),e?E(e.id).photos:null,o=>e?((o.entries||{})[e.id]||{}).photos:null],[$('thumbsA'),A(area.key).photos,o=>((o.areas||{})[area.key]||{}).photos]]){
     if(!box) continue;
@@ -496,7 +546,7 @@ function chgFb(ver,i){ const k=`chg-${ver}-${i}`, mineT=((mine.entries||{})[k]||
   return `<div class="chgfb">${oth.map(x=>`<p class="hint"><b>${esc(x.w)}:</b> ${esc(x.t)}</p>`).join('')}<textarea class="in" rows="2" data-chg="${k}" placeholder="Was this change done right? Tell us what's off.">${esc(mineT)}</textarea></div>`; }
 let showApproved=false, showRedo=false;
 function showChanges(){
-  const was=document.body.classList.contains('changes'); closeDD(); disposeSpheres(); document.body.classList.add('changes'); const C=DATA.changes||[];
+  const was=document.body.classList.contains('changes'); closeDD(); disposeSpheres(); document.body.classList.remove('photos','questions'); document.body.classList.add('changes'); const C=DATA.changes||[];
   const st=(ver,i)=>((ADM.chg||{})[ver+'-'+i]||{});
   const openN=it=>(it.notes||[]).map((n,nj)=>[n,nj]).filter(([n])=>!n.key||((ADM.tri||{})[n.key]||{}).s!=='done');
   const fixedN=it=>(it.notes||[]).length-openN(it).length;
@@ -566,6 +616,8 @@ document.addEventListener('input',e=>{ if(e.target.dataset&&e.target.dataset.chg
   else if(t.id==='stext'){ A(area.key).text=t.value; A(area.key).ver=VER(); queueSave(); }
   else if(t.id==='sang'){ A(area.key).angles=t.value; A(area.key).ver=VER(); queueSave(); }
   else if(t.id==='sitefb'){ mine.site=t.value; queueSave(); }
+  else if(t.id==='phsel'){ if(t.value) phAnswer(t.value); }
+  else if(t.dataset.qa){ mine.qa={...(mine.qa||{}),[t.dataset.qa]:t.value}; queueSave(); }
   else if(t.dataset.gtx){ const g=(mine.gfb??={})[t.dataset.gtx]??={}; g.t=t.value; queueSave(); }
 });
 document.addEventListener('change',e=>{ const t=e.target;
@@ -588,6 +640,12 @@ document.addEventListener('click',async e=>{
     if(inDD){ const grp=DATA.groups.find(g=>g.name===$('dd').dataset.group); path=[grp.name,...((pathOf(t.dataset.area,grp.items)||[]))]; }
     else { const trail=[]; let el=t.parentElement; while(el&&el.id!=='tree'){ if(el.tagName==='DETAILS') trail.unshift(el.querySelector(':scope>summary').textContent); el=el.parentElement; } path=trail; }
     $('menu').classList.remove('on'); closeDD(); setArea(t.dataset.area,t.dataset.goto||null,path); window.scrollTo({top:0}); }
+  else if(t.id==='phbtn'||t.id==='phbtn2'){ showPhotos(); }
+  else if(t.id==='qbtn'||t.id==='qbtn2'){ showQuestions(); }
+  else if(t.dataset.qdone){ const d={...(ADM.qdone||{})}; if(d[t.dataset.qdone]) delete d[t.dataset.qdone]; else d[t.dataset.qdone]=new Date().toISOString(); saveAdm({qdone:d}).then(paintQ); }
+  else if(t.dataset.pha){ phAnswer(t.dataset.pha); }
+  else if(t.dataset.phundo){ phUndo(); }
+  else if(t.dataset.zoom){ window.open(t.dataset.zoom,'_blank'); }
   else if(t.id==='chgbtn'||t.id==='chgbtn2'){ $('menu').classList.remove('on'); showChanges(); }
   else if(t.dataset.sub!==undefined&&t.closest('#dd')){ showSub(+t.dataset.sub); }
   else if(t.dataset.top){ $('dd').classList.contains('on')&&$('dd').dataset.top===t.dataset.top?closeDD():openDD(t); }
@@ -626,7 +684,7 @@ document.addEventListener('click',async e=>{
   else if(t.id==='photobtn'){ photoOn=!photoOn; LS('lrv_photo',photoOn?'1':'0'); paintPhotoBtn(); renderView(); }
   else if(t.id==='showall'){ showAll=!showAll; t.setAttribute('aria-pressed',String(showAll)); t.textContent=showAll?'Hide fixed & not-valid notes':'Show fixed & not-valid notes'; paintPins(); paintOthers(); }
   else if(t.id==='alogin'){ const k=$('akey').value.trim(); if(!k||!API()) return;
-    try{ await api({action:'checkkey',key:k}); adminKey=k; isOwner=true; LS('lrv_admin',k); $('astate').textContent='Unlocked'; refresh(); renderView(); if(document.body.classList.contains('changes')) showChanges(); }catch(err){ $('astate').textContent='Wrong passcode'; } }
+    try{ await api({action:'checkkey',key:k}); adminKey=k; isOwner=true; LS('lrv_admin',k); if(!mine.owner){ mine.owner=true; queueSave(); } $('astate').textContent='Unlocked'; refresh(); renderView(); if(document.body.classList.contains('changes')) showChanges(); }catch(err){ $('astate').textContent='Wrong passcode'; } }
   else if(t.id==='copy'){
     const L=[`Lohikan model feedback from ${mine.name||'a reviewer'}${mine.years?' ('+mine.years+')':''}`];
     for(const a of AREAS){ const out=[];
