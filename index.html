@@ -304,7 +304,6 @@ function phNext(){ const seed=[...(me.id||'x')].reduce((h,c)=>(h*31+c.charCodeAt
 async function showPhotos(){ await loadPH(); closeDD(); disposeSpheres(); document.body.classList.remove('changes','questions'); document.body.classList.add('photos'); $('menu').classList.remove('on'); phCur=phNext(); paintPh(); scrollTo(0,0); }
 function paintPh(){
   const all=PH.map(p=>phState(p.id)), placed=all.filter(x=>x.s==='placed').length, dropped=all.filter(x=>x.s==='dropped').length, mineN=Object.keys(mine.ph||{}).length;
-  const opts=AREAS.map(a=>`<option value="${esc(a.key)}">${esc(a.name)}</option>`).join('');
   const back=`<button class="small" data-goarea="${esc(area?area.key:AREAS[0].key)}">← Back to ${esc(area?area.name:'places')}</button>`;
   const head=`<div class="row1" style="justify-content:space-between">${back}<span class="by">${placed} placed · ${dropped} set aside · ${PH.length-placed-dropped} to go · you've done ${mineN}</span></div>
     <h2 style="margin:8px 0 4px">Where was this photo taken?</h2><p class="hint" style="margin:0 0 8px">Old camp photos from the website and Instagram. Pick the place you recognise. When two people agree, the photo goes into that place's gallery and helps get the 3D model right.</p>`;
@@ -312,7 +311,7 @@ function paintPh(){
   const p=phCur, g=(p.guess||[]).filter(k=>AREAS.some(a=>a.key===k));
   $('photos').innerHTML=head+`<img class="phimg" src="${esc(p.src)}" alt="Archive camp photo">
     <div class="phbtns">${g.map(k=>`<button class="go" data-pha="${esc(k)}">✓ ${esc(areaName(k))}</button>`).join('')}</div>
-    <div class="phbtns"><select id="phsel" aria-label="Somewhere else"><option value="">Somewhere else…</option>${opts}</select></div>
+    <div class="phbtns"><button class="pick" data-pick="${esc(p.id)}" data-mode="photo">Somewhere else ▾</button></div>
     <div class="phbtns"><button data-pha="x">Not useful (no buildings or places to see)</button><button data-pha="skip">Not sure, skip</button></div>${phUndoBtn()}`;
 }
 function phUndoBtn(){ return phLast?`<p><button class="small" data-phundo="1">↶ Undo last answer (${esc(phLast.a==='x'?'not useful':phLast.a==='skip'?'skipped':areaName(phLast.a))})</button></p>`:''; }
@@ -724,7 +723,8 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.gal&&isOwner){ const gal={...(ADM.gal||{})}, cur=galState(t.dataset.gal); const nv={...cur,s:t.dataset.v}; if(!nv.s) delete nv.s; if(!nv.s&&!nv.to) delete gal[t.dataset.gal]; else gal[t.dataset.gal]=nv; saveAdm({gal}); toast(t.dataset.v==='ok'?'Added to gallery':t.dataset.v==='no'?'Hidden':'Restored'); }
   else if(t.dataset.pick){ openPicker(t); }
   else if(t.dataset.pk){ const P=$('picker'); const id=P.dataset.id;
-    if(P.dataset.mode==='fb'){ const g=(mine.gfb??={})[id]??={}; g.to=t.dataset.pk; queueSave(); toast('Saved: '+placeName(t.dataset.pk)); }
+    if(P.dataset.mode==='photo'){ phAnswer(t.dataset.pk); }
+    else if(P.dataset.mode==='fb'){ const g=(mine.gfb??={})[id]??={}; g.to=t.dataset.pk; queueSave(); toast('Saved: '+placeName(t.dataset.pk)); }
     else if(isOwner){ const gal={...(ADM.gal||{})}; gal[id]={to:t.dataset.pk,at:Date.now()}; saveAdm({gal}); toast('Moved to '+placeName(t.dataset.pk)); }
     closePicker(); paintGallery(); }
   else if(t.dataset.pg!==undefined&&t.closest('#picker')){ pickGroup(+t.dataset.pg); }
