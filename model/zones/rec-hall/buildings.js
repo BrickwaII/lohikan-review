@@ -6,7 +6,8 @@ export const BUILDINGS = [
     map: [1484.5, 1647.2], angleDeg: 172.2, groundZ: 459.26,
     len: 38.8, wid: 23.2, floor: 0.3, eave: 5.1, ridge: 6.8,
     profile: [[-11.6, 5.1], [0, 6.8], [11.6, 5.1]],
-    roof: 'metal', siding: 'brown', trim: 'white', windows: { spacing: 2.6, h: 0.7, sill: 1.0 },
+    /* Henry: the Rec Hall walls are corrugated metal, a material used only on this building */
+    roof: 'metal', siding: 'corrugated', sidingStyle: 'corrugated', trim: 'white', windows: { spacing: 2.6, h: 0.7, sill: 1.0 },
     body: [[-19.1, 19.1, -11.2, 11.2]],
     porches: [],
     vents: [],

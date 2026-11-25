@@ -22,7 +22,7 @@ export function buildCampBuilding(cfg, renderer) {
   const T = (w, h, d) => canvasTex(renderer, w, h, d);
   const rep = (t, rx, ry) => { const c = t.clone(); c.needsUpdate = true; c.repeat.set(rx, ry); return c; };
   /* Henry: most buildings share the same dark brown board siding outside: siding and roof textures come from the camp-wide core/materials.js */
-  const siding = sidingTexture(cfg.siding || STANDARD_SIDING, cfg.sidingStyle === 'liveedge' ? 'liveedge' : 'board');
+  const siding = sidingTexture(cfg.siding || STANDARD_SIDING, cfg.sidingStyle || 'board');
   const shingles = roofTexture(cfg.roof || 'grey');
   const deck = T(256, 256, (g, w, h) => { g.fillStyle = '#6b5440'; g.fillRect(0, 0, w, h); for (let y = 0; y < h; y += 20) { g.fillStyle = 'rgba(0,0,0,.25)'; g.fillRect(0, y, w, 2); } });
   const lattice = T(128, 128, (g, w, h) => { g.fillStyle = '#141110'; g.fillRect(0, 0, w, h); g.strokeStyle = '#2c241d'; g.lineWidth = 6;

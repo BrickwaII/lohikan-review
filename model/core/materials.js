@@ -6,7 +6,8 @@ import * as THREE from 'three';
 
 export const PALETTE = {
   // outside wall boards: [board colour, gap/batten colour]. 'darkbrown' is the camp standard.
-  siding: { darkbrown: ['#2a221c', '#1f1915'], brown: ['#5a4330', '#47342a'], charcoal: ['#262220', '#141210'] },
+  siding: { darkbrown: ['#2a221c', '#1f1915'], brown: ['#5a4330', '#47342a'], charcoal: ['#262220', '#141210'],
+            corrugated: ['#9a978f', '#77746d'] },   // Henry: the Rec Hall alone has corrugated metal walls (colour still to confirm)
   // roofs: [base, line colour]
   roof: { grey: ['#7a7c7e', '#68696b'], green: ['#4a6553', '#3c5444'], metal: ['#d4d6d6', '#b9bcbd'] },
   trim: { white: 0xf1efe8, brown: 0x4a3426, dark: 0x2e241c },
@@ -27,10 +28,14 @@ function canvasTex(w, h, draw) {
 const cache = new Map();
 const once = (key, make) => { if (!cache.has(key)) cache.set(key, make()); return cache.get(key); };
 
-/** Siding texture (one tile = SIDING_TILE m). pattern: 'board' (vertical board and batten, the camp standard) or 'liveedge' (Lower Office). */
+/** Siding texture (one tile = SIDING_TILE m). pattern: 'board' (vertical board and batten, the camp standard), 'liveedge' (Lower Office)
+ *  or 'corrugated' (ribbed metal, Rec Hall only). */
 export function sidingTexture(style = STANDARD_SIDING, pattern = 'board') {
   const [a, b] = PALETTE.siding[style] || PALETTE.siding[STANDARD_SIDING];
   return once(`siding:${style}:${pattern}`, () => { const rnd = rng(7);
+    if (pattern === 'corrugated') return canvasTex(256, 256, (g, w, h) => { g.fillStyle = a; g.fillRect(0, 0, w, h);   // vertical ribs ~7.5 cm apart
+      for (let x = 0; x < w; x += 6) { const gr = g.createLinearGradient(x, 0, x + 6, 0); gr.addColorStop(0, b); gr.addColorStop(0.5, 'rgba(255,255,255,0.18)'); gr.addColorStop(1, b); g.fillStyle = gr; g.fillRect(x, 0, 6, h); }
+      for (let y = 0; y < h; y += 64) { g.fillStyle = `rgba(0,0,0,${0.05 + rnd() * 0.05})`; g.fillRect(0, y, w, 1); } });
     return pattern === 'liveedge' ? canvasTex(256, 256, (g, w, h) => { g.fillStyle = a; g.fillRect(0, 0, w, h);   // horizontal waney-edge boards (Lower Office photos)
       for (let y = 0; y < h; y += 26) { const ph = rnd() * 6, f = 1 + rnd() * 2; g.fillStyle = b; g.beginPath(); g.moveTo(0, y);
         for (let x = 0; x <= w; x += 8) g.lineTo(x, y + 4 + Math.sin(x / w * Math.PI * 2 * f + ph) * 3.5); g.lineTo(w, y); g.fill();

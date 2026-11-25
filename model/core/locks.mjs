@@ -4,3 +4,4 @@ export const locks = [
       /sidingTexture\(/.test(k.source('core/building.js')) && /sidingTexture\(STANDARD_SIDING\)/.test(k.source('zones/sports-center/kit.js')) && !/const SID = \{/.test(k.source('core/building.js')) },
   { what: "The camp-standard siding is 'darkbrown'", check: k => /STANDARD_SIDING = 'darkbrown'/.test(k.source('core/materials.js')) },
 ];
+locks.push({ what: 'Corrugated metal siding is used only by the Rec Hall', check: k => k.BUILDINGS.filter(b => b.siding === 'corrugated').every(b => b.id === 'rec_hall') });

@@ -6,7 +6,8 @@ export const BUILDINGS = [
     map: [1390.58, 1588.48], angleDeg: -8.5, groundZ: 452.01,
     len: 67.1, wid: 15.0, floor: 0.4, eave: 3.4, ridge: 5.8,
     profile: [[-8.0, 3.2], [0.5, 5.8], [7.0, 3.6]],   /* raw 2019 LiDAR b029 cross-section (Nov 16 recheck): eaves at z -8 / +7, ridge ~z 0.5 */
-    roof: 'grey', siding: 'brown', trim: 'brown',
+    /* Henry: the Art Center uses the same dark brown siding as the rest of camp */
+    roof: 'grey', siding: 'darkbrown', trim: 'brown',
     body: [[-33.2, 33.2, -7.8, 6.8]],
     porches: [],
     windows: { spacing: 3.2, h: 1.3, sill: 1.0, sides: ['+z'] },   /* Henry: no windows on the back (north) wall — it is all closets */
