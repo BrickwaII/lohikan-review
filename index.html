@@ -30,7 +30,8 @@ h1,h2,h3{font-family:"Zilla Slab",Georgia,serif;line-height:1.05;text-wrap:balan
 .crumb{color:var(--mute);font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .crumb b{color:var(--ink)}
 .menu{position:fixed;inset:0;z-index:25;display:none;background:#0007}
-.menu.on{display:block}
+.menu.on{display:block}.rtbox{margin:10px 0;padding:10px;border:1px solid #3a3a3a;border-radius:10px}.rtrow{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.rtc.on{background:#2e7d4f;color:#fff;border-color:#2e7d4f}
+
 .menu .panel{position:absolute;top:0;left:0;bottom:0;width:min(380px,92vw);background:var(--sheet);overflow-y:auto;padding:14px;box-shadow:4px 0 20px #0005}
 .menu details{margin:2px 0}.menu summary{cursor:pointer;font-weight:700;padding:8px 6px;border-radius:8px;list-style-position:inside;min-height:40px}
 .menu summary:hover{background:var(--chip)}
@@ -330,10 +331,11 @@ function paintPh(){
     <div class="phbtns">${p.piece?'':'<button data-phsplit="1">✂️ This is several photos</button>'}<button data-pha="x">Not useful (no places to see)</button><button data-pha="skip">Not sure, skip</button></div><div id="phsplitbox"></div>${phNoteBox(p)}${phUndoBtn()}`;
 }
 /* "Pin it on the map": for photos taken between places (a road, a path). Pins are approximate; earlier pins show so people can agree. */
-let phPick=null;
-function phMapOpen(){ const M=DATA.minimap; if(!M||!phCur) return; phPick=null;
+let phPick=null, phPinKind=0;   // Henry Nov 25: a map pin is either the subject of the photo (0) or the camera spot (1); stored as m:x,y or m:x,y,1
+function phMapOpen(){ const M=DATA.minimap; if(!M||!phCur) return; phPick=null; phPinKind=0;
   const pins=[...others.map(o=>phMap((o.ph||{})[phCur.id]))].filter(Boolean);
-  $('phmapbox').innerHTML=`<p class="hint" style="margin:6px 0">Tap roughly where the photo was taken. Pins are approximate, near is good enough.${pins.length?' Orange dots are where others put it.':''}</p>
+  $('phmapbox').innerHTML=`<p class="hint" style="margin:6px 0">Tap the map. Pins are approximate, near is good enough.${pins.length?' Orange dots are where others put it.':''}</p>
+    <div class="rtrow"><span class="by">This pin marks:</span><button class="small rtc on" data-phpinkind="0">What the photo shows</button><button class="small rtc" data-phpinkind="1">Where it was taken from</button></div>
     <div id="phmap" style="position:relative;touch-action:manipulation"><img src="${esc(M.src)}" alt="Camp map" style="width:100%;display:block;border-radius:8px;cursor:crosshair" id="phmapimg">
     ${pins.map(m=>`<span style="position:absolute;left:${(m[0]-M.x0)/(M.x1-M.x0)*100}%;top:${(m[1]-M.y0)/(M.y1-M.y0)*100}%;width:14px;height:14px;margin:-7px;border-radius:50%;background:#f28a2e;border:2px solid #111"></span>`).join('')}
     <span id="phmapdot" style="display:none;position:absolute;width:18px;height:18px;margin:-9px;border-radius:50%;background:#e53935;border:3px solid #fff;box-shadow:0 0 0 2px #111"></span></div>
@@ -552,6 +554,18 @@ function paintGallery(){
 }
 
 /* ---------- render ---------- */
+/* Road tour (Henry Nov 25): quick answers per stop, stored in mine.qa under 'surf:<id>' and 'miss:<id>' */
+const RT_SURF=[['paved','Paved (concrete)'],['dirt','Dirt'],['gravel','Gravel'],['grass','Grass / no road'],['unsure','Not sure']];
+const RT_MISS=[['sidewalk','Sidewalk missing'],['stairs','Stairs missing'],['bridge','Bridge missing'],['wide','Road too wide'],['narrow','Road too narrow'],['wrongline','Road in the wrong place']];
+function rtHtml(e){ const qa=mine.qa||{}, mySurf=qa['surf:'+e.id]||'', myMiss=(qa['miss:'+e.id]||'').split(',').filter(Boolean);
+  const cnt={}; for(const o of others){ const v=((o.qa||{})['surf:'+e.id]); if(v) cnt[v]=(cnt[v]||0)+1; }
+  const chip=(grp,k,l,on,n)=>`<button class="small rtc${on?' on':''}" data-rt="${grp}" data-rk="${k}" data-rid="${esc(e.id)}" aria-pressed="${on}">${esc(l)}${n?` · ${n}`:''}</button>`;
+  const i=VIEWS.findIndex(v=>v.id===e.id), rts=VIEWS.filter(v=>v.rt), done=rts.filter(v=>qa['surf:'+v.id]).length;
+  const nav=`<div class="rtrow">${i>0&&VIEWS[i-1].rt?`<button class="small" data-view="${i-1}">← Previous stop</button>`:''}${i<VIEWS.length-1&&VIEWS[i+1].rt?`<button class="small" data-view="${i+1}">Next stop →</button>`:''}<span class="by">${done} of ${rts.length} stops answered</span></div>`;
+  return `<div class="rtbox">${nav}<b>What is the ground here?</b> <span class="by">The model shows: ${esc(e.surface==='paved'?'paved (concrete)':e.surface==='none'?'no road':e.surface)}</span>
+    <div class="rtrow">${RT_SURF.map(([k,l])=>chip('surf',k,l,mySurf===k,cnt[k])).join('')}</div>
+    <b>Anything wrong or missing here?</b> <span class="by">Pick any, then add a pin on the 360 to show where.</span>
+    <div class="rtrow">${RT_MISS.map(([k,l])=>chip('miss',k,l,myMiss.includes(k))).join('')}</div></div>`; }
 function viewHtml(e){
   if(e&&e.type==='soon') return `<h3 class="vt">${esc(e.label)}</h3><div class="soonbox"><b>Model coming soon.</b> This part isn't modelled yet. If you remember it or have photos, add them below; they help build it.</div>
     <div class="grid2"><div><h3>Notes</h3><textarea id="etext" placeholder="What was here? Layout, furniture, colours, what changed over the years…" maxlength="2000"></textarea><ul class="notes" id="otext"></ul></div>
@@ -559,7 +573,7 @@ function viewHtml(e){
   if(!e) return '<p class="blurb">No views here yet. Use the box below to tell us what this place looked like, or attach photos.</p>';
   let h=`<h3 class="vt">${esc(e.label)}${(ADM.hidden||[]).includes(e.id)?' <span class="st">removed for reviewers</span>':''}</h3>`;
   if(e.type==='mpano') h+=`<div class="media one"><div class="pane sphere" data-k="model"><span class="tag">${photoOn&&e.modelPanoPhoto?'Model + photo scan 360°':'Model 360°'}</span><div class="pins"></div></div></div>
-    <p class="hint">Drag to look around. Pinch or scroll to zoom. ${esc(e.cap||'')}</p><div class="ctrl"><button id="pinbtn">Add a pin</button></div>`;
+    <p class="hint">Drag to look around. Pinch or scroll to zoom. ${esc(e.cap||'')}</p><div class="ctrl"><button id="pinbtn">Add a pin</button></div>${e.rt?rtHtml(e):''}`;
   else if(e.type==='pano') h+=`<div class="media"><div class="pane sphere" data-k="real"><span class="tag">Real 360°</span><div class="pins"></div></div><div class="pane sphere" data-k="model"><span class="tag">${photoOn&&e.modelPanoPhoto?'Model + photo scan 360°':'Model 360°'}</span><div class="pins"></div></div></div>
     <p class="hint">Drag either picture to look around; both turn together. Pinch or scroll to zoom. ${esc(e.cap||'')}</p>
     <div class="ctrl"><button id="pinbtn">Add a pin</button><span class="by">Model turned the wrong way?</span><button class="small" data-rot="-5" aria-label="Turn model left">⟲ 5°</button><button class="small" data-rot="5" aria-label="Turn model right">⟳ 5°</button></div>`;
@@ -719,6 +733,9 @@ document.addEventListener('change',e=>{ const t=e.target;
   if(t.dataset.galmovesel&&isOwner&&t.value){ const gal={...(ADM.gal||{})}; gal[t.dataset.galmovesel]={to:t.value,at:Date.now()}; saveAdm({gal}); toast('Moved to '+placeName(t.value)); }
   if(t.dataset.tri&&isOwner){ const tri={...(ADM.tri||{})}; if(t.value) tri[t.dataset.tri]={s:t.value,at:new Date().toISOString(),ver:VER()}; else delete tri[t.dataset.tri]; saveAdm({tri}); } });
 document.addEventListener('click',async e=>{
+  const rc=e.target.closest('[data-rt]'); if(rc){ const id=rc.dataset.rid, k=rc.dataset.rk, qa={...(mine.qa||{})};
+    if(rc.dataset.rt==='surf'){ qa['surf:'+id]=qa['surf:'+id]===k?'':k; } else { const L=(qa['miss:'+id]||'').split(',').filter(Boolean); qa['miss:'+id]=(L.includes(k)?L.filter(x=>x!==k):[...L,k]).join(','); }
+    mine.qa=qa; queueSave(); const box=rc.closest('.rtbox'); const cur=VIEWS.find(v=>v.id===id); if(box&&cur) box.outerHTML=rtHtml(cur); return; }
   const fl=e.target.closest('.pane.flat');
   if(fl&&armed){ const r=fl.getBoundingClientRect(); startDraft({img:fl.dataset.k,x:+((e.clientX-r.left)/r.width*100).toFixed(1),y:+((e.clientY-r.top)/r.height*100).toFixed(1)}); return; }
   const im=e.target.closest('.thumbs img,.gal img,.shots img'); if(im&&im.src){ if(im.dataset.pano) openPano(im.src); else { $('bigimg').src=im.src; $('big').classList.add('on'); } return; }
@@ -744,7 +761,8 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.phsub!==undefined){ const a=phSub; phSub=null; if(a) phAnswer(t.dataset.phsub?a+'/'+t.dataset.phsub:a,true); }
   else if(t.dataset.phsplit){ phSplitOpen(); }
   else if(t.dataset.phcut){ phCut(t.dataset.phcut); }
-  else if(t.dataset.phmapsave){ if(phPick) phAnswer('m:'+phPick.join(',')); }
+  else if(t.dataset.phmapsave){ if(phPick) phAnswer('m:'+phPick.join(',')+(phPinKind?',1':'')); }
+  else if(t.dataset.phpinkind!==undefined){ phPinKind=+t.dataset.phpinkind; t.parentNode.querySelectorAll('[data-phpinkind]').forEach(b=>b.classList.toggle('on',b===t)); }
   else if(t.dataset.phmapcancel){ $('phmapbox').innerHTML=''; }
   else if(t.dataset.phundo){ phUndo(); }
   else if(t.dataset.zoom){ window.open(t.dataset.zoom,'_blank'); }

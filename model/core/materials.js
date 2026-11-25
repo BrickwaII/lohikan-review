@@ -43,8 +43,25 @@ export function sidingTexture(style = STANDARD_SIDING, pattern = 'board') {
     : canvasTex(256, 256, (g, w, h) => { g.fillStyle = a; g.fillRect(0, 0, w, h);
       for (let x = 0; x < w; x += 28) { g.fillStyle = b; g.fillRect(x, 0, 4, h); g.fillStyle = `rgba(255,235,210,${0.02 + rnd() * 0.04})`; g.fillRect(x + 4, 0, 24, h); } }); });
 }
-/** Roof texture: shingles (grey/green) or standing-seam metal. */
+/** Roof texture: shingles (grey/green) or standing-seam metal.
+ *  Henry (Nov 25): the grey shingle roof is the real Dining Hall roof (2025 drone footage, tools/textures/make_roof_shingle.py)
+ *  and every building with a grey shingle roof uses it. The procedural pattern below shows until the photo texture loads.
+ *  Anything that clones this texture must call trackClone(tex, clone) so the clone refreshes when the photo arrives
+ *  (kept outside userData: Texture.clone() JSON-copies userData, and a list of textures there blows up). */
+const ROOF_PHOTO = { grey: 'textures/roof_shingle.jpg' };
+const CLONES = new Map();
+export function trackClone(tex, c) { if (CLONES.has(tex)) CLONES.get(tex).push(c); return c; }
 export function roofTexture(style = 'grey') {
+  const t = roofTextureBase(style);
+  if (ROOF_PHOTO[style] && !CLONES.has(t) && typeof Image !== 'undefined') {
+    CLONES.set(t, []);
+    const img = new Image(); img.onload = () => { const c = t.image; c.width = c.height = 512; c.getContext('2d').drawImage(img, 0, 0, 512, 512);
+      t.needsUpdate = true; for (const k of CLONES.get(t)) k.needsUpdate = true; };
+    img.src = new URL(ROOF_PHOTO[style], import.meta.url).href;
+  }
+  return t;
+}
+function roofTextureBase(style) {
   const [a, b] = PALETTE.roof[style] || PALETTE.roof.grey;
   return once(`roof:${style}`, () => style === 'metal'
     ? canvasTex(256, 256, (g, w, h) => { g.fillStyle = a; g.fillRect(0, 0, w, h); for (let x = 0; x < w; x += 32) { g.fillStyle = b; g.fillRect(x, 0, 5, h); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(x + 5, 0, 3, h); } })
@@ -52,7 +69,7 @@ export function roofTexture(style = 'grey') {
         const rnd = rng(11); for (let i = 0; i < 500; i++) { const v = rnd(); g.fillStyle = v > .5 ? `rgba(255,255,255,${(v - .5) * .12})` : `rgba(0,0,0,${v * .14})`; g.fillRect(rnd() * w, rnd() * h, 14, 7); } }));
 }
 /** A repeat of a shared texture (cheap clone that shares the image). */
-export function repeat(tex, rx, ry) { const c = tex.clone(); c.needsUpdate = true; c.repeat.set(rx, ry); return c; }
+export function repeat(tex, rx, ry) { const c = tex.clone(); c.needsUpdate = true; c.repeat.set(rx, ry); return trackClone(tex, c); }
 /** Siding material for a wall w metres wide and h metres tall (boards come out the same width everywhere). */
 export function sidingMaterial(style = STANDARD_SIDING, w = SIDING_TILE, h = SIDING_TILE, opts = {}) {
   return new THREE.MeshStandardMaterial({ map: repeat(sidingTexture(style, opts.pattern), w / SIDING_TILE, h / SIDING_TILE), roughness: 0.88, metalness: 0, ...(opts.side ? { side: opts.side } : {}) });

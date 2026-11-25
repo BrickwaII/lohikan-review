@@ -6,7 +6,7 @@
 
 // Henry: two flagpoles stand between the two Senior Dining porches (not in the middle of the quad)
 import * as THREE from 'three';
-import { PALETTE, sidingTexture, roofTexture, STANDARD_SIDING } from './materials.js';
+import { PALETTE, sidingTexture, roofTexture, STANDARD_SIDING, trackClone } from './materials.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 export function canvasTex(renderer, w, h, draw) {
@@ -20,7 +20,7 @@ export function buildCampBuilding(cfg, renderer) {
   const OPEN_IN = [];   /* windows/doors on the outer walls, echoed on the inner wall finish so they show from inside */
   const mat = o => new THREE.MeshStandardMaterial({ roughness: 0.88, metalness: 0, side: THREE.DoubleSide, ...o });
   const T = (w, h, d) => canvasTex(renderer, w, h, d);
-  const rep = (t, rx, ry) => { const c = t.clone(); c.needsUpdate = true; c.repeat.set(rx, ry); return c; };
+  const rep = (t, rx, ry) => { const c = t.clone(); c.needsUpdate = true; c.repeat.set(rx, ry); return trackClone(t, c); };   // clones refresh when a photo texture loads (materials.js)
   /* Henry: most buildings share the same dark brown board siding outside: siding and roof textures come from the camp-wide core/materials.js */
   const siding = sidingTexture(cfg.siding || STANDARD_SIDING, cfg.sidingStyle || 'board');
   const shingles = roofTexture(cfg.roof || 'grey');
