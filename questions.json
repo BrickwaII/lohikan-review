@@ -55,26 +55,6 @@
    "why": "There's no photo or 360 of the entrance yet. A photo of your own would help a lot (attach it on the Camp entrance place page)."
   },
   {
-   "id": "amph-aerial",
-   "place": "Amphitheater / Lower Office",
-   "area": "amphitheater",
-   "q": "In this aerial 360 near the Dining Hall, the yellow pin marks rows of benches with red chairs, a curved split-rail fence and a stone wall. Is this the amphitheater, or a different seating area? If it's somewhere else, what is it called?",
-   "view": {
-    "pano": "pano/s13_real.jpg"
-   },
-   "pins": [
-    {
-     "d": [
-      -0.851,
-      -0.346,
-      0.394
-     ],
-     "t": "This seating?"
-    }
-   ],
-   "preview": "img/q/amph_aerial.jpg"
-  },
-  {
    "id": "amph-benches",
    "place": "Amphitheater",
    "area": "amphitheater",

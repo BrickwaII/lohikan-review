@@ -292,16 +292,24 @@ let curPath=[];
 /* ---- Place photos: every reviewer says where archive photos were taken. Stored in each reviewer's doc as ph:{photoId: areaKey | 'x'}.
    A photo is placed when 2 people agree on an area (Henry's answer decides on its own); dropped when 2 say "not useful". ---- */
 let PH=null, phCur=null, phLast=null;
-async function loadPH(){ if(PH) return PH; try{ PH=(await (await fetch('photos.json?t='+Date.now(),{cache:'no-store'})).json()).photos||[]; }catch(e){ PH=[]; } return PH; }
+async function loadPH(){ if(PH0) return phExpand(); try{ PH0=(await (await fetch('photos.json?t='+Date.now(),{cache:'no-store'})).json()).photos||[]; }catch(e){ PH0=[]; } return phExpand(); }
+let PH0=null;
+/* Collages: anyone can say "this is several photos" and where to cut (phs:{photoId:{dir:'v'|'h',cuts:[fractions]}}). The first split anyone
+   saved (Henry's wins) turns the photo into pieces ("id#0", "id#1"...) that are placed one by one like any other photo. */
+function phSplitOf(id){ let best=null; for(const o of [mine,...others]){ const sp=(o.phs||{})[id]; if(sp&&sp.cuts&&sp.cuts.length&&(!best||o.owner)) best=sp; } return best; }
+function phExpand(){ PH=[]; for(const p of PH0){ const sp=phSplitOf(p.id); if(!sp){ PH.push(p); continue; }
+    const c=[0,...sp.cuts,1]; for(let k=0;k<c.length-1;k++) PH.push({...p,id:p.id+'#'+k,piece:{dir:sp.dir,a:c[k],b:c[k+1]},guess:[]}); } return PH; }
+const phImg=p=>p.piece?`<div class="phimg" style="aspect-ratio:auto;overflow:hidden;position:relative"><img src="${esc(p.src)}" alt="Part of a camp photo" style="display:block;${p.piece.dir==='v'?`width:${100/(p.piece.b-p.piece.a)}%;margin-left:-${p.piece.a/(p.piece.b-p.piece.a)*100}%`:`width:100%;margin-top:0`}" data-piece='${esc(JSON.stringify(p.piece))}' onload="phPieceFit(this)"></div>`:`<img class="phimg" src="${esc(p.src)}" alt="Archive camp photo">`;
+function phPieceFit(im){ const pc=JSON.parse(im.dataset.piece), box=im.parentElement; if(pc.dir==='h'){ const h=im.offsetHeight; box.style.height=(h*(pc.b-pc.a))+'px'; im.style.marginTop=(-h*pc.a)+'px'; } else { box.style.height=im.offsetHeight+'px'; } }
 function phVotes(id){ const v=[]; for(const o of [mine,...others]){ const a=(o.ph||{})[id]; if(a) v.push({a,own:!!o.owner||(o===mine&&isOwner)}); } return v; }
 const phMap=a=>typeof a==='string'&&a.startsWith('m:')?a.slice(2).split(',').map(Number):null;
 function phState(id){ const v=phVotes(id), mp=v.map(x=>phMap(x.a)).filter(Boolean);
   const ownM=v.find(x=>x.own&&phMap(x.a)); if(ownM) return {s:'mapped',m:phMap(ownM.a)};
   for(let i=0;i<mp.length;i++) for(let j=i+1;j<mp.length;j++) if(Math.hypot(mp[i][0]-mp[j][0],mp[i][1]-mp[j][1])<=40) return {s:'mapped',m:[(mp[i][0]+mp[j][0])/2,(mp[i][1]+mp[j][1])/2]};   // two approximate pins within ~40 m agree
-  const own=v.find(x=>x.own&&x.a!=='skip'&&!phMap(x.a)); if(own) return own.a==='x'?{s:'dropped'}:{s:'placed',a:own.a};
-  const c={}; for(const x of v) if(x.a!=='skip'&&!phMap(x.a)) c[x.a]=(c[x.a]||0)+1; const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
+  const own=v.find(x=>x.own&&x.a!=='skip'&&!phMap(x.a)); if(own) return own.a==='x'?{s:'dropped'}:{s:'placed',a:own.a.split('/')[0]};
+  const c={}; for(const x of v) if(x.a!=='skip'&&!phMap(x.a)){ const k=x.a.split('/')[0]; c[k]=(c[k]||0)+1; } const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
   if(top&&top[1]>=2) return top[0]==='x'?{s:'dropped'}:{s:'placed',a:top[0]}; return {s:'open',n:v.filter(x=>x.a!=='skip').length}; }
-const areaName=k=>(AREAS.find(a=>a.key===k)||{}).name||k;
+const areaName=k=>{ if(k==='g:general') return 'Whole camp / aerial'; if(k==='g:woods') return 'Woods & trails'; const [a,sub]=String(k).split('/'); const n=(AREAS.find(x=>x.key===a)||{}).name||a; return sub?n+' › '+sub:n; };
 function phNext(){ const seed=[...(me.id||'x')].reduce((h,c)=>(h*31+c.charCodeAt(0))>>>0,7), r=s=>((s*2654435761)>>>0)%1000;
   const open=PH.map((p,i)=>({p,i,st:phState(p.id)})).filter(x=>x.st.s==='open'&&!(mine.ph||{})[x.p.id]);
   open.sort((a,b)=>(b.st.n-a.st.n)||(a.i<300?0:1)-(b.i<300?0:1)||(r(seed^a.i)-r(seed^b.i))); return open[0]?open[0].p:null; }
@@ -313,10 +321,13 @@ function paintPh(){
     <h2 style="margin:8px 0 4px">Where was this photo taken?</h2><p class="hint" style="margin:0 0 8px">Old camp photos from the website and Instagram. Pick the place you recognise. When two people agree, the photo goes into that place's gallery and helps get the 3D model right.</p>`;
   if(!phCur){ $('photos').innerHTML=head+`<p><b>You've been through every photo that still needs answers. Thank you!</b> More batches are coming.</p>${phUndoBtn()}`; return; }
   const p=phCur, g=(p.guess||[]).filter(k=>AREAS.some(a=>a.key===k));
-  $('photos').innerHTML=head+`<img class="phimg" src="${esc(p.src)}" alt="Archive camp photo">
+  if(phSub){ const subs=(DATA.subs||{})[phSub]||[];
+    $('photos').innerHTML=head+phImg(p)+`<h3 style="margin:10px 0 4px">Which part of ${esc(areaName(phSub))}?</h3><div class="phbtns">${subs.map(x=>`<button class="go" data-phsub="${esc(x)}">${esc(x)}</button>`).join('')}<button data-phsub="">Not sure / whole place</button></div>${phNoteBox(p)}`; return; }
+  $('photos').innerHTML=head+phImg(p)+`
     <div class="phbtns">${g.map(k=>`<button class="go" data-pha="${esc(k)}">✓ ${esc(areaName(k))}</button>`).join('')}</div>
     <div class="phbtns"><button class="pick" data-pick="${esc(p.id)}" data-mode="photo">Somewhere else ▾</button><button data-phmap="1">📍 Pin it on the map</button></div><div id="phmapbox"></div>
-    <div class="phbtns"><button data-pha="x">Not useful (no buildings or places to see)</button><button data-pha="skip">Not sure, skip</button></div>${phUndoBtn()}`;
+    <div class="phbtns"><button data-pha="g:general">🌄 Whole camp / aerial view</button><button data-pha="g:woods">🌲 Woods, trails or hills (no exact spot)</button></div>
+    <div class="phbtns">${p.piece?'':'<button data-phsplit="1">✂️ This is several photos</button>'}<button data-pha="x">Not useful (no places to see)</button><button data-pha="skip">Not sure, skip</button></div><div id="phsplitbox"></div>${phNoteBox(p)}${phUndoBtn()}`;
 }
 /* "Pin it on the map": for photos taken between places (a road, a path). Pins are approximate; earlier pins show so people can agree. */
 let phPick=null;
@@ -329,8 +340,17 @@ function phMapOpen(){ const M=DATA.minimap; if(!M||!phCur) return; phPick=null;
     <div class="phbtns"><button class="go" data-phmapsave="1" disabled id="phmapsave">Save this spot</button><button data-phmapcancel="1">Cancel</button></div>`; $('phmapbox').scrollIntoView({block:'nearest'}); }
 function phMapTap(e){ const M=DATA.minimap, im=$('phmapimg'), r=im.getBoundingClientRect(); const fx=(e.clientX-r.left)/r.width, fy=(e.clientY-r.top)/r.height; if(fx<0||fx>1||fy<0||fy>1) return;
   phPick=[Math.round(M.x0+fx*(M.x1-M.x0)),Math.round(M.y0+fy*(M.y1-M.y0))]; const d=$('phmapdot'); d.style.left=fx*100+'%'; d.style.top=fy*100+'%'; d.style.display='block'; $('phmapsave').disabled=false; }
+function phSplitOpen(){ if(!phCur) return; $('phsplitbox').innerHTML=`<p class="hint" style="margin:6px 0">How is it split? The cut lines snap to the edges between the photos.</p><div class="phbtns"><button data-phcut="v2">2 side by side</button><button data-phcut="v3">3 side by side</button><button data-phcut="h2">2 stacked</button><button data-phcut="h3">3 stacked</button></div>`; }
+function phSnap(im,dir,f){ const c=document.createElement('canvas'), W=200, H=Math.round(200*im.naturalHeight/im.naturalWidth); c.width=W; c.height=H; const g=c.getContext('2d'); g.drawImage(im,0,0,W,H); const d=g.getImageData(0,0,W,H).data;
+  const L=dir==='v'?W:H, M=dir==='v'?H:W, px=(i,j)=>{ const x=dir==='v'?i:j, y=dir==='v'?j:i, k=(y*W+x)*4; return d[k]+d[k+1]+d[k+2]; };
+  let best=Math.round(f*L), bs=-1; for(let i=Math.max(2,Math.round((f-0.1)*L));i<Math.min(L-2,Math.round((f+0.1)*L));i++){ let sc=0; for(let j=0;j<M;j++) sc+=Math.abs(px(i,j)-px(i-1,j)); if(sc>bs){ bs=sc; best=i; } } return +(best/L).toFixed(4); }
+function phCut(spec){ const dir=spec[0], n=+spec[1], im=document.querySelector('#photos img.phimg'); if(!im||!phCur) return; let cuts=[]; try{ for(let k=1;k<n;k++) cuts.push(phSnap(im,dir,k/n)); }catch(e){ for(let k=1;k<n;k++) cuts.push(+(k/n).toFixed(4)); }
+  mine.phs={...(mine.phs||{}),[phCur.id]:{dir,cuts}}; queueSave(); phExpand(); phCur=PH.find(p=>p.id===phCur.id+'#0')||phNext(); paintPh(); toast('Split into '+n+' photos'); }
 function phUndoBtn(){ return phLast?`<p><button class="small" data-phundo="1">↶ Undo last answer (${esc(phLast.a==='x'?'not useful':phLast.a==='skip'?'skipped':phMap(phLast.a)?'pin on the map':areaName(phLast.a))})</button></p>`:''; }
-function phAnswer(a){ if(!phCur) return; mine.ph={...(mine.ph||{}),[phCur.id]:a}; phLast={id:phCur.id,a}; queueSave(); phCur=phNext(); paintPh(); }
+let phSub=null;
+function phNoteBox(p){ return `<textarea id="phnote" data-phid="${esc(p.id)}" placeholder="Anything else about this photo? (optional: what's in it, the year, a closer spot...)" style="width:100%;min-height:54px;margin-top:8px">${esc((mine.phn||{})[p.id]||'')}</textarea>`; }
+function phAnswer(a){ if(!phCur) return; const subs=(DATA.subs||{})[a]; if(subs&&subs.length&&!phSub&&!a.includes('/')&&!a.includes(':')&&a!=='x'&&a!=='skip'){ phSub=a; paintPh(); return; }
+  mine.ph={...(mine.ph||{}),[phCur.id]:a}; phLast={id:phCur.id,a}; phSub=null; queueSave(); phCur=phNext(); paintPh(); }
 function phUndo(){ if(!phLast) return; const m={...(mine.ph||{})}; delete m[phLast.id]; mine.ph=m; queueSave(); phCur=PH.find(p=>p.id===phLast.id)||phNext(); phLast=null; paintPh(); }
 async function paintCampPh(){ const box=$('campph'); if(!box||!area) return; await loadPH(); const list=PH.filter(p=>{ const s=phState(p.id); return s.s==='placed'&&s.a===area.key; });
   box.innerHTML=list.length?`<h3 style="margin-top:14px">Camp photos placed here by reviewers (${list.length})</h3><div class="phgrid">${list.map(p=>`<img src="${esc(p.src)}" alt="Camp photo" loading="lazy" data-zoom="${esc(p.src)}">`).join('')}</div>`:''; }
@@ -500,7 +520,7 @@ async function addPhotos(files,scope){
 }
 
 /* ---------- gallery ---------- */
-const galState=id=>{ const g=(ADM.gal||{})[id]; return typeof g==='string'?{s:g}:(g||{}); };
+const galState=id=>{ const g=(ADM.gal||{})[id]; if(g===undefined){ const c=Object.values(DATA.areas||{}).flatMap(x=>x.candidates||[]).find(c=>c.id===id&&c.pre); if(c) return {s:c.pre}; } return typeof g==='string'?{s:g}:(g||{}); };   /* photos Henry supplied himself come pre-approved */
 function allPhotos(){ const M=new Map(); for(const [k,a] of Object.entries(DATA.areas||{})) for(const p of a.candidates||[]){ const q=M.get(p.id); if(q){ if(!q.homes.includes(k)) q.homes.push(k); } else M.set(p.id,{...p,home:k,homes:[k]}); } return [...M.values()]; }
 const photoPlaces=p=>{ const t=galState(p.id).to; return t?[t]:p.homes; };
 function placeOptions(sel){ const opt=[]; const walk=(items,pre)=>{ for(const it of items){ if(it.ref){ const a=AR(it.ref); if(a&&!opt.some(o=>o[0]===it.ref)) opt.push([it.ref,pre+(it.name||a.name)]); } else walk(it.items||[],pre+it.name+' › '); } }; walk(DATA.groups,'');
@@ -689,6 +709,7 @@ document.addEventListener('input',e=>{ if(e.target.dataset&&e.target.dataset.chg
   else if(t.id==='sitefb'){ mine.site=t.value; queueSave(); }
   else if(t.id==='phsel'){ if(t.value) phAnswer(t.value); }
   else if(t.dataset.qa){ mine.qa={...(mine.qa||{}),[t.dataset.qa]:t.value}; queueSave(); }
+  else if(t.id==='phnote'){ mine.phn={...(mine.phn||{}),[t.dataset.phid]:t.value}; queueSave(); }
   else if(t.dataset.gtx){ const g=(mine.gfb??={})[t.dataset.gtx]??={}; g.t=t.value; queueSave(); }
 });
 document.addEventListener('change',e=>{ const t=e.target;
@@ -720,6 +741,9 @@ document.addEventListener('click',async e=>{
   else if(t.dataset.qdone){ const d={...(ADM.qdone||{})}; if(d[t.dataset.qdone]) delete d[t.dataset.qdone]; else d[t.dataset.qdone]=new Date().toISOString(); saveAdm({qdone:d}).then(paintQ); }
   else if(t.dataset.pha){ phAnswer(t.dataset.pha); }
   else if(t.dataset.phmap){ phMapOpen(); }
+  else if(t.dataset.phsub!==undefined){ const a=phSub; phSub=null; if(a) phAnswer(t.dataset.phsub?a+'/'+t.dataset.phsub:a); }
+  else if(t.dataset.phsplit){ phSplitOpen(); }
+  else if(t.dataset.phcut){ phCut(t.dataset.phcut); }
   else if(t.dataset.phmapsave){ if(phPick) phAnswer('m:'+phPick.join(',')); }
   else if(t.dataset.phmapcancel){ $('phmapbox').innerHTML=''; }
   else if(t.dataset.phundo){ phUndo(); }
