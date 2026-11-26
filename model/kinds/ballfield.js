@@ -10,5 +10,5 @@ export function ballfield(e, g) {   // diamond with home plate at the origin, fi
     const plate = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.04, 0.45), chalk); plate.position.set(0, 0.06, 0); P0.add(plate);
     const mound = new THREE.Mesh(new THREE.CylinderGeometry(2.4, 2.8, 0.2, 24), M(0xb89a6c)); mound.position.set(d, 0.1, 0); P0.add(mound);
     const fence = new THREE.MeshStandardMaterial({ color: 0x5a6266, metalness: 0.4, roughness: 0.6, transparent: true, opacity: 0.35, side: THREE.DoubleSide, depthWrite: false });
-    const bk = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, 4, 24, 1, true, Math.PI / 2 + 0.5, Math.PI - 1.0), fence); bk.position.set(2, 2, 0); P0.add(bk);
+    const bk = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, 4, 24, 1, true, Math.PI + 0.5, Math.PI - 1.0), fence); bk.position.set(2, 2, 0); P0.add(bk);   // Henry Nov 25 (road tour stop 55): the backstop arc was swung 90 deg off to the side; it now curves behind home plate (local -x)
   }

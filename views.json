@@ -2997,7 +2997,7 @@
   },
   "roadtour": {
    "name": "Road tour",
-   "blurb": "Walk every road in the model, one 360\u00b0 stop about every 40 m. At each stop, say whether the ground is paved, dirt or gravel, and pin anything missing: sidewalks, stairs, bridges (Henry, Nov 25).",
+   "blurb": "Walk every road in the model, one 360\u00b0 stop about every 40 m. At each stop, say whether the ground is paved, dirt or gravel, and pin anything missing: sidewalks, stairs, bridges (Henry, Nov 25). Round 2 (Nov 25 evening): every stop re-rendered after Henry's first pass and drawing: hill road moved onto the real paved band, sidewalks, Infirmary lot, creek + culvert + footbridge, cabin-row and barn roads, Rec Hall dirt plaza, trees off the roads. Stops 29, 35, 72, 74 and 75 sat on roads that are now removed.",
    "parts": [
     {
      "kind": "Road up the hill (lake to the Lower Office)",
@@ -3009,7 +3009,7 @@
        "surface": "paved",
        "label": "Stop 1: Road up the hill (lake to the Lower Office)",
        "short": "Stop 1",
-       "modelPano": "pano/rt001.jpg",
+       "modelPano": "pano/rt001_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 0.0
       },
@@ -3020,7 +3020,7 @@
        "surface": "paved",
        "label": "Stop 2: Road up the hill (lake to the Lower Office)",
        "short": "Stop 2",
-       "modelPano": "pano/rt002.jpg",
+       "modelPano": "pano/rt002_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 337.9
       },
@@ -3031,7 +3031,7 @@
        "surface": "paved",
        "label": "Stop 3: Road up the hill (lake to the Lower Office)",
        "short": "Stop 3",
-       "modelPano": "pano/rt003.jpg",
+       "modelPano": "pano/rt003_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 324.7
       },
@@ -3042,7 +3042,7 @@
        "surface": "paved",
        "label": "Stop 4: Road up the hill (lake to the Lower Office)",
        "short": "Stop 4",
-       "modelPano": "pano/rt004.jpg",
+       "modelPano": "pano/rt004_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 288.5
       },
@@ -3053,7 +3053,7 @@
        "surface": "paved",
        "label": "Stop 5: Road up the hill (lake to the Lower Office)",
        "short": "Stop 5",
-       "modelPano": "pano/rt005.jpg",
+       "modelPano": "pano/rt005_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 284.1
       },
@@ -3064,7 +3064,7 @@
        "surface": "paved",
        "label": "Stop 6: Road up the hill (lake to the Lower Office)",
        "short": "Stop 6",
-       "modelPano": "pano/rt006.jpg",
+       "modelPano": "pano/rt006_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 289.6
       },
@@ -3075,7 +3075,7 @@
        "surface": "paved",
        "label": "Stop 7: Road up the hill (lake to the Lower Office)",
        "short": "Stop 7",
-       "modelPano": "pano/rt007.jpg",
+       "modelPano": "pano/rt007_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 302.7
       },
@@ -3086,7 +3086,7 @@
        "surface": "paved",
        "label": "Stop 8: Road up the hill (lake to the Lower Office)",
        "short": "Stop 8",
-       "modelPano": "pano/rt008.jpg",
+       "modelPano": "pano/rt008_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 298.5
       },
@@ -3097,7 +3097,7 @@
        "surface": "paved",
        "label": "Stop 9: Road up the hill (lake to the Lower Office)",
        "short": "Stop 9",
-       "modelPano": "pano/rt009.jpg",
+       "modelPano": "pano/rt009_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 274.6
       },
@@ -3108,7 +3108,7 @@
        "surface": "paved",
        "label": "Stop 10: Road up the hill (lake to the Lower Office)",
        "short": "Stop 10",
-       "modelPano": "pano/rt010.jpg",
+       "modelPano": "pano/rt010_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 284.1
       }
@@ -3124,7 +3124,7 @@
        "surface": "none",
        "label": "Stop 11: Main road past Arts & Crafts and the Infirmary",
        "short": "Stop 11",
-       "modelPano": "pano/rt011.jpg",
+       "modelPano": "pano/rt011_r2.jpg",
        "cap": "Model only. The model draws this spot as no road drawn. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 1.4
       },
@@ -3135,7 +3135,7 @@
        "surface": "dirt",
        "label": "Stop 12: Main road past Arts & Crafts and the Infirmary",
        "short": "Stop 12",
-       "modelPano": "pano/rt012.jpg",
+       "modelPano": "pano/rt012_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 1.1
       },
@@ -3146,7 +3146,7 @@
        "surface": "dirt",
        "label": "Stop 13: Main road past Arts & Crafts and the Infirmary",
        "short": "Stop 13",
-       "modelPano": "pano/rt013.jpg",
+       "modelPano": "pano/rt013_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 0.7
       },
@@ -3157,7 +3157,7 @@
        "surface": "paved",
        "label": "Stop 14: Main road past Arts & Crafts and the Infirmary",
        "short": "Stop 14",
-       "modelPano": "pano/rt014.jpg",
+       "modelPano": "pano/rt014_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 321.2
       }
@@ -3173,7 +3173,7 @@
        "surface": "dirt",
        "label": "Stop 15: Road north past the skate park (Base of the Hill)",
        "short": "Stop 15",
-       "modelPano": "pano/rt015.jpg",
+       "modelPano": "pano/rt015_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 300.2
       },
@@ -3184,7 +3184,7 @@
        "surface": "dirt",
        "label": "Stop 16: Road north past the skate park (Base of the Hill)",
        "short": "Stop 16",
-       "modelPano": "pano/rt016.jpg",
+       "modelPano": "pano/rt016_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 297.4
       },
@@ -3195,7 +3195,7 @@
        "surface": "dirt",
        "label": "Stop 17: Road north past the skate park (Base of the Hill)",
        "short": "Stop 17",
-       "modelPano": "pano/rt017.jpg",
+       "modelPano": "pano/rt017_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 286.0
       }
@@ -3211,7 +3211,7 @@
        "surface": "dirt",
        "label": "Stop 18: Lake Road",
        "short": "Stop 18",
-       "modelPano": "pano/rt018.jpg",
+       "modelPano": "pano/rt018_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 358.2
       },
@@ -3222,7 +3222,7 @@
        "surface": "dirt",
        "label": "Stop 19: Lake Road",
        "short": "Stop 19",
-       "modelPano": "pano/rt019.jpg",
+       "modelPano": "pano/rt019_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 2.3
       },
@@ -3233,7 +3233,7 @@
        "surface": "dirt",
        "label": "Stop 20: Lake Road",
        "short": "Stop 20",
-       "modelPano": "pano/rt020.jpg",
+       "modelPano": "pano/rt020_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 12.1
       },
@@ -3244,7 +3244,7 @@
        "surface": "dirt",
        "label": "Stop 21: Lake Road",
        "short": "Stop 21",
-       "modelPano": "pano/rt021.jpg",
+       "modelPano": "pano/rt021_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 16.2
       },
@@ -3255,7 +3255,7 @@
        "surface": "dirt",
        "label": "Stop 22: Lake Road",
        "short": "Stop 22",
-       "modelPano": "pano/rt022.jpg",
+       "modelPano": "pano/rt022_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 13.4
       },
@@ -3266,7 +3266,7 @@
        "surface": "dirt",
        "label": "Stop 23: Lake Road",
        "short": "Stop 23",
-       "modelPano": "pano/rt023.jpg",
+       "modelPano": "pano/rt023_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 352.3
       }
@@ -3282,7 +3282,7 @@
        "surface": "dirt",
        "label": "Stop 24: South branch road",
        "short": "Stop 24",
-       "modelPano": "pano/rt024.jpg",
+       "modelPano": "pano/rt024_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 82.2
       },
@@ -3293,7 +3293,7 @@
        "surface": "dirt",
        "label": "Stop 25: South branch road",
        "short": "Stop 25",
-       "modelPano": "pano/rt025.jpg",
+       "modelPano": "pano/rt025_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 68.0
       },
@@ -3304,7 +3304,7 @@
        "surface": "dirt",
        "label": "Stop 26: South branch road",
        "short": "Stop 26",
-       "modelPano": "pano/rt026.jpg",
+       "modelPano": "pano/rt026_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 69.2
       }
@@ -3320,7 +3320,7 @@
        "surface": "dirt",
        "label": "Stop 27: Road to the boathouse",
        "short": "Stop 27",
-       "modelPano": "pano/rt027.jpg",
+       "modelPano": "pano/rt027_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 199.2
       },
@@ -3331,7 +3331,7 @@
        "surface": "dirt",
        "label": "Stop 28: Road to the boathouse",
        "short": "Stop 28",
-       "modelPano": "pano/rt028.jpg",
+       "modelPano": "pano/rt028_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 185.7
       }
@@ -3347,7 +3347,7 @@
        "surface": "dirt",
        "label": "Stop 29: Down to the swim dock",
        "short": "Stop 29",
-       "modelPano": "pano/rt029.jpg",
+       "modelPano": "pano/rt029_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 118.2
       }
@@ -3363,7 +3363,7 @@
        "surface": "dirt",
        "label": "Stop 30: Road by cabins 6-9",
        "short": "Stop 30",
-       "modelPano": "pano/rt030.jpg",
+       "modelPano": "pano/rt030_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 2.2
       },
@@ -3374,7 +3374,7 @@
        "surface": "dirt",
        "label": "Stop 31: Road by cabins 6-9",
        "short": "Stop 31",
-       "modelPano": "pano/rt031.jpg",
+       "modelPano": "pano/rt031_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 6.4
       },
@@ -3385,7 +3385,7 @@
        "surface": "dirt",
        "label": "Stop 32: Road by cabins 6-9",
        "short": "Stop 32",
-       "modelPano": "pano/rt032.jpg",
+       "modelPano": "pano/rt032_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 10.6
       }
@@ -3401,7 +3401,7 @@
        "surface": "dirt",
        "label": "Stop 33: Road around the pool and courts",
        "short": "Stop 33",
-       "modelPano": "pano/rt033.jpg",
+       "modelPano": "pano/rt033_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 307.3
       },
@@ -3412,7 +3412,7 @@
        "surface": "dirt",
        "label": "Stop 34: Road around the pool and courts",
        "short": "Stop 34",
-       "modelPano": "pano/rt034.jpg",
+       "modelPano": "pano/rt034_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 349.8
       },
@@ -3423,7 +3423,7 @@
        "surface": "none",
        "label": "Stop 35: Road around the pool and courts",
        "short": "Stop 35",
-       "modelPano": "pano/rt035.jpg",
+       "modelPano": "pano/rt035_r2.jpg",
        "cap": "Model only. The model draws this spot as no road drawn. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 0.9
       },
@@ -3434,7 +3434,7 @@
        "surface": "dirt",
        "label": "Stop 36: Road around the pool and courts",
        "short": "Stop 36",
-       "modelPano": "pano/rt036.jpg",
+       "modelPano": "pano/rt036_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 43.7
       },
@@ -3445,7 +3445,7 @@
        "surface": "dirt",
        "label": "Stop 37: Road around the pool and courts",
        "short": "Stop 37",
-       "modelPano": "pano/rt037.jpg",
+       "modelPano": "pano/rt037_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 67.9
       },
@@ -3456,7 +3456,7 @@
        "surface": "dirt",
        "label": "Stop 38: Road around the pool and courts",
        "short": "Stop 38",
-       "modelPano": "pano/rt038.jpg",
+       "modelPano": "pano/rt038_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 116.4
       },
@@ -3467,7 +3467,7 @@
        "surface": "dirt",
        "label": "Stop 39: Road around the pool and courts",
        "short": "Stop 39",
-       "modelPano": "pano/rt039.jpg",
+       "modelPano": "pano/rt039_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 119.3
       },
@@ -3478,7 +3478,7 @@
        "surface": "dirt",
        "label": "Stop 40: Road around the pool and courts",
        "short": "Stop 40",
-       "modelPano": "pano/rt040.jpg",
+       "modelPano": "pano/rt040_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 90.0
       }
@@ -3494,7 +3494,7 @@
        "surface": "dirt",
        "label": "Stop 41: Road south of the pool",
        "short": "Stop 41",
-       "modelPano": "pano/rt041.jpg",
+       "modelPano": "pano/rt041_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 32.7
       },
@@ -3505,7 +3505,7 @@
        "surface": "dirt",
        "label": "Stop 42: Road south of the pool",
        "short": "Stop 42",
-       "modelPano": "pano/rt042.jpg",
+       "modelPano": "pano/rt042_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 24.0
       },
@@ -3516,7 +3516,7 @@
        "surface": "dirt",
        "label": "Stop 43: Road south of the pool",
        "short": "Stop 43",
-       "modelPano": "pano/rt043.jpg",
+       "modelPano": "pano/rt043_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 7.1
       }
@@ -3532,7 +3532,7 @@
        "surface": "dirt",
        "label": "Stop 44: Road past the Sports Center",
        "short": "Stop 44",
-       "modelPano": "pano/rt044.jpg",
+       "modelPano": "pano/rt044_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 0.7
       },
@@ -3543,7 +3543,7 @@
        "surface": "dirt",
        "label": "Stop 45: Road past the Sports Center",
        "short": "Stop 45",
-       "modelPano": "pano/rt045.jpg",
+       "modelPano": "pano/rt045_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 0.4
       },
@@ -3554,7 +3554,7 @@
        "surface": "dirt",
        "label": "Stop 46: Road past the Sports Center",
        "short": "Stop 46",
-       "modelPano": "pano/rt046.jpg",
+       "modelPano": "pano/rt046_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 359.7
       },
@@ -3565,7 +3565,7 @@
        "surface": "dirt",
        "label": "Stop 47: Road past the Sports Center",
        "short": "Stop 47",
-       "modelPano": "pano/rt047.jpg",
+       "modelPano": "pano/rt047_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 358.0
       }
@@ -3581,7 +3581,7 @@
        "surface": "dirt",
        "label": "Stop 48: Senior Girls Hill road",
        "short": "Stop 48",
-       "modelPano": "pano/rt048.jpg",
+       "modelPano": "pano/rt048_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 11.8
       },
@@ -3592,7 +3592,7 @@
        "surface": "dirt",
        "label": "Stop 49: Senior Girls Hill road",
        "short": "Stop 49",
-       "modelPano": "pano/rt049.jpg",
+       "modelPano": "pano/rt049_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 351.0
       },
@@ -3603,7 +3603,7 @@
        "surface": "dirt",
        "label": "Stop 50: Senior Girls Hill road",
        "short": "Stop 50",
-       "modelPano": "pano/rt050.jpg",
+       "modelPano": "pano/rt050_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 5.6
       },
@@ -3614,7 +3614,7 @@
        "surface": "dirt",
        "label": "Stop 51: Senior Girls Hill road",
        "short": "Stop 51",
-       "modelPano": "pano/rt051.jpg",
+       "modelPano": "pano/rt051_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 337.2
       },
@@ -3625,7 +3625,7 @@
        "surface": "dirt",
        "label": "Stop 52: Senior Girls Hill road",
        "short": "Stop 52",
-       "modelPano": "pano/rt052.jpg",
+       "modelPano": "pano/rt052_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 1.0
       },
@@ -3636,7 +3636,7 @@
        "surface": "dirt",
        "label": "Stop 53: Senior Girls Hill road",
        "short": "Stop 53",
-       "modelPano": "pano/rt053.jpg",
+       "modelPano": "pano/rt053_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 20.1
       }
@@ -3652,7 +3652,7 @@
        "surface": "dirt",
        "label": "Stop 54: Road to the ATVs and baseball field",
        "short": "Stop 54",
-       "modelPano": "pano/rt054.jpg",
+       "modelPano": "pano/rt054_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 335.0
       },
@@ -3663,7 +3663,7 @@
        "surface": "dirt",
        "label": "Stop 55: Road to the ATVs and baseball field",
        "short": "Stop 55",
-       "modelPano": "pano/rt055.jpg",
+       "modelPano": "pano/rt055_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 316.5
       },
@@ -3674,7 +3674,7 @@
        "surface": "dirt",
        "label": "Stop 56: Road to the ATVs and baseball field",
        "short": "Stop 56",
-       "modelPano": "pano/rt056.jpg",
+       "modelPano": "pano/rt056_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 328.9
       },
@@ -3685,7 +3685,7 @@
        "surface": "dirt",
        "label": "Stop 57: Road to the ATVs and baseball field",
        "short": "Stop 57",
-       "modelPano": "pano/rt057.jpg",
+       "modelPano": "pano/rt057_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 284.7
       }
@@ -3701,7 +3701,7 @@
        "surface": "dirt",
        "label": "Stop 58: Road to the barn",
        "short": "Stop 58",
-       "modelPano": "pano/rt058.jpg",
+       "modelPano": "pano/rt058_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 322.3
       },
@@ -3712,7 +3712,7 @@
        "surface": "dirt",
        "label": "Stop 59: Road to the barn",
        "short": "Stop 59",
-       "modelPano": "pano/rt059.jpg",
+       "modelPano": "pano/rt059_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 304.9
       },
@@ -3723,7 +3723,7 @@
        "surface": "dirt",
        "label": "Stop 60: Road to the barn",
        "short": "Stop 60",
-       "modelPano": "pano/rt060.jpg",
+       "modelPano": "pano/rt060_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 300.4
       },
@@ -3734,7 +3734,7 @@
        "surface": "dirt",
        "label": "Stop 61: Road to the barn",
        "short": "Stop 61",
-       "modelPano": "pano/rt061.jpg",
+       "modelPano": "pano/rt061_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 295.9
       },
@@ -3745,7 +3745,7 @@
        "surface": "dirt",
        "label": "Stop 62: Road to the barn",
        "short": "Stop 62",
-       "modelPano": "pano/rt062.jpg",
+       "modelPano": "pano/rt062_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 304.5
       },
@@ -3756,7 +3756,7 @@
        "surface": "dirt",
        "label": "Stop 63: Road to the barn",
        "short": "Stop 63",
-       "modelPano": "pano/rt063.jpg",
+       "modelPano": "pano/rt063_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 315.7
       },
@@ -3767,7 +3767,7 @@
        "surface": "none",
        "label": "Stop 64: Road to the barn",
        "short": "Stop 64",
-       "modelPano": "pano/rt064.jpg",
+       "modelPano": "pano/rt064_r2.jpg",
        "cap": "Model only. The model draws this spot as no road drawn. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 6.6
       }
@@ -3783,7 +3783,7 @@
        "surface": "dirt",
        "label": "Stop 65: Past the barn",
        "short": "Stop 65",
-       "modelPano": "pano/rt065.jpg",
+       "modelPano": "pano/rt065_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 62.7
       },
@@ -3794,7 +3794,7 @@
        "surface": "dirt",
        "label": "Stop 66: Past the barn",
        "short": "Stop 66",
-       "modelPano": "pano/rt066.jpg",
+       "modelPano": "pano/rt066_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 63.0
       },
@@ -3805,7 +3805,7 @@
        "surface": "dirt",
        "label": "Stop 67: Past the barn",
        "short": "Stop 67",
-       "modelPano": "pano/rt067.jpg",
+       "modelPano": "pano/rt067_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 50.6
       }
@@ -3821,7 +3821,7 @@
        "surface": "dirt",
        "label": "Stop 68: Trail from cabin 19 to the ropes course",
        "short": "Stop 68",
-       "modelPano": "pano/rt068.jpg",
+       "modelPano": "pano/rt068_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 225.0
       },
@@ -3832,7 +3832,7 @@
        "surface": "dirt",
        "label": "Stop 69: Trail from cabin 19 to the ropes course",
        "short": "Stop 69",
-       "modelPano": "pano/rt069.jpg",
+       "modelPano": "pano/rt069_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 225.0
       },
@@ -3843,7 +3843,7 @@
        "surface": "dirt",
        "label": "Stop 70: Trail from cabin 19 to the ropes course",
        "short": "Stop 70",
-       "modelPano": "pano/rt070.jpg",
+       "modelPano": "pano/rt070_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 219.8
       }
@@ -3859,7 +3859,7 @@
        "surface": "dirt",
        "label": "Stop 71: Senior Boys Hill drive",
        "short": "Stop 71",
-       "modelPano": "pano/rt071.jpg",
+       "modelPano": "pano/rt071_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 272.6
       },
@@ -3870,7 +3870,7 @@
        "surface": "dirt",
        "label": "Stop 72: Senior Boys Hill drive",
        "short": "Stop 72",
-       "modelPano": "pano/rt072.jpg",
+       "modelPano": "pano/rt072_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 268.3
       }
@@ -3886,7 +3886,7 @@
        "surface": "dirt",
        "label": "Stop 73: Senior Boys Hill path",
        "short": "Stop 73",
-       "modelPano": "pano/rt073.jpg",
+       "modelPano": "pano/rt073_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 245.2
       }
@@ -3902,7 +3902,7 @@
        "surface": "dirt",
        "label": "Stop 74: Behind the Sports Center",
        "short": "Stop 74",
-       "modelPano": "pano/rt074.jpg",
+       "modelPano": "pano/rt074_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 358.3
       },
@@ -3913,7 +3913,7 @@
        "surface": "none",
        "label": "Stop 75: Behind the Sports Center",
        "short": "Stop 75",
-       "modelPano": "pano/rt075.jpg",
+       "modelPano": "pano/rt075_r2.jpg",
        "cap": "Model only. The model draws this spot as no road drawn. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 358.0
       }
@@ -3929,7 +3929,7 @@
        "surface": "paved",
        "label": "Stop 76: Flagpole Quad walks",
        "short": "Stop 76",
-       "modelPano": "pano/rt076.jpg",
+       "modelPano": "pano/rt076_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 39.3
       },
@@ -3940,7 +3940,7 @@
        "surface": "paved",
        "label": "Stop 77: Flagpole Quad walks",
        "short": "Stop 77",
-       "modelPano": "pano/rt077.jpg",
+       "modelPano": "pano/rt077_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 18.5
       },
@@ -3951,7 +3951,7 @@
        "surface": "paved",
        "label": "Stop 82: Flagpole Quad walks",
        "short": "Stop 82",
-       "modelPano": "pano/rt082.jpg",
+       "modelPano": "pano/rt082_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 174.8
       }
@@ -3967,7 +3967,7 @@
        "surface": "paved",
        "label": "Stop 78: Dining Hall lawn walk",
        "short": "Stop 78",
-       "modelPano": "pano/rt078.jpg",
+       "modelPano": "pano/rt078_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 14.0
       },
@@ -3978,7 +3978,7 @@
        "surface": "paved",
        "label": "Stop 79: Dining Hall lawn walk",
        "short": "Stop 79",
-       "modelPano": "pano/rt079.jpg",
+       "modelPano": "pano/rt079_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 359.6
       },
@@ -3989,7 +3989,7 @@
        "surface": "paved",
        "label": "Stop 80: Dining Hall lawn walk",
        "short": "Stop 80",
-       "modelPano": "pano/rt080.jpg",
+       "modelPano": "pano/rt080_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 303.7
       }
@@ -4005,7 +4005,7 @@
        "surface": "paved",
        "label": "Stop 81: Walk behind Senior Dining",
        "short": "Stop 81",
-       "modelPano": "pano/rt081.jpg",
+       "modelPano": "pano/rt081_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 16.6
       }
@@ -4021,7 +4021,7 @@
        "surface": "dirt",
        "label": "Stop 83: Road to the dirtbikes",
        "short": "Stop 83",
-       "modelPano": "pano/rt083.jpg",
+       "modelPano": "pano/rt083_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 41.1
       }
@@ -4037,7 +4037,7 @@
        "surface": "dirt",
        "label": "Stop 84: Walk behind cabins 10 & 11",
        "short": "Stop 84",
-       "modelPano": "pano/rt084.jpg",
+       "modelPano": "pano/rt084_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 1.4
       },
@@ -4048,7 +4048,7 @@
        "surface": "dirt",
        "label": "Stop 85: Walk behind cabins 10 & 11",
        "short": "Stop 85",
-       "modelPano": "pano/rt085.jpg",
+       "modelPano": "pano/rt085_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 4.1
       }
@@ -4064,7 +4064,7 @@
        "surface": "dirt",
        "label": "Stop 86: Rec Hall loop",
        "short": "Stop 86",
-       "modelPano": "pano/rt086.jpg",
+       "modelPano": "pano/rt086_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 183.5
       },
@@ -4075,7 +4075,7 @@
        "surface": "dirt",
        "label": "Stop 87: Rec Hall loop",
        "short": "Stop 87",
-       "modelPano": "pano/rt087.jpg",
+       "modelPano": "pano/rt087_r2.jpg",
        "cap": "Model only. The model draws this spot as dirt. Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 103.1
       }
@@ -4091,7 +4091,7 @@
        "surface": "paved",
        "label": "Stop 88: Footbridge up to the courts",
        "short": "Stop 88",
-       "modelPano": "pano/rt088.jpg",
+       "modelPano": "pano/rt088_r2.jpg",
        "cap": "Model only. The model draws this spot as paved (concrete). Answer below, and pin anything missing: sidewalks, stairs, bridges, a road that is too wide or narrow.",
        "yaw0": 356.2
       }

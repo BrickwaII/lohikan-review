@@ -325,7 +325,7 @@ try {
                dirt:new THREE.MeshStandardMaterial({map:TX.dirt, roughness:1, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3}),
                sand:new THREE.MeshStandardMaterial({map:TX.sand, roughness:1, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2}),
                grass:new THREE.MeshStandardMaterial({map:TX.grass, roughness:1, transparent:true, opacity:0.82, depthWrite:false, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2}) };
-  const tess=new TessellateModifier(2.5, 8); const byType={grass:[],sand:[],paved:[],dirt:[]};
+  /* Henry (Nov 25, stop 4): grass peeked through road edges; finer drape (< terrain grid 1.5 m) keeps the road on top */ const tess=new TessellateModifier(1.2, 12); const byType={grass:[],sand:[],paved:[],dirt:[]};
   for (const P of PATHS){ const sh=new THREE.Shape(P.o.map(([x,y])=>new THREE.Vector2(x-W/2, y-H/2)));
     for (const h of P.h) sh.holes.push(new THREE.Path(h.map(([x,y])=>new THREE.Vector2(x-W/2, y-H/2))));
     let geo=new THREE.ShapeGeometry(sh); try{ geo=tess.modify(geo); }catch(e){}

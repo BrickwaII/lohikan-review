@@ -32,7 +32,13 @@ export function courts(e, g) {   // outdoor basketball courts (colours from the 
         const ge = new THREE.ExtrudeGeometry(sh, { depth: W, bevelEnabled: false }); ge.translate(0, 0, -W / 2); const m = new THREE.Mesh(ge, [side, mat]); if (flip) { m.scale.x = -1; side.side = THREE.DoubleSide; mat.side = THREE.DoubleSide; } m.position.x = x0; rg.add(m);
         const cope = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, W, 8), steel); cope.rotation.x = Math.PI / 2; cope.position.set(x0 + (flip ? -R : R), R, 0); rg.add(cope); };
       if (kind === 'half') { const R = o.r || 1.6, W = o.w || 5, F = o.flat || 3; qp(R, W, grey, F / 2, false); qp(R, W, grey, -F / 2, true); const fb = new THREE.Mesh(new THREE.BoxGeometry(F, 0.05, W), grey); fb.position.y = 0.025; rg.add(fb); }   /* Henry: the half pipe on the west side */
-      else if (kind === 'qtall') qp(o.r || 2.2, o.w || 2.4, wood, -1.1, false);
+      else if (kind === 'qtall') { const R = o.r || 2.2, W = o.w || 2.4; qp(R, W, wood, -1.1, false);
+        if (o.rail) { const xr = -1.1 + R + 0.5; for (const z of [-W / 2 + 0.05, 0, W / 2 - 0.05]) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.0, 0.06), steel); p.position.set(xr, R + 0.5, z); rg.add(p); }   // Henry Nov 25: guard rails around the deck
+          const t = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, W, 8), steel); t.rotation.x = Math.PI / 2; t.position.set(xr, R + 1.0, 0); rg.add(t); } }
+      else if (kind === 'doublehalf') {   // Henry Nov 25: two half pipes joined in the middle; walls (south, middle, north) heights from o.rs, o.rm, o.rn
+        const Rs = o.rs || 2.4, Rm = o.rm || 2.4, Rn = o.rn || 3.0, F = o.flat || 3.5, W = o.w || 6;
+        qp(Rs, W, grey, -Rm - F, true); qp(Rm, W, grey, -Rm, false); qp(Rm, W, grey, Rm, true); qp(Rn, W, grey, Rm + F, false);
+        for (const xc of [-Rm - F / 2, Rm + F / 2]) { const fb = new THREE.Mesh(new THREE.BoxGeometry(F, 0.05, W), grey); fb.position.set(xc, 0.025, 0); rg.add(fb); } }
       else if (kind === 'funbox') { const L = o.l || 4, Wd = o.w || 2.2, H = o.h || 0.6; const top = new THREE.Mesh(new THREE.BoxGeometry(L, H, Wd), [side, side, wood, side, side, side]); top.position.y = H / 2; rg.add(top);
         for (const sg of [-1, 1]) { const sh = new THREE.Shape(); sh.moveTo(0, 0); sh.lineTo(1.6, H); sh.lineTo(1.6, 0); sh.lineTo(0, 0); const ge = new THREE.ExtrudeGeometry(sh, { depth: Wd, bevelEnabled: false }); ge.translate(-1.6, 0, -Wd / 2); const m = new THREE.Mesh(ge, [side, wood]); if (sg > 0) { m.scale.x = -1; side.side = THREE.DoubleSide; wood.side = THREE.DoubleSide; } m.position.x = sg * -L / 2 - (sg > 0 ? 0 : 0); m.position.x = sg < 0 ? -L / 2 : L / 2; rg.add(m); }
         const rl = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, L + 2.4, 8), steel); rl.rotation.z = Math.PI / 2; rl.position.set(0, H + 0.35, Wd / 2 - 0.15); rg.add(rl);

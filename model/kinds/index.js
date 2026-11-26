@@ -36,12 +36,14 @@ import * as K_ropescourse from './ropescourse.js';
 import * as K_soccergoal from './soccergoal.js';
 import * as K_footbridge from './footbridge.js';
 import * as K_woodstairs from './woodstairs.js';
-const K = { ...K_steps, ...K_benches, ...K_flagpole, ...K_bandshell, ...K_tetherball, ...K_courts, ...K_sandcourt, ...K_bungee, ...K_pavilion, ...K_gaga, ...K_closet, ...K_entrance, ...K_gateway, ...K_arena, ...K_lamellaroof, ...K_signboard, ...K_fence, ...K_tenniscourts, ...K_pool, ...K_archery, ...K_ballfield, ...K_dirttrack, ...K_riflery, ...K_dock, ...K_iceberg, ...K_buoyline, ...K_watertramp, ...K_tent, ...K_skilift, ...K_chimney, ...K_ropeswing, ...K_waterslide, ...K_ropescourse, ...K_soccergoal, ...K_footbridge, ...K_woodstairs };
+import * as K_culvert from './culvert.js';
+const K = { ...K_steps, ...K_benches, ...K_flagpole, ...K_bandshell, ...K_tetherball, ...K_courts, ...K_sandcourt, ...K_bungee, ...K_pavilion, ...K_gaga, ...K_closet, ...K_entrance, ...K_gateway, ...K_arena, ...K_lamellaroof, ...K_signboard, ...K_fence, ...K_tenniscourts, ...K_pool, ...K_archery, ...K_ballfield, ...K_dirttrack, ...K_riflery, ...K_dock, ...K_iceberg, ...K_buoyline, ...K_watertramp, ...K_tent, ...K_skilift, ...K_chimney, ...K_ropeswing, ...K_waterslide, ...K_ropescourse, ...K_soccergoal, ...K_footbridge, ...K_woodstairs, ...K_culvert };
 
 export function buildExtra(e) {
   if (e.type === 'steps') { const r = K.steps(e); if (r !== undefined) return r; }
   if (e.type === 'benches') { const r = K.benches(e); if (r !== undefined) return r; }
   const g = new THREE.Group();
+  if (e.type === 'culvert') { const r = K.culvert(e, g); if (r !== undefined) return r; }
   if (e.type === 'footbridge') { const r = K.footbridge(e, g); if (r !== undefined) return r; }
   if (e.type === 'woodstairs') { const r = K.woodstairs(e, g); if (r !== undefined) return r; }
   if (e.type === 'flagpole') { const r = K.flagpole(e, g); if (r !== undefined) return r; }
